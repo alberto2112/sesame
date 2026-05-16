@@ -6,6 +6,7 @@
 <header>
   <h1>Matières</h1>
   <p>Le poids détermine la part de chaque matière dans un contrôle. Les valeurs sont relatives — pas besoin de sommer à 1.</p>
+  <p>Une matière <strong>désactivée</strong> n'apparaît plus dans les contrôles, mais garde ses questions. La supprimer efface définitivement la matière <em>et toutes ses questions</em>.</p>
 </header>
 
 {% match flash %}
@@ -19,14 +20,26 @@
 <form method="post" action="/admin/subjects">
   <table>
     <thead>
-      <tr><th>Matière</th><th>Poids</th><th>Questions</th></tr>
+      <tr><th>Matière</th><th>Poids</th><th>Activée</th><th>Questions</th><th>Action</th></tr>
     </thead>
     <tbody>
       {% for s in subjects %}
       <tr>
         <td>{{ s.1 }}</td>
         <td><input type="number" step="0.1" min="0.1" name="weight_{{ s.0 }}" value="{{ s.2 }}" style="width:5rem;"></td>
+        <td>
+          {# Champ caché "0" + case "1" : si décochée, seul "0" est envoyé. #}
+          <input type="hidden" name="enabled_{{ s.0 }}" value="0">
+          <input type="checkbox" name="enabled_{{ s.0 }}" value="1" {% if s.4 %}checked{% endif %}>
+        </td>
         <td>{{ s.3 }}</td>
+        <td>
+          <button type="submit" class="secondary outline"
+                  formaction="/admin/subjects/{{ s.0 }}/delete" formnovalidate
+                  onclick="return confirm('Supprimer la matière « {{ s.1 }} » et ses {{ s.3 }} question(s) ? Cette action est définitive.')">
+            Supprimer
+          </button>
+        </td>
       </tr>
       {% endfor %}
     </tbody>

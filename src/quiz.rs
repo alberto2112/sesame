@@ -62,6 +62,7 @@ pub async fn pick_questions(pool: &SqlitePool, n: usize) -> Result<Vec<QuizQuest
         "SELECT s.id, s.weight, COUNT(q.id)
          FROM subjects s
          LEFT JOIN questions q ON q.subject_id = s.id
+         WHERE s.enabled = 1
          GROUP BY s.id",
     )
     .fetch_all(pool)

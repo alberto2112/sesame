@@ -27,6 +27,7 @@ pub fn router() -> Router<AppState> {
         .route("/questions/:id/edit", get(question_edit_get).post(question_edit_post))
         .route("/questions/:id/delete", post(question_delete_post))
         .route("/subjects", get(subjects_get).post(subjects_post))
+        .route("/subjects/:id/delete", post(subject_delete_post))
         .route("/settings", get(settings_get).post(settings_post))
         .route("/import", get(import_get).post(import_post))
         .route("/history", get(history_list))
@@ -132,7 +133,8 @@ struct QuestionFormTemplate {
 #[derive(Template)]
 #[template(path = "admin/subjects.html")]
 struct SubjectsTemplate {
-    subjects: Vec<(i64, String, f64, i64)>,
+    // (id, nom, poids, nb_questions, activée)
+    subjects: Vec<(i64, String, f64, i64, bool)>,
     flash: Option<String>,
 }
 
@@ -579,8 +581,8 @@ async fn subjects_get(
     State(state): State<AppState>,
     Query(q): Query<SubjectsQuery>,
 ) -> Result<Response, AppError> {
-    let rows: Vec<(i64, String, f64, i64)> = sqlx::query_as(
-        "SELECT s.id, s.name, s.weight, COUNT(q.id)
+    let rows: Vec<(i64, String, f64, i64, bool)> = sqlx::query_as(
+        "SELECT s.id, s.name, s.weight, COUNT(q.id), s.enabled
          FROM subjects s
          LEFT JOIN questions q ON q.subject_id = s.id
          GROUP BY s.id ORDER BY s.name",
@@ -598,23 +600,56 @@ async fn subjects_post(
     State(state): State<AppState>,
     Form(pairs): Form<Vec<(String, String)>>,
 ) -> Result<Response, AppError> {
-    let mut tx = state.pool.begin().await?;
+    // Cases à cocher : un champ caché "0" précède chaque case "1", donc la
+    // dernière valeur reçue pour une clé enabled_<id> donne l'état réel.
+    let mut weights: Vec<(i64, f64)> = Vec::new();
+    let mut enabled: HashMap<i64, bool> = HashMap::new();
     for (k, v) in &pairs {
         if let Some(suffix) = k.strip_prefix("weight_") {
             let id: i64 = suffix.parse().context("invalid subject id")?;
             let w: f64 = v.parse().context("invalid weight")?;
-            if w <= 0.0 {
-                continue;
+            // Le poids reste strictement positif ; pour désactiver une
+            // matière, on utilise la case « activée ».
+            if w > 0.0 {
+                weights.push((id, w));
             }
-            sqlx::query("UPDATE subjects SET weight = ? WHERE id = ?")
-                .bind(w)
-                .bind(id)
-                .execute(&mut *tx)
-                .await?;
+        } else if let Some(suffix) = k.strip_prefix("enabled_") {
+            let id: i64 = suffix.parse().context("invalid subject id")?;
+            enabled.insert(id, v == "1");
         }
     }
+
+    let mut tx = state.pool.begin().await?;
+    for (id, w) in weights {
+        sqlx::query("UPDATE subjects SET weight = ? WHERE id = ?")
+            .bind(w)
+            .bind(id)
+            .execute(&mut *tx)
+            .await?;
+    }
+    for (id, en) in enabled {
+        sqlx::query("UPDATE subjects SET enabled = ? WHERE id = ?")
+            .bind(en)
+            .bind(id)
+            .execute(&mut *tx)
+            .await?;
+    }
     tx.commit().await?;
-    Ok(Redirect::to("/admin/subjects?msg=Pondérations+enregistrées").into_response())
+    Ok(Redirect::to("/admin/subjects?msg=Matières+enregistrées").into_response())
+}
+
+async fn subject_delete_post(
+    _: AdminAuth,
+    State(state): State<AppState>,
+    AxPath(id): AxPath<i64>,
+) -> Result<Response, AppError> {
+    // ON DELETE CASCADE supprime aussi les questions de cette matière
+    // (et leurs réponses, en cascade à leur tour).
+    sqlx::query("DELETE FROM subjects WHERE id = ?")
+        .bind(id)
+        .execute(&state.pool)
+        .await?;
+    Ok(Redirect::to("/admin/subjects?msg=Matière+supprimée").into_response())
 }
 
 // ===== Settings ==============================================================
