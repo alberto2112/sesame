@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Résultat{% endblock %}
+
+{% block content %}
+<header>
+  {% if attempt.passed %}
+    <h1 class="score-pass">Bravo ! Tu peux jouer.</h1>
+  {% else %}
+    <h1 class="score-fail">Pas encore…</h1>
+  {% endif %}
+  <p>
+    Score : <strong>{{ attempt.correct_count }}/{{ attempt.total_count }}</strong>
+    ({{ score_fmt }}%).
+    Seuil de réussite : {{ threshold_fmt }}%.
+  </p>
+  {% if attempt.passed %}
+    <form method="post" action="/game/start">
+      <button type="submit">À toi de jouer !</button>
+    </form>
+  {% else %}
+    <p><a href="/" role="button">Réessayer</a></p>
+  {% endif %}
+</header>
+
+<h2>Tes réponses</h2>
+
+{% for q in attempt.questions %}
+<article class="{% if q.correct %}q-correct{% else %}q-incorrect{% endif %}">
+  <header>
+    <strong>{{ loop.index }}. {{ q.statement }}</strong>
+    {% if q.correct %} ✓ {% else %} ✗ {% endif %}
+  </header>
+  <ul>
+    {% for a in q.answers %}
+      <li>
+        {% if a.is_correct && a.was_chosen %}
+          <span class="answer-correct-chosen">{{ a.text }}</span> — bonne réponse, choisie ✓
+        {% else if a.is_correct %}
+          <span class="answer-correct-missed">{{ a.text }}</span> — c'était la bonne réponse
+        {% else if a.was_chosen %}
+          <span class="answer-wrong-chosen">{{ a.text }}</span> — choisie mais incorrecte ✗
+        {% else %}
+          {{ a.text }}
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+  {% match q.explanation %}
+    {% when Some with (text) %}
+      <footer><em>{{ text }}</em></footer>
+    {% when None %}
+  {% endmatch %}
+</article>
+{% endfor %}
+{% endblock %}

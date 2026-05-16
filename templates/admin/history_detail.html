@@ -1,0 +1,44 @@
+{% extends "admin/_layout.html" %}
+
+{% block title %}Contrôle #{{ attempt_id }} — admin{% endblock %}
+
+{% block admin_content %}
+<header>
+  <h1>Contrôle #{{ attempt_id }}</h1>
+  <p>
+    Date : {{ when }}
+    — Score : <strong>{{ score_fmt }}%</strong>
+    —
+    {% if passed %}
+      <span class="score-pass">Réussi</span>
+    {% else %}
+      <span class="score-fail">Échec</span>
+    {% endif %}
+  </p>
+  <p><a href="/admin/history">← Retour à l'historique</a></p>
+</header>
+
+{% for q in questions %}
+<article class="{% if q.correct_overall %}q-correct{% else %}q-incorrect{% endif %}">
+  <header>
+    <strong>{{ loop.index }}. {{ q.statement }}</strong>
+    <span style="float:right;"><small>({{ q.kind }})</small></span>
+  </header>
+  <ul>
+    {% for a in q.answers %}
+      <li>
+        {% if a.is_correct && a.was_chosen %}
+          <span class="answer-correct-chosen">{{ a.text }}</span> — bonne réponse, choisie ✓
+        {% else if a.is_correct %}
+          <span class="answer-correct-missed">{{ a.text }}</span> — c'était la bonne réponse
+        {% else if a.was_chosen %}
+          <span class="answer-wrong-chosen">{{ a.text }}</span> — choisie mais incorrecte ✗
+        {% else %}
+          {{ a.text }}
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</article>
+{% endfor %}
+{% endblock %}

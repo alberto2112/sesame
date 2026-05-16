@@ -1,0 +1,17 @@
+# luanti-gate — fichier de configuration
+# Les valeurs dynamiques (seuil, nombre de questions, intervalle) vivent dans la
+# base de données et sont modifiables depuis /admin sans redémarrer.
+
+[server]
+# 0.0.0.0 = écoute sur toutes les interfaces réseau (accessible depuis le LAN).
+# Utilise "127.0.0.1" pour limiter l'accès à la machine locale.
+host = "0.0.0.0"
+port = 0  # 0 = port aléatoire choisi par le système
+
+[paths]
+# Chemin du binaire réel de Luanti (celui qu'on lance après réussite du test).
+game_binary = "/usr/bin/luanti"
+
+# Base de données SQLite. Si commence par ~ ou est relatif, sera résolu au
+# démarrage (~ → $HOME, relatif → XDG_DATA_HOME/luanti-gate).
+database = "questions.db"

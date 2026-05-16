@@ -1,0 +1,33 @@
+{% extends "admin/_layout.html" %}
+
+{% block title %}Réglages — admin{% endblock %}
+
+{% block admin_content %}
+<header>
+  <h1>Réglages du contrôle</h1>
+</header>
+
+{% match flash %}
+  {% when Some with (msg) %}
+    <article style="border-left:4px solid var(--pico-color-green-500); padding-left:1rem;">
+      <strong>{{ msg }}</strong>
+    </article>
+  {% when None %}
+{% endmatch %}
+
+<form method="post" action="/admin/settings">
+  <label>
+    Nombre de questions par contrôle
+    <input type="number" name="questions_per_test" min="1" value="{{ questions_per_test }}" required>
+  </label>
+  <label>
+    Seuil de réussite (en %)
+    <input type="number" name="pass_threshold_pct" min="0" max="100" step="1" value="{{ pass_threshold_pct }}" required>
+  </label>
+  <label>
+    Intervalle avant nouveau contrôle (en minutes)
+    <input type="number" name="kill_interval_minutes" min="1" value="{{ kill_interval_minutes }}" required>
+  </label>
+  <button type="submit">Enregistrer</button>
+</form>
+{% endblock %}

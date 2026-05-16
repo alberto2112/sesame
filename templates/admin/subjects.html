@@ -1,0 +1,36 @@
+{% extends "admin/_layout.html" %}
+
+{% block title %}Matières — admin{% endblock %}
+
+{% block admin_content %}
+<header>
+  <h1>Matières</h1>
+  <p>Le poids détermine la part de chaque matière dans un contrôle. Les valeurs sont relatives — pas besoin de sommer à 1.</p>
+</header>
+
+{% match flash %}
+  {% when Some with (msg) %}
+    <article style="border-left:4px solid var(--pico-color-green-500); padding-left:1rem;">
+      <strong>{{ msg }}</strong>
+    </article>
+  {% when None %}
+{% endmatch %}
+
+<form method="post" action="/admin/subjects">
+  <table>
+    <thead>
+      <tr><th>Matière</th><th>Poids</th><th>Questions</th></tr>
+    </thead>
+    <tbody>
+      {% for s in subjects %}
+      <tr>
+        <td>{{ s.1 }}</td>
+        <td><input type="number" step="0.1" min="0.1" name="weight_{{ s.0 }}" value="{{ s.2 }}" style="width:5rem;"></td>
+        <td>{{ s.3 }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <button type="submit">Enregistrer</button>
+</form>
+{% endblock %}

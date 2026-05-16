@@ -1,0 +1,46 @@
+{% extends "admin/_layout.html" %}
+
+{% block title %}Importer — admin{% endblock %}
+
+{% block admin_content %}
+<header>
+  <h1>Importer des questions (JSON)</h1>
+  <p><small>Le fichier doit suivre le format <code>{ "subjects": [...], "questions": [...] }</code>. Les matières inconnues font échouer leurs questions.</small></p>
+</header>
+
+{% match flash %}
+  {% when Some with (msg) %}
+    <article style="border-left:4px solid var(--pico-color-green-500); padding-left:1rem;">
+      <strong>{{ msg }}</strong>
+    </article>
+  {% when None %}
+{% endmatch %}
+
+<form method="post" action="/admin/import" enctype="multipart/form-data">
+  <label>
+    Fichier JSON
+    <input type="file" name="file" accept="application/json,.json" required>
+  </label>
+  <button type="submit">Importer</button>
+</form>
+
+{% match report %}
+  {% when Some with (r) %}
+    <h2>Rapport d'importation</h2>
+    <ul>
+      <li>Matières créées : <strong>{{ r.subjects_created }}</strong></li>
+      <li>Matières existantes (ignorées) : <strong>{{ r.subjects_skipped }}</strong></li>
+      <li>Questions importées : <strong>{{ r.questions_imported }}</strong></li>
+      <li>Questions échouées : <strong>{{ r.questions_failed.len() }}</strong></li>
+    </ul>
+    {% if !r.questions_failed.is_empty() %}
+      <h3>Détails des échecs</h3>
+      <ul>
+        {% for f in r.questions_failed %}
+          <li>#{{ f.0 }} : {{ f.1 }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% when None %}
+{% endmatch %}
+{% endblock %}

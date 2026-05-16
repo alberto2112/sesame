@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Bonne partie !{% endblock %}
+
+{% block head_extra %}
+  <meta http-equiv="refresh" content="{{ refresh_seconds }}; url=/">
+{% endblock %}
+
+{% block content %}
+<header>
+  <h1>Bonne partie !</h1>
+  <p>Tu peux jouer pendant <strong>{{ kill_minutes }}</strong> minutes.</p>
+  <p>Partie en cours depuis <strong>{{ elapsed_minutes }}</strong> minute(s).</p>
+  <p>Ensuite la page se rechargera automatiquement pour un nouveau contrôle.</p>
+</header>
+{% endblock %}

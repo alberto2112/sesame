@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<nav style="margin-bottom:1.5rem; border-bottom:1px solid var(--pico-muted-border-color); padding-bottom:0.5rem;">
+  <ul style="display:flex; gap:1rem; flex-wrap:wrap; padding:0; margin:0; list-style:none;">
+    <li><a href="/admin">Tableau de bord</a></li>
+    <li><a href="/admin/questions">Questions</a></li>
+    <li><a href="/admin/subjects">Matières</a></li>
+    <li><a href="/admin/settings">Réglages</a></li>
+    <li><a href="/admin/import">Importer</a></li>
+    <li><a href="/admin/history">Historique</a></li>
+    <li style="margin-left:auto;">
+      <form method="post" action="/admin/logout" style="display:inline;">
+        <button type="submit" class="secondary outline" style="width:auto; padding:0.2rem 0.6rem; font-size:0.9rem;">Déconnexion</button>
+      </form>
+    </li>
+  </ul>
+</nav>
+
+{% block admin_content %}{% endblock %}
+{% endblock %}

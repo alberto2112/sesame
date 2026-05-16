@@ -1,0 +1,104 @@
+{
+  "subjects": [
+    { "name": "mathématiques", "weight": 1.0 },
+    { "name": "biologie",      "weight": 1.0 },
+    { "name": "compréhension", "weight": 1.0 },
+    { "name": "conjugaison",   "weight": 1.0 }
+  ],
+  "questions": [
+    {
+      "subject": "mathématiques",
+      "kind": "single",
+      "statement": "Combien font 7 × 8 ?",
+      "answers": [
+        { "text": "54", "correct": false },
+        { "text": "56", "correct": true  },
+        { "text": "64", "correct": false }
+      ],
+      "explanation": "Sept fois huit égalent cinquante-six."
+    },
+    {
+      "subject": "mathématiques",
+      "kind": "single",
+      "statement": "Quel est le double de 14 ?",
+      "answers": [
+        { "text": "24", "correct": false },
+        { "text": "28", "correct": true  },
+        { "text": "32", "correct": false }
+      ]
+    },
+    {
+      "subject": "mathématiques",
+      "kind": "multi",
+      "statement": "Quels nombres sont pairs ?",
+      "answers": [
+        { "text": "3",  "correct": false },
+        { "text": "8",  "correct": true  },
+        { "text": "11", "correct": false },
+        { "text": "12", "correct": true  }
+      ]
+    },
+    {
+      "subject": "biologie",
+      "kind": "multi",
+      "statement": "Quels animaux sont des mammifères ?",
+      "answers": [
+        { "text": "chien",         "correct": true  },
+        { "text": "carpe",         "correct": false },
+        { "text": "chauve-souris", "correct": true  },
+        { "text": "crocodile",     "correct": false }
+      ],
+      "explanation": "Les mammifères allaitent leurs petits."
+    },
+    {
+      "subject": "biologie",
+      "kind": "single",
+      "statement": "Quel organe pompe le sang dans le corps ?",
+      "answers": [
+        { "text": "le foie",   "correct": false },
+        { "text": "le cœur",   "correct": true  },
+        { "text": "le poumon", "correct": false }
+      ]
+    },
+    {
+      "subject": "compréhension",
+      "kind": "single",
+      "statement": "Quel est le contraire de « grand » ?",
+      "answers": [
+        { "text": "petit", "correct": true  },
+        { "text": "lourd", "correct": false },
+        { "text": "vieux", "correct": false }
+      ]
+    },
+    {
+      "subject": "compréhension",
+      "kind": "single",
+      "statement": "Quel mot est synonyme de « rapide » ?",
+      "answers": [
+        { "text": "lent",   "correct": false },
+        { "text": "vite",   "correct": true  },
+        { "text": "fort",   "correct": false }
+      ]
+    },
+    {
+      "subject": "conjugaison",
+      "kind": "single",
+      "statement": "« Je ___ à l'école » — quelle forme du verbe « aller » ?",
+      "answers": [
+        { "text": "vais",  "correct": true  },
+        { "text": "vas",   "correct": false },
+        { "text": "va",    "correct": false }
+      ]
+    },
+    {
+      "subject": "conjugaison",
+      "kind": "single",
+      "statement": "« Nous ___ heureux » — quelle forme du verbe « être » ?",
+      "answers": [
+        { "text": "sommes", "correct": true  },
+        { "text": "sont",   "correct": false },
+        { "text": "êtes",   "correct": false }
+      ]
+    }
+  ]
+}

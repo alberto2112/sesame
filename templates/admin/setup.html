@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Configuration initiale{% endblock %}
+
+{% block content %}
+<header>
+  <h1>Bienvenue !</h1>
+  <p>Définis le mot de passe d'administration. Tu en auras besoin pour gérer les questions, les matières et consulter l'historique.</p>
+</header>
+
+{% match error %}
+  {% when Some with (msg) %}
+    <article style="border-left:4px solid var(--pico-color-red-500); padding-left:1rem;">
+      <strong>{{ msg }}</strong>
+    </article>
+  {% when None %}
+{% endmatch %}
+
+<form method="post" action="/admin/setup">
+  <label>
+    Mot de passe (au moins 6 caractères)
+    <input type="password" name="password" required minlength="6" autofocus>
+  </label>
+  <label>
+    Confirme le mot de passe
+    <input type="password" name="confirm" required minlength="6">
+  </label>
+  <button type="submit">Créer le mot de passe et se connecter</button>
+</form>
+{% endblock %}

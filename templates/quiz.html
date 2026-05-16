@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Contrôle avant de jouer{% endblock %}
+
+{% block content %}
+<header>
+  <h1>Avant de jouer…</h1>
+  <p>Réponds aux <strong>{{ questions.len() }} questions</strong> ci-dessous.
+     Il faut au moins <strong>{{ threshold_fmt }}%</strong> de bonnes réponses pour pouvoir jouer.</p>
+</header>
+
+<form method="post" action="/submit">
+  <input type="hidden" name="question_ids" value="{{ ids_csv }}">
+
+  {% for q in questions %}
+  <article>
+    <header><strong>{{ loop.index }}. {{ q.statement }}</strong></header>
+    {% if q.kind == "single" %}
+      <small>Choisis une seule réponse.</small>
+    {% else %}
+      <small>Plusieurs réponses possibles. Coche toutes les bonnes.</small>
+    {% endif %}
+    {% for a in q.answers %}
+      <label>
+        {% if q.kind == "single" %}
+          <input type="radio" name="q_{{ q.id }}" value="{{ a.id }}" required>
+        {% else %}
+          <input type="checkbox" name="q_{{ q.id }}" value="{{ a.id }}">
+        {% endif %}
+        {{ a.text }}
+      </label>
+    {% endfor %}
+  </article>
+  {% endfor %}
+
+  <button type="submit">Valider mes réponses</button>
+</form>
+{% endblock %}

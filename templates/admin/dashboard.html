@@ -1,0 +1,24 @@
+{% extends "admin/_layout.html" %}
+
+{% block title %}Tableau de bord — admin{% endblock %}
+
+{% block admin_content %}
+<header>
+  <h1>Tableau de bord</h1>
+</header>
+
+<div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem;">
+  <article>
+    <header><strong>Questions</strong></header>
+    <p style="font-size:2rem; margin:0;">{{ nb_questions }}</p>
+  </article>
+  <article>
+    <header><strong>Matières</strong></header>
+    <p style="font-size:2rem; margin:0;">{{ nb_subjects }}</p>
+  </article>
+  <article>
+    <header><strong>Contrôles passés</strong></header>
+    <p style="font-size:2rem; margin:0;">{{ nb_attempts }}</p>
+  </article>
+</div>
+{% endblock %}

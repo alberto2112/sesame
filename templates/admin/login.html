@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Connexion admin{% endblock %}
+
+{% block content %}
+<header>
+  <h1>Connexion administrateur</h1>
+</header>
+
+{% match error %}
+  {% when Some with (msg) %}
+    <article style="border-left:4px solid var(--pico-color-red-500); padding-left:1rem;">
+      <strong>{{ msg }}</strong>
+    </article>
+  {% when None %}
+{% endmatch %}
+
+<form method="post" action="/admin/login">
+  <label>
+    Mot de passe
+    <input type="password" name="password" required autofocus>
+  </label>
+  <button type="submit">Se connecter</button>
+</form>
+{% endblock %}

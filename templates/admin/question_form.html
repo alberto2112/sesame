@@ -1,0 +1,65 @@
+{% extends "admin/_layout.html" %}
+
+{% block title %}{{ title }} — admin{% endblock %}
+
+{% block admin_content %}
+<header>
+  <h1>{{ title }}</h1>
+  <p><a href="/admin/questions">← Retour à la liste</a></p>
+</header>
+
+{% match error %}
+  {% when Some with (msg) %}
+    <article style="border-left:4px solid var(--pico-color-red-500); padding-left:1rem;">
+      <strong>{{ msg }}</strong>
+    </article>
+  {% when None %}
+{% endmatch %}
+
+<form method="post" action="{{ action }}">
+  <label>
+    Énoncé
+    <textarea name="statement" rows="2" required>{{ statement }}</textarea>
+  </label>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+    <label>
+      Matière
+      <select name="subject_id" required>
+        <option value="">— choisir —</option>
+        {% for s in subjects %}
+          <option value="{{ s.id }}" {% if s.selected %}selected{% endif %}>{{ s.name }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>
+      Type
+      <select name="kind" required>
+        <option value="single" {% if kind == "single" %}selected{% endif %}>Réponse unique</option>
+        <option value="multi" {% if kind == "multi" %}selected{% endif %}>Réponses multiples</option>
+      </select>
+    </label>
+  </div>
+
+  <label>
+    Explication (facultatif, montrée après le contrôle)
+    <textarea name="explanation" rows="2">{{ explanation }}</textarea>
+  </label>
+
+  <h3>Réponses (jusqu'à 6 — laisse vide ce que tu n'utilises pas)</h3>
+  <p><small>Coche la case « correcte » à droite pour les bonnes réponses.</small></p>
+  {% for a in answers %}
+    {% let i = loop.index %}
+    <div style="display:grid; grid-template-columns:1fr auto; gap:0.5rem; align-items:center; margin-bottom:0.4rem;">
+      <input type="text" name="ans_{{ i }}_text" value="{{ a.0 }}" placeholder="Réponse {{ i }}">
+      <label style="margin:0; padding:0;">
+        <input type="checkbox" name="ans_{{ i }}_correct" value="1" {% if a.1 %}checked{% endif %}>
+        correcte
+      </label>
+    </div>
+  {% endfor %}
+
+  <button type="submit">Enregistrer</button>
+</form>
+{% endblock %}

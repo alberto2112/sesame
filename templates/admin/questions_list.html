@@ -1,0 +1,61 @@
+{% extends "admin/_layout.html" %}
+
+{% block title %}Questions — admin{% endblock %}
+
+{% block admin_content %}
+<header style="display:flex; justify-content:space-between; align-items:center; gap:1rem;">
+  <h1 style="margin:0;">Questions</h1>
+  <a href="/admin/questions/new" role="button" style="width:auto;">+ Nouvelle question</a>
+</header>
+
+{% match flash %}
+  {% when Some with (msg) %}
+    <article style="border-left:4px solid var(--pico-color-green-500); padding-left:1rem;">
+      <strong>{{ msg }}</strong>
+    </article>
+  {% when None %}
+{% endmatch %}
+
+<form method="get" action="/admin/questions" style="margin:1rem 0;">
+  <label>
+    Filtrer par matière
+    <select name="subject" onchange="this.form.submit()">
+      <option value="">— Toutes —</option>
+      {% for s in subjects %}
+        <option value="{{ s.id }}" {% if s.selected %}selected{% endif %}>{{ s.name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+</form>
+
+{% if questions.is_empty() %}
+  <p><em>Aucune question pour ce filtre.</em></p>
+{% else %}
+  <table>
+    <thead>
+      <tr>
+        <th>#</th><th>Énoncé</th><th>Matière</th><th>Type</th><th>Réponses</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for q in questions %}
+      <tr>
+        <td>{{ q.id }}</td>
+        <td>{{ q.statement }}</td>
+        <td>{{ q.subject_name }}</td>
+        <td>{{ q.kind }}</td>
+        <td>{{ q.nb_answers }}</td>
+        <td>
+          <a href="/admin/questions/{{ q.id }}/edit">Modifier</a>
+          —
+          <form method="post" action="/admin/questions/{{ q.id }}/delete" style="display:inline;"
+                onsubmit="return confirm('Supprimer cette question ?')">
+            <button type="submit" class="secondary outline" style="width:auto; padding:0.1rem 0.5rem; font-size:0.85rem;">Supprimer</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
+{% endblock %}
