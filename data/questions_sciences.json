@@ -1,0 +1,915 @@
+{
+  "subjects": [ { "name": "Sciences", "weight": 1.0 } ],
+  "questions": [
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel animal pond des œufs ?",
+      "answers": [
+        { "text": "La poule", "correct": true },
+        { "text": "Le chien", "correct": false },
+        { "text": "Le chat", "correct": false },
+        { "text": "La vache", "correct": false }
+      ],
+      "explanation": "La poule est un oiseau qui pond des œufs."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "De quoi les plantes ont-elles besoin pour pousser ?",
+      "answers": [
+        { "text": "De lumière, d'eau et de terre", "correct": true },
+        { "text": "Uniquement d'eau", "correct": false },
+        { "text": "De lait et de sucre", "correct": false },
+        { "text": "D'obscurité et de froid", "correct": false }
+      ],
+      "explanation": "Les plantes ont besoin de lumière, d'eau et de nutriments dans la terre pour grandir."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Combien de sens possède le corps humain ?",
+      "answers": [
+        { "text": "5", "correct": true },
+        { "text": "3", "correct": false },
+        { "text": "7", "correct": false },
+        { "text": "2", "correct": false }
+      ],
+      "explanation": "Le corps humain a 5 sens : la vue, l'ouïe, le toucher, l'odorat et le goût."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel sens utilise-t-on avec les yeux ?",
+      "answers": [
+        { "text": "La vue", "correct": true },
+        { "text": "L'ouïe", "correct": false },
+        { "text": "Le toucher", "correct": false },
+        { "text": "L'odorat", "correct": false }
+      ],
+      "explanation": "Les yeux nous permettent de voir : c'est le sens de la vue."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "En quelle saison les feuilles tombent-elles des arbres ?",
+      "answers": [
+        { "text": "En automne", "correct": true },
+        { "text": "En été", "correct": false },
+        { "text": "Au printemps", "correct": false },
+        { "text": "En hiver", "correct": false }
+      ],
+      "explanation": "En automne, les feuilles changent de couleur et tombent des arbres."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Qu'est-ce que la glace ?",
+      "answers": [
+        { "text": "De l'eau à l'état solide", "correct": true },
+        { "text": "De l'eau à l'état gazeux", "correct": false },
+        { "text": "Du sucre durci", "correct": false },
+        { "text": "De l'air congelé", "correct": false }
+      ],
+      "explanation": "La glace, c'est de l'eau qui a été très refroidie et qui est devenue solide."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel animal vit dans la mer ?",
+      "answers": [
+        { "text": "Le dauphin", "correct": true },
+        { "text": "Le renard", "correct": false },
+        { "text": "Le lapin", "correct": false },
+        { "text": "Le hérisson", "correct": false }
+      ],
+      "explanation": "Le dauphin est un mammifère marin qui vit dans la mer."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Que mange une vache ?",
+      "answers": [
+        { "text": "De l'herbe", "correct": true },
+        { "text": "De la viande", "correct": false },
+        { "text": "Des insectes", "correct": false },
+        { "text": "Des poissons", "correct": false }
+      ],
+      "explanation": "La vache est un herbivore : elle mange de l'herbe et du foin."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quelle partie de la plante absorbe l'eau dans le sol ?",
+      "answers": [
+        { "text": "Les racines", "correct": true },
+        { "text": "Les feuilles", "correct": false },
+        { "text": "Les fleurs", "correct": false },
+        { "text": "La tige", "correct": false }
+      ],
+      "explanation": "Les racines s'enfoncent dans la terre pour absorber l'eau et les nutriments."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel organe du corps humain pompe le sang ?",
+      "answers": [
+        { "text": "Le cœur", "correct": true },
+        { "text": "Le cerveau", "correct": false },
+        { "text": "L'estomac", "correct": false },
+        { "text": "Les poumons", "correct": false }
+      ],
+      "explanation": "Le cœur est un muscle qui pompe le sang dans tout le corps."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Pendant quelle saison fait-il le plus chaud ?",
+      "answers": [
+        { "text": "En été", "correct": true },
+        { "text": "En hiver", "correct": false },
+        { "text": "En automne", "correct": false },
+        { "text": "Au printemps", "correct": false }
+      ],
+      "explanation": "L'été est la saison la plus chaude de l'année."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Comment appelle-t-on les animaux qui mangent uniquement des plantes ?",
+      "answers": [
+        { "text": "Des herbivores", "correct": true },
+        { "text": "Des carnivores", "correct": false },
+        { "text": "Des omnivores", "correct": false },
+        { "text": "Des insectivores", "correct": false }
+      ],
+      "explanation": "Les herbivores, comme le lapin ou la vache, ne mangent que des végétaux."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel insecte fabrique du miel ?",
+      "answers": [
+        { "text": "L'abeille", "correct": true },
+        { "text": "Le papillon", "correct": false },
+        { "text": "La mouche", "correct": false },
+        { "text": "La fourmi", "correct": false }
+      ],
+      "explanation": "L'abeille fabrique du miel à partir du nectar des fleurs."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Dans quelle poubelle jette-t-on le verre ?",
+      "answers": [
+        { "text": "Dans le bac à verre (conteneur spécial)", "correct": true },
+        { "text": "Dans la poubelle des déchets verts", "correct": false },
+        { "text": "Dans la poubelle des emballages", "correct": false },
+        { "text": "Dans la poubelle des déchets ordinaires", "correct": false }
+      ],
+      "explanation": "Le verre se recycle dans un conteneur à verre prévu spécialement."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel animal passe l'hiver à dormir dans son terrier (hibernation) ?",
+      "answers": [
+        { "text": "L'ours", "correct": true },
+        { "text": "Le lion", "correct": false },
+        { "text": "Le cheval", "correct": false },
+        { "text": "Le canard", "correct": false }
+      ],
+      "explanation": "L'ours hiberne : il dort une grande partie de l'hiver pour économiser son énergie."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Pourquoi faut-il se laver les mains avant de manger ?",
+      "answers": [
+        { "text": "Pour enlever les microbes et rester en bonne santé", "correct": true },
+        { "text": "Pour que les mains sentent bon", "correct": false },
+        { "text": "Pour refroidir les mains", "correct": false },
+        { "text": "Pour que la nourriture ait meilleur goût", "correct": false }
+      ],
+      "explanation": "Se laver les mains élimine les microbes et évite les maladies."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Comment s'appelle la partie colorée de la plante qui attire les insectes ?",
+      "answers": [
+        { "text": "La fleur", "correct": true },
+        { "text": "La racine", "correct": false },
+        { "text": "Le tronc", "correct": false },
+        { "text": "L'écorce", "correct": false }
+      ],
+      "explanation": "La fleur est colorée et parfumée pour attirer les insectes qui l'aident à se reproduire."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel oiseau ne peut pas voler ?",
+      "answers": [
+        { "text": "Le pingouin", "correct": true },
+        { "text": "L'aigle", "correct": false },
+        { "text": "L'hirondelle", "correct": false },
+        { "text": "Le moineau", "correct": false }
+      ],
+      "explanation": "Le pingouin a des ailes mais il ne peut pas voler ; par contre il nage très bien."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Où vit le poisson ?",
+      "answers": [
+        { "text": "Dans l'eau", "correct": true },
+        { "text": "Dans les arbres", "correct": false },
+        { "text": "Sous la terre", "correct": false },
+        { "text": "Dans l'air", "correct": false }
+      ],
+      "explanation": "Les poissons respirent sous l'eau grâce à leurs branchies."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Que produit le soleil qui nous réchauffe ?",
+      "answers": [
+        { "text": "De la chaleur et de la lumière", "correct": true },
+        { "text": "De la pluie", "correct": false },
+        { "text": "Du vent", "correct": false },
+        { "text": "De la neige", "correct": false }
+      ],
+      "explanation": "Le soleil émet de la lumière et de la chaleur qui réchauffent la Terre."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Par quoi commence la vie d'une plante à fleurs ?",
+      "answers": [
+        { "text": "Par une graine", "correct": true },
+        { "text": "Par une feuille", "correct": false },
+        { "text": "Par une fleur", "correct": false },
+        { "text": "Par une branche", "correct": false }
+      ],
+      "explanation": "La plupart des plantes naissent d'une graine qui germe dans la terre."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Avec quel organe respirons-nous ?",
+      "answers": [
+        { "text": "Les poumons", "correct": true },
+        { "text": "L'estomac", "correct": false },
+        { "text": "Le foie", "correct": false },
+        { "text": "Les reins", "correct": false }
+      ],
+      "explanation": "Nous respirons grâce à nos poumons qui font entrer l'air dans notre corps."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel animal est un mammifère ?",
+      "answers": [
+        { "text": "Le chien", "correct": true },
+        { "text": "La grenouille", "correct": false },
+        { "text": "Le lézard", "correct": false },
+        { "text": "Le saumon", "correct": false }
+      ],
+      "explanation": "Le chien est un mammifère : il est recouvert de poils et allaite ses petits."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Que se passe-t-il quand l'eau est très chauffée ?",
+      "answers": [
+        { "text": "Elle se transforme en vapeur", "correct": true },
+        { "text": "Elle devient de la glace", "correct": false },
+        { "text": "Elle disparaît définitivement", "correct": false },
+        { "text": "Elle devient du lait", "correct": false }
+      ],
+      "explanation": "Quand on chauffe beaucoup l'eau, elle bout et se transforme en vapeur (état gazeux)."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Comment appelle-t-on les animaux qui mangent à la fois des plantes et de la viande ?",
+      "answers": [
+        { "text": "Des omnivores", "correct": true },
+        { "text": "Des herbivores", "correct": false },
+        { "text": "Des carnivores", "correct": false },
+        { "text": "Des frugivores", "correct": false }
+      ],
+      "explanation": "Les omnivores, comme l'être humain ou l'ours, mangent aussi bien des plantes que de la viande."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel est le milieu de vie du chameau ?",
+      "answers": [
+        { "text": "Le désert", "correct": true },
+        { "text": "La forêt", "correct": false },
+        { "text": "La mer", "correct": false },
+        { "text": "La montagne enneigée", "correct": false }
+      ],
+      "explanation": "Le chameau vit dans le désert et peut rester longtemps sans boire grâce à ses bosses."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quelle est la couleur du ciel par beau temps ?",
+      "answers": [
+        { "text": "Bleu", "correct": true },
+        { "text": "Rouge", "correct": false },
+        { "text": "Vert", "correct": false },
+        { "text": "Violet", "correct": false }
+      ],
+      "explanation": "Par beau temps, le ciel est bleu car l'atmosphère diffuse la lumière du soleil."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Comment s'appelle l'eau qui tombe du ciel sous forme de gouttes ?",
+      "answers": [
+        { "text": "La pluie", "correct": true },
+        { "text": "La rosée", "correct": false },
+        { "text": "La neige", "correct": false },
+        { "text": "Le brouillard", "correct": false }
+      ],
+      "explanation": "La pluie, ce sont des gouttes d'eau qui tombent des nuages."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel animal construit une toile pour attraper des insectes ?",
+      "answers": [
+        { "text": "L'araignée", "correct": true },
+        { "text": "La coccinelle", "correct": false },
+        { "text": "Le papillon", "correct": false },
+        { "text": "La libellule", "correct": false }
+      ],
+      "explanation": "L'araignée tisse une toile de soie pour capturer ses proies."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Que faut-il manger pour avoir des os solides ?",
+      "answers": [
+        { "text": "Des aliments riches en calcium comme le lait et les produits laitiers", "correct": true },
+        { "text": "Beaucoup de bonbons", "correct": false },
+        { "text": "Des chips et des frites", "correct": false },
+        { "text": "Des sodas sucrés", "correct": false }
+      ],
+      "explanation": "Le calcium contenu dans le lait, le fromage et les yaourts renforce les os."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Combien de pattes possède un insecte ?",
+      "answers": [
+        { "text": "6", "correct": true },
+        { "text": "4", "correct": false },
+        { "text": "8", "correct": false },
+        { "text": "10", "correct": false }
+      ],
+      "explanation": "Tous les insectes ont exactement 6 pattes, c'est l'une de leurs caractéristiques."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel organe sert à voir ?",
+      "answers": [
+        { "text": "Les yeux", "correct": true },
+        { "text": "Les oreilles", "correct": false },
+        { "text": "Le nez", "correct": false },
+        { "text": "La langue", "correct": false }
+      ],
+      "explanation": "Les yeux sont les organes de la vue, ils nous permettent de voir le monde."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel oiseau chante au printemps pour marquer son territoire ?",
+      "answers": [
+        { "text": "Le merle", "correct": true },
+        { "text": "Le pingouin", "correct": false },
+        { "text": "Le poulet", "correct": false },
+        { "text": "La dinde", "correct": false }
+      ],
+      "explanation": "Au printemps, le merle chante pour attirer les femelles et marquer son territoire."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Dans quel milieu vivent les ours polaires ?",
+      "answers": [
+        { "text": "Dans les régions glacées du pôle Nord", "correct": true },
+        { "text": "Dans la forêt tropicale", "correct": false },
+        { "text": "Dans le désert chaud", "correct": false },
+        { "text": "Dans la mer chaude", "correct": false }
+      ],
+      "explanation": "L'ours polaire vit dans les glaces du pôle Nord où il chasse le phoque."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Que recycle-t-on dans la poubelle jaune ?",
+      "answers": [
+        { "text": "Les emballages en plastique, métal et les cartons", "correct": true },
+        { "text": "Les restes de nourriture", "correct": false },
+        { "text": "Le verre", "correct": false },
+        { "text": "Les vieux vêtements", "correct": false }
+      ],
+      "explanation": "La poubelle jaune accueille les emballages recyclables : plastique, métal, cartons."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quelle saison vient après l'hiver ?",
+      "answers": [
+        { "text": "Le printemps", "correct": true },
+        { "text": "L'été", "correct": false },
+        { "text": "L'automne", "correct": false },
+        { "text": "L'hiver à nouveau", "correct": false }
+      ],
+      "explanation": "Les saisons se succèdent dans cet ordre : hiver, printemps, été, automne."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Combien de pattes a une araignée ?",
+      "answers": [
+        { "text": "8", "correct": true },
+        { "text": "6", "correct": false },
+        { "text": "4", "correct": false },
+        { "text": "10", "correct": false }
+      ],
+      "explanation": "L'araignée n'est pas un insecte mais une arachnide : elle a 8 pattes."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Comment s'appelle la transformation d'une chenille en papillon ?",
+      "answers": [
+        { "text": "La métamorphose", "correct": true },
+        { "text": "La mue", "correct": false },
+        { "text": "La germination", "correct": false },
+        { "text": "La migration", "correct": false }
+      ],
+      "explanation": "La métamorphose est le processus qui transforme la chenille en chrysalide, puis en beau papillon."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Lequel de ces fruits contient des graines ?",
+      "answers": [
+        { "text": "La pomme", "correct": true },
+        { "text": "La carotte", "correct": false },
+        { "text": "La salade", "correct": false },
+        { "text": "La pomme de terre", "correct": false }
+      ],
+      "explanation": "La pomme est un fruit qui contient des pépins (graines) à l'intérieur."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Avec quelle partie du corps sent-on les odeurs ?",
+      "answers": [
+        { "text": "Le nez", "correct": true },
+        { "text": "Les oreilles", "correct": false },
+        { "text": "Les yeux", "correct": false },
+        { "text": "Les pieds", "correct": false }
+      ],
+      "explanation": "Le nez est l'organe de l'odorat, il nous permet de sentir les odeurs."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel phénomène crée le tonnerre et les éclairs ?",
+      "answers": [
+        { "text": "L'orage", "correct": true },
+        { "text": "La neige", "correct": false },
+        { "text": "Le brouillard", "correct": false },
+        { "text": "La rosée", "correct": false }
+      ],
+      "explanation": "Pendant un orage, l'électricité dans les nuages produit des éclairs et le tonnerre."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel animal vit dans une forêt en Europe ?",
+      "answers": [
+        { "text": "Le renard", "correct": true },
+        { "text": "Le lion", "correct": false },
+        { "text": "L'éléphant", "correct": false },
+        { "text": "Le kangourou", "correct": false }
+      ],
+      "explanation": "Le renard est un animal sauvage qui vit dans les forêts et les campagnes d'Europe."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Pourquoi fait-il nuit ?",
+      "answers": [
+        { "text": "Parce que la Terre tourne et notre côté n'est plus face au soleil", "correct": true },
+        { "text": "Parce que le soleil s'éteint", "correct": false },
+        { "text": "Parce que la lune cache le soleil", "correct": false },
+        { "text": "Parce que les nuages couvrent le soleil", "correct": false }
+      ],
+      "explanation": "La Terre tourne sur elle-même : quand notre côté regarde loin du soleil, c'est la nuit."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel animal est recouvert d'écailles ?",
+      "answers": [
+        { "text": "Le poisson", "correct": true },
+        { "text": "Le lapin", "correct": false },
+        { "text": "L'oiseau", "correct": false },
+        { "text": "Le cheval", "correct": false }
+      ],
+      "explanation": "Les poissons sont recouverts d'écailles qui protègent leur corps."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quelle partie de l'arbre pousse sous la terre ?",
+      "answers": [
+        { "text": "Les racines", "correct": true },
+        { "text": "Les feuilles", "correct": false },
+        { "text": "Les branches", "correct": false },
+        { "text": "Le tronc", "correct": false }
+      ],
+      "explanation": "Les racines s'enfoncent dans la terre pour ancrer l'arbre et absorber l'eau."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Combien de dents de lait a un enfant ?",
+      "answers": [
+        { "text": "20", "correct": true },
+        { "text": "32", "correct": false },
+        { "text": "16", "correct": false },
+        { "text": "12", "correct": false }
+      ],
+      "explanation": "Les enfants ont 20 dents de lait qui seront remplacées plus tard par 32 dents définitives."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Lequel de ces animaux mange des insectes ?",
+      "answers": [
+        { "text": "La grenouille", "correct": true },
+        { "text": "La girafe", "correct": false },
+        { "text": "Le bœuf", "correct": false },
+        { "text": "Le lapin", "correct": false }
+      ],
+      "explanation": "La grenouille est insectivore : elle attrape les insectes avec sa longue langue."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Comment s'appelle la petite plante qui sort d'une graine ?",
+      "answers": [
+        { "text": "Une plantule (ou germe)", "correct": true },
+        { "text": "Une fleur", "correct": false },
+        { "text": "Un fruit", "correct": false },
+        { "text": "Une racine", "correct": false }
+      ],
+      "explanation": "Quand une graine germe, elle produit une toute petite plante appelée plantule."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Lequel de ces aliments est le plus sain pour les dents ?",
+      "answers": [
+        { "text": "Une pomme", "correct": true },
+        { "text": "Un bonbon", "correct": false },
+        { "text": "Un soda sucré", "correct": false },
+        { "text": "Un caramel", "correct": false }
+      ],
+      "explanation": "La pomme est bien meilleure pour les dents que les sucreries qui favorisent les caries."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel animal vit à la fois dans l'eau et sur terre ?",
+      "answers": [
+        { "text": "La grenouille", "correct": true },
+        { "text": "Le requin", "correct": false },
+        { "text": "L'aigle", "correct": false },
+        { "text": "Le cheval", "correct": false }
+      ],
+      "explanation": "La grenouille est un amphibien : elle vit dans l'eau quand elle est têtard, puis sur terre."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quelle est la source principale de lumière naturelle dans la journée ?",
+      "answers": [
+        { "text": "Le soleil", "correct": true },
+        { "text": "La lune", "correct": false },
+        { "text": "Les étoiles", "correct": false },
+        { "text": "L'arc-en-ciel", "correct": false }
+      ],
+      "explanation": "Le soleil est notre étoile : il éclaire et réchauffe la Terre pendant la journée."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Combien de saisons y a-t-il en France ?",
+      "answers": [
+        { "text": "4", "correct": true },
+        { "text": "2", "correct": false },
+        { "text": "3", "correct": false },
+        { "text": "6", "correct": false }
+      ],
+      "explanation": "Il y a 4 saisons : le printemps, l'été, l'automne et l'hiver."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel sens utilise-t-on avec les oreilles ?",
+      "answers": [
+        { "text": "L'ouïe", "correct": true },
+        { "text": "La vue", "correct": false },
+        { "text": "Le goût", "correct": false },
+        { "text": "L'odorat", "correct": false }
+      ],
+      "explanation": "Les oreilles captent les sons : c'est le sens de l'ouïe."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel est l'état de l'eau quand il neige ?",
+      "answers": [
+        { "text": "Solide", "correct": true },
+        { "text": "Liquide", "correct": false },
+        { "text": "Gazeux", "correct": false },
+        { "text": "Chaud", "correct": false }
+      ],
+      "explanation": "La neige est de l'eau à l'état solide : elle se forme quand il fait très froid."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Que font les oiseaux migrateurs en automne ?",
+      "answers": [
+        { "text": "Ils partent vers des pays plus chauds", "correct": true },
+        { "text": "Ils hibernent dans leurs nids", "correct": false },
+        { "text": "Ils perdent leurs plumes", "correct": false },
+        { "text": "Ils changent de couleur", "correct": false }
+      ],
+      "explanation": "En automne, les oiseaux migrateurs s'envolent vers des pays chauds pour trouver de la nourriture."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Lequel de ces animaux est un oiseau ?",
+      "answers": [
+        { "text": "La cigogne", "correct": true },
+        { "text": "La chauve-souris", "correct": false },
+        { "text": "Le papillon", "correct": false },
+        { "text": "La libellule", "correct": false }
+      ],
+      "explanation": "La cigogne est un grand oiseau migrateur recouvert de plumes avec un bec rouge."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Que fabrique la plante avec la lumière du soleil ?",
+      "answers": [
+        { "text": "Sa nourriture (sucre) grâce à la photosynthèse", "correct": true },
+        { "text": "De l'eau", "correct": false },
+        { "text": "De l'air", "correct": false },
+        { "text": "Des minéraux", "correct": false }
+      ],
+      "explanation": "Grâce à la lumière, les feuilles fabriquent la nourriture de la plante : c'est la photosynthèse."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Comment s'appelle l'animal qui vit dans un terrier sous terre ?",
+      "answers": [
+        { "text": "La taupe", "correct": true },
+        { "text": "L'aigle", "correct": false },
+        { "text": "La baleine", "correct": false },
+        { "text": "Le tigre", "correct": false }
+      ],
+      "explanation": "La taupe vit sous terre dans des galeries qu'elle creuse avec ses puissantes pattes."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel est le rôle des poumons ?",
+      "answers": [
+        { "text": "Respirer en faisant entrer l'oxygène et sortir le dioxyde de carbone", "correct": true },
+        { "text": "Digérer les aliments", "correct": false },
+        { "text": "Pomper le sang", "correct": false },
+        { "text": "Filtrer le sang", "correct": false }
+      ],
+      "explanation": "Les poumons permettent de respirer : ils font entrer l'air frais et sortir l'air usé."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Qu'est-ce qu'un arc-en-ciel ?",
+      "answers": [
+        { "text": "De la lumière du soleil divisée par les gouttes de pluie en plusieurs couleurs", "correct": true },
+        { "text": "Un nuage coloré", "correct": false },
+        { "text": "Un reflet de la mer", "correct": false },
+        { "text": "De la fumée de volcan", "correct": false }
+      ],
+      "explanation": "L'arc-en-ciel apparaît quand le soleil brille pendant la pluie : les gouttes d'eau décomposent la lumière."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Lequel de ces animaux est carnivore ?",
+      "answers": [
+        { "text": "Le loup", "correct": true },
+        { "text": "La girafe", "correct": false },
+        { "text": "Le mouton", "correct": false },
+        { "text": "Le cheval", "correct": false }
+      ],
+      "explanation": "Le loup est carnivore : il chasse et mange d'autres animaux pour se nourrir."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel organe du corps sert à goûter les aliments ?",
+      "answers": [
+        { "text": "La langue", "correct": true },
+        { "text": "Le nez", "correct": false },
+        { "text": "Les dents", "correct": false },
+        { "text": "Les lèvres", "correct": false }
+      ],
+      "explanation": "La langue porte des papilles gustatives qui nous permettent de goûter les saveurs."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Comment se déplace le pollen d'une fleur à l'autre ?",
+      "answers": [
+        { "text": "Par les insectes et le vent", "correct": true },
+        { "text": "Par la pluie uniquement", "correct": false },
+        { "text": "Par les racines", "correct": false },
+        { "text": "Par la terre", "correct": false }
+      ],
+      "explanation": "Les abeilles et autres insectes transportent le pollen ; le vent aussi peut le déplacer."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel animal marin est le plus grand du monde ?",
+      "answers": [
+        { "text": "La baleine bleue", "correct": true },
+        { "text": "Le requin blanc", "correct": false },
+        { "text": "Le dauphin", "correct": false },
+        { "text": "La pieuvre", "correct": false }
+      ],
+      "explanation": "La baleine bleue est le plus grand animal de la planète : elle peut mesurer 30 mètres !"
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Combien faut-il boire de verres d'eau par jour environ ?",
+      "answers": [
+        { "text": "6 à 8 verres", "correct": true },
+        { "text": "1 verre", "correct": false },
+        { "text": "15 verres", "correct": false },
+        { "text": "Il ne faut pas boire d'eau", "correct": false }
+      ],
+      "explanation": "Il est recommandé de boire environ 6 à 8 verres d'eau par jour pour rester bien hydraté."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "multi",
+      "statement": "Parmi ces animaux, lesquels pondent des œufs ?",
+      "answers": [
+        { "text": "La tortue", "correct": true },
+        { "text": "L'aigle", "correct": true },
+        { "text": "Le crocodile", "correct": true },
+        { "text": "Le chien", "correct": false },
+        { "text": "La vache", "correct": false }
+      ],
+      "explanation": "La tortue, l'aigle et le crocodile pondent des œufs. Le chien et la vache donnent naissance à des petits vivants."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "multi",
+      "statement": "Quels sont les besoins d'une plante pour vivre ?",
+      "answers": [
+        { "text": "De l'eau", "correct": true },
+        { "text": "De la lumière", "correct": true },
+        { "text": "Des minéraux dans le sol", "correct": true },
+        { "text": "Du lait", "correct": false },
+        { "text": "Du sel de cuisine", "correct": false }
+      ],
+      "explanation": "Une plante a besoin d'eau, de lumière et de minéraux dans le sol. Le lait et le sel lui sont inutiles ou nuisibles."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "multi",
+      "statement": "Quels aliments sont bons pour la santé ?",
+      "answers": [
+        { "text": "Les légumes", "correct": true },
+        { "text": "Les fruits", "correct": true },
+        { "text": "Les bonbons en grande quantité", "correct": false },
+        { "text": "Les chips en grande quantité", "correct": false },
+        { "text": "L'eau", "correct": true }
+      ],
+      "explanation": "Les légumes, les fruits et l'eau sont bons pour la santé. Les bonbons et les chips en excès sont mauvais pour la santé."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "multi",
+      "statement": "Quels animaux vivent dans la forêt en France ?",
+      "answers": [
+        { "text": "Le chevreuil", "correct": true },
+        { "text": "Le sanglier", "correct": true },
+        { "text": "Le lion", "correct": false },
+        { "text": "L'écureuil", "correct": true },
+        { "text": "Le crocodile", "correct": false }
+      ],
+      "explanation": "Le chevreuil, le sanglier et l'écureuil vivent bien en forêt française. Le lion et le crocodile vivent en Afrique."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "multi",
+      "statement": "Quels sens le corps humain possède-t-il ?",
+      "answers": [
+        { "text": "La vue", "correct": true },
+        { "text": "L'ouïe", "correct": true },
+        { "text": "Le toucher", "correct": true },
+        { "text": "La télépathie", "correct": false },
+        { "text": "L'odorat", "correct": true }
+      ],
+      "explanation": "Le corps humain a 5 sens : la vue, l'ouïe, le toucher, l'odorat et le goût. La télépathie n'est pas un sens réel."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "multi",
+      "statement": "Quels matériaux peut-on recycler ?",
+      "answers": [
+        { "text": "Le verre", "correct": true },
+        { "text": "Le papier", "correct": true },
+        { "text": "Les restes de repas", "correct": false },
+        { "text": "Le plastique des bouteilles", "correct": true },
+        { "text": "L'aluminium des canettes", "correct": true }
+      ],
+      "explanation": "Le verre, le papier, le plastique des bouteilles et l'aluminium des canettes se recyclent. Les restes alimentaires se compostent."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "multi",
+      "statement": "Quels phénomènes météo peut-on observer en hiver ?",
+      "answers": [
+        { "text": "La neige", "correct": true },
+        { "text": "Le givre", "correct": true },
+        { "text": "Le verglas", "correct": true },
+        { "text": "Les canicules", "correct": false },
+        { "text": "La grêle", "correct": true }
+      ],
+      "explanation": "La neige, le givre, le verglas et la grêle peuvent se produire en hiver. La canicule est une chaleur extrême qui se produit en été."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "multi",
+      "statement": "Quels animaux sont des mammifères ?",
+      "answers": [
+        { "text": "Le chat", "correct": true },
+        { "text": "La baleine", "correct": true },
+        { "text": "Le serpent", "correct": false },
+        { "text": "La chauve-souris", "correct": true },
+        { "text": "Le crocodile", "correct": false }
+      ],
+      "explanation": "Le chat, la baleine et la chauve-souris sont des mammifères. Le serpent et le crocodile sont des reptiles."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "multi",
+      "statement": "Quels gestes d'hygiène sont importants chaque jour ?",
+      "answers": [
+        { "text": "Se laver les dents", "correct": true },
+        { "text": "Se laver les mains", "correct": true },
+        { "text": "Manger beaucoup de bonbons", "correct": false },
+        { "text": "Se doucher ou se laver", "correct": true },
+        { "text": "Ne jamais se coiffer", "correct": false }
+      ],
+      "explanation": "Se laver les dents, les mains et le corps sont des gestes d'hygiène essentiels pour rester en bonne santé."
+    },
+    {
+      "subject": "Sciences",
+      "kind": "multi",
+      "statement": "Quels animaux vivent dans la mer ?",
+      "answers": [
+        { "text": "La méduse", "correct": true },
+        { "text": "Le requin", "correct": true },
+        { "text": "L'éléphant", "correct": false },
+        { "text": "La pieuvre", "correct": true },
+        { "text": "Le chameau", "correct": false }
+      ],
+      "explanation": "La méduse, le requin et la pieuvre vivent dans la mer. L'éléphant et le chameau sont des animaux terrestres."
+    }
+  ]
+}
