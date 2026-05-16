@@ -3,36 +3,42 @@
 {% block title %}Contrôle avant de jouer{% endblock %}
 
 {% block content %}
-<header>
+<div class="page-head">
+  <span class="tag">Contrôle</span>
   <h1>Avant de jouer…</h1>
-  <p>Réponds aux <strong>{{ questions.len() }} questions</strong> ci-dessous.
-     Il faut au moins <strong>{{ threshold_fmt }}%</strong> de bonnes réponses pour pouvoir jouer.</p>
-</header>
+  <p>Réponds aux <strong>{{ questions.len() }} questions</strong>.
+     Il te faut au moins <strong>{{ threshold_fmt }}%</strong> de bonnes réponses pour jouer.</p>
+</div>
 
 <form method="post" action="/submit">
   <input type="hidden" name="question_ids" value="{{ ids_csv }}">
 
   {% for q in questions %}
-  <article>
-    <header><strong>{{ loop.index }}. {{ q.statement }}</strong></header>
+  <div class="question">
+    <div class="question-title">
+      <span class="qnum">{{ loop.index }}</span>
+      <span>{{ q.statement }}</span>
+    </div>
     {% if q.kind == "single" %}
-      <small>Choisis une seule réponse.</small>
+      <p class="hint">Choisis une seule réponse.</p>
     {% else %}
-      <small>Plusieurs réponses possibles. Coche toutes les bonnes.</small>
+      <p class="hint">Plusieurs réponses possibles. Coche toutes les bonnes.</p>
     {% endif %}
-    {% for a in q.answers %}
-      <label>
-        {% if q.kind == "single" %}
-          <input type="radio" name="q_{{ q.id }}" value="{{ a.id }}" required>
-        {% else %}
-          <input type="checkbox" name="q_{{ q.id }}" value="{{ a.id }}">
-        {% endif %}
-        {{ a.text }}
-      </label>
-    {% endfor %}
-  </article>
+    <div class="answers">
+      {% for a in q.answers %}
+        <label class="answer">
+          {% if q.kind == "single" %}
+            <input type="radio" name="q_{{ q.id }}" value="{{ a.id }}" required>
+          {% else %}
+            <input type="checkbox" name="q_{{ q.id }}" value="{{ a.id }}">
+          {% endif %}
+          <span>{{ a.text }}</span>
+        </label>
+      {% endfor %}
+    </div>
+  </div>
   {% endfor %}
 
-  <button type="submit">Valider mes réponses</button>
+  <button type="submit" class="btn">Valider mes réponses</button>
 </form>
 {% endblock %}

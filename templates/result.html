@@ -3,43 +3,45 @@
 {% block title %}Résultat{% endblock %}
 
 {% block content %}
-<header>
+<div class="score-hero {% if attempt.passed %}pass{% else %}fail{% endif %}">
   {% if attempt.passed %}
-    <h1 class="score-pass">Bravo ! Tu peux jouer.</h1>
+    <div class="emoji">🎉</div>
+    <h1>Bravo ! Tu peux jouer.</h1>
   {% else %}
-    <h1 class="score-fail">Pas encore…</h1>
+    <div class="emoji">💪</div>
+    <h1>Pas encore… réessaie !</h1>
   {% endif %}
-  <p>
-    Score : <strong>{{ attempt.correct_count }}/{{ attempt.total_count }}</strong>
-    ({{ score_fmt }}%).
-    Seuil de réussite : {{ threshold_fmt }}%.
+  <div class="score-big">{{ score_fmt }}%</div>
+  <p class="score-sub">
+    {{ attempt.correct_count }}/{{ attempt.total_count }} bonnes réponses ·
+    seuil : {{ threshold_fmt }}%
   </p>
   {% if attempt.passed %}
     <form method="post" action="/game/start">
-      <button type="submit">À toi de jouer !</button>
+      <button type="submit" class="btn">À toi de jouer !</button>
     </form>
   {% else %}
-    <p><a href="/" role="button">Réessayer</a></p>
+    <a href="/" class="btn">Réessayer</a>
   {% endif %}
-</header>
+</div>
 
-<h2>Tes réponses</h2>
+<h2 class="section">Tes réponses</h2>
 
 {% for q in attempt.questions %}
-<article class="{% if q.correct %}q-correct{% else %}q-incorrect{% endif %}">
-  <header>
-    <strong>{{ loop.index }}. {{ q.statement }}</strong>
-    {% if q.correct %} ✓ {% else %} ✗ {% endif %}
-  </header>
+<div class="review {% if q.correct %}ok{% else %}ko{% endif %}">
+  <div class="review-title">
+    {% if q.correct %}✅{% else %}❌{% endif %}
+    {{ loop.index }}. {{ q.statement }}
+  </div>
   <ul>
     {% for a in q.answers %}
       <li>
         {% if a.is_correct && a.was_chosen %}
-          <span class="answer-correct-chosen">{{ a.text }}</span> — bonne réponse, choisie ✓
+          <span class="a-ok-chosen">{{ a.text }}</span> — bonne réponse, choisie ✓
         {% else if a.is_correct %}
-          <span class="answer-correct-missed">{{ a.text }}</span> — c'était la bonne réponse
+          <span class="a-ok-missed">{{ a.text }}</span> — c'était la bonne réponse
         {% else if a.was_chosen %}
-          <span class="answer-wrong-chosen">{{ a.text }}</span> — choisie mais incorrecte ✗
+          <span class="a-ko-chosen">{{ a.text }}</span> — choisie mais incorrecte ✗
         {% else %}
           {{ a.text }}
         {% endif %}
@@ -48,9 +50,9 @@
   </ul>
   {% match q.explanation %}
     {% when Some with (text) %}
-      <footer><em>{{ text }}</em></footer>
+      <div class="explain">{{ text }}</div>
     {% when None %}
   {% endmatch %}
-</article>
+</div>
 {% endfor %}
 {% endblock %}

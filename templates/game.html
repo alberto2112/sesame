@@ -7,10 +7,11 @@
 {% endblock %}
 
 {% block content %}
-<header>
+<div class="play-card">
+  <div class="emoji">🎮</div>
   <h1>Bonne partie !</h1>
   <p>Tu peux jouer pendant <strong>{{ kill_minutes }}</strong> minutes.</p>
   <p>Partie en cours depuis <strong>{{ elapsed_minutes }}</strong> minute(s).</p>
-  <p>Ensuite la page se rechargera automatiquement pour un nouveau contrôle.</p>
-</header>
+  <p>Ensuite, la page reviendra ici pour un nouveau contrôle.</p>
+</div>
 {% endblock %}

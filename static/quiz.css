@@ -1,0 +1,142 @@
+/* luanti-gate — feuille de style des pages publiques (contrôle / résultat / jeu).
+   Interface chaleureuse et arrondie, pensée pour des enfants de 7 à 9 ans.
+   Les pages d'administration gardent leur propre style (Pico.css). */
+
+:root {
+  --teal:      #1f9d8f;
+  --teal-dark: #17786d;
+  --navy:      #243049;
+  --gold:      #f6b73c;
+  --green:     #2fae66;
+  --soft-red:  #e07a5f;
+  --muted:     #5c6680;
+  --page-bg:   #fdf6ec;
+  --card-bg:   #ffffff;
+  --border:    #ece4d6;
+  --radius:    18px;
+  --radius-lg: 26px;
+  --shadow:    0 6px 24px rgba(36, 48, 73, .08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, "Segoe UI", Roboto, system-ui, sans-serif;
+  background: var(--page-bg);
+  color: var(--navy);
+  line-height: 1.55;
+  -webkit-text-size-adjust: 100%;
+}
+
+main { max-width: 640px; margin: 0 auto; padding: 2rem 1rem 3rem; }
+
+/* ---- En-tête de page ---- */
+.page-head { text-align: center; margin-bottom: 1.75rem; }
+.page-head h1 { font-size: 1.9rem; font-weight: 800; }
+.page-head p { color: var(--muted); margin-top: .5rem; }
+.tag {
+  display: inline-block; margin-bottom: .6rem;
+  background: var(--teal); color: #fff;
+  font-weight: 700; font-size: .8rem;
+  padding: .3rem .9rem; border-radius: 999px;
+}
+
+/* ---- Carte de question ---- */
+.question {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 1.4rem 1.4rem 1.1rem;
+  margin-bottom: 1.25rem;
+}
+.question-title {
+  display: flex; align-items: flex-start; gap: .7rem;
+  font-size: 1.15rem; font-weight: 700;
+}
+.qnum {
+  flex: none; width: 1.9rem; height: 1.9rem;
+  background: var(--teal); color: #fff; border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: .95rem; font-weight: 800;
+}
+.hint { color: #8a93a8; font-size: .85rem; margin: .35rem 0 .9rem 2.6rem; }
+
+/* ---- Réponses (grandes cartes cliquables) ---- */
+.answers { display: flex; flex-direction: column; gap: .55rem; }
+.answer {
+  display: flex; align-items: center; gap: .8rem;
+  padding: .85rem 1.1rem;
+  background: #fff;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color .15s, background .15s, transform .1s;
+}
+.answer:hover { border-color: var(--teal); transform: translateY(-1px); }
+.answer:has(input:checked) {
+  background: var(--teal); border-color: var(--teal); color: #fff;
+}
+.answer input { flex: none; width: 1.15rem; height: 1.15rem; accent-color: var(--teal); }
+.answer:has(input:checked) input { accent-color: #fff; }
+
+/* ---- Boutons ---- */
+.btn {
+  display: block; width: 100%;
+  background: var(--teal); color: #fff;
+  font-size: 1.15rem; font-weight: 700;
+  border: none; border-radius: 999px;
+  padding: 1rem; margin-top: 1rem;
+  text-align: center; text-decoration: none; cursor: pointer;
+  transition: background .15s, transform .1s;
+}
+.btn:hover { background: var(--teal-dark); transform: translateY(-1px); }
+
+/* ---- Résultat ---- */
+.score-hero {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 2rem 1.5rem; text-align: center;
+  margin-bottom: 1.75rem;
+}
+.score-hero .emoji { font-size: 3rem; }
+.score-hero h1 { font-size: 1.7rem; margin: .4rem 0; }
+.score-big { font-size: 3.4rem; font-weight: 800; line-height: 1; }
+.score-hero.pass .score-big { color: var(--green); }
+.score-hero.fail .score-big { color: var(--gold); }
+.score-sub { color: var(--muted); margin-bottom: 1.2rem; }
+
+/* ---- Revue des réponses ---- */
+h2.section { margin: 1.5rem 0 .8rem; font-size: 1.2rem; }
+.review {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.1rem 1.2rem; margin-bottom: .9rem;
+  border-left: 6px solid var(--border);
+}
+.review.ok { border-left-color: var(--green); }
+.review.ko { border-left-color: var(--soft-red); }
+.review-title { font-weight: 700; margin-bottom: .5rem; }
+.review ul { list-style: none; }
+.review li { padding: .15rem 0; }
+.a-ok-chosen { color: var(--green); font-weight: 700; }
+.a-ok-missed { color: var(--gold); font-weight: 700; }
+.a-ko-chosen { color: var(--soft-red); text-decoration: line-through; }
+.explain {
+  margin-top: .6rem; padding-top: .6rem;
+  border-top: 1px dashed var(--border);
+  color: var(--muted); font-style: italic; font-size: .92rem;
+}
+
+/* ---- Page de jeu ---- */
+.play-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 2.5rem 1.5rem; text-align: center;
+}
+.play-card .emoji { font-size: 3.5rem; }
+.play-card h1 { font-size: 1.9rem; margin: .5rem 0; }
+.play-card p { color: var(--muted); margin-top: .35rem; }
+.play-card strong { color: var(--teal); }

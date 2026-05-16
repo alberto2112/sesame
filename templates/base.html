@@ -4,21 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}luanti-gate{% endblock %}</title>
-  <link rel="stylesheet" href="/static/pico.min.css">
-  <style>
-    main { padding: 2rem 1rem; max-width: 720px; margin: 0 auto; }
-    article { margin-bottom: 1.5rem; }
-    article header strong { font-size: 1.05rem; }
-    label { display: block; padding: 0.4rem 0; cursor: pointer; }
-    .answer-correct-chosen { color: var(--pico-color-green-500); font-weight: bold; }
-    .answer-correct-missed { color: var(--pico-color-amber-600); font-weight: bold; }
-    .answer-wrong-chosen { color: var(--pico-color-red-500); text-decoration: line-through; }
-    article.q-correct   { border-left: 4px solid var(--pico-color-green-500); padding-left: 1rem; }
-    article.q-incorrect { border-left: 4px solid var(--pico-color-red-500); padding-left: 1rem; }
-    .score-pass { color: var(--pico-color-green-600); }
-    .score-fail { color: var(--pico-color-red-600); }
-    button[type=submit] { width: 100%; padding: 1rem; font-size: 1.1rem; }
-  </style>
+  <link rel="stylesheet" href="/static/quiz.css">
   {% block head_extra %}{% endblock %}
 </head>
 <body>
