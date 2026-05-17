@@ -5,15 +5,15 @@ use std::time::Duration;
 use anyhow::{Context, Result};
 use askama::Template;
 use axum::Router;
-use axum::extract::{Form, State};
-use axum::http::StatusCode;
+use axum::extract::{Form, Path, State};
+use axum::http::{StatusCode, header};
 use axum::response::{IntoResponse, Redirect, Response};
 use axum::routing::{get, post};
+use rust_embed::RustEmbed;
 use sqlx::SqlitePool;
 use tokio::process::{Child, Command};
 use tokio::sync::Mutex;
 use tower_cookies::CookieManagerLayer;
-use tower_http::services::ServeDir;
 use tower_http::trace::TraceLayer;
 
 use crate::admin;
@@ -42,10 +42,26 @@ pub fn build_router(state: AppState) -> Router {
         .route("/game", get(game))
         .route("/game/start", post(game_start))
         .nest("/admin", admin::router())
-        .nest_service("/static", ServeDir::new("static"))
+        .route("/static/*path", get(static_asset))
         .layer(CookieManagerLayer::new())
         .layer(TraceLayer::new_for_http())
         .with_state(state)
+}
+
+// ===== Static assets (embedded in the binary) =====
+
+#[derive(RustEmbed)]
+#[folder = "static/"]
+struct StaticAssets;
+
+async fn static_asset(Path(path): Path<String>) -> Response {
+    match StaticAssets::get(&path) {
+        Some(asset) => {
+            let mime = asset.metadata.mimetype().to_string();
+            ([(header::CONTENT_TYPE, mime)], asset.data).into_response()
+        }
+        None => StatusCode::NOT_FOUND.into_response(),
+    }
 }
 
 // ===== Templates =====
