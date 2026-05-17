@@ -28,6 +28,7 @@ pub fn router() -> Router<AppState> {
         .route("/questions/:id/delete", post(question_delete_post))
         .route("/subjects", get(subjects_get).post(subjects_post))
         .route("/subjects/:id/delete", post(subject_delete_post))
+        .route("/subjects/dedupe", post(subjects_dedupe_post))
         .route("/settings", get(settings_get).post(settings_post))
         .route("/import", get(import_get).post(import_post))
         .route("/history", get(history_list))
@@ -135,6 +136,8 @@ struct QuestionFormTemplate {
 struct SubjectsTemplate {
     // (id, nom, poids, nb_questions, activée)
     subjects: Vec<(i64, String, f64, i64, bool)>,
+    // Nombre de questions en double (énoncés identiques) toutes matières confondues.
+    duplicate_count: i64,
     flash: Option<String>,
 }
 
@@ -589,8 +592,14 @@ async fn subjects_get(
     )
     .fetch_all(&state.pool)
     .await?;
+    // Doublons = total de questions moins le nombre d'énoncés distincts.
+    let (duplicate_count,): (i64,) =
+        sqlx::query_as("SELECT COUNT(*) - COUNT(DISTINCT statement) FROM questions")
+            .fetch_one(&state.pool)
+            .await?;
     Ok(render(SubjectsTemplate {
         subjects: rows,
+        duplicate_count,
         flash: q.msg,
     }))
 }
@@ -650,6 +659,27 @@ async fn subject_delete_post(
         .execute(&state.pool)
         .await?;
     Ok(Redirect::to("/admin/subjects?msg=Matière+supprimée").into_response())
+}
+
+/// Supprime toutes les questions en double — toutes matières confondues.
+/// Le doublon est défini par un `statement` identique ; on conserve la
+/// question la plus ancienne (`id` minimal) de chaque groupe et on efface
+/// les autres. Les réponses partent en cascade (`ON DELETE CASCADE`).
+async fn subjects_dedupe_post(
+    _: AdminAuth,
+    State(state): State<AppState>,
+) -> Result<Response, AppError> {
+    let result = sqlx::query(
+        "DELETE FROM questions
+         WHERE id NOT IN (SELECT MIN(id) FROM questions GROUP BY statement)",
+    )
+    .execute(&state.pool)
+    .await?;
+    let removed = result.rows_affected();
+    Ok(Redirect::to(&format!(
+        "/admin/subjects?msg={removed}+doublon(s)+supprimé(s)"
+    ))
+    .into_response())
 }
 
 // ===== Settings ==============================================================

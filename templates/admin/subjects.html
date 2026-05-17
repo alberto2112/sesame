@@ -46,4 +46,20 @@
   </table>
   <button type="submit">Enregistrer</button>
 </form>
+
+<hr>
+
+<form method="post" action="/admin/subjects/dedupe">
+  <p>Supprime toutes les questions en double (même énoncé), toutes matières confondues. La question la plus ancienne de chaque groupe est conservée.</p>
+  {% if duplicate_count > 0 %}
+    <p><strong>{{ duplicate_count }}</strong> question(s) en double détectée(s).</p>
+    <button type="submit" class="secondary"
+            onclick="return confirm('Supprimer les {{ duplicate_count }} question(s) en double, toutes matières confondues ? Cette action est définitive.')">
+      Supprimer doublons
+    </button>
+  {% else %}
+    <p>Aucun doublon détecté.</p>
+    <button type="submit" class="secondary" disabled>Supprimer doublons</button>
+  {% endif %}
+</form>
 {% endblock %}
