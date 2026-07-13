@@ -1,6 +1,6 @@
 use std::collections::{HashMap, HashSet};
 
-use anyhow::{Context, Result};
+use anyhow::Result;
 use rand::seq::SliceRandom;
 use sqlx::SqlitePool;
 
@@ -186,14 +186,13 @@ fn distribute(subjects: &[(i64, f64, usize)], n: usize) -> Vec<(i64, usize)> {
 
 // ===== Grader =====
 
-pub async fn grade(pool: &SqlitePool, submission: &Submission) -> Result<GradedAttempt> {
-    let raw: String = sqlx::query_scalar("SELECT value FROM settings WHERE key = ?")
-        .bind("pass_threshold_pct")
-        .fetch_one(pool)
-        .await
-        .context("reading pass_threshold_pct")?;
-    let threshold_pct: f64 = raw.parse().context("pass_threshold_pct must be numeric")?;
-
+/// `threshold_pct` vient de l'enfant, pas des réglages globaux : un enfant de
+/// 6 ans et un de 10 ans ne passent pas la même barre.
+pub async fn grade(
+    pool: &SqlitePool,
+    submission: &Submission,
+    threshold_pct: f64,
+) -> Result<GradedAttempt> {
     let mut graded = Vec::with_capacity(submission.len());
 
     for (&question_id, chosen_ids) in submission {

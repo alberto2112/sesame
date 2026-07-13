@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}Contrôle avant de jouer{% endblock %}
+{% block title %}Contrôle{% endblock %}
 
 {% block content %}
 <div class="page-head">
   <span class="tag">Contrôle</span>
-  <h1>Avant de jouer…</h1>
+  <h1>Bonjour {{ child_avatar }} {{ child_name }} !</h1>
   <p>Réponds aux <strong>{{ questions.len() }} questions</strong>.
-     Il te faut au moins <strong>{{ threshold_fmt }}%</strong> de bonnes réponses pour jouer.</p>
+     Il te faut au moins <strong>{{ threshold_fmt }}%</strong> de bonnes réponses
+     pour gagner <strong>{{ grant_minutes }} minutes</strong> d'ordinateur.</p>
 </div>
 
 <form method="post" action="/submit">

@@ -17,8 +17,14 @@
     seuil : {{ threshold_fmt }}%
   </p>
   {% if attempt.passed %}
-    <form method="post" action="/game/start">
-      <button type="submit" class="btn">À toi de jouer !</button>
+    {# Le chrono ne démarre QU'ICI, au clic : l'enfant peut lire sa correction
+       tranquillement sans que ça lui coûte des minutes. #}
+    <p class="score-sub">Regarde tes réponses ci-dessous, puis clique quand tu es prêt.</p>
+    <form method="post" action="/unlock">
+      <input type="hidden" name="attempt_id" value="{{ attempt_id }}">
+      <button type="submit" class="btn">
+        Débloquer l'ordinateur — {{ grant_minutes }} min
+      </button>
     </form>
   {% else %}
     <a href="/" class="btn">Réessayer</a>

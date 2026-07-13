@@ -4,7 +4,10 @@
 
 {% block admin_content %}
 <header>
-  <h1>Réglages du contrôle</h1>
+  <h1>Réglages par défaut</h1>
+  <p>Ces valeurs servent de gabarit pour les nouveaux enfants. Chaque enfant
+     garde ensuite ses propres réglages (difficulté, budget, durée de session)
+     dans sa fiche.</p>
 </header>
 
 {% match flash %}
@@ -25,8 +28,19 @@
     <input type="number" name="pass_threshold_pct" min="0" max="100" step="1" value="{{ pass_threshold_pct }}" required>
   </label>
   <label>
-    Intervalle avant nouveau contrôle (en minutes)
-    <input type="number" name="kill_interval_minutes" min="1" value="{{ kill_interval_minutes }}" required>
+    Durée d'une session débloquée (en minutes)
+    <input type="number" name="session_minutes" min="1" value="{{ session_minutes }}" required>
+  </label>
+  <label>
+    Quand le temps est écoulé
+    <select name="lock_mode">
+      <option value="overlay" {% if lock_mode == "overlay" %}selected{% endif %}>
+        Recouvrir l'écran — l'enfant peut repasser un contrôle et reprendre son travail
+      </option>
+      <option value="logout" {% if lock_mode == "logout" %}selected{% endif %}>
+        Fermer la session — avertissement de 60 s, puis retour au contrôle
+      </option>
+    </select>
   </label>
   <button type="submit">Enregistrer</button>
 </form>

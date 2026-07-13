@@ -1,46 +1,39 @@
 use std::collections::HashMap;
-use std::sync::Arc;
-use std::time::Duration;
 
 use anyhow::{Context, Result};
 use askama::Template;
 use axum::Router;
 use axum::extract::{Form, Path, State};
 use axum::http::{StatusCode, header};
-use axum::response::{IntoResponse, Redirect, Response};
+use axum::response::{IntoResponse, Json, Redirect, Response};
 use axum::routing::{get, post};
 use rust_embed::RustEmbed;
+use serde::{Deserialize, Serialize};
 use sqlx::SqlitePool;
-use tokio::process::{Child, Command};
-use tokio::sync::Mutex;
-use tower_cookies::CookieManagerLayer;
+use tower_cookies::{CookieManagerLayer, Cookies};
 use tower_http::trace::TraceLayer;
 
 use crate::admin;
-use crate::config::Config;
+use crate::policy::{self, BlockReason, Child, GateDecision};
 use crate::quiz::{self, GradedAttempt, QuizQuestion, Submission};
 
-pub struct GameSession {
-    pub child: Child,
-    pub started_at: i64,
-    pub kill_at: i64,
-}
-
-pub type GameSlot = Arc<Mutex<Option<GameSession>>>;
+/// Cookie qui retient quel enfant est devant l'écran. Le sélecteur de profils
+/// arrive en phase 2 ; d'ici là elle reste vide et on retombe sur le premier
+/// enfant actif.
+pub const CHILD_COOKIE_NAME: &str = "kg_child";
 
 #[derive(Clone)]
 pub struct AppState {
     pub pool: SqlitePool,
-    pub cfg: Arc<Config>,
-    pub game: GameSlot,
 }
 
 pub fn build_router(state: AppState) -> Router {
     Router::new()
         .route("/", get(index))
         .route("/submit", post(submit))
-        .route("/game", get(game))
-        .route("/game/start", post(game_start))
+        .route("/unlock", post(unlock))
+        .route("/api/status", get(api_status))
+        .route("/api/heartbeat", post(api_heartbeat))
         .nest("/admin", admin::router())
         .route("/static/*path", get(static_asset))
         .layer(CookieManagerLayer::new())
@@ -69,8 +62,11 @@ async fn static_asset(Path(path): Path<String>) -> Response {
 #[derive(Template)]
 #[template(path = "quiz.html")]
 struct QuizTemplate {
+    child_name: String,
+    child_avatar: String,
     questions: Vec<QuizQuestion>,
     threshold_fmt: String,
+    grant_minutes: i64,
     ids_csv: String,
 }
 
@@ -78,122 +74,236 @@ struct QuizTemplate {
 #[template(path = "result.html")]
 struct ResultTemplate {
     attempt: GradedAttempt,
+    attempt_id: i64,
     score_fmt: String,
     threshold_fmt: String,
+    grant_minutes: i64,
 }
 
 #[derive(Template)]
-#[template(path = "game.html")]
-struct GameTemplate {
-    kill_minutes: i64,
-    refresh_seconds: i64,
-    elapsed_minutes: i64,
+#[template(path = "granted.html")]
+struct GrantedTemplate {
+    child_name: String,
+    child_avatar: String,
+    remaining_minutes: i64,
+}
+
+#[derive(Template)]
+#[template(path = "blocked.html")]
+struct BlockedTemplate {
+    child_name: String,
+    child_avatar: String,
+    emoji: String,
+    title: String,
+    detail: String,
 }
 
 // ===== Handlers =====
 
-async fn index(State(state): State<AppState>) -> Result<Response, AppError> {
-    let n = read_setting_usize(&state.pool, "questions_per_test", 10).await?;
-    let threshold = read_setting_f64(&state.pool, "pass_threshold_pct", 70.0).await?;
+/// Point d'entrée unique de l'enfant. Ce qu'il voit est décidé par le moteur de
+/// politiques, jamais par ce handler.
+async fn index(State(state): State<AppState>, cookies: Cookies) -> Result<Response, AppError> {
+    let child = current_child(&state, &cookies).await?;
 
-    let questions = quiz::pick_questions(&state.pool, n).await?;
-    let ids_csv = questions
-        .iter()
-        .map(|q| q.id.to_string())
-        .collect::<Vec<_>>()
-        .join(",");
+    match policy::evaluate(&state.pool, &child).await? {
+        GateDecision::Granted { remaining_secs } => Ok(render(GrantedTemplate {
+            child_name: child.name,
+            child_avatar: child.avatar,
+            remaining_minutes: (remaining_secs + 59) / 60,
+        })),
 
-    let tmpl = QuizTemplate {
-        questions,
-        threshold_fmt: format!("{threshold:.0}"),
-        ids_csv,
-    };
-    Ok(render(tmpl))
+        GateDecision::Blocked { reason } => Ok(render(blocked_page(&child, &reason))),
+
+        GateDecision::ExamAvailable {
+            questions,
+            threshold_pct,
+            max_grant_minutes,
+        } => {
+            let questions = quiz::pick_questions(&state.pool, questions as usize).await?;
+            let ids_csv = questions
+                .iter()
+                .map(|q| q.id.to_string())
+                .collect::<Vec<_>>()
+                .join(",");
+
+            Ok(render(QuizTemplate {
+                child_name: child.name,
+                child_avatar: child.avatar,
+                questions,
+                threshold_fmt: format!("{threshold_pct:.0}"),
+                grant_minutes: max_grant_minutes,
+                ids_csv,
+            }))
+        }
+    }
 }
 
+/// Corrige le contrôle et affiche la correction. **N'ouvre PAS la concession** :
+/// le chrono ne doit pas tourner pendant que l'enfant lit ses erreurs. C'est le
+/// bouton de la page de résultat (`POST /unlock`) qui démarre le temps.
 async fn submit(
     State(state): State<AppState>,
+    cookies: Cookies,
     Form(pairs): Form<Vec<(String, String)>>,
 ) -> Result<Response, AppError> {
+    let child = current_child(&state, &cookies).await?;
+
     let (question_ids, mut chosen) = parse_form(&pairs)?;
     for qid in &question_ids {
         chosen.entry(*qid).or_default();
     }
 
-    let attempt = quiz::grade(&state.pool, &chosen).await?;
-    persist_attempt(&state.pool, &attempt).await?;
+    let attempt = quiz::grade(&state.pool, &chosen, child.pass_threshold_pct).await?;
+    let attempt_id = persist_attempt(&state.pool, child.id, &attempt).await?;
 
-    let tmpl = ResultTemplate {
+    // Ce que ce contrôle rapportera s'il est réussi — calculé maintenant, à
+    // titre indicatif : /unlock le recalculera, car le budget a pu bouger.
+    let grant_minutes = match policy::evaluate(&state.pool, &child).await? {
+        GateDecision::ExamAvailable {
+            max_grant_minutes, ..
+        } => max_grant_minutes,
+        _ => 0,
+    };
+
+    Ok(render(ResultTemplate {
         score_fmt: format!("{:.0}", attempt.score_pct),
         threshold_fmt: format!("{:.0}", attempt.threshold_pct),
+        attempt_id,
+        grant_minutes,
         attempt,
-    };
-    Ok(render(tmpl))
-}
-
-async fn game(State(state): State<AppState>) -> Result<Response, AppError> {
-    let kill_minutes = read_setting_i64(&state.pool, "kill_interval_minutes", 30).await?;
-    let guard = state.game.lock().await;
-    let Some(session) = guard.as_ref() else {
-        return Ok(Redirect::to("/").into_response());
-    };
-    let now = chrono::Utc::now().timestamp();
-    let remaining = (session.kill_at - now).max(0);
-    let refresh_seconds = remaining + 2;
-    let elapsed_minutes = (now - session.started_at).max(0) / 60;
-    drop(guard);
-    Ok(render(GameTemplate {
-        kill_minutes,
-        refresh_seconds,
-        elapsed_minutes,
     }))
 }
 
-async fn game_start(State(state): State<AppState>) -> Result<Response, AppError> {
-    let kill_minutes = read_setting_i64(&state.pool, "kill_interval_minutes", 30).await?;
-    let mut guard = state.game.lock().await;
-    if guard.is_some() {
-        return Ok(Redirect::to("/game").into_response());
-    }
-
-    let binary = &state.cfg.paths.game_binary;
-    let child = Command::new(binary)
-        .spawn()
-        .with_context(|| format!("spawning game binary {}", binary.display()))?;
-    let started_at = chrono::Utc::now().timestamp();
-    let kill_at = started_at + kill_minutes * 60;
-    *guard = Some(GameSession {
-        child,
-        started_at,
-        kill_at,
-    });
-    drop(guard);
-
-    tracing::info!(%kill_minutes, %kill_at, "game session started");
-    spawn_watchdog(state.game.clone(), kill_at);
-
-    Ok(Redirect::to("/game").into_response())
+#[derive(Deserialize)]
+struct UnlockForm {
+    attempt_id: i64,
 }
 
-fn spawn_watchdog(slot: GameSlot, kill_at: i64) {
-    tokio::spawn(async move {
-        let now = chrono::Utc::now().timestamp();
-        let wait = (kill_at - now).max(0) as u64;
-        tokio::time::sleep(Duration::from_secs(wait)).await;
+/// Échange un contrôle réussi contre du temps. Tout est revérifié ici — c'est
+/// la seule porte par laquelle du temps peut entrer.
+async fn unlock(
+    State(state): State<AppState>,
+    cookies: Cookies,
+    Form(form): Form<UnlockForm>,
+) -> Result<Response, AppError> {
+    let child = current_child(&state, &cookies).await?;
 
-        let mut guard = slot.lock().await;
-        // Sanity check: another session might have replaced this one.
-        let take = matches!(guard.as_ref(), Some(s) if s.kill_at == kill_at);
-        if !take {
-            return;
-        }
-        if let Some(mut session) = guard.take() {
-            match session.child.kill().await {
-                Ok(()) => tracing::info!(%kill_at, "game session killed by watchdog"),
-                Err(err) => tracing::warn!(?err, "failed to kill game child"),
+    let row: Option<(i64, i64)> =
+        sqlx::query_as("SELECT passed, COALESCE(child_id, 0) FROM attempts WHERE id = ?")
+            .bind(form.attempt_id)
+            .fetch_optional(&state.pool)
+            .await?;
+
+    let Some((passed, attempt_child)) = row else {
+        return Err(AppError::bad_request("contrôle introuvable"));
+    };
+    if passed != 1 {
+        return Err(AppError::bad_request("ce contrôle n'a pas été réussi"));
+    }
+    if attempt_child != child.id {
+        return Err(AppError::bad_request("ce contrôle n'est pas le tien"));
+    }
+
+    // Un contrôle réussi ne s'échange qu'UNE fois : renvoyer le formulaire ne
+    // donne pas 30 minutes de plus. L'index unique sur grants(attempt_id)
+    // garantit la même chose au niveau de la base.
+    let already: Option<(i64,)> = sqlx::query_as("SELECT id FROM grants WHERE attempt_id = ?")
+        .bind(form.attempt_id)
+        .fetch_optional(&state.pool)
+        .await?;
+    if already.is_some() {
+        return Ok(Redirect::to("/").into_response());
+    }
+
+    // La durée est décidée par le moteur, jamais par le formulaire.
+    if let GateDecision::ExamAvailable { .. } = policy::evaluate(&state.pool, &child).await? {
+        policy::open_grant(&state.pool, &child, Some(form.attempt_id), None).await?;
+    }
+
+    Ok(Redirect::to("/").into_response())
+}
+
+// ===== API (kiosque, fenêtre de verrouillage, minuteur) =====
+
+#[derive(Serialize)]
+struct StatusResponse {
+    child_id: i64,
+    child_name: String,
+    #[serde(flatten)]
+    decision: GateDecision,
+}
+
+async fn api_status(
+    State(state): State<AppState>,
+    cookies: Cookies,
+) -> Result<Json<StatusResponse>, AppError> {
+    let child = current_child(&state, &cookies).await?;
+    let decision = policy::evaluate(&state.pool, &child).await?;
+    Ok(Json(StatusResponse {
+        child_id: child.id,
+        child_name: child.name,
+        decision,
+    }))
+}
+
+#[derive(Deserialize)]
+struct HeartbeatBody {
+    child_id: i64,
+    /// Secondes écoulées depuis le dernier battement, mesurées de façon
+    /// MONOTONE par le minuteur. Le serveur ne fait qu'additionner : l'horloge
+    /// de la machine n'entre jamais dans le calcul.
+    secs: i64,
+}
+
+async fn api_heartbeat(
+    State(state): State<AppState>,
+    Json(body): Json<HeartbeatBody>,
+) -> Result<Json<GateDecision>, AppError> {
+    let child = policy::load_child(&state.pool, body.child_id)
+        .await?
+        .ok_or_else(|| AppError::bad_request("enfant inconnu"))?;
+
+    policy::consume(&state.pool, child.id, body.secs).await?;
+    Ok(Json(policy::evaluate(&state.pool, &child).await?))
+}
+
+// ===== Enfant courant =====
+
+async fn current_child(state: &AppState, cookies: &Cookies) -> Result<Child, AppError> {
+    if let Some(c) = cookies.get(CHILD_COOKIE_NAME) {
+        if let Ok(id) = c.value().parse::<i64>() {
+            if let Some(child) = policy::load_child(&state.pool, id).await? {
+                return Ok(child);
             }
         }
-    });
+    }
+    Ok(policy::default_child(&state.pool).await?)
+}
+
+// ===== Écran de blocage =====
+
+fn blocked_page(child: &Child, reason: &BlockReason) -> BlockedTemplate {
+    let (emoji, title, detail) = match reason {
+        BlockReason::DailyBudgetSpent {
+            used_min,
+            budget_min,
+        } => (
+            "⏳",
+            "C'est fini pour aujourd'hui".to_string(),
+            format!(
+                "Tu as utilisé tes {budget_min} minutes ({used_min} min au compteur). \
+                 Un contrôle de plus n'y changera rien — à demain !"
+            ),
+        ),
+    };
+
+    BlockedTemplate {
+        child_name: child.name.clone(),
+        child_avatar: child.avatar.clone(),
+        emoji: emoji.to_string(),
+        title,
+        detail,
+    }
 }
 
 // ===== Form parsing =====
@@ -230,15 +340,16 @@ fn parse_form(pairs: &[(String, String)]) -> Result<(Vec<i64>, Submission), AppE
 
 // ===== Persistence =====
 
-async fn persist_attempt(pool: &SqlitePool, attempt: &GradedAttempt) -> Result<i64> {
+async fn persist_attempt(pool: &SqlitePool, child_id: i64, attempt: &GradedAttempt) -> Result<i64> {
     let now = chrono::Utc::now().timestamp();
     let mut tx = pool.begin().await?;
 
     let row: (i64,) = sqlx::query_as(
-        "INSERT INTO attempts (started_at, finished_at, score_pct, passed)
-         VALUES (?, ?, ?, ?)
+        "INSERT INTO attempts (child_id, started_at, finished_at, score_pct, passed)
+         VALUES (?, ?, ?, ?, ?)
          RETURNING id",
     )
+    .bind(child_id)
     .bind(now)
     .bind(now)
     .bind(attempt.score_pct)
@@ -282,37 +393,6 @@ async fn persist_attempt(pool: &SqlitePool, attempt: &GradedAttempt) -> Result<i
     Ok(attempt_id)
 }
 
-// ===== Settings helpers =====
-
-async fn read_setting_str(pool: &SqlitePool, key: &str) -> Result<Option<String>> {
-    let row: Option<(String,)> = sqlx::query_as("SELECT value FROM settings WHERE key = ?")
-        .bind(key)
-        .fetch_optional(pool)
-        .await?;
-    Ok(row.map(|(v,)| v))
-}
-
-async fn read_setting_usize(pool: &SqlitePool, key: &str, default: usize) -> Result<usize> {
-    Ok(read_setting_str(pool, key)
-        .await?
-        .and_then(|v| v.parse().ok())
-        .unwrap_or(default))
-}
-
-async fn read_setting_i64(pool: &SqlitePool, key: &str, default: i64) -> Result<i64> {
-    Ok(read_setting_str(pool, key)
-        .await?
-        .and_then(|v| v.parse().ok())
-        .unwrap_or(default))
-}
-
-async fn read_setting_f64(pool: &SqlitePool, key: &str, default: f64) -> Result<f64> {
-    Ok(read_setting_str(pool, key)
-        .await?
-        .and_then(|v| v.parse().ok())
-        .unwrap_or(default))
-}
-
 // ===== Response helper =====
 
 pub fn render<T: Template>(tmpl: T) -> Response {
@@ -348,11 +428,7 @@ impl AppError {
 impl IntoResponse for AppError {
     fn into_response(self) -> Response {
         tracing::error!(error = %self.inner, "request failed");
-        (
-            self.status,
-            format!("Erreur : {}", self.inner),
-        )
-            .into_response()
+        (self.status, format!("Erreur : {}", self.inner)).into_response()
     }
 }
 

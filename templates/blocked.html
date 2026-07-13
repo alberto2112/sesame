@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="score-hero fail">
+  <div class="emoji">{{ emoji }}</div>
+  <h1>{{ title }}</h1>
+  <p class="score-sub">{{ detail }}</p>
+  <p class="score-sub">{{ child_avatar }} {{ child_name }}</p>
+</div>
+{% endblock %}

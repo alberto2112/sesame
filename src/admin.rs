@@ -146,7 +146,8 @@ struct SubjectsTemplate {
 struct SettingsTemplate {
     questions_per_test: String,
     pass_threshold_pct: String,
-    kill_interval_minutes: String,
+    session_minutes: String,
+    lock_mode: String,
     flash: Option<String>,
 }
 
@@ -697,7 +698,8 @@ async fn settings_get(
     Ok(render(SettingsTemplate {
         questions_per_test: read_setting(&state, "questions_per_test", "10").await?,
         pass_threshold_pct: read_setting(&state, "pass_threshold_pct", "70").await?,
-        kill_interval_minutes: read_setting(&state, "kill_interval_minutes", "30").await?,
+        session_minutes: read_setting(&state, "session_minutes", "30").await?,
+        lock_mode: read_setting(&state, "lock_mode", "overlay").await?,
         flash: q.msg,
     }))
 }
@@ -706,7 +708,8 @@ async fn settings_get(
 struct SettingsForm {
     questions_per_test: i64,
     pass_threshold_pct: f64,
-    kill_interval_minutes: i64,
+    session_minutes: i64,
+    lock_mode: String,
 }
 
 async fn settings_post(
@@ -720,13 +723,17 @@ async fn settings_post(
     if !(0.0..=100.0).contains(&form.pass_threshold_pct) {
         return Err(AppError::bad_request("seuil hors [0,100]"));
     }
-    if form.kill_interval_minutes < 1 {
-        return Err(AppError::bad_request("intervalle doit être ≥ 1 minute"));
+    if form.session_minutes < 1 {
+        return Err(AppError::bad_request("la session doit durer ≥ 1 minute"));
+    }
+    if !matches!(form.lock_mode.as_str(), "overlay" | "logout") {
+        return Err(AppError::bad_request("mode de verrouillage inconnu"));
     }
     let mut tx = state.pool.begin().await?;
     upsert_setting(&mut tx, "questions_per_test", &form.questions_per_test.to_string()).await?;
     upsert_setting(&mut tx, "pass_threshold_pct", &form.pass_threshold_pct.to_string()).await?;
-    upsert_setting(&mut tx, "kill_interval_minutes", &form.kill_interval_minutes.to_string()).await?;
+    upsert_setting(&mut tx, "session_minutes", &form.session_minutes.to_string()).await?;
+    upsert_setting(&mut tx, "lock_mode", &form.lock_mode).await?;
     tx.commit().await?;
     Ok(Redirect::to("/admin/settings?msg=Réglages+enregistrés").into_response())
 }

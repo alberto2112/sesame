@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}C'est bon !{% endblock %}
+
+{% block content %}
+<div class="score-hero pass">
+  <div class="emoji">{{ child_avatar }}</div>
+  <h1>C'est bon, {{ child_name }} !</h1>
+  <div class="score-big">{{ remaining_minutes }} min</div>
+  <p class="score-sub">
+    L'ordinateur est à toi. Amuse-toi bien —
+    on te préviendra avant la fin.
+  </p>
+</div>
+{% endblock %}

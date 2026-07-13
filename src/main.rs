@@ -3,28 +3,26 @@ mod auth;
 mod config;
 mod db;
 mod importer;
+mod policy;
 mod quiz;
 mod web;
 
 use std::collections::HashMap;
 use std::path::{Path, PathBuf};
-use std::sync::Arc;
 use std::time::Duration;
 
 use anyhow::{Result, anyhow, bail};
 use sqlx::SqlitePool;
-use tokio::sync::Mutex;
 use tracing_subscriber::EnvFilter;
 
 use crate::config::Config;
 use crate::quiz::Submission;
-use crate::web::GameSlot;
 
 const HELP: &str = "\
-luanti-gate — portail de contrôle avant de lancer Luanti
+kidgate — portail de contrôle avant d'utiliser l'ordinateur
 
 USAGE :
-    luanti [OPTIONS] [COMMANDE]
+    kidgate [OPTIONS] [COMMANDE]
 
 COMMANDES :
     (aucune)            Démarre le serveur. Ouvre l'examen, ou la configuration
@@ -40,7 +38,7 @@ OPTIONS :
 CONFIGURATION :
     Sans --config, ces emplacements sont essayés dans l'ordre ; le premier
     qui existe est utilisé :
-      1. <répertoire de config du système>/luanti-gate/config.toml
+      1. <répertoire de config du système>/kidgate/config.toml
       2. ./config.toml  (répertoire courant)
 ";
 
@@ -155,8 +153,8 @@ async fn main() -> Result<()> {
             run_preview(&pool, count).await?;
         }
         Command::Server { force_admin } => {
-            let mode = if force_admin { "administration" } else { "wrapper" };
-            tracing::info!("luanti-gate démarré (mode {mode})");
+            let mode = if force_admin { "administration" } else { "portail" };
+            tracing::info!("kidgate démarré (mode {mode})");
             let pool = db::init(&cfg.paths.database).await?;
             run_server(cfg, pool, force_admin).await?;
         }
@@ -167,7 +165,7 @@ async fn main() -> Result<()> {
 
 /// Démarre le serveur HTTP et ouvre le navigateur sur la bonne page.
 ///
-/// `force_admin` : si vrai (commande `luanti admin`), on ouvre toujours
+/// `force_admin` : si vrai (commande `kidgate admin`), on ouvre toujours
 /// `/admin`. Sinon, on ouvre `/admin` quand aucun mot de passe administrateur
 /// n'existe encore (pour le configurer), et `/` (l'examen) le reste du temps.
 async fn run_server(cfg: Config, pool: SqlitePool, force_admin: bool) -> Result<()> {
@@ -180,13 +178,7 @@ async fn run_server(cfg: Config, pool: SqlitePool, force_admin: bool) -> Result<
         "/"
     };
 
-    let game: GameSlot = Arc::new(Mutex::new(None));
-    let state = web::AppState {
-        pool,
-        cfg: Arc::new(cfg),
-        game: game.clone(),
-    };
-    let router = web::build_router(state);
+    let router = web::build_router(web::AppState { pool });
 
     let listener = tokio::net::TcpListener::bind(format!("{host}:{port}")).await?;
     let actual = listener.local_addr()?;
@@ -203,7 +195,7 @@ async fn run_server(cfg: Config, pool: SqlitePool, force_admin: bool) -> Result<
 
     println!();
     println!("  ===========================================");
-    println!("  luanti-gate prêt");
+    println!("  kidgate prêt");
     println!("  Local  : {browse_url}");
     println!("  Réseau : écoute sur http://{actual}");
     println!("  Ctrl+C pour arrêter.");
@@ -211,14 +203,18 @@ async fn run_server(cfg: Config, pool: SqlitePool, force_admin: bool) -> Result<
     println!();
     tracing::info!(%browse_url, listen = %actual, "server listening");
 
-    let url_for_open = browse_url.clone();
-    tokio::spawn(async move {
-        tokio::time::sleep(Duration::from_millis(300)).await;
-        open_browser(&url_for_open);
-    });
+    // Le kiosque intègre ce serveur et affiche la page dans SA fenêtre : il ne
+    // doit surtout pas ouvrir un navigateur par-dessus. KIDGATE_NO_BROWSER=1.
+    if std::env::var_os("KIDGATE_NO_BROWSER").is_none() {
+        let url_for_open = browse_url.clone();
+        tokio::spawn(async move {
+            tokio::time::sleep(Duration::from_millis(300)).await;
+            open_browser(&url_for_open);
+        });
+    }
 
     axum::serve(listener, router)
-        .with_graceful_shutdown(shutdown_signal(game))
+        .with_graceful_shutdown(shutdown_signal())
         .await?;
     Ok(())
 }
@@ -243,19 +239,12 @@ fn open_browser(url: &str) {
     }
 }
 
-async fn shutdown_signal(game: GameSlot) {
+async fn shutdown_signal() {
     if let Err(err) = tokio::signal::ctrl_c().await {
         tracing::error!(?err, "failed to listen for ctrl_c");
         return;
     }
     tracing::info!("shutdown signal received");
-    let mut guard = game.lock().await;
-    if let Some(mut session) = guard.take() {
-        match session.child.kill().await {
-            Ok(()) => tracing::info!("game child killed on shutdown"),
-            Err(err) => tracing::warn!(?err, "failed to kill game child on shutdown"),
-        }
-    }
 }
 
 async fn run_import(pool: &SqlitePool, path: &Path) -> Result<()> {
@@ -274,19 +263,15 @@ async fn run_import(pool: &SqlitePool, path: &Path) -> Result<()> {
 }
 
 async fn run_preview(pool: &SqlitePool, n_override: Option<usize>) -> Result<()> {
-    let n = match n_override {
-        Some(v) => v,
-        None => {
-            let raw: String = sqlx::query_scalar("SELECT value FROM settings WHERE key = ?")
-                .bind("questions_per_test")
-                .fetch_one(pool)
-                .await?;
-            raw.parse().unwrap_or(10)
-        }
-    };
+    let child = policy::default_child(pool).await?;
+    let n = n_override.unwrap_or(child.questions_per_test as usize);
 
     let questions = quiz::pick_questions(pool, n).await?;
-    println!("=== Aperçu du contrôle ({} questions) ===", questions.len());
+    println!(
+        "=== Aperçu du contrôle de {} ({} questions) ===",
+        child.name,
+        questions.len()
+    );
     for (i, q) in questions.iter().enumerate() {
         println!("\n{}. [{}] {}", i + 1, q.kind, q.statement);
         for a in &q.answers {
@@ -303,7 +288,7 @@ async fn run_preview(pool: &SqlitePool, n_override: Option<usize>) -> Result<()>
                 .await?;
         submission.insert(q.id, correct.into_iter().map(|(id,)| id).collect());
     }
-    let result = quiz::grade(pool, &submission).await?;
+    let result = quiz::grade(pool, &submission, child.pass_threshold_pct).await?;
     println!("\n=== Simulation: toutes les réponses correctes ===");
     println!(
         "Score : {}/{} ({:.1}%)",
@@ -314,11 +299,14 @@ async fn run_preview(pool: &SqlitePool, n_override: Option<usize>) -> Result<()>
         "Résultat : {}",
         if result.passed { "RÉUSSI" } else { "ÉCHEC" }
     );
+
+    let used = policy::consumed_today(pool, child.id).await? / 60;
+    println!("\nTemps consommé aujourd'hui : {used} min");
     Ok(())
 }
 
 fn init_tracing() {
     let filter = EnvFilter::try_from_default_env()
-        .unwrap_or_else(|_| EnvFilter::new("luanti=info,tower_http=info"));
+        .unwrap_or_else(|_| EnvFilter::new("kidgate=info,tower_http=info"));
     tracing_subscriber::fmt().with_env_filter(filter).init();
 }

@@ -17,7 +17,6 @@ pub struct ServerConfig {
 
 #[derive(Debug, Deserialize)]
 pub struct PathsConfig {
-    pub game_binary: PathBuf,
     pub database: PathBuf,
 }
 
@@ -47,7 +46,7 @@ impl Config {
             .join("\n");
         Err(anyhow!(
             "Aucun fichier de configuration trouvé. Chemins essayés :\n{tried}\n\
-             Crée le fichier dans ~/.config/luanti-gate/config.toml, lance la commande \
+             Crée le fichier dans ~/.config/kidgate/config.toml, lance la commande \
              depuis le dossier du projet, ou passe --config <fichier>."
         ))
     }
@@ -56,7 +55,7 @@ impl Config {
 fn default_config_candidates() -> Vec<PathBuf> {
     let mut out = Vec::new();
     if let Some(dir) = dirs::config_dir() {
-        out.push(dir.join("luanti-gate").join("config.toml"));
+        out.push(dir.join("kidgate").join("config.toml"));
     }
     out.push(PathBuf::from("config.toml"));
     out
@@ -67,7 +66,7 @@ fn resolve_data_path(p: &Path) -> PathBuf {
         return p.to_path_buf();
     }
     let base = dirs::data_dir()
-        .map(|d| d.join("luanti-gate"))
+        .map(|d| d.join("kidgate"))
         .unwrap_or_else(|| PathBuf::from("."));
     base.join(p)
 }
