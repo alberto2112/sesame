@@ -12,6 +12,7 @@ use tower_cookies::{Cookie, Cookies};
 
 use crate::auth;
 use crate::importer::{self, ImportFile};
+use crate::policy;
 use crate::web::{AppError, AppState, render};
 
 // ===== Router ================================================================
@@ -29,6 +30,8 @@ pub fn router() -> Router<AppState> {
         .route("/children", get(children_list).post(child_create_post))
         .route("/children/:id/edit", get(child_edit_get).post(child_edit_post))
         .route("/children/:id/delete", post(child_delete_post))
+        .route("/children/:id/grant", post(child_grant_post))
+        .route("/children/:id/revoke", post(child_revoke_post))
         .route("/children/:id/schedules", post(schedule_add_post))
         .route("/children/:id/schedules/:sid/delete", post(schedule_delete_post))
         .route("/subjects", get(subjects_get).post(subjects_post))
@@ -176,11 +179,19 @@ struct ImportReportView {
 #[template(path = "admin/history_list.html")]
 struct HistoryListTemplate {
     attempts: Vec<HistoryAttemptRow>,
+    children: Vec<ChildOption>,
+}
+
+struct ChildOption {
+    id: i64,
+    label: String,
+    selected: bool,
 }
 
 struct HistoryAttemptRow {
     id: i64,
     when: String,
+    child: String,
     score_fmt: String,
     passed: bool,
 }
@@ -720,6 +731,10 @@ struct ChildRow {
     used_today_min: i64,
     /// Questions visibles pour sa plage de difficulté — 0 = examen impossible.
     available_questions: i64,
+    attempts_passed: i64,
+    attempts_total: i64,
+    /// Concession vivante (temps en cours) ?
+    has_grant: bool,
 }
 
 #[derive(Template)]
@@ -752,35 +767,44 @@ async fn children_list(
     Query(q): Query<ChildrenQuery>,
 ) -> Result<Response, AppError> {
     let today = chrono::Local::now().format("%Y-%m-%d").to_string();
-    let rows: Vec<(i64, String, String, i64, i64, i64, i64, i64, i64, i64)> = sqlx::query_as(
-        "SELECT c.id, c.name, c.avatar, c.enabled, c.difficulty_min, c.difficulty_max,
-                c.session_minutes, c.daily_budget_minutes,
-                COALESCE(u.consumed_secs, 0) / 60,
-                (SELECT COUNT(*) FROM questions q
-                  JOIN subjects s ON s.id = q.subject_id AND s.enabled = 1
-                  WHERE q.difficulty BETWEEN c.difficulty_min AND c.difficulty_max)
-         FROM children c
-         LEFT JOIN daily_usage u ON u.child_id = c.id AND u.day = ?
-         ORDER BY c.position, c.id",
-    )
-    .bind(&today)
-    .fetch_all(&state.pool)
-    .await?;
+    let rows: Vec<(i64, String, String, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64)> =
+        sqlx::query_as(
+            "SELECT c.id, c.name, c.avatar, c.enabled, c.difficulty_min, c.difficulty_max,
+                    c.session_minutes, c.daily_budget_minutes,
+                    COALESCE(u.consumed_secs, 0) / 60,
+                    (SELECT COUNT(*) FROM questions q
+                      JOIN subjects s ON s.id = q.subject_id AND s.enabled = 1
+                      WHERE q.difficulty BETWEEN c.difficulty_min AND c.difficulty_max),
+                    (SELECT COUNT(*) FROM attempts a WHERE a.child_id = c.id AND a.passed = 1),
+                    (SELECT COUNT(*) FROM attempts a WHERE a.child_id = c.id),
+                    EXISTS(SELECT 1 FROM grants g WHERE g.child_id = c.id AND g.closed_at IS NULL)
+             FROM children c
+             LEFT JOIN daily_usage u ON u.child_id = c.id AND u.day = ?
+             ORDER BY c.position, c.id",
+        )
+        .bind(&today)
+        .fetch_all(&state.pool)
+        .await?;
 
     let children = rows
         .into_iter()
         .map(
-            |(id, name, avatar, enabled, dmin, dmax, session, budget, used, avail)| ChildRow {
-                id,
-                name,
-                avatar,
-                enabled: enabled == 1,
-                difficulty_min: dmin,
-                difficulty_max: dmax,
-                session_minutes: session,
-                daily_budget_minutes: budget,
-                used_today_min: used,
-                available_questions: avail,
+            |(id, name, avatar, enabled, dmin, dmax, session, budget, used, avail, passed, total, grant)| {
+                ChildRow {
+                    id,
+                    name,
+                    avatar,
+                    enabled: enabled == 1,
+                    difficulty_min: dmin,
+                    difficulty_max: dmax,
+                    session_minutes: session,
+                    daily_budget_minutes: budget,
+                    used_today_min: used,
+                    available_questions: avail,
+                    attempts_passed: passed,
+                    attempts_total: total,
+                    has_grant: grant == 1,
+                }
             },
         )
         .collect();
@@ -972,6 +996,46 @@ async fn child_delete_post(
         .await?;
     tx.commit().await?;
     Ok(Redirect::to("/admin/children?msg=Enfant+supprimé").into_response())
+}
+
+// ===== Bouton de secours du parent ===========================================
+
+#[derive(Deserialize)]
+struct GrantForm {
+    minutes: i64,
+}
+
+/// Donne du temps SANS contrôle. Décision du parent : la concession ignore le
+/// budget quotidien et le couvre-feu (bypass) — sinon ce bouton serait inutile
+/// précisément quand on en a besoin (devoir à finir, budget épuisé).
+async fn child_grant_post(
+    _: AdminAuth,
+    State(state): State<AppState>,
+    AxPath(id): AxPath<i64>,
+    Form(form): Form<GrantForm>,
+) -> Result<Response, AppError> {
+    if !(1..=600).contains(&form.minutes) {
+        return Err(AppError::bad_request("minutes hors de [1, 600]"));
+    }
+    let child = policy::load_child(&state.pool, id)
+        .await?
+        .ok_or_else(|| AppError::bad_request("enfant inconnu ou désactivé"))?;
+
+    policy::open_grant(&state.pool, &child, None, Some(form.minutes), true).await?;
+    tracing::info!(child = %child.name, minutes = form.minutes, "concession parentale");
+
+    Ok(Redirect::to("/admin/children?msg=Temps+accordé").into_response())
+}
+
+/// Coupe le temps en cours, tout de suite. L'écran de l'enfant repassera au
+/// contrôle (ou au blocage) à la prochaine évaluation.
+async fn child_revoke_post(
+    _: AdminAuth,
+    State(state): State<AppState>,
+    AxPath(id): AxPath<i64>,
+) -> Result<Response, AppError> {
+    policy::close_open_grants(&state.pool, id).await?;
+    Ok(Redirect::to("/admin/children?msg=Temps+retiré").into_response())
 }
 
 // ===== Plages horaires (admin) ==============================================
@@ -1188,26 +1252,59 @@ async fn import_post(
 
 // ===== History ===============================================================
 
+#[derive(Deserialize)]
+struct HistoryQuery {
+    child: Option<i64>,
+}
+
 async fn history_list(
     _: AdminAuth,
     State(state): State<AppState>,
+    Query(q): Query<HistoryQuery>,
 ) -> Result<Response, AppError> {
-    let rows: Vec<(i64, i64, Option<f64>, i64)> = sqlx::query_as(
-        "SELECT id, started_at, score_pct, passed FROM attempts
-         ORDER BY started_at DESC LIMIT 20",
-    )
-    .fetch_all(&state.pool)
-    .await?;
+    let base = "SELECT a.id, a.started_at, a.score_pct, a.passed,
+                       COALESCE(c.avatar || ' ' || c.name, '—')
+                FROM attempts a
+                LEFT JOIN children c ON c.id = a.child_id";
+
+    let rows: Vec<(i64, i64, Option<f64>, i64, String)> = if let Some(cid) = q.child {
+        sqlx::query_as(&format!(
+            "{base} WHERE a.child_id = ? ORDER BY a.started_at DESC LIMIT 20"
+        ))
+        .bind(cid)
+        .fetch_all(&state.pool)
+        .await?
+    } else {
+        sqlx::query_as(&format!("{base} ORDER BY a.started_at DESC LIMIT 20"))
+            .fetch_all(&state.pool)
+            .await?
+    };
+
     let attempts = rows
         .into_iter()
-        .map(|(id, ts, score, passed)| HistoryAttemptRow {
+        .map(|(id, ts, score, passed, child)| HistoryAttemptRow {
             id,
             when: format_ts(ts),
+            child,
             score_fmt: format!("{:.0}", score.unwrap_or(0.0)),
             passed: passed == 1,
         })
         .collect();
-    Ok(render(HistoryListTemplate { attempts }))
+
+    let kid_rows: Vec<(i64, String, String)> =
+        sqlx::query_as("SELECT id, avatar, name FROM children ORDER BY position, id")
+            .fetch_all(&state.pool)
+            .await?;
+    let children = kid_rows
+        .into_iter()
+        .map(|(id, avatar, name)| ChildOption {
+            id,
+            label: format!("{avatar} {name}"),
+            selected: q.child == Some(id),
+        })
+        .collect();
+
+    Ok(render(HistoryListTemplate { attempts, children }))
 }
 
 async fn history_detail(

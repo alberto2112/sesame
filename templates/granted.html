@@ -2,6 +2,13 @@
 
 {% block title %}C'est bon !{% endblock %}
 
+{# Quand le temps expire, la page se recharge : le moteur décide alors quoi
+   afficher — un nouveau contrôle (renouvellement), « c'est fini pour
+   aujourd'hui » ou « c'est l'heure de dormir ». #}
+{% block head_extra %}
+<meta http-equiv="refresh" content="{{ refresh_secs }}">
+{% endblock %}
+
 {% block content %}
 <div class="score-hero pass">
   <div class="emoji">{{ child_avatar }}</div>
@@ -9,7 +16,7 @@
   <div class="score-big">{{ remaining_minutes }} min</div>
   <p class="score-sub">
     L'ordinateur est à toi. Amuse-toi bien —
-    on te préviendra avant la fin.
+    quand le temps sera écoulé, cette page te proposera la suite.
   </p>
 </div>
 {% endblock %}

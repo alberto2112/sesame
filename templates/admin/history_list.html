@@ -7,18 +7,31 @@
   <h1>Historique (20 derniers contrôles)</h1>
 </header>
 
+<form method="get" action="/admin/history" style="margin:1rem 0;">
+  <label>
+    Filtrer par enfant
+    <select name="child" onchange="this.form.submit()">
+      <option value="">— Tous —</option>
+      {% for c in children %}
+        <option value="{{ c.id }}" {% if c.selected %}selected{% endif %}>{{ c.label }}</option>
+      {% endfor %}
+    </select>
+  </label>
+</form>
+
 {% if attempts.is_empty() %}
   <p><em>Aucun contrôle pour l'instant.</em></p>
 {% else %}
   <table>
     <thead>
-      <tr><th>#</th><th>Date</th><th>Score</th><th>Résultat</th><th>Détail</th></tr>
+      <tr><th>#</th><th>Date</th><th>Enfant</th><th>Score</th><th>Résultat</th><th>Détail</th></tr>
     </thead>
     <tbody>
       {% for a in attempts %}
       <tr>
         <td>{{ a.id }}</td>
         <td>{{ a.when }}</td>
+        <td>{{ a.child }}</td>
         <td>{{ a.score_fmt }}%</td>
         <td>
           {% if a.passed %}

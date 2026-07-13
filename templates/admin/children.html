@@ -23,14 +23,17 @@
       <tr>
         <th></th><th>Prénom</th><th>Difficulté</th><th>Session</th>
         <th>Budget/jour</th><th>Aujourd'hui</th><th>Questions dispo</th>
-        <th>Actif</th><th>Actions</th>
+        <th>Contrôles</th><th>Actif</th><th>Actions</th>
       </tr>
     </thead>
     <tbody>
       {% for c in children %}
       <tr>
         <td style="font-size:1.6rem;">{{ c.avatar }}</td>
-        <td><strong>{{ c.name }}</strong></td>
+        <td>
+          <strong>{{ c.name }}</strong>
+          {% if c.has_grant %}<br><small>⏱ temps en cours</small>{% endif %}
+        </td>
         <td>{{ c.difficulty_min }}–{{ c.difficulty_max }}</td>
         <td>{{ c.session_minutes }} min</td>
         <td>{{ c.daily_budget_minutes }} min</td>
@@ -42,10 +45,23 @@
             {{ c.available_questions }}
           {% endif %}
         </td>
+        <td>{{ c.attempts_passed }}/{{ c.attempts_total }} réussis</td>
         <td>{% if c.enabled %}✅{% else %}⛔{% endif %}</td>
-        <td>
+        <td style="white-space:nowrap;">
           <a href="/admin/children/{{ c.id }}/edit">Modifier</a>
-          —
+          <form method="post" action="/admin/children/{{ c.id }}/grant"
+                style="display:flex; gap:0.3rem; align-items:center; margin:0.3rem 0;">
+            <input type="number" name="minutes" value="30" min="1" max="600"
+                   style="width:4.5rem; margin:0; padding:0.1rem 0.3rem;">
+            <button type="submit" style="width:auto; padding:0.1rem 0.5rem; font-size:0.85rem;"
+                    title="Donner du temps sans contrôle (ignore budget et horaires)">Donner</button>
+          </form>
+          {% if c.has_grant %}
+          <form method="post" action="/admin/children/{{ c.id }}/revoke" style="display:inline;">
+            <button type="submit" class="secondary outline"
+                    style="width:auto; padding:0.1rem 0.5rem; font-size:0.85rem;">Couper le temps</button>
+          </form>
+          {% endif %}
           <form method="post" action="/admin/children/{{ c.id }}/delete" style="display:inline;"
                 onsubmit="return confirm('Supprimer {{ c.name }} ? Son historique de contrôles sera conservé mais anonymisé.')">
             <button type="submit" class="secondary outline"

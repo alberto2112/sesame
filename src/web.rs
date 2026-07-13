@@ -88,6 +88,9 @@ struct GrantedTemplate {
     child_name: String,
     child_avatar: String,
     remaining_minutes: i64,
+    /// La page se recharge à l'expiration : le moteur décide de la suite
+    /// (nouveau contrôle, budget épuisé, couvre-feu).
+    refresh_secs: i64,
 }
 
 #[derive(Template)]
@@ -120,6 +123,7 @@ async fn index(State(state): State<AppState>, cookies: Cookies) -> Result<Respon
             child_name: child.name,
             child_avatar: child.avatar,
             remaining_minutes: (remaining_secs + 59) / 60,
+            refresh_secs: remaining_secs + 3,
         })),
 
         GateDecision::Blocked { reason } => Ok(render(blocked_page(&child, &reason))),
@@ -253,7 +257,7 @@ async fn unlock(
 
     // La durée est décidée par le moteur, jamais par le formulaire.
     if let GateDecision::ExamAvailable { .. } = policy::evaluate(&state.pool, &child).await? {
-        policy::open_grant(&state.pool, &child, Some(form.attempt_id), None).await?;
+        policy::open_grant(&state.pool, &child, Some(form.attempt_id), None, false).await?;
     }
 
     Ok(Redirect::to("/").into_response())

@@ -120,7 +120,13 @@ pub async fn evaluate(pool: &SqlitePool, child: &Child) -> Result<GateDecision> 
     // horaire permettent encore : le couvre-feu coupe une session en cours.
     if let Some(grant) = active_grant(pool, child.id).await? {
         let grant_left = (grant.minutes * 60 - grant.consumed_secs).max(0);
-        let remaining = grant_left.min(budget_left).min(sched.window_left_secs);
+        // Une concession du parent (bypass) ne connaît ni budget ni couvre-feu :
+        // le parent est devant l'écran, sa décision prime sur les règles.
+        let remaining = if grant.bypass == 1 {
+            grant_left
+        } else {
+            grant_left.min(budget_left).min(sched.window_left_secs)
+        };
         if remaining > 0 {
             return Ok(GateDecision::Granted {
                 remaining_secs: remaining,
@@ -288,11 +294,13 @@ pub struct Grant {
     pub id: i64,
     pub minutes: i64,
     pub consumed_secs: i64,
+    /// 1 = concession du parent : ignore budget et plages horaires.
+    pub bypass: i64,
 }
 
 pub async fn active_grant(pool: &SqlitePool, child_id: i64) -> Result<Option<Grant>> {
     Ok(sqlx::query_as(
-        "SELECT id, minutes, consumed_secs
+        "SELECT id, minutes, consumed_secs, bypass
          FROM grants
          WHERE child_id = ? AND closed_at IS NULL
          ORDER BY id DESC LIMIT 1",
@@ -310,13 +318,15 @@ pub async fn open_grant(
     child: &Child,
     attempt_id: Option<i64>,
     minutes_override: Option<i64>,
+    bypass: bool,
 ) -> Result<i64> {
     let minutes = match minutes_override {
         Some(m) => m.max(1),
         None => {
+            let sched = schedule_status(pool, child.id).await?;
             let budget_left =
                 (child.budget_secs_today() - consumed_today(pool, child.id).await?).max(0);
-            grantable_minutes(child, budget_left)
+            grantable_minutes(child, budget_left.min(sched.window_left_secs))
         }
     };
 
@@ -325,14 +335,15 @@ pub async fn open_grant(
 
     let now = chrono::Utc::now().timestamp();
     let row: (i64,) = sqlx::query_as(
-        "INSERT INTO grants (child_id, attempt_id, granted_at, minutes)
-         VALUES (?, ?, ?, ?)
+        "INSERT INTO grants (child_id, attempt_id, granted_at, minutes, bypass)
+         VALUES (?, ?, ?, ?, ?)
          RETURNING id",
     )
     .bind(child.id)
     .bind(attempt_id)
     .bind(now)
     .bind(minutes)
+    .bind(if bypass { 1 } else { 0 })
     .fetch_one(pool)
     .await?;
 
