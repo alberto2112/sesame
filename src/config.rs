@@ -7,6 +7,8 @@ use serde::Deserialize;
 pub struct Config {
     pub server: ServerConfig,
     pub paths: PathsConfig,
+    #[serde(default)]
+    pub kiosk: KioskConfig,
 }
 
 #[derive(Debug, Deserialize)]
@@ -18,6 +20,27 @@ pub struct ServerConfig {
 #[derive(Debug, Deserialize)]
 pub struct PathsConfig {
     pub database: PathBuf,
+}
+
+#[derive(Debug, Deserialize, Default)]
+pub struct KioskConfig {
+    /// Commande du navigateur, arguments compris. Vide = détection
+    /// automatique parmi les navigateurs installés.
+    #[serde(default)]
+    pub browser: Option<String>,
+}
+
+impl Config {
+    /// Adresse joignable du serveur. `0.0.0.0` n'est pas une adresse à
+    /// laquelle on se connecte : c'est une adresse sur laquelle on écoute.
+    pub fn local_url(&self) -> String {
+        let host = match self.server.host.as_str() {
+            "0.0.0.0" | "" => "127.0.0.1",
+            "::" => "[::1]",
+            h => h,
+        };
+        format!("http://{host}:{}", self.server.port)
+    }
 }
 
 impl Config {

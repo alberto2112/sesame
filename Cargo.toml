@@ -6,12 +6,24 @@ description = "Quiz gate that controls kids' access to the computer"
 license = "MIT"
 publish = false
 
+# Bibliothèque partagée : le serveur et les binaires « système » (kiosque,
+# minuteur…) parlent le même langage sans dupliquer la config ni le moteur.
+[lib]
+name = "sesame"
+path = "src/lib.rs"
+
 # Le binaire ne doit SURTOUT plus s'appeler « luanti » : il ne remplace plus le
 # jeu, il garde l'ordinateur. S'il gardait ce nom, il masquerait le vrai Luanti
 # dans le PATH et l'enfant ne pourrait plus jouer une fois débloqué.
 [[bin]]
 name = "sesame"
 path = "src/main.rs"
+
+# La porte : tourne dans un X nu, sans gestionnaire de fenêtres, AVANT que le
+# bureau n'existe. Sort avec le code 0 quand l'ordinateur est gagné.
+[[bin]]
+name = "sesame-kiosk"
+path = "src/bin/kiosk.rs"
 
 [dependencies]
 tokio = { version = "1", features = ["full"] }
@@ -42,6 +54,16 @@ thiserror = "2"
 
 chrono = { version = "0.4", features = ["serde"] }
 dirs = "5"
+
+# Client HTTP synchrone pour les binaires « système » : ils sondent l'API du
+# serveur en boucle. Pas de TLS — tout se passe sur la boucle locale.
+ureq = { version = "2", default-features = false, features = ["json"] }
+
+# X11 en Rust pur (pas de liaison C) : compile partout, ne se connecte que là
+# où un serveur X existe. Sert à lire la taille de l'écran — sans gestionnaire
+# de fenêtres, `fullscreen` n'existe pas, il faut demander la bonne géométrie
+# soi-même.
+x11rb = "0.13"
 
 [profile.release]
 opt-level = 3

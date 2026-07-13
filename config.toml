@@ -1,18 +1,28 @@
 # sesame — fichier de configuration
 #
-# Ici ne vivent QUE les valeurs qui exigent un redémarrage. Tout le reste — durée
-# de session, budget quotidien, seuil de réussite, difficulté, plages horaires —
-# vit dans la base de données, PAR ENFANT, et se modifie depuis /admin sans
-# redémarrer.
+# Ici ne vivent QUE les valeurs qui exigent un redémarrage. Tout le reste —
+# durée de session, budget quotidien, seuil de réussite, difficulté, plages
+# horaires — vit dans la base de données, PAR ENFANT, et se modifie depuis
+# /admin sans redémarrer.
 
 [server]
-# 0.0.0.0 = écoute sur toutes les interfaces réseau (le parent peut ouvrir
-# /admin depuis un autre appareil). Utilise "127.0.0.1" pour limiter l'accès à
-# la machine locale.
+# 0.0.0.0 = écoute sur toutes les interfaces (le parent peut ouvrir /admin
+# depuis un autre appareil). "127.0.0.1" limite l'accès à cette machine.
 host = "0.0.0.0"
-port = 0  # 0 = port aléatoire choisi par le système
+
+# Le port doit être FIXE : le kiosque, le minuteur et la fenêtre de
+# verrouillage sont des clients qui doivent savoir où frapper.
+port = 7654
 
 [paths]
 # Base de données SQLite. Un chemin relatif est résolu vers
 # $XDG_DATA_HOME/sesame (et NON vers le répertoire courant).
 database = "questions.db"
+
+[kiosk]
+# Navigateur utilisé par sesame-kiosk pour afficher le contrôle en plein écran.
+# Commenté = détection automatique (chromium, chrome, brave, firefox…).
+# Les bons arguments (plein écran, navigation privée, géométrie de l'écran)
+# sont ajoutés automatiquement pour les navigateurs connus.
+#
+# browser = "chromium"

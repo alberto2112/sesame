@@ -34,6 +34,7 @@ pub fn build_router(state: AppState) -> Router {
         .route("/profile", post(profile_post))
         .route("/submit", post(submit))
         .route("/unlock", post(unlock))
+        .route("/api/gate", get(api_gate))
         .route("/api/status", get(api_status))
         .route("/api/heartbeat", post(api_heartbeat))
         .nest("/admin", admin::router())
@@ -264,6 +265,43 @@ async fn unlock(
 }
 
 // ===== API (kiosque, fenêtre de verrouillage, minuteur) =====
+
+/// *La MACHINE est-elle ouverte ?* — et non « cet enfant a-t-il du temps ? ».
+///
+/// Le kiosque et le minuteur n'ont pas de cookie : ils ne savent pas QUI est
+/// assis devant l'écran (c'est l'enfant qui l'a choisi dans le navigateur).
+/// La seule question qui a un sens pour eux est : *quelqu'un a-t-il gagné
+/// l'ordinateur ?* — s'il y a une concession vivante, la porte s'ouvre, et le
+/// temps est débité à celui qui l'a gagnée.
+#[derive(Serialize)]
+struct GateResponse {
+    unlocked: bool,
+    child_id: Option<i64>,
+    child_name: Option<String>,
+    remaining_secs: i64,
+}
+
+async fn api_gate(State(state): State<AppState>) -> Result<Json<GateResponse>, AppError> {
+    for child in policy::list_children(&state.pool).await? {
+        if let GateDecision::Granted { remaining_secs } =
+            policy::evaluate(&state.pool, &child).await?
+        {
+            return Ok(Json(GateResponse {
+                unlocked: true,
+                child_id: Some(child.id),
+                child_name: Some(child.name),
+                remaining_secs,
+            }));
+        }
+    }
+
+    Ok(Json(GateResponse {
+        unlocked: false,
+        child_id: None,
+        child_name: None,
+        remaining_secs: 0,
+    }))
+}
 
 #[derive(Serialize)]
 struct StatusResponse {

@@ -1,12 +1,3 @@
-mod admin;
-mod auth;
-mod config;
-mod db;
-mod importer;
-mod policy;
-mod quiz;
-mod web;
-
 use std::collections::HashMap;
 use std::path::{Path, PathBuf};
 use std::time::Duration;
@@ -15,8 +6,9 @@ use anyhow::{Result, anyhow, bail};
 use sqlx::SqlitePool;
 use tracing_subscriber::EnvFilter;
 
-use crate::config::Config;
-use crate::quiz::Submission;
+use sesame::config::Config;
+use sesame::quiz::Submission;
+use sesame::{auth, db, importer, policy, quiz, web};
 
 const HELP: &str = "\
 sesame — portail de contrôle avant d'utiliser l'ordinateur
