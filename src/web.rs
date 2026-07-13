@@ -3,23 +3,23 @@ use std::collections::HashMap;
 use anyhow::{Context, Result};
 use askama::Template;
 use axum::Router;
-use axum::extract::{Form, Path, State};
+use axum::extract::{Form, Path, Query, State};
 use axum::http::{StatusCode, header};
 use axum::response::{IntoResponse, Json, Redirect, Response};
 use axum::routing::{get, post};
 use rust_embed::RustEmbed;
 use serde::{Deserialize, Serialize};
 use sqlx::SqlitePool;
-use tower_cookies::{CookieManagerLayer, Cookies};
+use tower_cookies::{Cookie, CookieManagerLayer, Cookies};
 use tower_http::trace::TraceLayer;
 
 use crate::admin;
 use crate::policy::{self, BlockReason, Child, GateDecision};
 use crate::quiz::{self, GradedAttempt, QuizQuestion, Submission};
 
-/// Cookie qui retient quel enfant est devant l'écran. Le sélecteur de profils
-/// arrive en phase 2 ; d'ici là elle reste vide et on retombe sur le premier
-/// enfant actif.
+/// Cookie qui retient quel enfant est devant l'écran, posé par le sélecteur de
+/// profils (/profiles). Cookie de session : à chaque redémarrage du navigateur
+/// (donc du kiosque), on redemande qui est là.
 pub const CHILD_COOKIE_NAME: &str = "sesame_child";
 
 #[derive(Clone)]
@@ -30,6 +30,8 @@ pub struct AppState {
 pub fn build_router(state: AppState) -> Router {
     Router::new()
         .route("/", get(index))
+        .route("/profiles", get(profiles_get))
+        .route("/profile", post(profile_post))
         .route("/submit", post(submit))
         .route("/unlock", post(unlock))
         .route("/api/status", get(api_status))
@@ -98,12 +100,20 @@ struct BlockedTemplate {
     detail: String,
 }
 
+#[derive(Template)]
+#[template(path = "profiles.html")]
+struct ProfilesTemplate {
+    children: Vec<Child>,
+}
+
 // ===== Handlers =====
 
 /// Point d'entrée unique de l'enfant. Ce qu'il voit est décidé par le moteur de
 /// politiques, jamais par ce handler.
 async fn index(State(state): State<AppState>, cookies: Cookies) -> Result<Response, AppError> {
-    let child = current_child(&state, &cookies).await?;
+    let Some(child) = resolve_child(&state, &cookies).await? else {
+        return Ok(Redirect::to("/profiles").into_response());
+    };
 
     match policy::evaluate(&state.pool, &child).await? {
         GateDecision::Granted { remaining_secs } => Ok(render(GrantedTemplate {
@@ -119,7 +129,29 @@ async fn index(State(state): State<AppState>, cookies: Cookies) -> Result<Respon
             threshold_pct,
             max_grant_minutes,
         } => {
-            let questions = quiz::pick_questions(&state.pool, questions as usize).await?;
+            let questions = quiz::pick_questions(
+                &state.pool,
+                questions as usize,
+                child.difficulty_min,
+                child.difficulty_max,
+            )
+            .await?;
+
+            // Aucune question dans sa plage de difficulté : un formulaire vide
+            // serait un cul-de-sac pour l'enfant. On explique, et l'admin voit
+            // le même problème signalé sur /admin/children.
+            if questions.is_empty() {
+                return Ok(render(BlockedTemplate {
+                    child_name: child.name,
+                    child_avatar: child.avatar,
+                    emoji: "🧐".to_string(),
+                    title: "Pas encore de questions pour toi".to_string(),
+                    detail: "Aucune question ne correspond à ton niveau. \
+                             Demande à un parent d'en ajouter !"
+                        .to_string(),
+                }));
+            }
+
             let ids_csv = questions
                 .iter()
                 .map(|q| q.id.to_string())
@@ -146,7 +178,9 @@ async fn submit(
     cookies: Cookies,
     Form(pairs): Form<Vec<(String, String)>>,
 ) -> Result<Response, AppError> {
-    let child = current_child(&state, &cookies).await?;
+    let Some(child) = resolve_child(&state, &cookies).await? else {
+        return Ok(Redirect::to("/profiles").into_response());
+    };
 
     let (question_ids, mut chosen) = parse_form(&pairs)?;
     for qid in &question_ids {
@@ -186,7 +220,9 @@ async fn unlock(
     cookies: Cookies,
     Form(form): Form<UnlockForm>,
 ) -> Result<Response, AppError> {
-    let child = current_child(&state, &cookies).await?;
+    let Some(child) = resolve_child(&state, &cookies).await? else {
+        return Ok(Redirect::to("/profiles").into_response());
+    };
 
     let row: Option<(i64, i64)> =
         sqlx::query_as("SELECT passed, COALESCE(child_id, 0) FROM attempts WHERE id = ?")
@@ -233,17 +269,40 @@ struct StatusResponse {
     decision: GateDecision,
 }
 
+#[derive(Deserialize)]
+struct StatusQuery {
+    /// Le kiosque et le minuteur n'ont pas de cookies : ils demandent le
+    /// statut d'un enfant précis. Sans ce paramètre, on retombe sur le cookie.
+    child_id: Option<i64>,
+}
+
 async fn api_status(
     State(state): State<AppState>,
     cookies: Cookies,
-) -> Result<Json<StatusResponse>, AppError> {
-    let child = current_child(&state, &cookies).await?;
+    Query(q): Query<StatusQuery>,
+) -> Result<Response, AppError> {
+    let child = match q.child_id {
+        Some(id) => policy::load_child(&state.pool, id)
+            .await?
+            .ok_or_else(|| AppError::bad_request("enfant inconnu"))?,
+        None => match resolve_child(&state, &cookies).await? {
+            Some(c) => c,
+            // Plusieurs enfants et aucun choisi : le client doit afficher le
+            // sélecteur (ou passer ?child_id=).
+            None => {
+                return Ok(Json(serde_json::json!({ "state": "profile_required" }))
+                    .into_response());
+            }
+        },
+    };
+
     let decision = policy::evaluate(&state.pool, &child).await?;
     Ok(Json(StatusResponse {
         child_id: child.id,
         child_name: child.name,
         decision,
-    }))
+    })
+    .into_response())
 }
 
 #[derive(Deserialize)]
@@ -267,17 +326,68 @@ async fn api_heartbeat(
     Ok(Json(policy::evaluate(&state.pool, &child).await?))
 }
 
+// ===== Sélecteur de profils =====
+
+async fn profiles_get(State(state): State<AppState>) -> Result<Response, AppError> {
+    let children = policy::list_children(&state.pool).await?;
+    if children.is_empty() {
+        return Err(AppError::bad_request(
+            "aucun enfant configuré — le parent doit en créer un depuis /admin/children",
+        ));
+    }
+    Ok(render(ProfilesTemplate { children }))
+}
+
+#[derive(Deserialize)]
+struct ProfileForm {
+    child_id: i64,
+}
+
+async fn profile_post(
+    State(state): State<AppState>,
+    cookies: Cookies,
+    Form(form): Form<ProfileForm>,
+) -> Result<Response, AppError> {
+    // On ne pose le cookie que pour un enfant réel et actif : impossible de
+    // forger un profil inexistant en éditant la requête.
+    let child = policy::load_child(&state.pool, form.child_id)
+        .await?
+        .ok_or_else(|| AppError::bad_request("enfant inconnu"))?;
+
+    let mut c = Cookie::new(CHILD_COOKIE_NAME, child.id.to_string());
+    c.set_path("/");
+    c.set_http_only(true);
+    cookies.add(c);
+
+    Ok(Redirect::to("/").into_response())
+}
+
 // ===== Enfant courant =====
 
-async fn current_child(state: &AppState, cookies: &Cookies) -> Result<Child, AppError> {
+/// Qui est devant l'écran ?
+/// - cookie valide → cet enfant ;
+/// - pas de cookie et UN SEUL enfant actif → lui (pas de sélecteur inutile
+///   dans une famille à enfant unique) ;
+/// - pas de cookie et plusieurs enfants → `None`, l'appelant envoie au
+///   sélecteur ;
+/// - aucun enfant actif → erreur (il faut passer par /admin).
+async fn resolve_child(state: &AppState, cookies: &Cookies) -> Result<Option<Child>, AppError> {
     if let Some(c) = cookies.get(CHILD_COOKIE_NAME) {
         if let Ok(id) = c.value().parse::<i64>() {
             if let Some(child) = policy::load_child(&state.pool, id).await? {
-                return Ok(child);
+                return Ok(Some(child));
             }
         }
     }
-    Ok(policy::default_child(&state.pool).await?)
+
+    let mut children = policy::list_children(&state.pool).await?;
+    match children.len() {
+        0 => Err(AppError::bad_request(
+            "aucun enfant configuré — le parent doit en créer un depuis /admin/children",
+        )),
+        1 => Ok(Some(children.remove(0))),
+        _ => Ok(None),
+    }
 }
 
 // ===== Écran de blocage =====

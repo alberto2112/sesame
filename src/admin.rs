@@ -26,6 +26,9 @@ pub fn router() -> Router<AppState> {
         .route("/questions/new", get(question_new_get).post(question_new_post))
         .route("/questions/:id/edit", get(question_edit_get).post(question_edit_post))
         .route("/questions/:id/delete", post(question_delete_post))
+        .route("/children", get(children_list).post(child_create_post))
+        .route("/children/:id/edit", get(child_edit_get).post(child_edit_post))
+        .route("/children/:id/delete", post(child_delete_post))
         .route("/subjects", get(subjects_get).post(subjects_post))
         .route("/subjects/:id/delete", post(subject_delete_post))
         .route("/subjects/dedupe", post(subjects_dedupe_post))
@@ -115,6 +118,7 @@ struct QuestionRow {
     statement: String,
     kind: String,
     subject_name: String,
+    difficulty: i64,
     nb_answers: i64,
 }
 
@@ -127,6 +131,7 @@ struct QuestionFormTemplate {
     statement: String,
     explanation: String,
     kind: String,
+    difficulty: i64,
     answers: Vec<(String, bool)>,
     error: Option<String>,
 }
@@ -336,9 +341,9 @@ async fn questions_list(
             .fetch_all(&state.pool)
             .await?;
 
-    let rows: Vec<(i64, String, String, String, i64)> = if let Some(sid) = q.subject {
+    let rows: Vec<(i64, String, String, String, i64, i64)> = if let Some(sid) = q.subject {
         sqlx::query_as(
-            "SELECT q.id, q.statement, q.kind, s.name, COUNT(a.id)
+            "SELECT q.id, q.statement, q.kind, s.name, q.difficulty, COUNT(a.id)
              FROM questions q
              JOIN subjects s ON s.id = q.subject_id
              LEFT JOIN answers a ON a.question_id = q.id
@@ -350,7 +355,7 @@ async fn questions_list(
         .await?
     } else {
         sqlx::query_as(
-            "SELECT q.id, q.statement, q.kind, s.name, COUNT(a.id)
+            "SELECT q.id, q.statement, q.kind, s.name, q.difficulty, COUNT(a.id)
              FROM questions q
              JOIN subjects s ON s.id = q.subject_id
              LEFT JOIN answers a ON a.question_id = q.id
@@ -362,11 +367,12 @@ async fn questions_list(
 
     let questions = rows
         .into_iter()
-        .map(|(id, st, kd, sn, na)| QuestionRow {
+        .map(|(id, st, kd, sn, df, na)| QuestionRow {
             id,
             statement: st,
             kind: kd,
             subject_name: sn,
+            difficulty: df,
             nb_answers: na,
         })
         .collect();
@@ -411,6 +417,7 @@ async fn question_new_get(
         statement: String::new(),
         explanation: String::new(),
         kind: "single".into(),
+        difficulty: 3,
         answers: vec![(String::new(), false); 6],
         error: None,
     }))
@@ -435,6 +442,7 @@ async fn question_new_post(
                 statement: pair_get(&pairs, "statement"),
                 explanation: pair_get(&pairs, "explanation"),
                 kind: pair_get_or(&pairs, "kind", "single"),
+                difficulty: pair_get_or(&pairs, "difficulty", "3").parse().unwrap_or(3),
                 answers: collect_answer_pairs(&pairs),
                 error: Some(msg),
             }));
@@ -444,13 +452,14 @@ async fn question_new_post(
     let now = chrono::Utc::now().timestamp();
     let mut tx = state.pool.begin().await?;
     let inserted: (i64,) = sqlx::query_as(
-        "INSERT INTO questions (subject_id, kind, statement, explanation, created_at)
-         VALUES (?, ?, ?, ?, ?) RETURNING id",
+        "INSERT INTO questions (subject_id, kind, statement, explanation, difficulty, created_at)
+         VALUES (?, ?, ?, ?, ?, ?) RETURNING id",
     )
     .bind(parsed.subject_id)
     .bind(&parsed.kind)
     .bind(&parsed.statement)
     .bind(parsed.explanation.as_ref())
+    .bind(parsed.difficulty)
     .bind(now)
     .fetch_one(&mut *tx)
     .await?;
@@ -473,13 +482,14 @@ async fn question_edit_get(
     State(state): State<AppState>,
     AxPath(id): AxPath<i64>,
 ) -> Result<Response, AppError> {
-    let row: Option<(i64, String, String, Option<String>, i64)> = sqlx::query_as(
-        "SELECT id, statement, kind, explanation, subject_id FROM questions WHERE id = ?",
+    let row: Option<(i64, String, String, Option<String>, i64, i64)> = sqlx::query_as(
+        "SELECT id, statement, kind, explanation, subject_id, difficulty
+         FROM questions WHERE id = ?",
     )
     .bind(id)
     .fetch_optional(&state.pool)
     .await?;
-    let (qid, statement, kind, explanation, subject_id) = match row {
+    let (qid, statement, kind, explanation, subject_id, difficulty) = match row {
         Some(r) => r,
         None => return Err(AppError::bad_request(format!("question {id} introuvable"))),
     };
@@ -503,6 +513,7 @@ async fn question_edit_get(
         statement,
         explanation: explanation.unwrap_or_default(),
         kind,
+        difficulty,
         answers,
         error: None,
     }))
@@ -527,6 +538,7 @@ async fn question_edit_post(
                 statement: pair_get(&pairs, "statement"),
                 explanation: pair_get(&pairs, "explanation"),
                 kind: pair_get_or(&pairs, "kind", "single"),
+                difficulty: pair_get_or(&pairs, "difficulty", "3").parse().unwrap_or(3),
                 answers: collect_answer_pairs(&pairs),
                 error: Some(msg),
             }));
@@ -535,13 +547,15 @@ async fn question_edit_post(
 
     let mut tx = state.pool.begin().await?;
     sqlx::query(
-        "UPDATE questions SET subject_id = ?, kind = ?, statement = ?, explanation = ?
+        "UPDATE questions SET subject_id = ?, kind = ?, statement = ?, explanation = ?,
+                              difficulty = ?
          WHERE id = ?",
     )
     .bind(parsed.subject_id)
     .bind(&parsed.kind)
     .bind(&parsed.statement)
     .bind(parsed.explanation.as_ref())
+    .bind(parsed.difficulty)
     .bind(id)
     .execute(&mut *tx)
     .await?;
@@ -681,6 +695,279 @@ async fn subjects_dedupe_post(
         "/admin/subjects?msg={removed}+doublon(s)+supprimé(s)"
     ))
     .into_response())
+}
+
+// ===== Enfants ===============================================================
+
+#[derive(Template)]
+#[template(path = "admin/children.html")]
+struct ChildrenTemplate {
+    children: Vec<ChildRow>,
+    flash: Option<String>,
+}
+
+struct ChildRow {
+    id: i64,
+    name: String,
+    avatar: String,
+    enabled: bool,
+    difficulty_min: i64,
+    difficulty_max: i64,
+    session_minutes: i64,
+    daily_budget_minutes: i64,
+    used_today_min: i64,
+    /// Questions visibles pour sa plage de difficulté — 0 = examen impossible.
+    available_questions: i64,
+}
+
+#[derive(Template)]
+#[template(path = "admin/child_form.html")]
+struct ChildFormTemplate {
+    child_id: i64,
+    name: String,
+    avatar: String,
+    enabled: bool,
+    difficulty_min: i64,
+    difficulty_max: i64,
+    questions_per_test: i64,
+    pass_threshold_pct: String,
+    session_minutes: i64,
+    daily_budget_minutes: i64,
+    weekend_budget_minutes: i64,
+    exam_cooldown_minutes: i64,
+    error: Option<String>,
+}
+
+#[derive(Deserialize)]
+struct ChildrenQuery {
+    msg: Option<String>,
+}
+
+async fn children_list(
+    _: AdminAuth,
+    State(state): State<AppState>,
+    Query(q): Query<ChildrenQuery>,
+) -> Result<Response, AppError> {
+    let today = chrono::Local::now().format("%Y-%m-%d").to_string();
+    let rows: Vec<(i64, String, String, i64, i64, i64, i64, i64, i64, i64)> = sqlx::query_as(
+        "SELECT c.id, c.name, c.avatar, c.enabled, c.difficulty_min, c.difficulty_max,
+                c.session_minutes, c.daily_budget_minutes,
+                COALESCE(u.consumed_secs, 0) / 60,
+                (SELECT COUNT(*) FROM questions q
+                  JOIN subjects s ON s.id = q.subject_id AND s.enabled = 1
+                  WHERE q.difficulty BETWEEN c.difficulty_min AND c.difficulty_max)
+         FROM children c
+         LEFT JOIN daily_usage u ON u.child_id = c.id AND u.day = ?
+         ORDER BY c.position, c.id",
+    )
+    .bind(&today)
+    .fetch_all(&state.pool)
+    .await?;
+
+    let children = rows
+        .into_iter()
+        .map(
+            |(id, name, avatar, enabled, dmin, dmax, session, budget, used, avail)| ChildRow {
+                id,
+                name,
+                avatar,
+                enabled: enabled == 1,
+                difficulty_min: dmin,
+                difficulty_max: dmax,
+                session_minutes: session,
+                daily_budget_minutes: budget,
+                used_today_min: used,
+                available_questions: avail,
+            },
+        )
+        .collect();
+
+    Ok(render(ChildrenTemplate {
+        children,
+        flash: q.msg,
+    }))
+}
+
+#[derive(Deserialize)]
+struct ChildCreateForm {
+    name: String,
+    avatar: String,
+}
+
+/// Création volontairement minimale (nom + emoji) : l'enfant naît avec les
+/// défauts du schéma, le réglage fin se fait dans sa fiche.
+async fn child_create_post(
+    _: AdminAuth,
+    State(state): State<AppState>,
+    Form(form): Form<ChildCreateForm>,
+) -> Result<Response, AppError> {
+    let name = form.name.trim();
+    if name.is_empty() {
+        return Err(AppError::bad_request("le prénom ne peut pas être vide"));
+    }
+    let avatar = if form.avatar.trim().is_empty() {
+        "🙂".to_string()
+    } else {
+        form.avatar.trim().to_string()
+    };
+
+    let dup: Option<(i64,)> = sqlx::query_as("SELECT id FROM children WHERE name = ?")
+        .bind(name)
+        .fetch_optional(&state.pool)
+        .await?;
+    if dup.is_some() {
+        return Err(AppError::bad_request(format!("« {name} » existe déjà")));
+    }
+
+    sqlx::query("INSERT INTO children (name, avatar) VALUES (?, ?)")
+        .bind(name)
+        .bind(&avatar)
+        .execute(&state.pool)
+        .await?;
+
+    Ok(Redirect::to("/admin/children?msg=Enfant+créé").into_response())
+}
+
+async fn child_edit_get(
+    _: AdminAuth,
+    State(state): State<AppState>,
+    AxPath(id): AxPath<i64>,
+) -> Result<Response, AppError> {
+    let row: Option<(String, String, i64, i64, i64, i64, f64, i64, i64, i64, i64)> =
+        sqlx::query_as(
+            "SELECT name, avatar, enabled, difficulty_min, difficulty_max,
+                    questions_per_test, pass_threshold_pct, session_minutes,
+                    daily_budget_minutes, weekend_budget_minutes, exam_cooldown_minutes
+             FROM children WHERE id = ?",
+        )
+        .bind(id)
+        .fetch_optional(&state.pool)
+        .await?;
+
+    let Some((name, avatar, enabled, dmin, dmax, qpt, threshold, session, daily, weekend, cooldown)) =
+        row
+    else {
+        return Err(AppError::bad_request(format!("enfant {id} introuvable")));
+    };
+
+    Ok(render(ChildFormTemplate {
+        child_id: id,
+        name,
+        avatar,
+        enabled: enabled == 1,
+        difficulty_min: dmin,
+        difficulty_max: dmax,
+        questions_per_test: qpt,
+        pass_threshold_pct: format!("{threshold:.0}"),
+        session_minutes: session,
+        daily_budget_minutes: daily,
+        weekend_budget_minutes: weekend,
+        exam_cooldown_minutes: cooldown,
+        error: None,
+    }))
+}
+
+#[derive(Deserialize)]
+struct ChildEditForm {
+    name: String,
+    avatar: String,
+    #[serde(default)]
+    enabled: Option<String>,
+    difficulty_min: i64,
+    difficulty_max: i64,
+    questions_per_test: i64,
+    pass_threshold_pct: f64,
+    session_minutes: i64,
+    daily_budget_minutes: i64,
+    weekend_budget_minutes: i64,
+    exam_cooldown_minutes: i64,
+}
+
+async fn child_edit_post(
+    _: AdminAuth,
+    State(state): State<AppState>,
+    AxPath(id): AxPath<i64>,
+    Form(form): Form<ChildEditForm>,
+) -> Result<Response, AppError> {
+    let name = form.name.trim().to_string();
+    if name.is_empty() {
+        return Err(AppError::bad_request("le prénom ne peut pas être vide"));
+    }
+    if !(1..=5).contains(&form.difficulty_min)
+        || !(1..=5).contains(&form.difficulty_max)
+        || form.difficulty_min > form.difficulty_max
+    {
+        return Err(AppError::bad_request(
+            "plage de difficulté invalide (1 ≤ min ≤ max ≤ 5)",
+        ));
+    }
+    if form.questions_per_test < 1 {
+        return Err(AppError::bad_request("au moins 1 question par contrôle"));
+    }
+    if !(0.0..=100.0).contains(&form.pass_threshold_pct) {
+        return Err(AppError::bad_request("seuil hors [0,100]"));
+    }
+    if form.session_minutes < 1 {
+        return Err(AppError::bad_request("la session doit durer ≥ 1 minute"));
+    }
+    if form.daily_budget_minutes < 0
+        || form.weekend_budget_minutes < 0
+        || form.exam_cooldown_minutes < 0
+    {
+        return Err(AppError::bad_request("les budgets ne peuvent pas être négatifs"));
+    }
+
+    let avatar = if form.avatar.trim().is_empty() {
+        "🙂".to_string()
+    } else {
+        form.avatar.trim().to_string()
+    };
+    let enabled = if form.enabled.is_some() { 1 } else { 0 };
+
+    sqlx::query(
+        "UPDATE children SET name = ?, avatar = ?, enabled = ?,
+                difficulty_min = ?, difficulty_max = ?, questions_per_test = ?,
+                pass_threshold_pct = ?, session_minutes = ?, daily_budget_minutes = ?,
+                weekend_budget_minutes = ?, exam_cooldown_minutes = ?
+         WHERE id = ?",
+    )
+    .bind(&name)
+    .bind(&avatar)
+    .bind(enabled)
+    .bind(form.difficulty_min)
+    .bind(form.difficulty_max)
+    .bind(form.questions_per_test)
+    .bind(form.pass_threshold_pct)
+    .bind(form.session_minutes)
+    .bind(form.daily_budget_minutes)
+    .bind(form.weekend_budget_minutes)
+    .bind(form.exam_cooldown_minutes)
+    .bind(id)
+    .execute(&state.pool)
+    .await?;
+
+    Ok(Redirect::to("/admin/children?msg=Enfant+enregistré").into_response())
+}
+
+/// Supprime un enfant. Ses tentatives passées sont anonymisées (child_id NULL)
+/// plutôt que supprimées : l'historique pédagogique survit. Concessions,
+/// consommation et plages horaires partent en cascade.
+async fn child_delete_post(
+    _: AdminAuth,
+    State(state): State<AppState>,
+    AxPath(id): AxPath<i64>,
+) -> Result<Response, AppError> {
+    let mut tx = state.pool.begin().await?;
+    sqlx::query("UPDATE attempts SET child_id = NULL WHERE child_id = ?")
+        .bind(id)
+        .execute(&mut *tx)
+        .await?;
+    sqlx::query("DELETE FROM children WHERE id = ?")
+        .bind(id)
+        .execute(&mut *tx)
+        .await?;
+    tx.commit().await?;
+    Ok(Redirect::to("/admin/children?msg=Enfant+supprimé").into_response())
 }
 
 // ===== Settings ==============================================================
@@ -926,6 +1213,7 @@ struct ParsedQuestion {
     kind: String,
     statement: String,
     explanation: Option<String>,
+    difficulty: i64,
     answers: Vec<(String, bool)>,
 }
 
@@ -940,6 +1228,12 @@ fn parse_question_form(pairs: &[(String, String)]) -> Result<ParsedQuestion, Str
     let kind = pair_get(pairs, "kind");
     if kind != "single" && kind != "multi" {
         return Err("Type invalide (single ou multi).".into());
+    }
+    let difficulty: i64 = pair_get_or(pairs, "difficulty", "3")
+        .parse()
+        .map_err(|_| "Difficulté invalide.".to_string())?;
+    if !(1..=5).contains(&difficulty) {
+        return Err("La difficulté doit être entre 1 et 5.".into());
     }
     let explanation = {
         let s = pair_get(pairs, "explanation").trim().to_string();
@@ -979,6 +1273,7 @@ fn parse_question_form(pairs: &[(String, String)]) -> Result<ParsedQuestion, Str
         kind,
         statement,
         explanation,
+        difficulty,
         answers,
     })
 }

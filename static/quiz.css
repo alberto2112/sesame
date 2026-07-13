@@ -140,3 +140,46 @@ h2.section { margin: 1.5rem 0 .8rem; font-size: 1.2rem; }
 .play-card h1 { font-size: 1.9rem; margin: .5rem 0; }
 .play-card p { color: var(--muted); margin-top: .35rem; }
 .play-card strong { color: var(--teal); }
+
+/* ===== Sélecteur de profils ===== */
+
+.profiles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .6rem;
+  padding: 1.6rem 2.2rem;
+  background: var(--card-bg);
+  border: 3px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  font: inherit;
+  transition: transform .12s ease, border-color .12s ease;
+}
+
+.profile-card:hover,
+.profile-card:focus-visible {
+  transform: translateY(-4px) scale(1.04);
+  border-color: var(--teal);
+  outline: none;
+}
+
+.profile-avatar {
+  font-size: 4.5rem;
+  line-height: 1;
+}
+
+.profile-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--navy);
+}

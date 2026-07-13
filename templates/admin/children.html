@@ -1,0 +1,76 @@
+{% extends "admin/_layout.html" %}
+
+{% block title %}Enfants — admin{% endblock %}
+
+{% block admin_content %}
+<header>
+  <h1>Enfants</h1>
+</header>
+
+{% match flash %}
+  {% when Some with (msg) %}
+    <article style="border-left:4px solid var(--pico-color-green-500); padding-left:1rem;">
+      <strong>{{ msg }}</strong>
+    </article>
+  {% when None %}
+{% endmatch %}
+
+{% if children.is_empty() %}
+  <p><em>Aucun enfant. Crée le premier ci-dessous.</em></p>
+{% else %}
+  <table>
+    <thead>
+      <tr>
+        <th></th><th>Prénom</th><th>Difficulté</th><th>Session</th>
+        <th>Budget/jour</th><th>Aujourd'hui</th><th>Questions dispo</th>
+        <th>Actif</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in children %}
+      <tr>
+        <td style="font-size:1.6rem;">{{ c.avatar }}</td>
+        <td><strong>{{ c.name }}</strong></td>
+        <td>{{ c.difficulty_min }}–{{ c.difficulty_max }}</td>
+        <td>{{ c.session_minutes }} min</td>
+        <td>{{ c.daily_budget_minutes }} min</td>
+        <td>{{ c.used_today_min }} min</td>
+        <td>
+          {% if c.available_questions == 0 %}
+            <mark>0 — aucun contrôle possible !</mark>
+          {% else %}
+            {{ c.available_questions }}
+          {% endif %}
+        </td>
+        <td>{% if c.enabled %}✅{% else %}⛔{% endif %}</td>
+        <td>
+          <a href="/admin/children/{{ c.id }}/edit">Modifier</a>
+          —
+          <form method="post" action="/admin/children/{{ c.id }}/delete" style="display:inline;"
+                onsubmit="return confirm('Supprimer {{ c.name }} ? Son historique de contrôles sera conservé mais anonymisé.')">
+            <button type="submit" class="secondary outline"
+                    style="width:auto; padding:0.1rem 0.5rem; font-size:0.85rem;">Supprimer</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
+
+<h3>Ajouter un enfant</h3>
+<form method="post" action="/admin/children"
+      style="display:grid; grid-template-columns: 2fr 1fr auto; gap:1rem; align-items:end;">
+  <label>
+    Prénom
+    <input type="text" name="name" required placeholder="Zoé">
+  </label>
+  <label>
+    Emoji
+    <input type="text" name="avatar" placeholder="🦊" maxlength="8">
+  </label>
+  <button type="submit" style="width:auto;">Créer</button>
+</form>
+<p><small>L'enfant est créé avec les réglages par défaut — clique ensuite sur
+  « Modifier » pour ajuster difficulté, budgets et durée de session.</small></p>
+{% endblock %}

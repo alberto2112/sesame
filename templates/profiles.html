@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Qui es-tu ?{% endblock %}
+
+{% block content %}
+<div class="page-head" style="text-align:center;">
+  <span class="tag">Bonjour !</span>
+  <h1>Qui est là ?</h1>
+  <p>Touche ton visage pour commencer.</p>
+</div>
+
+<div class="profiles">
+  {% for c in children %}
+  <form method="post" action="/profile">
+    <input type="hidden" name="child_id" value="{{ c.id }}">
+    <button type="submit" class="profile-card">
+      <span class="profile-avatar">{{ c.avatar }}</span>
+      <span class="profile-name">{{ c.name }}</span>
+    </button>
+  </form>
+  {% endfor %}
+</div>
+{% endblock %}

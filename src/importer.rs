@@ -30,6 +30,14 @@ pub struct ImportQuestion {
     pub answers: Vec<ImportAnswer>,
     #[serde(default)]
     pub explanation: Option<String>,
+    /// 1 (facile) à 5 (difficile). Absent = 3 : les fichiers existants restent
+    /// valides et leurs questions visibles par tous les enfants.
+    #[serde(default = "default_difficulty")]
+    pub difficulty: i64,
+}
+
+fn default_difficulty() -> i64 {
+    3
 }
 
 #[derive(Debug, Deserialize)]
@@ -102,14 +110,15 @@ pub async fn import(pool: &SqlitePool, file: ImportFile) -> Result<ImportReport>
 
         let now = chrono::Utc::now().timestamp();
         let inserted: (i64,) = sqlx::query_as(
-            "INSERT INTO questions (subject_id, kind, statement, explanation, created_at)
-             VALUES (?, ?, ?, ?, ?)
+            "INSERT INTO questions (subject_id, kind, statement, explanation, difficulty, created_at)
+             VALUES (?, ?, ?, ?, ?, ?)
              RETURNING id",
         )
         .bind(subject_id)
         .bind(&q.kind)
         .bind(q.statement.trim())
         .bind(q.explanation.as_ref().map(|s| s.trim().to_string()))
+        .bind(q.difficulty)
         .bind(now)
         .fetch_one(&mut *tx)
         .await?;
@@ -132,6 +141,9 @@ pub async fn import(pool: &SqlitePool, file: ImportFile) -> Result<ImportReport>
 fn validate_question(q: &ImportQuestion) -> Result<(), String> {
     if q.statement.trim().is_empty() {
         return Err("énoncé vide".into());
+    }
+    if !(1..=5).contains(&q.difficulty) {
+        return Err(format!("difficulté {} hors de [1,5]", q.difficulty));
     }
     if q.answers.len() < 2 {
         return Err(format!(

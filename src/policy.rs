@@ -46,8 +46,13 @@ pub async fn load_child(pool: &SqlitePool, id: i64) -> Result<Option<Child>> {
     Ok(sqlx::query_as(&sql).bind(id).fetch_optional(pool).await?)
 }
 
-/// Enfant utilisé quand aucun n'a été choisi. Le sélecteur de profils arrive en
-/// phase 2 ; d'ici là, tout passe par le premier enfant actif.
+pub async fn list_children(pool: &SqlitePool) -> Result<Vec<Child>> {
+    let sql =
+        format!("SELECT {CHILD_COLUMNS} FROM children WHERE enabled = 1 ORDER BY position, id");
+    Ok(sqlx::query_as(&sql).fetch_all(pool).await?)
+}
+
+/// Enfant utilisé pour les outils console (preview) : le premier actif.
 pub async fn default_child(pool: &SqlitePool) -> Result<Child> {
     let sql =
         format!("SELECT {CHILD_COLUMNS} FROM children WHERE enabled = 1 ORDER BY position, id LIMIT 1");

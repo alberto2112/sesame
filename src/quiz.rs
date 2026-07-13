@@ -53,7 +53,16 @@ pub struct GradedAnswer {
 
 // ===== Selector =====
 
-pub async fn pick_questions(pool: &SqlitePool, n: usize) -> Result<Vec<QuizQuestion>> {
+/// `diff_min..=diff_max` : plage de difficulté de l'ENFANT. Le filtre
+/// s'applique aussi au comptage par matière, pour que la répartition
+/// proportionnelle se fasse sur les questions réellement disponibles
+/// pour cet enfant, pas sur le total.
+pub async fn pick_questions(
+    pool: &SqlitePool,
+    n: usize,
+    diff_min: i64,
+    diff_max: i64,
+) -> Result<Vec<QuizQuestion>> {
     if n == 0 {
         return Ok(Vec::new());
     }
@@ -62,9 +71,12 @@ pub async fn pick_questions(pool: &SqlitePool, n: usize) -> Result<Vec<QuizQuest
         "SELECT s.id, s.weight, COUNT(q.id)
          FROM subjects s
          LEFT JOIN questions q ON q.subject_id = s.id
+                              AND q.difficulty BETWEEN ? AND ?
          WHERE s.enabled = 1
          GROUP BY s.id",
     )
+    .bind(diff_min)
+    .bind(diff_max)
     .fetch_all(pool)
     .await?;
 
@@ -82,9 +94,13 @@ pub async fn pick_questions(pool: &SqlitePool, n: usize) -> Result<Vec<QuizQuest
             continue;
         }
         let ids: Vec<(i64,)> = sqlx::query_as(
-            "SELECT id FROM questions WHERE subject_id = ? ORDER BY RANDOM() LIMIT ?",
+            "SELECT id FROM questions
+             WHERE subject_id = ? AND difficulty BETWEEN ? AND ?
+             ORDER BY RANDOM() LIMIT ?",
         )
         .bind(subject_id)
+        .bind(diff_min)
+        .bind(diff_max)
         .bind(*count as i64)
         .fetch_all(pool)
         .await?;

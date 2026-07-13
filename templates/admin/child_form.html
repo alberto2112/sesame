@@ -1,0 +1,80 @@
+{% extends "admin/_layout.html" %}
+
+{% block title %}{{ name }} — admin{% endblock %}
+
+{% block admin_content %}
+<header>
+  <h1>{{ avatar }} {{ name }}</h1>
+  <p><a href="/admin/children">← Retour à la liste</a></p>
+</header>
+
+{% match error %}
+  {% when Some with (msg) %}
+    <article style="border-left:4px solid var(--pico-color-red-500); padding-left:1rem;">
+      <strong>{{ msg }}</strong>
+    </article>
+  {% when None %}
+{% endmatch %}
+
+<form method="post" action="/admin/children/{{ child_id }}/edit">
+  <div style="display:grid; grid-template-columns:2fr 1fr 1fr; gap:1rem; align-items:end;">
+    <label>
+      Prénom
+      <input type="text" name="name" value="{{ name }}" required>
+    </label>
+    <label>
+      Emoji
+      <input type="text" name="avatar" value="{{ avatar }}" maxlength="8">
+    </label>
+    <label>
+      <input type="checkbox" name="enabled" value="1" {% if enabled %}checked{% endif %}>
+      Actif
+    </label>
+  </div>
+
+  <h3>Contrôle</h3>
+  <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:1rem;">
+    <label>
+      Difficulté min
+      <input type="number" name="difficulty_min" min="1" max="5" value="{{ difficulty_min }}" required>
+    </label>
+    <label>
+      Difficulté max
+      <input type="number" name="difficulty_max" min="1" max="5" value="{{ difficulty_max }}" required>
+    </label>
+    <label>
+      Questions par contrôle
+      <input type="number" name="questions_per_test" min="1" value="{{ questions_per_test }}" required>
+    </label>
+    <label>
+      Seuil de réussite (%)
+      <input type="number" name="pass_threshold_pct" min="0" max="100" step="1"
+             value="{{ pass_threshold_pct }}" required>
+    </label>
+  </div>
+
+  <h3>Temps</h3>
+  <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:1rem;">
+    <label>
+      Session (min)
+      <input type="number" name="session_minutes" min="1" value="{{ session_minutes }}" required>
+    </label>
+    <label>
+      Budget/jour (min)
+      <input type="number" name="daily_budget_minutes" min="0" value="{{ daily_budget_minutes }}" required>
+    </label>
+    <label>
+      Budget week-end (min)
+      <input type="number" name="weekend_budget_minutes" min="0" value="{{ weekend_budget_minutes }}" required>
+    </label>
+    <label>
+      Attente entre contrôles (min)
+      <input type="number" name="exam_cooldown_minutes" min="0" value="{{ exam_cooldown_minutes }}" required>
+    </label>
+  </div>
+  <p><small>L'attente entre contrôles sera appliquée avec les plages horaires
+    (phase suivante) — la valeur est déjà enregistrée.</small></p>
+
+  <button type="submit">Enregistrer</button>
+</form>
+{% endblock %}

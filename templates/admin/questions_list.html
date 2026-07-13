@@ -34,7 +34,7 @@
   <table>
     <thead>
       <tr>
-        <th>#</th><th>Énoncé</th><th>Matière</th><th>Type</th><th>Réponses</th><th>Actions</th>
+        <th>#</th><th>Énoncé</th><th>Matière</th><th>Type</th><th>Diff.</th><th>Réponses</th><th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -44,6 +44,7 @@
         <td>{{ q.statement }}</td>
         <td>{{ q.subject_name }}</td>
         <td>{{ q.kind }}</td>
+        <td>{{ q.difficulty }}</td>
         <td>{{ q.nb_answers }}</td>
         <td>
           <a href="/admin/questions/{{ q.id }}/edit">Modifier</a>
