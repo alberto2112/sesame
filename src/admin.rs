@@ -29,6 +29,8 @@ pub fn router() -> Router<AppState> {
         .route("/children", get(children_list).post(child_create_post))
         .route("/children/:id/edit", get(child_edit_get).post(child_edit_post))
         .route("/children/:id/delete", post(child_delete_post))
+        .route("/children/:id/schedules", post(schedule_add_post))
+        .route("/children/:id/schedules/:sid/delete", post(schedule_delete_post))
         .route("/subjects", get(subjects_get).post(subjects_post))
         .route("/subjects/:id/delete", post(subject_delete_post))
         .route("/subjects/dedupe", post(subjects_dedupe_post))
@@ -727,6 +729,7 @@ struct ChildFormTemplate {
     name: String,
     avatar: String,
     enabled: bool,
+    schedules: Vec<ScheduleRow>,
     difficulty_min: i64,
     difficulty_max: i64,
     questions_per_test: i64,
@@ -855,6 +858,7 @@ async fn child_edit_get(
         name,
         avatar,
         enabled: enabled == 1,
+        schedules: load_schedules(&state, id).await?,
         difficulty_min: dmin,
         difficulty_max: dmax,
         questions_per_test: qpt,
@@ -968,6 +972,108 @@ async fn child_delete_post(
         .await?;
     tx.commit().await?;
     Ok(Redirect::to("/admin/children?msg=Enfant+supprimé").into_response())
+}
+
+// ===== Plages horaires (admin) ==============================================
+
+struct ScheduleRow {
+    id: i64,
+    weekday_name: &'static str,
+    start_fmt: String,
+    end_fmt: String,
+}
+
+const WEEKDAYS_FR: [&str; 7] = [
+    "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche",
+];
+
+async fn load_schedules(state: &AppState, child_id: i64) -> Result<Vec<ScheduleRow>, AppError> {
+    let rows: Vec<(i64, i64, i64, i64)> = sqlx::query_as(
+        "SELECT id, weekday, start_min, end_min FROM schedules
+         WHERE child_id = ? ORDER BY weekday, start_min",
+    )
+    .bind(child_id)
+    .fetch_all(&state.pool)
+    .await?;
+
+    Ok(rows
+        .into_iter()
+        .map(|(id, wd, start, end)| ScheduleRow {
+            id,
+            weekday_name: WEEKDAYS_FR[(wd.clamp(0, 6)) as usize],
+            start_fmt: format!("{:02}:{:02}", start / 60, start % 60),
+            end_fmt: format!("{:02}:{:02}", end / 60, end % 60),
+        })
+        .collect())
+}
+
+/// « HH:MM » → minutes depuis minuit.
+fn parse_hhmm(s: &str) -> Option<i64> {
+    let (h, m) = s.trim().split_once(':')?;
+    let h: i64 = h.parse().ok()?;
+    let m: i64 = m.parse().ok()?;
+    if (0..=24).contains(&h) && (0..=59).contains(&m) && h * 60 + m <= 1440 {
+        Some(h * 60 + m)
+    } else {
+        None
+    }
+}
+
+/// Une seule saisie (jours cochés + plage horaire) crée une ligne PAR jour
+/// coché : le cas courant « lundi-vendredi 17h-19h » se fait en un geste.
+async fn schedule_add_post(
+    _: AdminAuth,
+    State(state): State<AppState>,
+    AxPath(id): AxPath<i64>,
+    Form(pairs): Form<Vec<(String, String)>>,
+) -> Result<Response, AppError> {
+    let days: Vec<i64> = pairs
+        .iter()
+        .filter(|(k, _)| k == "day")
+        .filter_map(|(_, v)| v.parse().ok())
+        .filter(|d| (0..=6).contains(d))
+        .collect();
+    if days.is_empty() {
+        return Err(AppError::bad_request("coche au moins un jour"));
+    }
+
+    let start = parse_hhmm(&pair_get(&pairs, "start"))
+        .ok_or_else(|| AppError::bad_request("heure de début invalide (HH:MM)"))?;
+    let end = parse_hhmm(&pair_get(&pairs, "end"))
+        .ok_or_else(|| AppError::bad_request("heure de fin invalide (HH:MM)"))?;
+    if start >= end {
+        return Err(AppError::bad_request("le début doit précéder la fin"));
+    }
+
+    let mut tx = state.pool.begin().await?;
+    for day in &days {
+        sqlx::query(
+            "INSERT INTO schedules (child_id, weekday, start_min, end_min)
+             VALUES (?, ?, ?, ?)",
+        )
+        .bind(id)
+        .bind(day)
+        .bind(start)
+        .bind(end)
+        .execute(&mut *tx)
+        .await?;
+    }
+    tx.commit().await?;
+
+    Ok(Redirect::to(&format!("/admin/children/{id}/edit")).into_response())
+}
+
+async fn schedule_delete_post(
+    _: AdminAuth,
+    State(state): State<AppState>,
+    AxPath((id, sid)): AxPath<(i64, i64)>,
+) -> Result<Response, AppError> {
+    sqlx::query("DELETE FROM schedules WHERE id = ? AND child_id = ?")
+        .bind(sid)
+        .bind(id)
+        .execute(&state.pool)
+        .await?;
+    Ok(Redirect::to(&format!("/admin/children/{id}/edit")).into_response())
 }
 
 // ===== Settings ==============================================================

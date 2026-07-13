@@ -72,9 +72,64 @@
       <input type="number" name="exam_cooldown_minutes" min="0" value="{{ exam_cooldown_minutes }}" required>
     </label>
   </div>
-  <p><small>L'attente entre contrôles sera appliquée avec les plages horaires
-    (phase suivante) — la valeur est déjà enregistrée.</small></p>
+  <p><small>L'attente entre contrôles s'applique après un contrôle raté :
+    l'enfant doit patienter avant de réessayer. 0 = pas d'attente.</small></p>
 
   <button type="submit">Enregistrer</button>
+</form>
+
+<h3>Plages horaires</h3>
+<p><small>Hors de ces fenêtres, l'ordinateur est bloqué (« C'est l'heure de
+  dormir »). <strong>Aucune plage = toujours autorisé.</strong></small></p>
+
+{% if schedules.is_empty() %}
+  <p><em>Aucune plage — {{ name }} peut utiliser l'ordinateur à toute heure
+    (dans la limite de son budget).</em></p>
+{% else %}
+  <table>
+    <thead><tr><th>Jour</th><th>De</th><th>À</th><th></th></tr></thead>
+    <tbody>
+      {% for sc in schedules %}
+      <tr>
+        <td>{{ sc.weekday_name }}</td>
+        <td>{{ sc.start_fmt }}</td>
+        <td>{{ sc.end_fmt }}</td>
+        <td>
+          <form method="post" action="/admin/children/{{ child_id }}/schedules/{{ sc.id }}/delete"
+                style="display:inline;">
+            <button type="submit" class="secondary outline"
+                    style="width:auto; padding:0.1rem 0.5rem; font-size:0.85rem;">Retirer</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
+
+<form method="post" action="/admin/children/{{ child_id }}/schedules">
+  <fieldset>
+    <legend>Ajouter une fenêtre</legend>
+    <div style="display:flex; flex-wrap:wrap; gap:0.8rem;">
+      <label><input type="checkbox" name="day" value="0"> lundi</label>
+      <label><input type="checkbox" name="day" value="1"> mardi</label>
+      <label><input type="checkbox" name="day" value="2"> mercredi</label>
+      <label><input type="checkbox" name="day" value="3"> jeudi</label>
+      <label><input type="checkbox" name="day" value="4"> vendredi</label>
+      <label><input type="checkbox" name="day" value="5"> samedi</label>
+      <label><input type="checkbox" name="day" value="6"> dimanche</label>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr auto; gap:1rem; align-items:end; margin-top:0.8rem;">
+      <label>
+        De
+        <input type="time" name="start" value="17:00" required>
+      </label>
+      <label>
+        À
+        <input type="time" name="end" value="19:00" required>
+      </label>
+      <button type="submit" style="width:auto;">Ajouter</button>
+    </div>
+  </fieldset>
 </form>
 {% endblock %}

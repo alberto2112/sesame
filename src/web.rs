@@ -405,6 +405,25 @@ fn blocked_page(child: &Child, reason: &BlockReason) -> BlockedTemplate {
                  Un contrôle de plus n'y changera rien — à demain !"
             ),
         ),
+
+        BlockReason::OutsideSchedule { next_window } => (
+            "🌙",
+            "C'est l'heure de dormir".to_string(),
+            match next_window {
+                Some(next) => format!("Ce n'est pas le moment d'utiliser l'ordinateur. Tu pourras revenir {next}."),
+                None => "Ce n'est pas le moment d'utiliser l'ordinateur.".to_string(),
+            },
+        ),
+
+        BlockReason::Cooldown { remaining_min } => (
+            "🧘",
+            "Petite pause !".to_string(),
+            format!(
+                "Ton dernier contrôle n'est pas passé. Respire, relis tes leçons… \
+                 tu pourras réessayer dans {remaining_min} minute{}.",
+                if *remaining_min > 1 { "s" } else { "" }
+            ),
+        ),
     };
 
     BlockedTemplate {
