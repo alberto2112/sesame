@@ -1,4 +1,4 @@
-# kidgate — fichier de configuration
+# sesame — fichier de configuration
 #
 # Ici ne vivent QUE les valeurs qui exigent un redémarrage. Tout le reste — durée
 # de session, budget quotidien, seuil de réussite, difficulté, plages horaires —
@@ -14,5 +14,5 @@ port = 0  # 0 = port aléatoire choisi par le système
 
 [paths]
 # Base de données SQLite. Un chemin relatif est résolu vers
-# $XDG_DATA_HOME/kidgate (et NON vers le répertoire courant).
+# $XDG_DATA_HOME/sesame (et NON vers le répertoire courant).
 database = "questions.db"

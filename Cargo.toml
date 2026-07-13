@@ -1,5 +1,5 @@
 [package]
-name = "kidgate"
+name = "sesame"
 version = "0.2.0"
 edition = "2024"
 description = "Quiz gate that controls kids' access to the computer"
@@ -10,7 +10,7 @@ publish = false
 # jeu, il garde l'ordinateur. S'il gardait ce nom, il masquerait le vrai Luanti
 # dans le PATH et l'enfant ne pourrait plus jouer une fois débloqué.
 [[bin]]
-name = "kidgate"
+name = "sesame"
 path = "src/main.rs"
 
 [dependencies]

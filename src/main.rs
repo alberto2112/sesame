@@ -19,10 +19,10 @@ use crate::config::Config;
 use crate::quiz::Submission;
 
 const HELP: &str = "\
-kidgate — portail de contrôle avant d'utiliser l'ordinateur
+sesame — portail de contrôle avant d'utiliser l'ordinateur
 
 USAGE :
-    kidgate [OPTIONS] [COMMANDE]
+    sesame [OPTIONS] [COMMANDE]
 
 COMMANDES :
     (aucune)            Démarre le serveur. Ouvre l'examen, ou la configuration
@@ -38,7 +38,7 @@ OPTIONS :
 CONFIGURATION :
     Sans --config, ces emplacements sont essayés dans l'ordre ; le premier
     qui existe est utilisé :
-      1. <répertoire de config du système>/kidgate/config.toml
+      1. <répertoire de config du système>/sesame/config.toml
       2. ./config.toml  (répertoire courant)
 ";
 
@@ -95,7 +95,7 @@ impl Cli {
             Some("import") => {
                 let path = positionals
                     .get(1)
-                    .ok_or_else(|| anyhow!("usage : luanti import <fichier.json>"))?;
+                    .ok_or_else(|| anyhow!("usage : sesame import <fichier.json>"))?;
                 Command::Import {
                     path: PathBuf::from(path),
                 }
@@ -154,7 +154,7 @@ async fn main() -> Result<()> {
         }
         Command::Server { force_admin } => {
             let mode = if force_admin { "administration" } else { "portail" };
-            tracing::info!("kidgate démarré (mode {mode})");
+            tracing::info!("sesame démarré (mode {mode})");
             let pool = db::init(&cfg.paths.database).await?;
             run_server(cfg, pool, force_admin).await?;
         }
@@ -165,7 +165,7 @@ async fn main() -> Result<()> {
 
 /// Démarre le serveur HTTP et ouvre le navigateur sur la bonne page.
 ///
-/// `force_admin` : si vrai (commande `kidgate admin`), on ouvre toujours
+/// `force_admin` : si vrai (commande `sesame admin`), on ouvre toujours
 /// `/admin`. Sinon, on ouvre `/admin` quand aucun mot de passe administrateur
 /// n'existe encore (pour le configurer), et `/` (l'examen) le reste du temps.
 async fn run_server(cfg: Config, pool: SqlitePool, force_admin: bool) -> Result<()> {
@@ -195,7 +195,7 @@ async fn run_server(cfg: Config, pool: SqlitePool, force_admin: bool) -> Result<
 
     println!();
     println!("  ===========================================");
-    println!("  kidgate prêt");
+    println!("  sesame prêt");
     println!("  Local  : {browse_url}");
     println!("  Réseau : écoute sur http://{actual}");
     println!("  Ctrl+C pour arrêter.");
@@ -204,8 +204,8 @@ async fn run_server(cfg: Config, pool: SqlitePool, force_admin: bool) -> Result<
     tracing::info!(%browse_url, listen = %actual, "server listening");
 
     // Le kiosque intègre ce serveur et affiche la page dans SA fenêtre : il ne
-    // doit surtout pas ouvrir un navigateur par-dessus. KIDGATE_NO_BROWSER=1.
-    if std::env::var_os("KIDGATE_NO_BROWSER").is_none() {
+    // doit surtout pas ouvrir un navigateur par-dessus. SESAME_NO_BROWSER=1.
+    if std::env::var_os("SESAME_NO_BROWSER").is_none() {
         let url_for_open = browse_url.clone();
         tokio::spawn(async move {
             tokio::time::sleep(Duration::from_millis(300)).await;
@@ -307,6 +307,6 @@ async fn run_preview(pool: &SqlitePool, n_override: Option<usize>) -> Result<()>
 
 fn init_tracing() {
     let filter = EnvFilter::try_from_default_env()
-        .unwrap_or_else(|_| EnvFilter::new("kidgate=info,tower_http=info"));
+        .unwrap_or_else(|_| EnvFilter::new("sesame=info,tower_http=info"));
     tracing_subscriber::fmt().with_env_filter(filter).init();
 }

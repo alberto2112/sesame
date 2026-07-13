@@ -5,7 +5,7 @@ use rand::RngCore;
 use sqlx::SqlitePool;
 
 const PASSWORD_SETTING_KEY: &str = "admin_password_hash";
-pub const SESSION_COOKIE_NAME: &str = "luanti_admin";
+pub const SESSION_COOKIE_NAME: &str = "sesame_admin";
 const DEFAULT_SESSION_TTL_SECS: i64 = 60 * 60 * 24 * 30;
 
 // ===== Password ==============================================================

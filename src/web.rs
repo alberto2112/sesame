@@ -20,7 +20,7 @@ use crate::quiz::{self, GradedAttempt, QuizQuestion, Submission};
 /// Cookie qui retient quel enfant est devant l'écran. Le sélecteur de profils
 /// arrive en phase 2 ; d'ici là elle reste vide et on retombe sur le premier
 /// enfant actif.
-pub const CHILD_COOKIE_NAME: &str = "kg_child";
+pub const CHILD_COOKIE_NAME: &str = "sesame_child";
 
 #[derive(Clone)]
 pub struct AppState {
