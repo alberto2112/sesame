@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+#
+# Session X11 de l'enfant. C'est SDDM qui lance ce script (via l'entrée
+# /usr/share/xsessions/sesame.desktop).
+#
+# Tout le système tient dans ces quatre étapes. Lis-les dans l'ordre :
+#
+#   1. le serveur démarre ;
+#   2. le kiosque prend l'écran — SEUL client X, sans gestionnaire de fenêtres,
+#      donc rien à fuir : ni Alt+Tab, ni Alt+F4, ni barre des tâches. Ces
+#      raccourcis ne sont pas désactivés, ils N'EXISTENT PAS, parce que c'est
+#      le gestionnaire de fenêtres qui les implémente et qu'il n'y en a pas ;
+#   3. il ne rend la main (code 0) que lorsqu'un enfant a gagné du temps ;
+#   4. ALORS SEULEMENT le bureau est lancé.
+#
+# Le bureau n'est pas « bloqué » : il n'existe simplement pas encore. C'est
+# toute l'idée.
+
+set -u
+
+BIN_DIR="${SESAME_BIN_DIR:-/usr/local/bin}"
+
+log() {
+    echo "sesame-session: $*" >&2
+    command -v logger >/dev/null 2>&1 && logger -t sesame "$*"
+}
+
+# --- 1. Le serveur : unique propriétaire de la base, vivant toute la session.
+"$BIN_DIR/sesame" &
+SERVER_PID=$!
+log "serveur démarré (pid $SERVER_PID)"
+
+# --- 2 et 3. La porte.
+if ! "$BIN_DIR/sesame-kiosk"; then
+    log "le kiosque n'a pas rendu 0 — pas de bureau"
+    kill "$SERVER_PID" 2>/dev/null
+    exit 1
+fi
+log "contrôle réussi — on ouvre le bureau"
+
+# --- L'horloge. Elle décompte, prévient, et ferme la session à la fin.
+"$BIN_DIR/sesame-timer" &
+log "minuteur démarré"
+
+# --- 4. Le bureau. `exec` : quand Plasma s'arrête, la session s'arrête, et
+# logind nettoie le serveur et le minuteur avec elle.
+exec startplasma-x11

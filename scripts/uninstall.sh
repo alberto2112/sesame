@@ -1,37 +1,58 @@
 #!/usr/bin/env bash
+#
+# Sésame — désinstallation.
+#
+# Retire les binaires, la session SDDM et le durcissement. La BASE DE DONNÉES
+# est préservée : elle contient les questions et l'historique pédagogique des
+# enfants. On ne détruit jamais ça sans qu'on nous le demande deux fois.
+
 set -euo pipefail
 
-# luanti-gate — script de désinstallation
-# Supprime le wrapper, la config et l'entrée .desktop. Préserve la base de données.
+BIN_DIR=/usr/local/bin
+SESSION_DIR=/usr/share/xsessions
+LOGIND_DROPIN=/etc/systemd/logind.conf.d/50-sesame.conf
+XORG_DROPIN=/etc/X11/xorg.conf.d/50-sesame.conf
 
-BIN_DIR="$HOME/.local/bin"
-APPS_DIR="$HOME/.local/share/applications"
-CONFIG_DIR="$HOME/.config/luanti-gate"
-DESKTOP_FILE="$APPS_DIR/luanti.desktop"
-TARGET_BIN="$BIN_DIR/luanti"
+CONFIG_DIR="$HOME/.config/sesame"
+DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/sesame"
 
-DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/luanti-gate"
+say() { printf '\n\033[1;36m==>\033[0m %s\n' "$*"; }
 
-echo "==> Suppression du binaire wrapper..."
-rm -f "$TARGET_BIN"
+say "Suppression des binaires (sudo)…"
+sudo rm -f "$BIN_DIR"/sesame "$BIN_DIR"/sesame-kiosk \
+           "$BIN_DIR"/sesame-timer "$BIN_DIR"/sesame-session
 
-echo "==> Suppression de l'entrée .desktop..."
-rm -f "$DESKTOP_FILE"
+say "Suppression de la session SDDM…"
+sudo rm -f "$SESSION_DIR/sesame.desktop"
 
-echo "==> Suppression du dossier de configuration..."
+say "Retrait du durcissement…"
+sudo rm -f "$LOGIND_DROPIN" "$XORG_DROPIN"
+echo "    Les consoles texte et Ctrl+Alt+Retour arrière reviendront au"
+echo "    prochain démarrage."
+
+say "Suppression de la configuration…"
 rm -rf "$CONFIG_DIR"
 
-echo "==> Mise à jour de la base de données desktop..."
-update-desktop-database "$APPS_DIR" 2>/dev/null || true
+cat <<EOF
 
-echo ""
-echo "============================================================"
-echo "  Désinstallation terminée."
-echo ""
-echo "  La base de données (historique des contrôles, questions)"
-echo "  a été PRÉSERVÉE à :"
-echo "      $DATA_DIR"
-echo ""
-echo "  Si tu veux vraiment effacer tout l'historique, lance :"
-echo "      rm -rf \"$DATA_DIR\""
-echo "============================================================"
+============================================================
+  Désinstallation terminée.
+
+  /!\\ Si l'autologin pointe encore sur la session « sesame », le
+      prochain démarrage n'aura plus de session à lancer. Vérifie :
+
+          sudo cat /etc/sddm.conf.d/autologin.conf
+
+      et remets Session=plasma (ou supprime le fichier).
+
+  La BASE DE DONNÉES a été PRÉSERVÉE :
+
+      $DATA_DIR
+
+  Elle contient les questions et tout l'historique des contrôles.
+  Pour l'effacer vraiment :
+
+      rm -rf "$DATA_DIR"
+============================================================
+
+EOF

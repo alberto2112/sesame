@@ -25,6 +25,12 @@ path = "src/main.rs"
 name = "sesame-kiosk"
 path = "src/bin/kiosk.rs"
 
+# L'horloge : décompte le temps accordé (horloge MONOTONE), prévient, puis
+# ferme la porte.
+[[bin]]
+name = "sesame-timer"
+path = "src/bin/timer.rs"
+
 [dependencies]
 tokio = { version = "1", features = ["full"] }
 axum = { version = "0.7", features = ["macros", "multipart"] }

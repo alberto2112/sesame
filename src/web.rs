@@ -279,9 +279,19 @@ struct GateResponse {
     child_id: Option<i64>,
     child_name: Option<String>,
     remaining_secs: i64,
+    /// Ce que le minuteur doit faire quand le temps expire : `overlay` ou
+    /// `logout`. C'est un réglage du parent — le minuteur ne le devine pas, il
+    /// le demande.
+    lock_mode: String,
 }
 
 async fn api_gate(State(state): State<AppState>) -> Result<Json<GateResponse>, AppError> {
+    let lock_mode: Option<(String,)> =
+        sqlx::query_as("SELECT value FROM settings WHERE key = 'lock_mode'")
+            .fetch_optional(&state.pool)
+            .await?;
+    let lock_mode = lock_mode.map(|(v,)| v).unwrap_or_else(|| "logout".into());
+
     for child in policy::list_children(&state.pool).await? {
         if let GateDecision::Granted { remaining_secs } =
             policy::evaluate(&state.pool, &child).await?
@@ -291,6 +301,7 @@ async fn api_gate(State(state): State<AppState>) -> Result<Json<GateResponse>, A
                 child_id: Some(child.id),
                 child_name: Some(child.name),
                 remaining_secs,
+                lock_mode,
             }));
         }
     }
@@ -300,6 +311,7 @@ async fn api_gate(State(state): State<AppState>) -> Result<Json<GateResponse>, A
         child_id: None,
         child_name: None,
         remaining_secs: 0,
+        lock_mode,
     }))
 }
 

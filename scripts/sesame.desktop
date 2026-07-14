@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Sésame (contrôle)
+Comment=Passe un contrôle avant d'utiliser l'ordinateur
+Exec=/usr/local/bin/sesame-session
+TryExec=/usr/local/bin/sesame-session
+DesktopNames=KDE
+X-KDE-PluginInfo-Version=1.0
