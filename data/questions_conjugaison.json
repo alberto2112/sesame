@@ -1,917 +1,1910 @@
 {
-  "subjects": [ { "name": "Conjugaison", "weight": 1.0 } ],
+  "subjects": [
+    {
+      "name": "Conjugaison",
+      "weight": 1.0
+    }
+  ],
   "questions": [
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Je ___ à l'école. » (verbe aller, présent)",
       "answers": [
-        { "text": "vais", "correct": true },
-        { "text": "vas", "correct": false },
-        { "text": "va", "correct": false },
-        { "text": "allons", "correct": false }
+        {
+          "text": "vais",
+          "correct": true
+        },
+        {
+          "text": "vas",
+          "correct": false
+        },
+        {
+          "text": "va",
+          "correct": false
+        },
+        {
+          "text": "allons",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « je », le verbe aller donne « je vais »."
+      "explanation": "Avec « je », le verbe aller donne « je vais ».",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Tu ___ au parc. » (verbe aller, présent)",
       "answers": [
-        { "text": "vas", "correct": true },
-        { "text": "vais", "correct": false },
-        { "text": "va", "correct": false },
-        { "text": "allez", "correct": false }
+        {
+          "text": "vas",
+          "correct": true
+        },
+        {
+          "text": "vais",
+          "correct": false
+        },
+        {
+          "text": "va",
+          "correct": false
+        },
+        {
+          "text": "allez",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « tu », le verbe aller donne « tu vas »."
+      "explanation": "Avec « tu », le verbe aller donne « tu vas ».",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Nous ___ à la piscine. » (verbe aller, présent)",
       "answers": [
-        { "text": "allons", "correct": true },
-        { "text": "allez", "correct": false },
-        { "text": "vont", "correct": false },
-        { "text": "vais", "correct": false }
+        {
+          "text": "allons",
+          "correct": true
+        },
+        {
+          "text": "allez",
+          "correct": false
+        },
+        {
+          "text": "vont",
+          "correct": false
+        },
+        {
+          "text": "vais",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « nous », le verbe aller donne « nous allons »."
+      "explanation": "Avec « nous », le verbe aller donne « nous allons ».",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Elle ___ une robe. » (verbe avoir, présent)",
       "answers": [
-        { "text": "a", "correct": true },
-        { "text": "as", "correct": false },
-        { "text": "ai", "correct": false },
-        { "text": "avons", "correct": false }
+        {
+          "text": "a",
+          "correct": true
+        },
+        {
+          "text": "as",
+          "correct": false
+        },
+        {
+          "text": "ai",
+          "correct": false
+        },
+        {
+          "text": "avons",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « elle », le verbe avoir donne « elle a »."
+      "explanation": "Avec « elle », le verbe avoir donne « elle a ».",
+      "difficulty": 1
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « J'___ faim. » (verbe avoir, présent)",
       "answers": [
-        { "text": "ai", "correct": true },
-        { "text": "as", "correct": false },
-        { "text": "a", "correct": false },
-        { "text": "avez", "correct": false }
+        {
+          "text": "ai",
+          "correct": true
+        },
+        {
+          "text": "as",
+          "correct": false
+        },
+        {
+          "text": "a",
+          "correct": false
+        },
+        {
+          "text": "avez",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « je », le verbe avoir donne « j'ai »."
+      "explanation": "Avec « je », le verbe avoir donne « j'ai ».",
+      "difficulty": 1
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Ils ___ deux chiens. » (verbe avoir, présent)",
       "answers": [
-        { "text": "ont", "correct": true },
-        { "text": "avons", "correct": false },
-        { "text": "avez", "correct": false },
-        { "text": "a", "correct": false }
+        {
+          "text": "ont",
+          "correct": true
+        },
+        {
+          "text": "avons",
+          "correct": false
+        },
+        {
+          "text": "avez",
+          "correct": false
+        },
+        {
+          "text": "a",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « ils », le verbe avoir donne « ils ont »."
+      "explanation": "Avec « ils », le verbe avoir donne « ils ont ».",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Je ___ content. » (verbe être, présent)",
       "answers": [
-        { "text": "suis", "correct": true },
-        { "text": "es", "correct": false },
-        { "text": "est", "correct": false },
-        { "text": "sommes", "correct": false }
+        {
+          "text": "suis",
+          "correct": true
+        },
+        {
+          "text": "es",
+          "correct": false
+        },
+        {
+          "text": "est",
+          "correct": false
+        },
+        {
+          "text": "sommes",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « je », le verbe être donne « je suis »."
+      "explanation": "Avec « je », le verbe être donne « je suis ».",
+      "difficulty": 1
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Vous ___ en retard. » (verbe être, présent)",
       "answers": [
-        { "text": "êtes", "correct": true },
-        { "text": "sommes", "correct": false },
-        { "text": "sont", "correct": false },
-        { "text": "est", "correct": false }
+        {
+          "text": "êtes",
+          "correct": true
+        },
+        {
+          "text": "sommes",
+          "correct": false
+        },
+        {
+          "text": "sont",
+          "correct": false
+        },
+        {
+          "text": "est",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « vous », le verbe être donne « vous êtes »."
+      "explanation": "Avec « vous », le verbe être donne « vous êtes ».",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Elles ___ mes amies. » (verbe être, présent)",
       "answers": [
-        { "text": "sont", "correct": true },
-        { "text": "êtes", "correct": false },
-        { "text": "sommes", "correct": false },
-        { "text": "est", "correct": false }
+        {
+          "text": "sont",
+          "correct": true
+        },
+        {
+          "text": "êtes",
+          "correct": false
+        },
+        {
+          "text": "sommes",
+          "correct": false
+        },
+        {
+          "text": "est",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « elles », le verbe être donne « elles sont »."
+      "explanation": "Avec « elles », le verbe être donne « elles sont ».",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Je ___ du sport. » (verbe faire, présent)",
       "answers": [
-        { "text": "fais", "correct": true },
-        { "text": "fait", "correct": false },
-        { "text": "faites", "correct": false },
-        { "text": "font", "correct": false }
+        {
+          "text": "fais",
+          "correct": true
+        },
+        {
+          "text": "fait",
+          "correct": false
+        },
+        {
+          "text": "faites",
+          "correct": false
+        },
+        {
+          "text": "font",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « je » et « tu », le verbe faire donne « fais »."
+      "explanation": "Avec « je » et « tu », le verbe faire donne « fais ».",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Nous ___ un gâteau. » (verbe faire, présent)",
       "answers": [
-        { "text": "faisons", "correct": true },
-        { "text": "faites", "correct": false },
-        { "text": "font", "correct": false },
-        { "text": "fais", "correct": false }
+        {
+          "text": "faisons",
+          "correct": true
+        },
+        {
+          "text": "faites",
+          "correct": false
+        },
+        {
+          "text": "font",
+          "correct": false
+        },
+        {
+          "text": "fais",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « nous », le verbe faire donne « nous faisons »."
+      "explanation": "Avec « nous », le verbe faire donne « nous faisons ».",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Ils ___ du bruit. » (verbe faire, présent)",
       "answers": [
-        { "text": "font", "correct": true },
-        { "text": "faisons", "correct": false },
-        { "text": "faites", "correct": false },
-        { "text": "fait", "correct": false }
+        {
+          "text": "font",
+          "correct": true
+        },
+        {
+          "text": "faisons",
+          "correct": false
+        },
+        {
+          "text": "faites",
+          "correct": false
+        },
+        {
+          "text": "fait",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « ils » et « elles », le verbe faire donne « font »."
+      "explanation": "Avec « ils » et « elles », le verbe faire donne « font ».",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Je ___ le ballon. » (verbe lancer, présent)",
       "answers": [
-        { "text": "lance", "correct": true },
-        { "text": "lances", "correct": false },
-        { "text": "lancez", "correct": false },
-        { "text": "lançons", "correct": false }
+        {
+          "text": "lance",
+          "correct": true
+        },
+        {
+          "text": "lances",
+          "correct": false
+        },
+        {
+          "text": "lancez",
+          "correct": false
+        },
+        {
+          "text": "lançons",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « je », les verbes en -er prennent « -e » : je lance."
+      "explanation": "Avec « je », les verbes en -er prennent « -e » : je lance.",
+      "difficulty": 1
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Tu ___ avec tes amis. » (verbe jouer, présent)",
       "answers": [
-        { "text": "joues", "correct": true },
-        { "text": "joue", "correct": false },
-        { "text": "jouez", "correct": false },
-        { "text": "jouons", "correct": false }
+        {
+          "text": "joues",
+          "correct": true
+        },
+        {
+          "text": "joue",
+          "correct": false
+        },
+        {
+          "text": "jouez",
+          "correct": false
+        },
+        {
+          "text": "jouons",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « tu », les verbes en -er prennent « -es » : tu joues."
+      "explanation": "Avec « tu », les verbes en -er prennent « -es » : tu joues.",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Il ___ une chanson. » (verbe chanter, présent)",
       "answers": [
-        { "text": "chante", "correct": true },
-        { "text": "chantes", "correct": false },
-        { "text": "chantez", "correct": false },
-        { "text": "chantons", "correct": false }
+        {
+          "text": "chante",
+          "correct": true
+        },
+        {
+          "text": "chantes",
+          "correct": false
+        },
+        {
+          "text": "chantez",
+          "correct": false
+        },
+        {
+          "text": "chantons",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « il » ou « elle », les verbes en -er prennent « -e » : il chante."
+      "explanation": "Avec « il » ou « elle », les verbes en -er prennent « -e » : il chante.",
+      "difficulty": 1
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Nous ___ à la maison. » (verbe manger, présent)",
       "answers": [
-        { "text": "mangeons", "correct": true },
-        { "text": "mangons", "correct": false },
-        { "text": "mangez", "correct": false },
-        { "text": "mangent", "correct": false }
+        {
+          "text": "mangeons",
+          "correct": true
+        },
+        {
+          "text": "mangons",
+          "correct": false
+        },
+        {
+          "text": "mangez",
+          "correct": false
+        },
+        {
+          "text": "mangent",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « nous », manger garde le « e » : nous mangeons."
+      "explanation": "Avec « nous », manger garde le « e » : nous mangeons.",
+      "difficulty": 5
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Vous ___ bien. » (verbe parler, présent)",
       "answers": [
-        { "text": "parlez", "correct": true },
-        { "text": "parlons", "correct": false },
-        { "text": "parlent", "correct": false },
-        { "text": "parles", "correct": false }
+        {
+          "text": "parlez",
+          "correct": true
+        },
+        {
+          "text": "parlons",
+          "correct": false
+        },
+        {
+          "text": "parlent",
+          "correct": false
+        },
+        {
+          "text": "parles",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « vous », les verbes en -er prennent « -ez » : vous parlez."
+      "explanation": "Avec « vous », les verbes en -er prennent « -ez » : vous parlez.",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Elles ___ la télévision. » (verbe regarder, présent)",
       "answers": [
-        { "text": "regardent", "correct": true },
-        { "text": "regardez", "correct": false },
-        { "text": "regardons", "correct": false },
-        { "text": "regarde", "correct": false }
+        {
+          "text": "regardent",
+          "correct": true
+        },
+        {
+          "text": "regardez",
+          "correct": false
+        },
+        {
+          "text": "regardons",
+          "correct": false
+        },
+        {
+          "text": "regarde",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « ils » et « elles », les verbes en -er prennent « -ent » : elles regardent."
+      "explanation": "Avec « ils » et « elles », les verbes en -er prennent « -ent » : elles regardent.",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Je ___ ma chambre. » (verbe ranger, présent)",
       "answers": [
-        { "text": "range", "correct": true },
-        { "text": "ranges", "correct": false },
-        { "text": "rangez", "correct": false },
-        { "text": "rangeons", "correct": false }
+        {
+          "text": "range",
+          "correct": true
+        },
+        {
+          "text": "ranges",
+          "correct": false
+        },
+        {
+          "text": "rangez",
+          "correct": false
+        },
+        {
+          "text": "rangeons",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « je », les verbes en -er prennent « -e » : je range."
+      "explanation": "Avec « je », les verbes en -er prennent « -e » : je range.",
+      "difficulty": 1
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Tu ___ tes devoirs. » (verbe finir, présent)",
       "answers": [
-        { "text": "finis", "correct": true },
-        { "text": "finit", "correct": false },
-        { "text": "finissez", "correct": false },
-        { "text": "finissons", "correct": false }
+        {
+          "text": "finis",
+          "correct": true
+        },
+        {
+          "text": "finit",
+          "correct": false
+        },
+        {
+          "text": "finissez",
+          "correct": false
+        },
+        {
+          "text": "finissons",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « tu », le verbe finir donne « tu finis »."
+      "explanation": "Avec « tu », le verbe finir donne « tu finis ».",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Je ___ venir. » (verbe pouvoir, présent)",
       "answers": [
-        { "text": "peux", "correct": true },
-        { "text": "peut", "correct": false },
-        { "text": "pouvons", "correct": false },
-        { "text": "peuvent", "correct": false }
+        {
+          "text": "peux",
+          "correct": true
+        },
+        {
+          "text": "peut",
+          "correct": false
+        },
+        {
+          "text": "pouvons",
+          "correct": false
+        },
+        {
+          "text": "peuvent",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « je », le verbe pouvoir donne « je peux »."
+      "explanation": "Avec « je », le verbe pouvoir donne « je peux ».",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Il ___ du gâteau. » (verbe prendre, présent)",
       "answers": [
-        { "text": "prend", "correct": true },
-        { "text": "prends", "correct": false },
-        { "text": "prenons", "correct": false },
-        { "text": "prennent", "correct": false }
+        {
+          "text": "prend",
+          "correct": true
+        },
+        {
+          "text": "prends",
+          "correct": false
+        },
+        {
+          "text": "prenons",
+          "correct": false
+        },
+        {
+          "text": "prennent",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « il » ou « elle », le verbe prendre donne « il prend »."
+      "explanation": "Avec « il » ou « elle », le verbe prendre donne « il prend ».",
+      "difficulty": 5
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Je ___ mon ami. » (verbe voir, présent)",
       "answers": [
-        { "text": "vois", "correct": true },
-        { "text": "voit", "correct": false },
-        { "text": "voyons", "correct": false },
-        { "text": "voient", "correct": false }
+        {
+          "text": "vois",
+          "correct": true
+        },
+        {
+          "text": "voit",
+          "correct": false
+        },
+        {
+          "text": "voyons",
+          "correct": false
+        },
+        {
+          "text": "voient",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « je » et « tu », le verbe voir donne « je vois »."
+      "explanation": "Avec « je » et « tu », le verbe voir donne « je vois ».",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Il ___ à la maison. » (verbe venir, présent)",
       "answers": [
-        { "text": "vient", "correct": true },
-        { "text": "viens", "correct": false },
-        { "text": "venons", "correct": false },
-        { "text": "viennent", "correct": false }
+        {
+          "text": "vient",
+          "correct": true
+        },
+        {
+          "text": "viens",
+          "correct": false
+        },
+        {
+          "text": "venons",
+          "correct": false
+        },
+        {
+          "text": "viennent",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « il » ou « elle », le verbe venir donne « il vient »."
+      "explanation": "Avec « il » ou « elle », le verbe venir donne « il vient ».",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Je ___ manger une pomme. » (futur proche)",
       "answers": [
-        { "text": "vais", "correct": true },
-        { "text": "vas", "correct": false },
-        { "text": "va", "correct": false },
-        { "text": "vont", "correct": false }
+        {
+          "text": "vais",
+          "correct": true
+        },
+        {
+          "text": "vas",
+          "correct": false
+        },
+        {
+          "text": "va",
+          "correct": false
+        },
+        {
+          "text": "vont",
+          "correct": false
+        }
       ],
-      "explanation": "Le futur proche se forme avec aller au présent + infinitif : je vais manger."
+      "explanation": "Le futur proche se forme avec aller au présent + infinitif : je vais manger.",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Nous ___ jouer dehors. » (futur proche)",
       "answers": [
-        { "text": "allons", "correct": true },
-        { "text": "allez", "correct": false },
-        { "text": "vont", "correct": false },
-        { "text": "allaient", "correct": false }
+        {
+          "text": "allons",
+          "correct": true
+        },
+        {
+          "text": "allez",
+          "correct": false
+        },
+        {
+          "text": "vont",
+          "correct": false
+        },
+        {
+          "text": "allaient",
+          "correct": false
+        }
       ],
-      "explanation": "Le futur proche se forme avec aller au présent + infinitif : nous allons jouer."
+      "explanation": "Le futur proche se forme avec aller au présent + infinitif : nous allons jouer.",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « J'___ mangé une pomme. » (passé composé)",
       "answers": [
-        { "text": "ai", "correct": true },
-        { "text": "as", "correct": false },
-        { "text": "a", "correct": false },
-        { "text": "avons", "correct": false }
+        {
+          "text": "ai",
+          "correct": true
+        },
+        {
+          "text": "as",
+          "correct": false
+        },
+        {
+          "text": "a",
+          "correct": false
+        },
+        {
+          "text": "avons",
+          "correct": false
+        }
       ],
-      "explanation": "Au passé composé avec « je », on utilise « j'ai » + participe passé."
+      "explanation": "Au passé composé avec « je », on utilise « j'ai » + participe passé.",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Elle ___ chanté une jolie chanson. » (passé composé)",
       "answers": [
-        { "text": "a", "correct": true },
-        { "text": "ai", "correct": false },
-        { "text": "avons", "correct": false },
-        { "text": "as", "correct": false }
+        {
+          "text": "a",
+          "correct": true
+        },
+        {
+          "text": "ai",
+          "correct": false
+        },
+        {
+          "text": "avons",
+          "correct": false
+        },
+        {
+          "text": "as",
+          "correct": false
+        }
       ],
-      "explanation": "Au passé composé avec « elle », on utilise « elle a » + participe passé."
+      "explanation": "Au passé composé avec « elle », on utilise « elle a » + participe passé.",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Nous ___ joué au foot. » (passé composé)",
       "answers": [
-        { "text": "avons", "correct": true },
-        { "text": "avez", "correct": false },
-        { "text": "ont", "correct": false },
-        { "text": "ai", "correct": false }
+        {
+          "text": "avons",
+          "correct": true
+        },
+        {
+          "text": "avez",
+          "correct": false
+        },
+        {
+          "text": "ont",
+          "correct": false
+        },
+        {
+          "text": "ai",
+          "correct": false
+        }
       ],
-      "explanation": "Au passé composé avec « nous », on utilise « nous avons » + participe passé."
+      "explanation": "Au passé composé avec « nous », on utilise « nous avons » + participe passé.",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Quel est l'infinitif du verbe dans : « nous jouons » ?",
       "answers": [
-        { "text": "jouer", "correct": true },
-        { "text": "joues", "correct": false },
-        { "text": "jouons", "correct": false },
-        { "text": "jouant", "correct": false }
+        {
+          "text": "jouer",
+          "correct": true
+        },
+        {
+          "text": "joues",
+          "correct": false
+        },
+        {
+          "text": "jouons",
+          "correct": false
+        },
+        {
+          "text": "jouant",
+          "correct": false
+        }
       ],
-      "explanation": "L'infinitif est la forme de base du verbe : jouer."
+      "explanation": "L'infinitif est la forme de base du verbe : jouer.",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Quel est l'infinitif du verbe dans : « elle chante » ?",
       "answers": [
-        { "text": "chanter", "correct": true },
-        { "text": "chantons", "correct": false },
-        { "text": "chantée", "correct": false },
-        { "text": "chantant", "correct": false }
+        {
+          "text": "chanter",
+          "correct": true
+        },
+        {
+          "text": "chantons",
+          "correct": false
+        },
+        {
+          "text": "chantée",
+          "correct": false
+        },
+        {
+          "text": "chantant",
+          "correct": false
+        }
       ],
-      "explanation": "L'infinitif est la forme de base du verbe : chanter."
+      "explanation": "L'infinitif est la forme de base du verbe : chanter.",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Quel est l'infinitif du verbe dans : « ils font » ?",
       "answers": [
-        { "text": "faire", "correct": true },
-        { "text": "faisir", "correct": false },
-        { "text": "faisons", "correct": false },
-        { "text": "faisant", "correct": false }
+        {
+          "text": "faire",
+          "correct": true
+        },
+        {
+          "text": "faisir",
+          "correct": false
+        },
+        {
+          "text": "faisons",
+          "correct": false
+        },
+        {
+          "text": "faisant",
+          "correct": false
+        }
       ],
-      "explanation": "L'infinitif du verbe irrégulier « font » est « faire »."
+      "explanation": "L'infinitif du verbe irrégulier « font » est « faire ».",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Quel pronom correspond à : « ___ chante » (1 personne) ?",
       "answers": [
-        { "text": "Il / Elle", "correct": true },
-        { "text": "Je", "correct": false },
-        { "text": "Nous", "correct": false },
-        { "text": "Ils", "correct": false }
+        {
+          "text": "Il / Elle",
+          "correct": true
+        },
+        {
+          "text": "Je",
+          "correct": false
+        },
+        {
+          "text": "Nous",
+          "correct": false
+        },
+        {
+          "text": "Ils",
+          "correct": false
+        }
       ],
-      "explanation": "La terminaison « -e » sans « s » correspond à la 3e personne du singulier : il ou elle."
+      "explanation": "La terminaison « -e » sans « s » correspond à la 3e personne du singulier : il ou elle.",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Quel pronom correspond à : « ___ mangeons » ?",
       "answers": [
-        { "text": "Nous", "correct": true },
-        { "text": "Vous", "correct": false },
-        { "text": "Ils", "correct": false },
-        { "text": "Je", "correct": false }
+        {
+          "text": "Nous",
+          "correct": true
+        },
+        {
+          "text": "Vous",
+          "correct": false
+        },
+        {
+          "text": "Ils",
+          "correct": false
+        },
+        {
+          "text": "Je",
+          "correct": false
+        }
       ],
-      "explanation": "La terminaison « -ons » correspond toujours à « nous »."
+      "explanation": "La terminaison « -ons » correspond toujours à « nous ».",
+      "difficulty": 1
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Quel pronom correspond à : « ___ parlez » ?",
       "answers": [
-        { "text": "Vous", "correct": true },
-        { "text": "Nous", "correct": false },
-        { "text": "Ils", "correct": false },
-        { "text": "Tu", "correct": false }
+        {
+          "text": "Vous",
+          "correct": true
+        },
+        {
+          "text": "Nous",
+          "correct": false
+        },
+        {
+          "text": "Ils",
+          "correct": false
+        },
+        {
+          "text": "Tu",
+          "correct": false
+        }
       ],
-      "explanation": "La terminaison « -ez » correspond toujours à « vous »."
+      "explanation": "La terminaison « -ez » correspond toujours à « vous ».",
+      "difficulty": 1
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Quel pronom correspond à : « ___ jouent » ?",
       "answers": [
-        { "text": "Ils / Elles", "correct": true },
-        { "text": "Vous", "correct": false },
-        { "text": "Nous", "correct": false },
-        { "text": "Il", "correct": false }
+        {
+          "text": "Ils / Elles",
+          "correct": true
+        },
+        {
+          "text": "Vous",
+          "correct": false
+        },
+        {
+          "text": "Nous",
+          "correct": false
+        },
+        {
+          "text": "Il",
+          "correct": false
+        }
       ],
-      "explanation": "La terminaison « -ent » correspond à « ils » ou « elles »."
+      "explanation": "La terminaison « -ent » correspond à « ils » ou « elles ».",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Quel pronom correspond à : « ___ danses » ?",
       "answers": [
-        { "text": "Tu", "correct": true },
-        { "text": "Je", "correct": false },
-        { "text": "Il", "correct": false },
-        { "text": "Nous", "correct": false }
+        {
+          "text": "Tu",
+          "correct": true
+        },
+        {
+          "text": "Je",
+          "correct": false
+        },
+        {
+          "text": "Il",
+          "correct": false
+        },
+        {
+          "text": "Nous",
+          "correct": false
+        }
       ],
-      "explanation": "La terminaison « -es » correspond toujours à « tu »."
+      "explanation": "La terminaison « -es » correspond toujours à « tu ».",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Les enfants ___ dans la cour. » (verbe courir, présent)",
       "answers": [
-        { "text": "courent", "correct": true },
-        { "text": "court", "correct": false },
-        { "text": "coure", "correct": false },
-        { "text": "courons", "correct": false }
+        {
+          "text": "courent",
+          "correct": true
+        },
+        {
+          "text": "court",
+          "correct": false
+        },
+        {
+          "text": "coure",
+          "correct": false
+        },
+        {
+          "text": "courons",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « ils/elles » (ici « les enfants »), courir donne « courent »."
+      "explanation": "Avec « ils/elles » (ici « les enfants »), courir donne « courent ».",
+      "difficulty": 4
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Le chat ___ sur le canapé. » (verbe dormir, présent)",
       "answers": [
-        { "text": "dort", "correct": true },
-        { "text": "dors", "correct": false },
-        { "text": "dorment", "correct": false },
-        { "text": "dormons", "correct": false }
+        {
+          "text": "dort",
+          "correct": true
+        },
+        {
+          "text": "dors",
+          "correct": false
+        },
+        {
+          "text": "dorment",
+          "correct": false
+        },
+        {
+          "text": "dormons",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « il » ou « elle » (ici « le chat »), dormir donne « dort »."
+      "explanation": "Avec « il » ou « elle » (ici « le chat »), dormir donne « dort ».",
+      "difficulty": 4
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Marie ___ une lettre. » (verbe écrire, présent)",
       "answers": [
-        { "text": "écrit", "correct": true },
-        { "text": "écris", "correct": false },
-        { "text": "écrivent", "correct": false },
-        { "text": "écrivons", "correct": false }
+        {
+          "text": "écrit",
+          "correct": true
+        },
+        {
+          "text": "écris",
+          "correct": false
+        },
+        {
+          "text": "écrivent",
+          "correct": false
+        },
+        {
+          "text": "écrivons",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « elle » (ici « Marie »), écrire donne « écrit »."
+      "explanation": "Avec « elle » (ici « Marie »), écrire donne « écrit ».",
+      "difficulty": 4
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Nous ___ un livre. » (verbe lire, présent)",
       "answers": [
-        { "text": "lisons", "correct": true },
-        { "text": "lisez", "correct": false },
-        { "text": "lisent", "correct": false },
-        { "text": "lis", "correct": false }
+        {
+          "text": "lisons",
+          "correct": true
+        },
+        {
+          "text": "lisez",
+          "correct": false
+        },
+        {
+          "text": "lisent",
+          "correct": false
+        },
+        {
+          "text": "lis",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « nous », lire donne « nous lisons »."
+      "explanation": "Avec « nous », lire donne « nous lisons ».",
+      "difficulty": 4
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Tu ___ de l'eau. » (verbe boire, présent)",
       "answers": [
-        { "text": "bois", "correct": true },
-        { "text": "boit", "correct": false },
-        { "text": "boivons", "correct": false },
-        { "text": "boivent", "correct": false }
+        {
+          "text": "bois",
+          "correct": true
+        },
+        {
+          "text": "boit",
+          "correct": false
+        },
+        {
+          "text": "boivons",
+          "correct": false
+        },
+        {
+          "text": "boivent",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « tu », boire donne « tu bois »."
+      "explanation": "Avec « tu », boire donne « tu bois ».",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Je ___ un dessin. » (verbe dessiner, présent)",
       "answers": [
-        { "text": "dessine", "correct": true },
-        { "text": "dessines", "correct": false },
-        { "text": "dessinez", "correct": false },
-        { "text": "dessinons", "correct": false }
+        {
+          "text": "dessine",
+          "correct": true
+        },
+        {
+          "text": "dessines",
+          "correct": false
+        },
+        {
+          "text": "dessinez",
+          "correct": false
+        },
+        {
+          "text": "dessinons",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « je », les verbes en -er prennent « -e » : je dessine."
+      "explanation": "Avec « je », les verbes en -er prennent « -e » : je dessine.",
+      "difficulty": 1
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Il ___ du piano. » (verbe jouer, présent)",
       "answers": [
-        { "text": "joue", "correct": true },
-        { "text": "joues", "correct": false },
-        { "text": "jouons", "correct": false },
-        { "text": "jouent", "correct": false }
+        {
+          "text": "joue",
+          "correct": true
+        },
+        {
+          "text": "joues",
+          "correct": false
+        },
+        {
+          "text": "jouons",
+          "correct": false
+        },
+        {
+          "text": "jouent",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « il », les verbes en -er prennent « -e » : il joue."
+      "explanation": "Avec « il », les verbes en -er prennent « -e » : il joue.",
+      "difficulty": 1
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Vous ___ une histoire. » (verbe raconter, présent)",
       "answers": [
-        { "text": "racontez", "correct": true },
-        { "text": "racontons", "correct": false },
-        { "text": "racontent", "correct": false },
-        { "text": "racontes", "correct": false }
+        {
+          "text": "racontez",
+          "correct": true
+        },
+        {
+          "text": "racontons",
+          "correct": false
+        },
+        {
+          "text": "racontent",
+          "correct": false
+        },
+        {
+          "text": "racontes",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « vous », les verbes en -er prennent « -ez » : vous racontez."
+      "explanation": "Avec « vous », les verbes en -er prennent « -ez » : vous racontez.",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Ils ___ leurs affaires. » (verbe ranger, présent)",
       "answers": [
-        { "text": "rangent", "correct": true },
-        { "text": "rangez", "correct": false },
-        { "text": "rangeons", "correct": false },
-        { "text": "range", "correct": false }
+        {
+          "text": "rangent",
+          "correct": true
+        },
+        {
+          "text": "rangez",
+          "correct": false
+        },
+        {
+          "text": "rangeons",
+          "correct": false
+        },
+        {
+          "text": "range",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « ils », les verbes en -er prennent « -ent » : ils rangent."
+      "explanation": "Avec « ils », les verbes en -er prennent « -ent » : ils rangent.",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Tu ___ de la musique. » (verbe écouter, présent)",
       "answers": [
-        { "text": "écoutes", "correct": true },
-        { "text": "écoute", "correct": false },
-        { "text": "écoutez", "correct": false },
-        { "text": "écoutons", "correct": false }
+        {
+          "text": "écoutes",
+          "correct": true
+        },
+        {
+          "text": "écoute",
+          "correct": false
+        },
+        {
+          "text": "écoutez",
+          "correct": false
+        },
+        {
+          "text": "écoutons",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « tu », les verbes en -er prennent « -es » : tu écoutes."
+      "explanation": "Avec « tu », les verbes en -er prennent « -es » : tu écoutes.",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « La maîtresse ___ la leçon. » (verbe expliquer, présent)",
       "answers": [
-        { "text": "explique", "correct": true },
-        { "text": "expliques", "correct": false },
-        { "text": "expliquez", "correct": false },
-        { "text": "expliquent", "correct": false }
+        {
+          "text": "explique",
+          "correct": true
+        },
+        {
+          "text": "expliques",
+          "correct": false
+        },
+        {
+          "text": "expliquez",
+          "correct": false
+        },
+        {
+          "text": "expliquent",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « elle » (ici « la maîtresse »), les verbes en -er prennent « -e »."
+      "explanation": "Avec « elle » (ici « la maîtresse »), les verbes en -er prennent « -e ».",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Nous ___ nos amis. » (verbe aider, présent)",
       "answers": [
-        { "text": "aidons", "correct": true },
-        { "text": "aidez", "correct": false },
-        { "text": "aident", "correct": false },
-        { "text": "aide", "correct": false }
+        {
+          "text": "aidons",
+          "correct": true
+        },
+        {
+          "text": "aidez",
+          "correct": false
+        },
+        {
+          "text": "aident",
+          "correct": false
+        },
+        {
+          "text": "aide",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « nous », les verbes en -er prennent « -ons » : nous aidons."
+      "explanation": "Avec « nous », les verbes en -er prennent « -ons » : nous aidons.",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Je ___ du lait. » (verbe boire, présent)",
       "answers": [
-        { "text": "bois", "correct": true },
-        { "text": "boit", "correct": false },
-        { "text": "buvons", "correct": false },
-        { "text": "boivent", "correct": false }
+        {
+          "text": "bois",
+          "correct": true
+        },
+        {
+          "text": "boit",
+          "correct": false
+        },
+        {
+          "text": "buvons",
+          "correct": false
+        },
+        {
+          "text": "boivent",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « je », boire donne « je bois »."
+      "explanation": "Avec « je », boire donne « je bois ».",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Ils ___ leurs parents. » (verbe voir, présent)",
       "answers": [
-        { "text": "voient", "correct": true },
-        { "text": "voyons", "correct": false },
-        { "text": "voient", "correct": false },
-        { "text": "vois", "correct": false }
+        {
+          "text": "voient",
+          "correct": true
+        },
+        {
+          "text": "voyons",
+          "correct": false
+        },
+        {
+          "text": "voit",
+          "correct": false
+        },
+        {
+          "text": "vois",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « ils » et « elles », voir donne « voient »."
+      "explanation": "Avec « ils » et « elles », voir donne « voient ».",
+      "difficulty": 5
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Tu ___ prendre un livre. » (verbe pouvoir, présent)",
       "answers": [
-        { "text": "peux", "correct": true },
-        { "text": "peut", "correct": false },
-        { "text": "pouvons", "correct": false },
-        { "text": "peuvent", "correct": false }
+        {
+          "text": "peux",
+          "correct": true
+        },
+        {
+          "text": "peut",
+          "correct": false
+        },
+        {
+          "text": "pouvons",
+          "correct": false
+        },
+        {
+          "text": "peuvent",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « tu », pouvoir donne « tu peux »."
+      "explanation": "Avec « tu », pouvoir donne « tu peux ».",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Nous ___ du pain. » (verbe prendre, présent)",
       "answers": [
-        { "text": "prenons", "correct": true },
-        { "text": "prennent", "correct": false },
-        { "text": "prenez", "correct": false },
-        { "text": "prends", "correct": false }
+        {
+          "text": "prenons",
+          "correct": true
+        },
+        {
+          "text": "prennent",
+          "correct": false
+        },
+        {
+          "text": "prenez",
+          "correct": false
+        },
+        {
+          "text": "prends",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « nous », prendre donne « nous prenons »."
+      "explanation": "Avec « nous », prendre donne « nous prenons ».",
+      "difficulty": 5
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Quel est l'infinitif du verbe dans : « je vais » ?",
       "answers": [
-        { "text": "aller", "correct": true },
-        { "text": "avoir", "correct": false },
-        { "text": "vouloir", "correct": false },
-        { "text": "venir", "correct": false }
+        {
+          "text": "aller",
+          "correct": true
+        },
+        {
+          "text": "avoir",
+          "correct": false
+        },
+        {
+          "text": "vouloir",
+          "correct": false
+        },
+        {
+          "text": "venir",
+          "correct": false
+        }
       ],
-      "explanation": "« Je vais » vient du verbe aller."
+      "explanation": "« Je vais » vient du verbe aller.",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Quel est l'infinitif du verbe dans : « nous sommes » ?",
       "answers": [
-        { "text": "être", "correct": true },
-        { "text": "avoir", "correct": false },
-        { "text": "aller", "correct": false },
-        { "text": "faire", "correct": false }
+        {
+          "text": "être",
+          "correct": true
+        },
+        {
+          "text": "avoir",
+          "correct": false
+        },
+        {
+          "text": "aller",
+          "correct": false
+        },
+        {
+          "text": "faire",
+          "correct": false
+        }
       ],
-      "explanation": "« Nous sommes » vient du verbe être."
+      "explanation": "« Nous sommes » vient du verbe être.",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Elle va ___ à la bibliothèque. » (futur proche)",
       "answers": [
-        { "text": "aller", "correct": true },
-        { "text": "allons", "correct": false },
-        { "text": "alla", "correct": false },
-        { "text": "allée", "correct": false }
+        {
+          "text": "aller",
+          "correct": true
+        },
+        {
+          "text": "allons",
+          "correct": false
+        },
+        {
+          "text": "alla",
+          "correct": false
+        },
+        {
+          "text": "allée",
+          "correct": false
+        }
       ],
-      "explanation": "Le futur proche se forme avec aller conjugué + infinitif : elle va aller."
+      "explanation": "Le futur proche se forme avec aller conjugué + infinitif : elle va aller.",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Ils vont ___ au cinéma. » (futur proche)",
       "answers": [
-        { "text": "aller", "correct": true },
-        { "text": "allons", "correct": false },
-        { "text": "allés", "correct": false },
-        { "text": "vont", "correct": false }
+        {
+          "text": "aller",
+          "correct": true
+        },
+        {
+          "text": "allons",
+          "correct": false
+        },
+        {
+          "text": "allés",
+          "correct": false
+        },
+        {
+          "text": "vont",
+          "correct": false
+        }
       ],
-      "explanation": "Le futur proche : aller conjugué + infinitif → ils vont aller."
+      "explanation": "Le futur proche : aller conjugué + infinitif → ils vont aller.",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Laquelle de ces formes est un verbe à l'infinitif ?",
       "answers": [
-        { "text": "sauter", "correct": true },
-        { "text": "sautez", "correct": false },
-        { "text": "saute", "correct": false },
-        { "text": "sautons", "correct": false }
+        {
+          "text": "sauter",
+          "correct": true
+        },
+        {
+          "text": "sautez",
+          "correct": false
+        },
+        {
+          "text": "saute",
+          "correct": false
+        },
+        {
+          "text": "sautons",
+          "correct": false
+        }
       ],
-      "explanation": "L'infinitif est la forme de base du verbe. Ici, « sauter » est l'infinitif."
+      "explanation": "L'infinitif est la forme de base du verbe. Ici, « sauter » est l'infinitif.",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Laquelle de ces formes est un verbe à l'infinitif ?",
       "answers": [
-        { "text": "finir", "correct": true },
-        { "text": "finit", "correct": false },
-        { "text": "finissons", "correct": false },
-        { "text": "finies", "correct": false }
+        {
+          "text": "finir",
+          "correct": true
+        },
+        {
+          "text": "finit",
+          "correct": false
+        },
+        {
+          "text": "finissons",
+          "correct": false
+        },
+        {
+          "text": "finies",
+          "correct": false
+        }
       ],
-      "explanation": "L'infinitif est la forme de base : « finir »."
+      "explanation": "L'infinitif est la forme de base : « finir ».",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Le chien ___ dans le jardin. » (verbe courir, présent)",
       "answers": [
-        { "text": "court", "correct": true },
-        { "text": "cours", "correct": false },
-        { "text": "courons", "correct": false },
-        { "text": "courent", "correct": false }
+        {
+          "text": "court",
+          "correct": true
+        },
+        {
+          "text": "cours",
+          "correct": false
+        },
+        {
+          "text": "courons",
+          "correct": false
+        },
+        {
+          "text": "courent",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « il » (ici « le chien »), courir donne « il court »."
+      "explanation": "Avec « il » (ici « le chien »), courir donne « il court ».",
+      "difficulty": 4
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Vous ___ vos légumes. » (verbe manger, présent)",
       "answers": [
-        { "text": "mangez", "correct": true },
-        { "text": "mangeons", "correct": false },
-        { "text": "mangent", "correct": false },
-        { "text": "mange", "correct": false }
+        {
+          "text": "mangez",
+          "correct": true
+        },
+        {
+          "text": "mangeons",
+          "correct": false
+        },
+        {
+          "text": "mangent",
+          "correct": false
+        },
+        {
+          "text": "mange",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « vous », manger donne « vous mangez »."
+      "explanation": "Avec « vous », manger donne « vous mangez ».",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « J'___ joué avec mon chien. » (passé composé)",
       "answers": [
-        { "text": "ai", "correct": true },
-        { "text": "as", "correct": false },
-        { "text": "a", "correct": false },
-        { "text": "avons", "correct": false }
+        {
+          "text": "ai",
+          "correct": true
+        },
+        {
+          "text": "as",
+          "correct": false
+        },
+        {
+          "text": "a",
+          "correct": false
+        },
+        {
+          "text": "avons",
+          "correct": false
+        }
       ],
-      "explanation": "Au passé composé avec « je », on écrit « j'ai » + participe passé."
+      "explanation": "Au passé composé avec « je », on écrit « j'ai » + participe passé.",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Ils ___ regardé un film. » (passé composé)",
       "answers": [
-        { "text": "ont", "correct": true },
-        { "text": "avons", "correct": false },
-        { "text": "avez", "correct": false },
-        { "text": "ai", "correct": false }
+        {
+          "text": "ont",
+          "correct": true
+        },
+        {
+          "text": "avons",
+          "correct": false
+        },
+        {
+          "text": "avez",
+          "correct": false
+        },
+        {
+          "text": "ai",
+          "correct": false
+        }
       ],
-      "explanation": "Au passé composé avec « ils », on écrit « ils ont » + participe passé."
+      "explanation": "Au passé composé avec « ils », on écrit « ils ont » + participe passé.",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Papa ___ la voiture. » (verbe laver, présent)",
       "answers": [
-        { "text": "lave", "correct": true },
-        { "text": "laves", "correct": false },
-        { "text": "lavez", "correct": false },
-        { "text": "lavent", "correct": false }
+        {
+          "text": "lave",
+          "correct": true
+        },
+        {
+          "text": "laves",
+          "correct": false
+        },
+        {
+          "text": "lavez",
+          "correct": false
+        },
+        {
+          "text": "lavent",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « il » (ici « papa »), les verbes en -er prennent « -e » : il lave."
+      "explanation": "Avec « il » (ici « papa »), les verbes en -er prennent « -e » : il lave.",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Tu ___ à la maison. » (verbe venir, présent)",
       "answers": [
-        { "text": "viens", "correct": true },
-        { "text": "vient", "correct": false },
-        { "text": "venons", "correct": false },
-        { "text": "viennent", "correct": false }
+        {
+          "text": "viens",
+          "correct": true
+        },
+        {
+          "text": "vient",
+          "correct": false
+        },
+        {
+          "text": "venons",
+          "correct": false
+        },
+        {
+          "text": "viennent",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « tu », venir donne « tu viens »."
+      "explanation": "Avec « tu », venir donne « tu viens ».",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "single",
       "statement": "Complète : « Je ___ promenade. » Quel verbe convient ici ? (verbe faire, présent)",
       "answers": [
-        { "text": "fais une", "correct": true },
-        { "text": "fait une", "correct": false },
-        { "text": "faisons une", "correct": false },
-        { "text": "font une", "correct": false }
+        {
+          "text": "fais une",
+          "correct": true
+        },
+        {
+          "text": "fait une",
+          "correct": false
+        },
+        {
+          "text": "faisons une",
+          "correct": false
+        },
+        {
+          "text": "font une",
+          "correct": false
+        }
       ],
-      "explanation": "Avec « je », faire donne « je fais »."
+      "explanation": "Avec « je », faire donne « je fais ».",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "multi",
       "statement": "Quelles formes correspondent au verbe jouer au présent avec « nous » ou « vous » ?",
       "answers": [
-        { "text": "nous jouons", "correct": true },
-        { "text": "vous jouez", "correct": true },
-        { "text": "ils jouent", "correct": false },
-        { "text": "je joue", "correct": false }
+        {
+          "text": "nous jouons",
+          "correct": true
+        },
+        {
+          "text": "vous jouez",
+          "correct": true
+        },
+        {
+          "text": "ils jouent",
+          "correct": false
+        },
+        {
+          "text": "je joue",
+          "correct": false
+        }
       ],
-      "explanation": "« Nous jouons » et « vous jouez » sont les formes de la 1re et 2e personne du pluriel."
+      "explanation": "« Nous jouons » et « vous jouez » sont les formes de la 1re et 2e personne du pluriel.",
+      "difficulty": 2
     },
     {
       "subject": "Conjugaison",
       "kind": "multi",
       "statement": "Quelles phrases utilisent correctement le verbe être au présent ?",
       "answers": [
-        { "text": "Je suis à l'école.", "correct": true },
-        { "text": "Nous sommes contents.", "correct": true },
-        { "text": "Tu est gentil.", "correct": false },
-        { "text": "Ils sommes fatigués.", "correct": false }
+        {
+          "text": "Je suis à l'école.",
+          "correct": true
+        },
+        {
+          "text": "Nous sommes contents.",
+          "correct": true
+        },
+        {
+          "text": "Tu est gentil.",
+          "correct": false
+        },
+        {
+          "text": "Ils sommes fatigués.",
+          "correct": false
+        }
       ],
-      "explanation": "On dit « je suis » et « nous sommes », mais « tu es » et « ils sont »."
+      "explanation": "On dit « je suis » et « nous sommes », mais « tu es » et « ils sont ».",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "multi",
       "statement": "Quelles phrases sont au passé composé ?",
       "answers": [
-        { "text": "J'ai mangé une pomme.", "correct": true },
-        { "text": "Elle a chanté une chanson.", "correct": true },
-        { "text": "Nous mangeons une pomme.", "correct": false },
-        { "text": "Tu vas chanter.", "correct": false }
+        {
+          "text": "J'ai mangé une pomme.",
+          "correct": true
+        },
+        {
+          "text": "Elle a chanté une chanson.",
+          "correct": true
+        },
+        {
+          "text": "Nous mangeons une pomme.",
+          "correct": false
+        },
+        {
+          "text": "Tu vas chanter.",
+          "correct": false
+        }
       ],
-      "explanation": "Le passé composé se forme avec avoir ou être au présent + participe passé."
+      "explanation": "Le passé composé se forme avec avoir ou être au présent + participe passé.",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "multi",
       "statement": "Quelles formes sont correctes pour le verbe aller au présent ?",
       "answers": [
-        { "text": "je vais", "correct": true },
-        { "text": "il va", "correct": true },
-        { "text": "tu vait", "correct": false },
-        { "text": "nous allent", "correct": false }
+        {
+          "text": "je vais",
+          "correct": true
+        },
+        {
+          "text": "il va",
+          "correct": true
+        },
+        {
+          "text": "tu vait",
+          "correct": false
+        },
+        {
+          "text": "nous allent",
+          "correct": false
+        }
       ],
-      "explanation": "Le verbe aller est irrégulier : je vais, tu vas, il va, nous allons, vous allez, ils vont."
+      "explanation": "Le verbe aller est irrégulier : je vais, tu vas, il va, nous allons, vous allez, ils vont.",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "multi",
       "statement": "Quelles phrases utilisent le futur proche correctement ?",
       "answers": [
-        { "text": "Je vais dormir.", "correct": true },
-        { "text": "Ils vont partir.", "correct": true },
-        { "text": "Tu va manger.", "correct": false },
-        { "text": "Nous allons du sport.", "correct": false }
+        {
+          "text": "Je vais dormir.",
+          "correct": true
+        },
+        {
+          "text": "Ils vont partir.",
+          "correct": true
+        },
+        {
+          "text": "Tu va manger.",
+          "correct": false
+        },
+        {
+          "text": "Nous allons du sport.",
+          "correct": false
+        }
       ],
-      "explanation": "Le futur proche = aller conjugué + infinitif. « Tu va » est incorrect (on dit « tu vas »)."
+      "explanation": "Le futur proche = aller conjugué + infinitif. « Tu va » est incorrect (on dit « tu vas »).",
+      "difficulty": 4
     },
     {
       "subject": "Conjugaison",
       "kind": "multi",
       "statement": "Quelles formes du verbe avoir sont correctes au présent ?",
       "answers": [
-        { "text": "tu as", "correct": true },
-        { "text": "elles ont", "correct": true },
-        { "text": "je as", "correct": false },
-        { "text": "nous avont", "correct": false }
+        {
+          "text": "tu as",
+          "correct": true
+        },
+        {
+          "text": "elles ont",
+          "correct": true
+        },
+        {
+          "text": "je as",
+          "correct": false
+        },
+        {
+          "text": "nous avont",
+          "correct": false
+        }
       ],
-      "explanation": "On dit « tu as » et « elles ont », mais « j'ai » et « nous avons »."
+      "explanation": "On dit « tu as » et « elles ont », mais « j'ai » et « nous avons ».",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "multi",
       "statement": "Quelles phrases accordent correctement le verbe avec son sujet ?",
       "answers": [
-        { "text": "Les enfants jouent dans le jardin.", "correct": true },
-        { "text": "Ma sœur chante une chanson.", "correct": true },
-        { "text": "Les oiseaux chante dans l'arbre.", "correct": false },
-        { "text": "Mon frère jouent au foot.", "correct": false }
+        {
+          "text": "Les enfants jouent dans le jardin.",
+          "correct": true
+        },
+        {
+          "text": "Ma sœur chante une chanson.",
+          "correct": true
+        },
+        {
+          "text": "Les oiseaux chante dans l'arbre.",
+          "correct": false
+        },
+        {
+          "text": "Mon frère jouent au foot.",
+          "correct": false
+        }
       ],
-      "explanation": "Le verbe doit s'accorder avec son sujet : « les enfants jouent » et « ma sœur chante »."
+      "explanation": "Le verbe doit s'accorder avec son sujet : « les enfants jouent » et « ma sœur chante ».",
+      "difficulty": 5
     },
     {
       "subject": "Conjugaison",
       "kind": "multi",
       "statement": "Quelles formes sont des infinitifs ?",
       "answers": [
-        { "text": "danser", "correct": true },
-        { "text": "voir", "correct": true },
-        { "text": "mangeons", "correct": false },
-        { "text": "parlait", "correct": false }
+        {
+          "text": "danser",
+          "correct": true
+        },
+        {
+          "text": "voir",
+          "correct": true
+        },
+        {
+          "text": "mangeons",
+          "correct": false
+        },
+        {
+          "text": "parlait",
+          "correct": false
+        }
       ],
-      "explanation": "« Danser » et « voir » sont des infinitifs (forme de base du verbe)."
+      "explanation": "« Danser » et « voir » sont des infinitifs (forme de base du verbe).",
+      "difficulty": 3
     },
     {
       "subject": "Conjugaison",
       "kind": "multi",
       "statement": "Quelles phrases utilisent correctement le verbe faire au présent ?",
       "answers": [
-        { "text": "Tu fais un dessin.", "correct": true },
-        { "text": "Elles font du vélo.", "correct": true },
-        { "text": "Il faisent du bruit.", "correct": false },
-        { "text": "Je faisons du sport.", "correct": false }
+        {
+          "text": "Tu fais un dessin.",
+          "correct": true
+        },
+        {
+          "text": "Elles font du vélo.",
+          "correct": true
+        },
+        {
+          "text": "Il faisent du bruit.",
+          "correct": false
+        },
+        {
+          "text": "Je faisons du sport.",
+          "correct": false
+        }
       ],
-      "explanation": "On dit « tu fais », « elles font », mais « il fait » et « je fais »."
+      "explanation": "On dit « tu fais », « elles font », mais « il fait » et « je fais ».",
+      "difficulty": 4
     },
     {
       "subject": "Conjugaison",
       "kind": "multi",
       "statement": "Quelles phrases contiennent un verbe du 1er groupe (en -er) à l'infinitif ?",
       "answers": [
-        { "text": "J'aime chanter.", "correct": true },
-        { "text": "Il adore nager.", "correct": true },
-        { "text": "Nous voulons finir.", "correct": false },
-        { "text": "Tu peux voir.", "correct": false }
+        {
+          "text": "J'aime chanter.",
+          "correct": true
+        },
+        {
+          "text": "Il adore nager.",
+          "correct": true
+        },
+        {
+          "text": "Nous voulons finir.",
+          "correct": false
+        },
+        {
+          "text": "Tu peux voir.",
+          "correct": false
+        }
       ],
-      "explanation": "« Chanter » et « nager » sont des verbes du 1er groupe en -er."
+      "explanation": "« Chanter » et « nager » sont des verbes du 1er groupe en -er.",
+      "difficulty": 5
     }
   ]
 }

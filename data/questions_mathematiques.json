@@ -1,933 +1,1951 @@
 {
-  "subjects": [ { "name": "Mathématiques", "weight": 1.0 } ],
+  "subjects": [
+    {
+      "name": "Mathématiques",
+      "weight": 1.0
+    }
+  ],
   "questions": [
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 3 + 4 ?",
       "answers": [
-        { "text": "7", "correct": true },
-        { "text": "6", "correct": false },
-        { "text": "8", "correct": false },
-        { "text": "5", "correct": false }
+        {
+          "text": "7",
+          "correct": true
+        },
+        {
+          "text": "6",
+          "correct": false
+        },
+        {
+          "text": "8",
+          "correct": false
+        },
+        {
+          "text": "5",
+          "correct": false
+        }
       ],
-      "explanation": "3 et 4, ça fait 7. Bravo !"
+      "explanation": "3 et 4, ça fait 7. Bravo !",
+      "difficulty": 1
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 15 + 8 ?",
       "answers": [
-        { "text": "23", "correct": true },
-        { "text": "22", "correct": false },
-        { "text": "24", "correct": false },
-        { "text": "21", "correct": false }
+        {
+          "text": "23",
+          "correct": true
+        },
+        {
+          "text": "22",
+          "correct": false
+        },
+        {
+          "text": "24",
+          "correct": false
+        },
+        {
+          "text": "21",
+          "correct": false
+        }
       ],
-      "explanation": "15 + 8 = 23. Tu peux compter : 15, 16, 17, 18, 19, 20, 21, 22, 23."
+      "explanation": "15 + 8 = 23. Tu peux compter : 15, 16, 17, 18, 19, 20, 21, 22, 23.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 47 + 36 ?",
       "answers": [
-        { "text": "83", "correct": true },
-        { "text": "73", "correct": false },
-        { "text": "84", "correct": false },
-        { "text": "82", "correct": false }
+        {
+          "text": "83",
+          "correct": true
+        },
+        {
+          "text": "73",
+          "correct": false
+        },
+        {
+          "text": "84",
+          "correct": false
+        },
+        {
+          "text": "82",
+          "correct": false
+        }
       ],
-      "explanation": "47 + 36 = 83. On additionne d'abord les unités (7+6=13) puis les dizaines."
+      "explanation": "47 + 36 = 83. On additionne d'abord les unités (7+6=13) puis les dizaines.",
+      "difficulty": 3
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 9 + 9 ?",
       "answers": [
-        { "text": "18", "correct": true },
-        { "text": "17", "correct": false },
-        { "text": "19", "correct": false },
-        { "text": "16", "correct": false }
+        {
+          "text": "18",
+          "correct": true
+        },
+        {
+          "text": "17",
+          "correct": false
+        },
+        {
+          "text": "19",
+          "correct": false
+        },
+        {
+          "text": "16",
+          "correct": false
+        }
       ],
-      "explanation": "9 + 9 = 18. C'est le double de 9 !"
+      "explanation": "9 + 9 = 18. C'est le double de 9 !",
+      "difficulty": 1
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 25 + 25 ?",
       "answers": [
-        { "text": "50", "correct": true },
-        { "text": "45", "correct": false },
-        { "text": "55", "correct": false },
-        { "text": "40", "correct": false }
+        {
+          "text": "50",
+          "correct": true
+        },
+        {
+          "text": "45",
+          "correct": false
+        },
+        {
+          "text": "55",
+          "correct": false
+        },
+        {
+          "text": "40",
+          "correct": false
+        }
       ],
-      "explanation": "25 + 25 = 50. C'est le double de 25 !"
+      "explanation": "25 + 25 = 50. C'est le double de 25 !",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 60 + 33 ?",
       "answers": [
-        { "text": "93", "correct": true },
-        { "text": "83", "correct": false },
-        { "text": "96", "correct": false },
-        { "text": "90", "correct": false }
+        {
+          "text": "93",
+          "correct": true
+        },
+        {
+          "text": "83",
+          "correct": false
+        },
+        {
+          "text": "96",
+          "correct": false
+        },
+        {
+          "text": "90",
+          "correct": false
+        }
       ],
-      "explanation": "60 + 33 = 93. On additionne les dizaines : 60+30=90, puis 90+3=93."
+      "explanation": "60 + 33 = 93. On additionne les dizaines : 60+30=90, puis 90+3=93.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 18 - 5 ?",
       "answers": [
-        { "text": "13", "correct": true },
-        { "text": "12", "correct": false },
-        { "text": "14", "correct": false },
-        { "text": "11", "correct": false }
+        {
+          "text": "13",
+          "correct": true
+        },
+        {
+          "text": "12",
+          "correct": false
+        },
+        {
+          "text": "14",
+          "correct": false
+        },
+        {
+          "text": "11",
+          "correct": false
+        }
       ],
-      "explanation": "18 - 5 = 13. On enlève 5 à 18 et on obtient 13."
+      "explanation": "18 - 5 = 13. On enlève 5 à 18 et on obtient 13.",
+      "difficulty": 1
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 50 - 17 ?",
       "answers": [
-        { "text": "33", "correct": true },
-        { "text": "43", "correct": false },
-        { "text": "32", "correct": false },
-        { "text": "34", "correct": false }
+        {
+          "text": "33",
+          "correct": true
+        },
+        {
+          "text": "43",
+          "correct": false
+        },
+        {
+          "text": "32",
+          "correct": false
+        },
+        {
+          "text": "34",
+          "correct": false
+        }
       ],
-      "explanation": "50 - 17 = 33. On peut passer par 50 - 20 = 30, puis 30 + 3 = 33."
+      "explanation": "50 - 17 = 33. On peut passer par 50 - 20 = 30, puis 30 + 3 = 33.",
+      "difficulty": 3
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 100 - 45 ?",
       "answers": [
-        { "text": "55", "correct": true },
-        { "text": "65", "correct": false },
-        { "text": "54", "correct": false },
-        { "text": "56", "correct": false }
+        {
+          "text": "55",
+          "correct": true
+        },
+        {
+          "text": "65",
+          "correct": false
+        },
+        {
+          "text": "54",
+          "correct": false
+        },
+        {
+          "text": "56",
+          "correct": false
+        }
       ],
-      "explanation": "100 - 45 = 55. Pour compléter 45 jusqu'à 100, il faut 55."
+      "explanation": "100 - 45 = 55. Pour compléter 45 jusqu'à 100, il faut 55.",
+      "difficulty": 3
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 72 - 30 ?",
       "answers": [
-        { "text": "42", "correct": true },
-        { "text": "52", "correct": false },
-        { "text": "41", "correct": false },
-        { "text": "43", "correct": false }
+        {
+          "text": "42",
+          "correct": true
+        },
+        {
+          "text": "52",
+          "correct": false
+        },
+        {
+          "text": "41",
+          "correct": false
+        },
+        {
+          "text": "43",
+          "correct": false
+        }
       ],
-      "explanation": "72 - 30 = 42. On enlève 3 dizaines à 72."
+      "explanation": "72 - 30 = 42. On enlève 3 dizaines à 72.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 38 - 9 ?",
       "answers": [
-        { "text": "29", "correct": true },
-        { "text": "28", "correct": false },
-        { "text": "30", "correct": false },
-        { "text": "31", "correct": false }
+        {
+          "text": "29",
+          "correct": true
+        },
+        {
+          "text": "28",
+          "correct": false
+        },
+        {
+          "text": "30",
+          "correct": false
+        },
+        {
+          "text": "31",
+          "correct": false
+        }
       ],
-      "explanation": "38 - 9 = 29. On peut passer par 38 - 10 = 28, puis 28 + 1 = 29."
+      "explanation": "38 - 9 = 29. On peut passer par 38 - 10 = 28, puis 28 + 1 = 29.",
+      "difficulty": 3
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 2 × 6 ?",
       "answers": [
-        { "text": "12", "correct": true },
-        { "text": "8", "correct": false },
-        { "text": "14", "correct": false },
-        { "text": "10", "correct": false }
+        {
+          "text": "12",
+          "correct": true
+        },
+        {
+          "text": "8",
+          "correct": false
+        },
+        {
+          "text": "14",
+          "correct": false
+        },
+        {
+          "text": "10",
+          "correct": false
+        }
       ],
-      "explanation": "2 × 6 = 12. C'est comme 6 + 6 = 12."
+      "explanation": "2 × 6 = 12. C'est comme 6 + 6 = 12.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 2 × 9 ?",
       "answers": [
-        { "text": "18", "correct": true },
-        { "text": "16", "correct": false },
-        { "text": "20", "correct": false },
-        { "text": "11", "correct": false }
+        {
+          "text": "18",
+          "correct": true
+        },
+        {
+          "text": "16",
+          "correct": false
+        },
+        {
+          "text": "20",
+          "correct": false
+        },
+        {
+          "text": "11",
+          "correct": false
+        }
       ],
-      "explanation": "2 × 9 = 18. C'est comme 9 + 9 = 18."
+      "explanation": "2 × 9 = 18. C'est comme 9 + 9 = 18.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 3 × 4 ?",
       "answers": [
-        { "text": "12", "correct": true },
-        { "text": "7", "correct": false },
-        { "text": "9", "correct": false },
-        { "text": "15", "correct": false }
+        {
+          "text": "12",
+          "correct": true
+        },
+        {
+          "text": "7",
+          "correct": false
+        },
+        {
+          "text": "9",
+          "correct": false
+        },
+        {
+          "text": "15",
+          "correct": false
+        }
       ],
-      "explanation": "3 × 4 = 12. On peut compter : 3, 6, 9, 12."
+      "explanation": "3 × 4 = 12. On peut compter : 3, 6, 9, 12.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 3 × 7 ?",
       "answers": [
-        { "text": "21", "correct": true },
-        { "text": "18", "correct": false },
-        { "text": "24", "correct": false },
-        { "text": "10", "correct": false }
+        {
+          "text": "21",
+          "correct": true
+        },
+        {
+          "text": "18",
+          "correct": false
+        },
+        {
+          "text": "24",
+          "correct": false
+        },
+        {
+          "text": "10",
+          "correct": false
+        }
       ],
-      "explanation": "3 × 7 = 21. On peut compter de 3 en 3 : 3, 6, 9, 12, 15, 18, 21."
+      "explanation": "3 × 7 = 21. On peut compter de 3 en 3 : 3, 6, 9, 12, 15, 18, 21.",
+      "difficulty": 3
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 4 × 5 ?",
       "answers": [
-        { "text": "20", "correct": true },
-        { "text": "16", "correct": false },
-        { "text": "24", "correct": false },
-        { "text": "9", "correct": false }
+        {
+          "text": "20",
+          "correct": true
+        },
+        {
+          "text": "16",
+          "correct": false
+        },
+        {
+          "text": "24",
+          "correct": false
+        },
+        {
+          "text": "9",
+          "correct": false
+        }
       ],
-      "explanation": "4 × 5 = 20. On peut compter de 4 en 4 : 4, 8, 12, 16, 20."
+      "explanation": "4 × 5 = 20. On peut compter de 4 en 4 : 4, 8, 12, 16, 20.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 4 × 8 ?",
       "answers": [
-        { "text": "32", "correct": true },
-        { "text": "28", "correct": false },
-        { "text": "36", "correct": false },
-        { "text": "12", "correct": false }
+        {
+          "text": "32",
+          "correct": true
+        },
+        {
+          "text": "28",
+          "correct": false
+        },
+        {
+          "text": "36",
+          "correct": false
+        },
+        {
+          "text": "12",
+          "correct": false
+        }
       ],
-      "explanation": "4 × 8 = 32. On peut compter de 4 en 4 jusqu'à 8 fois."
+      "explanation": "4 × 8 = 32. On peut compter de 4 en 4 jusqu'à 8 fois.",
+      "difficulty": 3
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 5 × 6 ?",
       "answers": [
-        { "text": "30", "correct": true },
-        { "text": "25", "correct": false },
-        { "text": "35", "correct": false },
-        { "text": "11", "correct": false }
+        {
+          "text": "30",
+          "correct": true
+        },
+        {
+          "text": "25",
+          "correct": false
+        },
+        {
+          "text": "35",
+          "correct": false
+        },
+        {
+          "text": "11",
+          "correct": false
+        }
       ],
-      "explanation": "5 × 6 = 30. La table de 5 donne toujours un nombre qui finit par 0 ou 5."
+      "explanation": "5 × 6 = 30. La table de 5 donne toujours un nombre qui finit par 0 ou 5.",
+      "difficulty": 3
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 5 × 9 ?",
       "answers": [
-        { "text": "45", "correct": true },
-        { "text": "40", "correct": false },
-        { "text": "50", "correct": false },
-        { "text": "54", "correct": false }
+        {
+          "text": "45",
+          "correct": true
+        },
+        {
+          "text": "40",
+          "correct": false
+        },
+        {
+          "text": "50",
+          "correct": false
+        },
+        {
+          "text": "54",
+          "correct": false
+        }
       ],
-      "explanation": "5 × 9 = 45. La table de 5 : 5, 10, 15, 20, 25, 30, 35, 40, 45."
+      "explanation": "5 × 9 = 45. La table de 5 : 5, 10, 15, 20, 25, 30, 35, 40, 45.",
+      "difficulty": 3
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 10 × 7 ?",
       "answers": [
-        { "text": "70", "correct": true },
-        { "text": "17", "correct": false },
-        { "text": "60", "correct": false },
-        { "text": "80", "correct": false }
+        {
+          "text": "70",
+          "correct": true
+        },
+        {
+          "text": "17",
+          "correct": false
+        },
+        {
+          "text": "60",
+          "correct": false
+        },
+        {
+          "text": "80",
+          "correct": false
+        }
       ],
-      "explanation": "10 × 7 = 70. Multiplier par 10, c'est ajouter un zéro !"
+      "explanation": "10 × 7 = 70. Multiplier par 10, c'est ajouter un zéro !",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 10 × 4 ?",
       "answers": [
-        { "text": "40", "correct": true },
-        { "text": "14", "correct": false },
-        { "text": "30", "correct": false },
-        { "text": "50", "correct": false }
+        {
+          "text": "40",
+          "correct": true
+        },
+        {
+          "text": "14",
+          "correct": false
+        },
+        {
+          "text": "30",
+          "correct": false
+        },
+        {
+          "text": "50",
+          "correct": false
+        }
       ],
-      "explanation": "10 × 4 = 40. Multiplier par 10, c'est ajouter un zéro au chiffre."
+      "explanation": "10 × 4 = 40. Multiplier par 10, c'est ajouter un zéro au chiffre.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Quel nombre est le plus grand : 47 ou 74 ?",
       "answers": [
-        { "text": "74", "correct": true },
-        { "text": "47", "correct": false },
-        { "text": "Ils sont égaux", "correct": false },
-        { "text": "On ne peut pas savoir", "correct": false }
+        {
+          "text": "74",
+          "correct": true
+        },
+        {
+          "text": "47",
+          "correct": false
+        },
+        {
+          "text": "Ils sont égaux",
+          "correct": false
+        },
+        {
+          "text": "On ne peut pas savoir",
+          "correct": false
+        }
       ],
-      "explanation": "74 est plus grand que 47. On compare les dizaines : 7 dizaines > 4 dizaines."
+      "explanation": "74 est plus grand que 47. On compare les dizaines : 7 dizaines > 4 dizaines.",
+      "difficulty": 1
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Quel nombre est le plus petit : 83 ou 38 ?",
       "answers": [
-        { "text": "38", "correct": true },
-        { "text": "83", "correct": false },
-        { "text": "Ils sont égaux", "correct": false },
-        { "text": "On ne peut pas savoir", "correct": false }
+        {
+          "text": "38",
+          "correct": true
+        },
+        {
+          "text": "83",
+          "correct": false
+        },
+        {
+          "text": "Ils sont égaux",
+          "correct": false
+        },
+        {
+          "text": "On ne peut pas savoir",
+          "correct": false
+        }
       ],
-      "explanation": "38 est plus petit que 83. On compare les dizaines : 3 dizaines < 8 dizaines."
+      "explanation": "38 est plus petit que 83. On compare les dizaines : 3 dizaines < 8 dizaines.",
+      "difficulty": 1
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Quel signe faut-il mettre entre 56 et 65 ?",
       "answers": [
-        { "text": "<", "correct": true },
-        { "text": ">", "correct": false },
-        { "text": "=", "correct": false },
-        { "text": "+", "correct": false }
+        {
+          "text": "<",
+          "correct": true
+        },
+        {
+          "text": ">",
+          "correct": false
+        },
+        {
+          "text": "=",
+          "correct": false
+        },
+        {
+          "text": "+",
+          "correct": false
+        }
       ],
-      "explanation": "56 < 65 car 56 est plus petit que 65."
+      "explanation": "56 < 65 car 56 est plus petit que 65.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Lequel de ces nombres est pair ?",
       "answers": [
-        { "text": "14", "correct": true },
-        { "text": "13", "correct": false },
-        { "text": "17", "correct": false },
-        { "text": "21", "correct": false }
+        {
+          "text": "14",
+          "correct": true
+        },
+        {
+          "text": "13",
+          "correct": false
+        },
+        {
+          "text": "17",
+          "correct": false
+        },
+        {
+          "text": "21",
+          "correct": false
+        }
       ],
-      "explanation": "14 est pair car il se termine par 4, qui est un chiffre pair (0, 2, 4, 6, 8)."
+      "explanation": "14 est pair car il se termine par 4, qui est un chiffre pair (0, 2, 4, 6, 8).",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Lequel de ces nombres est impair ?",
       "answers": [
-        { "text": "27", "correct": true },
-        { "text": "12", "correct": false },
-        { "text": "30", "correct": false },
-        { "text": "44", "correct": false }
+        {
+          "text": "27",
+          "correct": true
+        },
+        {
+          "text": "12",
+          "correct": false
+        },
+        {
+          "text": "30",
+          "correct": false
+        },
+        {
+          "text": "44",
+          "correct": false
+        }
       ],
-      "explanation": "27 est impair car il se termine par 7, qui est un chiffre impair (1, 3, 5, 7, 9)."
+      "explanation": "27 est impair car il se termine par 7, qui est un chiffre impair (1, 3, 5, 7, 9).",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Est-ce que 36 est un nombre pair ?",
       "answers": [
-        { "text": "Oui", "correct": true },
-        { "text": "Non", "correct": false },
-        { "text": "Parfois", "correct": false },
-        { "text": "Je ne sais pas", "correct": false }
+        {
+          "text": "Oui",
+          "correct": true
+        },
+        {
+          "text": "Non",
+          "correct": false
+        },
+        {
+          "text": "Parfois",
+          "correct": false
+        },
+        {
+          "text": "Je ne sais pas",
+          "correct": false
+        }
       ],
-      "explanation": "36 est pair car il se termine par 6, et les nombres pairs finissent par 0, 2, 4, 6 ou 8."
+      "explanation": "36 est pair car il se termine par 6, et les nombres pairs finissent par 0, 2, 4, 6 ou 8.",
+      "difficulty": 1
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Quel est le nombre qui vient après 49 ?",
       "answers": [
-        { "text": "50", "correct": true },
-        { "text": "48", "correct": false },
-        { "text": "59", "correct": false },
-        { "text": "51", "correct": false }
+        {
+          "text": "50",
+          "correct": true
+        },
+        {
+          "text": "48",
+          "correct": false
+        },
+        {
+          "text": "59",
+          "correct": false
+        },
+        {
+          "text": "51",
+          "correct": false
+        }
       ],
-      "explanation": "Après 49 vient 50. On passe à la dizaine suivante !"
+      "explanation": "Après 49 vient 50. On passe à la dizaine suivante !",
+      "difficulty": 1
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Quelle est la suite de cette série : 5, 10, 15, 20, … ?",
       "answers": [
-        { "text": "25", "correct": true },
-        { "text": "22", "correct": false },
-        { "text": "24", "correct": false },
-        { "text": "30", "correct": false }
+        {
+          "text": "25",
+          "correct": true
+        },
+        {
+          "text": "22",
+          "correct": false
+        },
+        {
+          "text": "24",
+          "correct": false
+        },
+        {
+          "text": "30",
+          "correct": false
+        }
       ],
-      "explanation": "On ajoute 5 à chaque fois : 20 + 5 = 25."
+      "explanation": "On ajoute 5 à chaque fois : 20 + 5 = 25.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Quelle est la suite de cette série : 2, 4, 6, 8, … ?",
       "answers": [
-        { "text": "10", "correct": true },
-        { "text": "9", "correct": false },
-        { "text": "12", "correct": false },
-        { "text": "11", "correct": false }
+        {
+          "text": "10",
+          "correct": true
+        },
+        {
+          "text": "9",
+          "correct": false
+        },
+        {
+          "text": "12",
+          "correct": false
+        },
+        {
+          "text": "11",
+          "correct": false
+        }
       ],
-      "explanation": "On ajoute 2 à chaque fois : 8 + 2 = 10. Ce sont les nombres pairs !"
+      "explanation": "On ajoute 2 à chaque fois : 8 + 2 = 10. Ce sont les nombres pairs !",
+      "difficulty": 1
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Quelle est la suite de cette série : 30, 27, 24, 21, … ?",
       "answers": [
-        { "text": "18", "correct": true },
-        { "text": "17", "correct": false },
-        { "text": "20", "correct": false },
-        { "text": "24", "correct": false }
+        {
+          "text": "18",
+          "correct": true
+        },
+        {
+          "text": "17",
+          "correct": false
+        },
+        {
+          "text": "20",
+          "correct": false
+        },
+        {
+          "text": "24",
+          "correct": false
+        }
       ],
-      "explanation": "On enlève 3 à chaque fois : 21 - 3 = 18."
+      "explanation": "On enlève 3 à chaque fois : 21 - 3 = 18.",
+      "difficulty": 3
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Quelle est la suite de cette série : 1, 3, 5, 7, … ?",
       "answers": [
-        { "text": "9", "correct": true },
-        { "text": "8", "correct": false },
-        { "text": "10", "correct": false },
-        { "text": "11", "correct": false }
+        {
+          "text": "9",
+          "correct": true
+        },
+        {
+          "text": "8",
+          "correct": false
+        },
+        {
+          "text": "10",
+          "correct": false
+        },
+        {
+          "text": "11",
+          "correct": false
+        }
       ],
-      "explanation": "On ajoute 2 à chaque fois : 7 + 2 = 9. Ce sont les nombres impairs !"
+      "explanation": "On ajoute 2 à chaque fois : 7 + 2 = 9. Ce sont les nombres impairs !",
+      "difficulty": 1
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien de côtés a un carré ?",
       "answers": [
-        { "text": "4", "correct": true },
-        { "text": "3", "correct": false },
-        { "text": "5", "correct": false },
-        { "text": "6", "correct": false }
+        {
+          "text": "4",
+          "correct": true
+        },
+        {
+          "text": "3",
+          "correct": false
+        },
+        {
+          "text": "5",
+          "correct": false
+        },
+        {
+          "text": "6",
+          "correct": false
+        }
       ],
-      "explanation": "Un carré a 4 côtés, tous de la même longueur."
+      "explanation": "Un carré a 4 côtés, tous de la même longueur.",
+      "difficulty": 1
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien de côtés a un triangle ?",
       "answers": [
-        { "text": "3", "correct": true },
-        { "text": "4", "correct": false },
-        { "text": "2", "correct": false },
-        { "text": "5", "correct": false }
+        {
+          "text": "3",
+          "correct": true
+        },
+        {
+          "text": "4",
+          "correct": false
+        },
+        {
+          "text": "2",
+          "correct": false
+        },
+        {
+          "text": "5",
+          "correct": false
+        }
       ],
-      "explanation": "Un triangle a 3 côtés et 3 angles."
+      "explanation": "Un triangle a 3 côtés et 3 angles.",
+      "difficulty": 1
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Quelle figure n'a pas de côté droit ?",
       "answers": [
-        { "text": "Le cercle", "correct": true },
-        { "text": "Le carré", "correct": false },
-        { "text": "Le rectangle", "correct": false },
-        { "text": "Le triangle", "correct": false }
+        {
+          "text": "Le cercle",
+          "correct": true
+        },
+        {
+          "text": "Le carré",
+          "correct": false
+        },
+        {
+          "text": "Le rectangle",
+          "correct": false
+        },
+        {
+          "text": "Le triangle",
+          "correct": false
+        }
       ],
-      "explanation": "Le cercle est rond, il n'a aucun côté droit ni angle."
+      "explanation": "Le cercle est rond, il n'a aucun côté droit ni angle.",
+      "difficulty": 1
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien de côtés a un rectangle ?",
       "answers": [
-        { "text": "4", "correct": true },
-        { "text": "3", "correct": false },
-        { "text": "5", "correct": false },
-        { "text": "6", "correct": false }
+        {
+          "text": "4",
+          "correct": true
+        },
+        {
+          "text": "3",
+          "correct": false
+        },
+        {
+          "text": "5",
+          "correct": false
+        },
+        {
+          "text": "6",
+          "correct": false
+        }
       ],
-      "explanation": "Un rectangle a 4 côtés : 2 côtés longs et 2 côtés courts."
+      "explanation": "Un rectangle a 4 côtés : 2 côtés longs et 2 côtés courts.",
+      "difficulty": 1
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Léa a 12 billes. Elle en donne 5 à son frère. Combien lui en reste-t-il ?",
       "answers": [
-        { "text": "7", "correct": true },
-        { "text": "8", "correct": false },
-        { "text": "6", "correct": false },
-        { "text": "17", "correct": false }
+        {
+          "text": "7",
+          "correct": true
+        },
+        {
+          "text": "8",
+          "correct": false
+        },
+        {
+          "text": "6",
+          "correct": false
+        },
+        {
+          "text": "17",
+          "correct": false
+        }
       ],
-      "explanation": "12 - 5 = 7. Léa a encore 7 billes."
+      "explanation": "12 - 5 = 7. Léa a encore 7 billes.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Il y a 24 élèves dans une classe. 9 sont absents. Combien d'élèves sont présents ?",
       "answers": [
-        { "text": "15", "correct": true },
-        { "text": "14", "correct": false },
-        { "text": "16", "correct": false },
-        { "text": "33", "correct": false }
+        {
+          "text": "15",
+          "correct": true
+        },
+        {
+          "text": "14",
+          "correct": false
+        },
+        {
+          "text": "16",
+          "correct": false
+        },
+        {
+          "text": "33",
+          "correct": false
+        }
       ],
-      "explanation": "24 - 9 = 15. Il y a 15 élèves présents."
+      "explanation": "24 - 9 = 15. Il y a 15 élèves présents.",
+      "difficulty": 3
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Un paquet contient 6 bonbons. Combien y a-t-il de bonbons dans 4 paquets ?",
       "answers": [
-        { "text": "24", "correct": true },
-        { "text": "10", "correct": false },
-        { "text": "20", "correct": false },
-        { "text": "18", "correct": false }
+        {
+          "text": "24",
+          "correct": true
+        },
+        {
+          "text": "10",
+          "correct": false
+        },
+        {
+          "text": "20",
+          "correct": false
+        },
+        {
+          "text": "18",
+          "correct": false
+        }
       ],
-      "explanation": "4 × 6 = 24. Il y a 24 bonbons en tout."
+      "explanation": "4 × 6 = 24. Il y a 24 bonbons en tout.",
+      "difficulty": 3
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Tom a 35 cartes à jouer. Il en reçoit 15 de plus. Combien en a-t-il maintenant ?",
       "answers": [
-        { "text": "50", "correct": true },
-        { "text": "45", "correct": false },
-        { "text": "55", "correct": false },
-        { "text": "20", "correct": false }
+        {
+          "text": "50",
+          "correct": true
+        },
+        {
+          "text": "45",
+          "correct": false
+        },
+        {
+          "text": "55",
+          "correct": false
+        },
+        {
+          "text": "20",
+          "correct": false
+        }
       ],
-      "explanation": "35 + 15 = 50. Tom a maintenant 50 cartes."
+      "explanation": "35 + 15 = 50. Tom a maintenant 50 cartes.",
+      "difficulty": 3
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Une boîte de crayons coûte 3 €. Combien coûtent 5 boîtes ?",
       "answers": [
-        { "text": "15 €", "correct": true },
-        { "text": "8 €", "correct": false },
-        { "text": "10 €", "correct": false },
-        { "text": "20 €", "correct": false }
+        {
+          "text": "15 €",
+          "correct": true
+        },
+        {
+          "text": "8 €",
+          "correct": false
+        },
+        {
+          "text": "10 €",
+          "correct": false
+        },
+        {
+          "text": "20 €",
+          "correct": false
+        }
       ],
-      "explanation": "5 × 3 = 15 €. Cinq boîtes coûtent 15 euros."
+      "explanation": "5 × 3 = 15 €. Cinq boîtes coûtent 15 euros.",
+      "difficulty": 3
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Un stylo coûte 2 € et une gomme coûte 1 €. Combien coûtent les deux ensemble ?",
       "answers": [
-        { "text": "3 €", "correct": true },
-        { "text": "2 €", "correct": false },
-        { "text": "4 €", "correct": false },
-        { "text": "1 €", "correct": false }
+        {
+          "text": "3 €",
+          "correct": true
+        },
+        {
+          "text": "2 €",
+          "correct": false
+        },
+        {
+          "text": "4 €",
+          "correct": false
+        },
+        {
+          "text": "1 €",
+          "correct": false
+        }
       ],
-      "explanation": "2 € + 1 € = 3 €. Le stylo et la gomme coûtent 3 euros ensemble."
+      "explanation": "2 € + 1 € = 3 €. Le stylo et la gomme coûtent 3 euros ensemble.",
+      "difficulty": 1
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Tu donnes un billet de 10 € pour acheter un livre à 7 €. Combien récupères-tu ?",
       "answers": [
-        { "text": "3 €", "correct": true },
-        { "text": "2 €", "correct": false },
-        { "text": "4 €", "correct": false },
-        { "text": "7 €", "correct": false }
+        {
+          "text": "3 €",
+          "correct": true
+        },
+        {
+          "text": "2 €",
+          "correct": false
+        },
+        {
+          "text": "4 €",
+          "correct": false
+        },
+        {
+          "text": "7 €",
+          "correct": false
+        }
       ],
-      "explanation": "10 - 7 = 3 €. Tu récupères 3 euros de monnaie."
+      "explanation": "10 - 7 = 3 €. Tu récupères 3 euros de monnaie.",
+      "difficulty": 1
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Une glace coûte 2 €. Combien coûtent 3 glaces ?",
       "answers": [
-        { "text": "6 €", "correct": true },
-        { "text": "5 €", "correct": false },
-        { "text": "8 €", "correct": false },
-        { "text": "3 €", "correct": false }
+        {
+          "text": "6 €",
+          "correct": true
+        },
+        {
+          "text": "5 €",
+          "correct": false
+        },
+        {
+          "text": "8 €",
+          "correct": false
+        },
+        {
+          "text": "3 €",
+          "correct": false
+        }
       ],
-      "explanation": "3 × 2 = 6 €. Trois glaces coûtent 6 euros."
+      "explanation": "3 × 2 = 6 €. Trois glaces coûtent 6 euros.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Tu as 50 centimes et tu trouves 50 centimes. Combien as-tu en tout ?",
       "answers": [
-        { "text": "1 €", "correct": true },
-        { "text": "50 centimes", "correct": false },
-        { "text": "100 centimes et 50", "correct": false },
-        { "text": "2 €", "correct": false }
+        {
+          "text": "1 €",
+          "correct": true
+        },
+        {
+          "text": "50 centimes",
+          "correct": false
+        },
+        {
+          "text": "100 centimes et 50",
+          "correct": false
+        },
+        {
+          "text": "2 €",
+          "correct": false
+        }
       ],
-      "explanation": "50 centimes + 50 centimes = 100 centimes = 1 €."
+      "explanation": "50 centimes + 50 centimes = 100 centimes = 1 €.",
+      "difficulty": 3
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Sur une horloge, il est 3 heures. Où pointe la grande aiguille ?",
       "answers": [
-        { "text": "Sur le 12", "correct": true },
-        { "text": "Sur le 3", "correct": false },
-        { "text": "Sur le 6", "correct": false },
-        { "text": "Sur le 9", "correct": false }
+        {
+          "text": "Sur le 12",
+          "correct": true
+        },
+        {
+          "text": "Sur le 3",
+          "correct": false
+        },
+        {
+          "text": "Sur le 6",
+          "correct": false
+        },
+        {
+          "text": "Sur le 9",
+          "correct": false
+        }
       ],
-      "explanation": "Pour une heure pleine, la grande aiguille (des minutes) pointe toujours sur le 12."
+      "explanation": "Pour une heure pleine, la grande aiguille (des minutes) pointe toujours sur le 12.",
+      "difficulty": 3
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Il est 2 heures et demie. Quelle heure est-il ?",
       "answers": [
-        { "text": "2 h 30", "correct": true },
-        { "text": "2 h 15", "correct": false },
-        { "text": "3 h 00", "correct": false },
-        { "text": "2 h 45", "correct": false }
+        {
+          "text": "2 h 30",
+          "correct": true
+        },
+        {
+          "text": "2 h 15",
+          "correct": false
+        },
+        {
+          "text": "3 h 00",
+          "correct": false
+        },
+        {
+          "text": "2 h 45",
+          "correct": false
+        }
       ],
-      "explanation": "2 heures et demie, c'est 2 h 30. La grande aiguille est sur le 6."
+      "explanation": "2 heures et demie, c'est 2 h 30. La grande aiguille est sur le 6.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "L'école commence à 8 h 30 et finit à 11 h 30. Combien d'heures dure la matinée ?",
       "answers": [
-        { "text": "3 heures", "correct": true },
-        { "text": "2 heures", "correct": false },
-        { "text": "4 heures", "correct": false },
-        { "text": "2 h 30", "correct": false }
+        {
+          "text": "3 heures",
+          "correct": true
+        },
+        {
+          "text": "2 heures",
+          "correct": false
+        },
+        {
+          "text": "4 heures",
+          "correct": false
+        },
+        {
+          "text": "2 h 30",
+          "correct": false
+        }
       ],
-      "explanation": "De 8 h 30 à 11 h 30, il y a 3 heures."
+      "explanation": "De 8 h 30 à 11 h 30, il y a 3 heures.",
+      "difficulty": 3
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Il est 7 heures du matin. Quelle heure sera-t-il dans 2 heures ?",
       "answers": [
-        { "text": "9 heures", "correct": true },
-        { "text": "8 heures", "correct": false },
-        { "text": "10 heures", "correct": false },
-        { "text": "5 heures", "correct": false }
+        {
+          "text": "9 heures",
+          "correct": true
+        },
+        {
+          "text": "8 heures",
+          "correct": false
+        },
+        {
+          "text": "10 heures",
+          "correct": false
+        },
+        {
+          "text": "5 heures",
+          "correct": false
+        }
       ],
-      "explanation": "7 h + 2 h = 9 h. Dans 2 heures, il sera 9 heures."
+      "explanation": "7 h + 2 h = 9 h. Dans 2 heures, il sera 9 heures.",
+      "difficulty": 1
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Quel est le double de 8 ?",
       "answers": [
-        { "text": "16", "correct": true },
-        { "text": "4", "correct": false },
-        { "text": "12", "correct": false },
-        { "text": "18", "correct": false }
+        {
+          "text": "16",
+          "correct": true
+        },
+        {
+          "text": "4",
+          "correct": false
+        },
+        {
+          "text": "12",
+          "correct": false
+        },
+        {
+          "text": "18",
+          "correct": false
+        }
       ],
-      "explanation": "Le double de 8, c'est 8 × 2 = 16."
+      "explanation": "Le double de 8, c'est 8 × 2 = 16.",
+      "difficulty": 1
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Quel est le double de 15 ?",
       "answers": [
-        { "text": "30", "correct": true },
-        { "text": "25", "correct": false },
-        { "text": "20", "correct": false },
-        { "text": "35", "correct": false }
+        {
+          "text": "30",
+          "correct": true
+        },
+        {
+          "text": "25",
+          "correct": false
+        },
+        {
+          "text": "20",
+          "correct": false
+        },
+        {
+          "text": "35",
+          "correct": false
+        }
       ],
-      "explanation": "Le double de 15, c'est 15 + 15 = 30."
+      "explanation": "Le double de 15, c'est 15 + 15 = 30.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Quelle est la moitié de 20 ?",
       "answers": [
-        { "text": "10", "correct": true },
-        { "text": "5", "correct": false },
-        { "text": "15", "correct": false },
-        { "text": "40", "correct": false }
+        {
+          "text": "10",
+          "correct": true
+        },
+        {
+          "text": "5",
+          "correct": false
+        },
+        {
+          "text": "15",
+          "correct": false
+        },
+        {
+          "text": "40",
+          "correct": false
+        }
       ],
-      "explanation": "La moitié de 20, c'est 20 ÷ 2 = 10."
+      "explanation": "La moitié de 20, c'est 20 ÷ 2 = 10.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Quelle est la moitié de 14 ?",
       "answers": [
-        { "text": "7", "correct": true },
-        { "text": "8", "correct": false },
-        { "text": "6", "correct": false },
-        { "text": "28", "correct": false }
+        {
+          "text": "7",
+          "correct": true
+        },
+        {
+          "text": "8",
+          "correct": false
+        },
+        {
+          "text": "6",
+          "correct": false
+        },
+        {
+          "text": "28",
+          "correct": false
+        }
       ],
-      "explanation": "La moitié de 14, c'est 14 ÷ 2 = 7."
+      "explanation": "La moitié de 14, c'est 14 ÷ 2 = 7.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Quelle est la moitié de 50 ?",
       "answers": [
-        { "text": "25", "correct": true },
-        { "text": "20", "correct": false },
-        { "text": "30", "correct": false },
-        { "text": "100", "correct": false }
+        {
+          "text": "25",
+          "correct": true
+        },
+        {
+          "text": "20",
+          "correct": false
+        },
+        {
+          "text": "30",
+          "correct": false
+        },
+        {
+          "text": "100",
+          "correct": false
+        }
       ],
-      "explanation": "La moitié de 50, c'est 50 ÷ 2 = 25."
+      "explanation": "La moitié de 50, c'est 50 ÷ 2 = 25.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Range ces nombres dans l'ordre croissant : 34, 12, 57, 8. Lequel est le plus petit ?",
       "answers": [
-        { "text": "8", "correct": true },
-        { "text": "12", "correct": false },
-        { "text": "34", "correct": false },
-        { "text": "57", "correct": false }
+        {
+          "text": "8",
+          "correct": true
+        },
+        {
+          "text": "12",
+          "correct": false
+        },
+        {
+          "text": "34",
+          "correct": false
+        },
+        {
+          "text": "57",
+          "correct": false
+        }
       ],
-      "explanation": "Dans l'ordre croissant : 8, 12, 34, 57. Le plus petit est 8."
+      "explanation": "Dans l'ordre croissant : 8, 12, 34, 57. Le plus petit est 8.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Range ces nombres dans l'ordre décroissant : 21, 45, 9, 63. Lequel est en premier ?",
       "answers": [
-        { "text": "63", "correct": true },
-        { "text": "45", "correct": false },
-        { "text": "21", "correct": false },
-        { "text": "9", "correct": false }
+        {
+          "text": "63",
+          "correct": true
+        },
+        {
+          "text": "45",
+          "correct": false
+        },
+        {
+          "text": "21",
+          "correct": false
+        },
+        {
+          "text": "9",
+          "correct": false
+        }
       ],
-      "explanation": "Dans l'ordre décroissant (du plus grand au plus petit), 63 est en premier."
+      "explanation": "Dans l'ordre décroissant (du plus grand au plus petit), 63 est en premier.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien y a-t-il de dizaines dans le nombre 73 ?",
       "answers": [
-        { "text": "7", "correct": true },
-        { "text": "3", "correct": false },
-        { "text": "70", "correct": false },
-        { "text": "73", "correct": false }
+        {
+          "text": "7",
+          "correct": true
+        },
+        {
+          "text": "3",
+          "correct": false
+        },
+        {
+          "text": "70",
+          "correct": false
+        },
+        {
+          "text": "73",
+          "correct": false
+        }
       ],
-      "explanation": "Dans 73, il y a 7 dizaines et 3 unités."
+      "explanation": "Dans 73, il y a 7 dizaines et 3 unités.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien y a-t-il d'unités dans le nombre 58 ?",
       "answers": [
-        { "text": "8", "correct": true },
-        { "text": "5", "correct": false },
-        { "text": "58", "correct": false },
-        { "text": "50", "correct": false }
+        {
+          "text": "8",
+          "correct": true
+        },
+        {
+          "text": "5",
+          "correct": false
+        },
+        {
+          "text": "58",
+          "correct": false
+        },
+        {
+          "text": "50",
+          "correct": false
+        }
       ],
-      "explanation": "Dans 58, il y a 5 dizaines et 8 unités."
+      "explanation": "Dans 58, il y a 5 dizaines et 8 unités.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Quel nombre a 4 dizaines et 6 unités ?",
       "answers": [
-        { "text": "46", "correct": true },
-        { "text": "64", "correct": false },
-        { "text": "406", "correct": false },
-        { "text": "10", "correct": false }
+        {
+          "text": "46",
+          "correct": true
+        },
+        {
+          "text": "64",
+          "correct": false
+        },
+        {
+          "text": "406",
+          "correct": false
+        },
+        {
+          "text": "10",
+          "correct": false
+        }
       ],
-      "explanation": "4 dizaines et 6 unités, c'est 40 + 6 = 46."
+      "explanation": "4 dizaines et 6 unités, c'est 40 + 6 = 46.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 3 × 10 ?",
       "answers": [
-        { "text": "30", "correct": true },
-        { "text": "13", "correct": false },
-        { "text": "33", "correct": false },
-        { "text": "300", "correct": false }
+        {
+          "text": "30",
+          "correct": true
+        },
+        {
+          "text": "13",
+          "correct": false
+        },
+        {
+          "text": "33",
+          "correct": false
+        },
+        {
+          "text": "300",
+          "correct": false
+        }
       ],
-      "explanation": "3 × 10 = 30. Multiplier par 10, c'est ajouter un zéro."
+      "explanation": "3 × 10 = 30. Multiplier par 10, c'est ajouter un zéro.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Marie a lu 18 pages lundi et 22 pages mardi. Combien de pages a-t-elle lu en tout ?",
       "answers": [
-        { "text": "40", "correct": true },
-        { "text": "38", "correct": false },
-        { "text": "42", "correct": false },
-        { "text": "30", "correct": false }
+        {
+          "text": "40",
+          "correct": true
+        },
+        {
+          "text": "38",
+          "correct": false
+        },
+        {
+          "text": "42",
+          "correct": false
+        },
+        {
+          "text": "30",
+          "correct": false
+        }
       ],
-      "explanation": "18 + 22 = 40. Marie a lu 40 pages en tout."
+      "explanation": "18 + 22 = 40. Marie a lu 40 pages en tout.",
+      "difficulty": 3
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Dans une boîte, il y a 5 rangées de 4 chocolats. Combien y a-t-il de chocolats en tout ?",
       "answers": [
-        { "text": "20", "correct": true },
-        { "text": "9", "correct": false },
-        { "text": "16", "correct": false },
-        { "text": "25", "correct": false }
+        {
+          "text": "20",
+          "correct": true
+        },
+        {
+          "text": "9",
+          "correct": false
+        },
+        {
+          "text": "16",
+          "correct": false
+        },
+        {
+          "text": "25",
+          "correct": false
+        }
       ],
-      "explanation": "5 × 4 = 20. Il y a 20 chocolats en tout."
+      "explanation": "5 × 4 = 20. Il y a 20 chocolats en tout.",
+      "difficulty": 3
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Quel est le résultat de 99 - 1 ?",
       "answers": [
-        { "text": "98", "correct": true },
-        { "text": "100", "correct": false },
-        { "text": "89", "correct": false },
-        { "text": "97", "correct": false }
+        {
+          "text": "98",
+          "correct": true
+        },
+        {
+          "text": "100",
+          "correct": false
+        },
+        {
+          "text": "89",
+          "correct": false
+        },
+        {
+          "text": "97",
+          "correct": false
+        }
       ],
-      "explanation": "99 - 1 = 98. Un de moins que 99, c'est 98."
+      "explanation": "99 - 1 = 98. Un de moins que 99, c'est 98.",
+      "difficulty": 1
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Combien font 2 × 2 × 2 ?",
       "answers": [
-        { "text": "8", "correct": true },
-        { "text": "6", "correct": false },
-        { "text": "4", "correct": false },
-        { "text": "12", "correct": false }
+        {
+          "text": "8",
+          "correct": true
+        },
+        {
+          "text": "6",
+          "correct": false
+        },
+        {
+          "text": "4",
+          "correct": false
+        },
+        {
+          "text": "12",
+          "correct": false
+        }
       ],
-      "explanation": "2 × 2 = 4, puis 4 × 2 = 8."
+      "explanation": "2 × 2 = 4, puis 4 × 2 = 8.",
+      "difficulty": 4
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Quel est le double de 7 ?",
       "answers": [
-        { "text": "14", "correct": true },
-        { "text": "12", "correct": false },
-        { "text": "7", "correct": false },
-        { "text": "21", "correct": false }
+        {
+          "text": "14",
+          "correct": true
+        },
+        {
+          "text": "12",
+          "correct": false
+        },
+        {
+          "text": "7",
+          "correct": false
+        },
+        {
+          "text": "21",
+          "correct": false
+        }
       ],
-      "explanation": "Le double de 7, c'est 7 + 7 = 14."
+      "explanation": "Le double de 7, c'est 7 + 7 = 14.",
+      "difficulty": 1
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Il est 4 h 30. Quelle heure sera-t-il dans 1 heure ?",
       "answers": [
-        { "text": "5 h 30", "correct": true },
-        { "text": "4 h 30", "correct": false },
-        { "text": "5 h 00", "correct": false },
-        { "text": "6 h 00", "correct": false }
+        {
+          "text": "5 h 30",
+          "correct": true
+        },
+        {
+          "text": "4 h 30",
+          "correct": false
+        },
+        {
+          "text": "5 h 00",
+          "correct": false
+        },
+        {
+          "text": "6 h 00",
+          "correct": false
+        }
       ],
-      "explanation": "4 h 30 + 1 h = 5 h 30."
+      "explanation": "4 h 30 + 1 h = 5 h 30.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "single",
       "statement": "Quelle est la suite : 10, 20, 30, 40, … ?",
       "answers": [
-        { "text": "50", "correct": true },
-        { "text": "41", "correct": false },
-        { "text": "45", "correct": false },
-        { "text": "60", "correct": false }
+        {
+          "text": "50",
+          "correct": true
+        },
+        {
+          "text": "41",
+          "correct": false
+        },
+        {
+          "text": "45",
+          "correct": false
+        },
+        {
+          "text": "60",
+          "correct": false
+        }
       ],
-      "explanation": "On ajoute 10 à chaque fois : 40 + 10 = 50."
+      "explanation": "On ajoute 10 à chaque fois : 40 + 10 = 50.",
+      "difficulty": 1
     },
     {
       "subject": "Mathématiques",
       "kind": "multi",
       "statement": "Quels nombres parmi ceux-ci sont des multiples de 2 (dans la table de 2) ?",
       "answers": [
-        { "text": "6", "correct": true },
-        { "text": "10", "correct": true },
-        { "text": "16", "correct": true },
-        { "text": "9", "correct": false },
-        { "text": "7", "correct": false }
+        {
+          "text": "6",
+          "correct": true
+        },
+        {
+          "text": "10",
+          "correct": true
+        },
+        {
+          "text": "16",
+          "correct": true
+        },
+        {
+          "text": "9",
+          "correct": false
+        },
+        {
+          "text": "7",
+          "correct": false
+        }
       ],
-      "explanation": "Les multiples de 2 sont tous les nombres pairs : 6, 10 et 16 sont pairs, mais 9 et 7 sont impairs."
+      "explanation": "Les multiples de 2 sont tous les nombres pairs : 6, 10 et 16 sont pairs, mais 9 et 7 sont impairs.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "multi",
       "statement": "Quels nombres parmi ceux-ci sont impairs ?",
       "answers": [
-        { "text": "11", "correct": true },
-        { "text": "35", "correct": true },
-        { "text": "20", "correct": false },
-        { "text": "44", "correct": false }
+        {
+          "text": "11",
+          "correct": true
+        },
+        {
+          "text": "35",
+          "correct": true
+        },
+        {
+          "text": "20",
+          "correct": false
+        },
+        {
+          "text": "44",
+          "correct": false
+        }
       ],
-      "explanation": "11 et 35 se terminent par un chiffre impair (1 et 5), donc ils sont impairs. 20 et 44 sont pairs."
+      "explanation": "11 et 35 se terminent par un chiffre impair (1 et 5), donc ils sont impairs. 20 et 44 sont pairs.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "multi",
       "statement": "Quelles formes ont exactement 4 côtés ?",
       "answers": [
-        { "text": "Le carré", "correct": true },
-        { "text": "Le rectangle", "correct": true },
-        { "text": "Le triangle", "correct": false },
-        { "text": "Le cercle", "correct": false }
+        {
+          "text": "Le carré",
+          "correct": true
+        },
+        {
+          "text": "Le rectangle",
+          "correct": true
+        },
+        {
+          "text": "Le triangle",
+          "correct": false
+        },
+        {
+          "text": "Le cercle",
+          "correct": false
+        }
       ],
-      "explanation": "Le carré et le rectangle ont tous les deux 4 côtés. Le triangle en a 3, et le cercle n'en a aucun."
+      "explanation": "Le carré et le rectangle ont tous les deux 4 côtés. Le triangle en a 3, et le cercle n'en a aucun.",
+      "difficulty": 2
     },
     {
       "subject": "Mathématiques",
       "kind": "multi",
       "statement": "Quels calculs donnent un résultat égal à 12 ?",
       "answers": [
-        { "text": "3 × 4", "correct": true },
-        { "text": "6 + 6", "correct": true },
-        { "text": "20 - 8", "correct": true },
-        { "text": "2 × 5", "correct": false },
-        { "text": "15 - 4", "correct": false }
+        {
+          "text": "3 × 4",
+          "correct": true
+        },
+        {
+          "text": "6 + 6",
+          "correct": true
+        },
+        {
+          "text": "20 - 8",
+          "correct": true
+        },
+        {
+          "text": "2 × 5",
+          "correct": false
+        },
+        {
+          "text": "15 - 4",
+          "correct": false
+        }
       ],
-      "explanation": "3 × 4 = 12, 6 + 6 = 12, et 20 - 8 = 12. Mais 2 × 5 = 10 et 15 - 4 = 11."
+      "explanation": "3 × 4 = 12, 6 + 6 = 12, et 20 - 8 = 12. Mais 2 × 5 = 10 et 15 - 4 = 11.",
+      "difficulty": 5
     },
     {
       "subject": "Mathématiques",
       "kind": "multi",
       "statement": "Quels nombres sont plus grands que 50 ?",
       "answers": [
-        { "text": "63", "correct": true },
-        { "text": "51", "correct": true },
-        { "text": "100", "correct": true },
-        { "text": "49", "correct": false },
-        { "text": "50", "correct": false }
+        {
+          "text": "63",
+          "correct": true
+        },
+        {
+          "text": "51",
+          "correct": true
+        },
+        {
+          "text": "100",
+          "correct": true
+        },
+        {
+          "text": "49",
+          "correct": false
+        },
+        {
+          "text": "50",
+          "correct": false
+        }
       ],
-      "explanation": "63, 51 et 100 sont tous supérieurs à 50. 49 est inférieur à 50, et 50 est égal à 50 (pas plus grand)."
+      "explanation": "63, 51 et 100 sont tous supérieurs à 50. 49 est inférieur à 50, et 50 est égal à 50 (pas plus grand).",
+      "difficulty": 3
     },
     {
       "subject": "Mathématiques",
       "kind": "multi",
       "statement": "Lesquels de ces calculs donnent un résultat supérieur à 20 ?",
       "answers": [
-        { "text": "5 × 5", "correct": true },
-        { "text": "30 - 7", "correct": true },
-        { "text": "10 + 9", "correct": false },
-        { "text": "4 × 4", "correct": false }
+        {
+          "text": "5 × 5",
+          "correct": true
+        },
+        {
+          "text": "30 - 7",
+          "correct": true
+        },
+        {
+          "text": "10 + 9",
+          "correct": false
+        },
+        {
+          "text": "4 × 4",
+          "correct": false
+        }
       ],
-      "explanation": "5 × 5 = 25 et 30 - 7 = 23, qui sont supérieurs à 20. Mais 10 + 9 = 19 et 4 × 4 = 16, inférieurs à 20."
+      "explanation": "5 × 5 = 25 et 30 - 7 = 23, qui sont supérieurs à 20. Mais 10 + 9 = 19 et 4 × 4 = 16, inférieurs à 20.",
+      "difficulty": 4
     },
     {
       "subject": "Mathématiques",
       "kind": "multi",
       "statement": "Quels calculs font partie de la table de 5 ?",
       "answers": [
-        { "text": "5 × 3 = 15", "correct": true },
-        { "text": "5 × 7 = 35", "correct": true },
-        { "text": "5 × 4 = 22", "correct": false },
-        { "text": "5 × 2 = 11", "correct": false }
+        {
+          "text": "5 × 3 = 15",
+          "correct": true
+        },
+        {
+          "text": "5 × 7 = 35",
+          "correct": true
+        },
+        {
+          "text": "5 × 4 = 22",
+          "correct": false
+        },
+        {
+          "text": "5 × 2 = 11",
+          "correct": false
+        }
       ],
-      "explanation": "5 × 3 = 15 et 5 × 7 = 35 sont corrects. Mais 5 × 4 = 20 (pas 22) et 5 × 2 = 10 (pas 11)."
+      "explanation": "5 × 3 = 15 et 5 × 7 = 35 sont corrects. Mais 5 × 4 = 20 (pas 22) et 5 × 2 = 10 (pas 11).",
+      "difficulty": 4
     },
     {
       "subject": "Mathématiques",
       "kind": "multi",
       "statement": "Quels nombres sont entre 30 et 40 (non compris) ?",
       "answers": [
-        { "text": "33", "correct": true },
-        { "text": "38", "correct": true },
-        { "text": "30", "correct": false },
-        { "text": "40", "correct": false },
-        { "text": "41", "correct": false }
+        {
+          "text": "33",
+          "correct": true
+        },
+        {
+          "text": "38",
+          "correct": true
+        },
+        {
+          "text": "30",
+          "correct": false
+        },
+        {
+          "text": "40",
+          "correct": false
+        },
+        {
+          "text": "41",
+          "correct": false
+        }
       ],
-      "explanation": "33 et 38 sont entre 30 et 40 (sans les inclure). 30 et 40 sont les bornes, et 41 est après 40."
+      "explanation": "33 et 38 sont entre 30 et 40 (sans les inclure). 30 et 40 sont les bornes, et 41 est après 40.",
+      "difficulty": 4
     },
     {
       "subject": "Mathématiques",
       "kind": "multi",
       "statement": "Parmi ces monnaies, lesquelles peuvent faire exactement 1 euro ?",
       "answers": [
-        { "text": "Deux pièces de 50 centimes", "correct": true },
-        { "text": "Dix pièces de 10 centimes", "correct": true },
-        { "text": "Trois pièces de 20 centimes", "correct": false },
-        { "text": "Quatre pièces de 25 centimes", "correct": true }
+        {
+          "text": "Deux pièces de 50 centimes",
+          "correct": true
+        },
+        {
+          "text": "Dix pièces de 10 centimes",
+          "correct": true
+        },
+        {
+          "text": "Trois pièces de 20 centimes",
+          "correct": false
+        },
+        {
+          "text": "Quatre pièces de 25 centimes",
+          "correct": true
+        }
       ],
-      "explanation": "2 × 50c = 100c = 1 €, et 10 × 10c = 100c = 1 €, et 4 × 25c = 100c = 1 €. Mais 3 × 20c = 60c seulement."
+      "explanation": "2 × 50c = 100c = 1 €, et 10 × 10c = 100c = 1 €, et 4 × 25c = 100c = 1 €. Mais 3 × 20c = 60c seulement.",
+      "difficulty": 5
     },
     {
       "subject": "Mathématiques",
       "kind": "multi",
       "statement": "Quels nombres complètent correctement la suite 4, 8, 12, ___, ___ ?",
       "answers": [
-        { "text": "16", "correct": true },
-        { "text": "20", "correct": true },
-        { "text": "14", "correct": false },
-        { "text": "18", "correct": false }
+        {
+          "text": "16",
+          "correct": true
+        },
+        {
+          "text": "20",
+          "correct": true
+        },
+        {
+          "text": "14",
+          "correct": false
+        },
+        {
+          "text": "18",
+          "correct": false
+        }
       ],
-      "explanation": "On ajoute 4 à chaque fois : 12 + 4 = 16, puis 16 + 4 = 20. Ce sont les multiples de 4."
+      "explanation": "On ajoute 4 à chaque fois : 12 + 4 = 16, puis 16 + 4 = 20. Ce sont les multiples de 4.",
+      "difficulty": 3
     }
   ]
 }

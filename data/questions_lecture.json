@@ -1,6 +1,9 @@
 {
   "subjects": [
-    { "name": "Lecture et vocabulaire", "weight": 1.0 }
+    {
+      "name": "Lecture et vocabulaire",
+      "weight": 1.0
+    }
   ],
   "questions": [
     {
@@ -8,1032 +11,2150 @@
       "kind": "single",
       "statement": "Quel mot veut dire la même chose que « content » ?",
       "answers": [
-        { "text": "heureux", "correct": true },
-        { "text": "triste", "correct": false },
-        { "text": "fatigué", "correct": false },
-        { "text": "fâché", "correct": false }
+        {
+          "text": "heureux",
+          "correct": true
+        },
+        {
+          "text": "triste",
+          "correct": false
+        },
+        {
+          "text": "fatigué",
+          "correct": false
+        },
+        {
+          "text": "fâché",
+          "correct": false
+        }
       ],
-      "explanation": "« Content » et « heureux » veulent dire la même chose : on est content quand on est heureux !"
+      "explanation": "« Content » et « heureux » veulent dire la même chose : on est content quand on est heureux !",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est le contraire de « grand » ?",
       "answers": [
-        { "text": "petit", "correct": true },
-        { "text": "gros", "correct": false },
-        { "text": "long", "correct": false },
-        { "text": "lourd", "correct": false }
+        {
+          "text": "petit",
+          "correct": true
+        },
+        {
+          "text": "gros",
+          "correct": false
+        },
+        {
+          "text": "long",
+          "correct": false
+        },
+        {
+          "text": "lourd",
+          "correct": false
+        }
       ],
-      "explanation": "Le contraire de « grand » est « petit » : ce sont des antonymes !"
+      "explanation": "Le contraire de « grand » est « petit » : ce sont des antonymes !",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot veut dire la même chose que « rapide » ?",
       "answers": [
-        { "text": "vite", "correct": false },
-        { "text": "lent", "correct": false },
-        { "text": "agile", "correct": false },
-        { "text": "véloce", "correct": true }
+        {
+          "text": "vite",
+          "correct": false
+        },
+        {
+          "text": "lent",
+          "correct": false
+        },
+        {
+          "text": "agile",
+          "correct": false
+        },
+        {
+          "text": "véloce",
+          "correct": true
+        }
       ],
-      "explanation": "« Véloce » et « rapide » sont des synonymes : ils veulent dire la même chose."
+      "explanation": "« Véloce » et « rapide » sont des synonymes : ils veulent dire la même chose.",
+      "difficulty": 4
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est le pluriel de « chapeau » ?",
       "answers": [
-        { "text": "chapeaux", "correct": true },
-        { "text": "chapeaus", "correct": false },
-        { "text": "chapeau", "correct": false },
-        { "text": "chapeaux's", "correct": false }
+        {
+          "text": "chapeaux",
+          "correct": true
+        },
+        {
+          "text": "chapeaus",
+          "correct": false
+        },
+        {
+          "text": "chapeau",
+          "correct": false
+        },
+        {
+          "text": "chapeaux's",
+          "correct": false
+        }
       ],
-      "explanation": "Les mots en -eau font leur pluriel en -eaux : un chapeau → des chapeaux."
+      "explanation": "Les mots en -eau font leur pluriel en -eaux : un chapeau → des chapeaux.",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Lequel de ces mots est féminin ?",
       "answers": [
-        { "text": "la maison", "correct": true },
-        { "text": "le vélo", "correct": false },
-        { "text": "le chien", "correct": false },
-        { "text": "le garçon", "correct": false }
+        {
+          "text": "la maison",
+          "correct": true
+        },
+        {
+          "text": "le vélo",
+          "correct": false
+        },
+        {
+          "text": "le chien",
+          "correct": false
+        },
+        {
+          "text": "le garçon",
+          "correct": false
+        }
       ],
-      "explanation": "« La maison » est féminin car on dit « la » devant ce mot."
+      "explanation": "« La maison » est féminin car on dit « la » devant ce mot.",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Combien de syllabes y a-t-il dans le mot « papillon » ?",
       "answers": [
-        { "text": "3", "correct": true },
-        { "text": "2", "correct": false },
-        { "text": "4", "correct": false },
-        { "text": "1", "correct": false }
+        {
+          "text": "3",
+          "correct": true
+        },
+        {
+          "text": "2",
+          "correct": false
+        },
+        {
+          "text": "4",
+          "correct": false
+        },
+        {
+          "text": "1",
+          "correct": false
+        }
       ],
-      "explanation": "Pa-pil-lon : le mot « papillon » a 3 syllabes. Bravo !"
+      "explanation": "Pa-pil-lon : le mot « papillon » a 3 syllabes. Bravo !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot est l'intrus dans cette liste : chien, chat, oiseau, table ?",
       "answers": [
-        { "text": "table", "correct": true },
-        { "text": "chien", "correct": false },
-        { "text": "chat", "correct": false },
-        { "text": "oiseau", "correct": false }
+        {
+          "text": "table",
+          "correct": true
+        },
+        {
+          "text": "chien",
+          "correct": false
+        },
+        {
+          "text": "chat",
+          "correct": false
+        },
+        {
+          "text": "oiseau",
+          "correct": false
+        }
       ],
-      "explanation": "« Table » est l'intrus : c'est un meuble, pas un animal comme les autres."
+      "explanation": "« Table » est l'intrus : c'est un meuble, pas un animal comme les autres.",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel déterminant convient : « ___ école » ?",
       "answers": [
-        { "text": "une", "correct": true },
-        { "text": "un", "correct": false },
-        { "text": "le", "correct": false },
-        { "text": "les", "correct": false }
+        {
+          "text": "une",
+          "correct": true
+        },
+        {
+          "text": "un",
+          "correct": false
+        },
+        {
+          "text": "le",
+          "correct": false
+        },
+        {
+          "text": "les",
+          "correct": false
+        }
       ],
-      "explanation": "« École » est féminin singulier, donc on dit « une école ». Super !"
+      "explanation": "« École » est féminin singulier, donc on dit « une école ». Super !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot de la famille de « fleur » est le bon : « fleuriste » ?",
       "answers": [
-        { "text": "une personne qui vend des fleurs", "correct": true },
-        { "text": "un bouquet de fleurs séchées", "correct": false },
-        { "text": "une couleur de fleur", "correct": false },
-        { "text": "un pot pour les fleurs", "correct": false }
+        {
+          "text": "une personne qui vend des fleurs",
+          "correct": true
+        },
+        {
+          "text": "un bouquet de fleurs séchées",
+          "correct": false
+        },
+        {
+          "text": "une couleur de fleur",
+          "correct": false
+        },
+        {
+          "text": "un pot pour les fleurs",
+          "correct": false
+        }
       ],
-      "explanation": "Un fleuriste est une personne qui vend des fleurs. Les mots fleur et fleuriste sont de la même famille !"
+      "explanation": "Un fleuriste est une personne qui vend des fleurs. Les mots fleur et fleuriste sont de la même famille !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Lequel de ces mots vient en premier dans l'ordre alphabétique ?",
       "answers": [
-        { "text": "ami", "correct": true },
-        { "text": "bras", "correct": false },
-        { "text": "chat", "correct": false },
-        { "text": "dent", "correct": false }
+        {
+          "text": "ami",
+          "correct": true
+        },
+        {
+          "text": "bras",
+          "correct": false
+        },
+        {
+          "text": "chat",
+          "correct": false
+        },
+        {
+          "text": "dent",
+          "correct": false
+        }
       ],
-      "explanation": "Dans l'alphabet, A vient avant B, C et D, donc « ami » est en premier !"
+      "explanation": "Dans l'alphabet, A vient avant B, C et D, donc « ami » est en premier !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Lis cette phrase : « Le soleil brille dans le ciel bleu. » Que fait le soleil ?",
       "answers": [
-        { "text": "Il brille.", "correct": true },
-        { "text": "Il pleut.", "correct": false },
-        { "text": "Il neige.", "correct": false },
-        { "text": "Il se couche.", "correct": false }
+        {
+          "text": "Il brille.",
+          "correct": true
+        },
+        {
+          "text": "Il pleut.",
+          "correct": false
+        },
+        {
+          "text": "Il neige.",
+          "correct": false
+        },
+        {
+          "text": "Il se couche.",
+          "correct": false
+        }
       ],
-      "explanation": "La phrase dit clairement « le soleil brille » : bonne lecture !"
+      "explanation": "La phrase dit clairement « le soleil brille » : bonne lecture !",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est le contraire de « chaud » ?",
       "answers": [
-        { "text": "froid", "correct": true },
-        { "text": "tiède", "correct": false },
-        { "text": "brûlant", "correct": false },
-        { "text": "doux", "correct": false }
+        {
+          "text": "froid",
+          "correct": true
+        },
+        {
+          "text": "tiède",
+          "correct": false
+        },
+        {
+          "text": "brûlant",
+          "correct": false
+        },
+        {
+          "text": "doux",
+          "correct": false
+        }
       ],
-      "explanation": "Le contraire de « chaud » est « froid ». Ce sont des mots contraires (antonymes) !"
+      "explanation": "Le contraire de « chaud » est « froid ». Ce sont des mots contraires (antonymes) !",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot convient dans la phrase : « Je mange une ___ de pain. »",
       "answers": [
-        { "text": "tranche", "correct": true },
-        { "text": "bouteille", "correct": false },
-        { "text": "poignée", "correct": false },
-        { "text": "verre", "correct": false }
+        {
+          "text": "tranche",
+          "correct": true
+        },
+        {
+          "text": "bouteille",
+          "correct": false
+        },
+        {
+          "text": "poignée",
+          "correct": false
+        },
+        {
+          "text": "verre",
+          "correct": false
+        }
       ],
-      "explanation": "On dit « une tranche de pain » : c'est le bon mot pour désigner une partie coupée de pain."
+      "explanation": "On dit « une tranche de pain » : c'est le bon mot pour désigner une partie coupée de pain.",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Combien de syllabes y a-t-il dans le mot « maison » ?",
       "answers": [
-        { "text": "2", "correct": true },
-        { "text": "1", "correct": false },
-        { "text": "3", "correct": false },
-        { "text": "4", "correct": false }
+        {
+          "text": "2",
+          "correct": true
+        },
+        {
+          "text": "1",
+          "correct": false
+        },
+        {
+          "text": "3",
+          "correct": false
+        },
+        {
+          "text": "4",
+          "correct": false
+        }
       ],
-      "explanation": "Mai-son : « maison » a 2 syllabes. Tu y es arrivé !"
+      "explanation": "Mai-son : « maison » a 2 syllabes. Tu y es arrivé !",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot veut dire la même chose que « beau » ?",
       "answers": [
-        { "text": "joli", "correct": true },
-        { "text": "laid", "correct": false },
-        { "text": "vieux", "correct": false },
-        { "text": "cassé", "correct": false }
+        {
+          "text": "joli",
+          "correct": true
+        },
+        {
+          "text": "laid",
+          "correct": false
+        },
+        {
+          "text": "vieux",
+          "correct": false
+        },
+        {
+          "text": "cassé",
+          "correct": false
+        }
       ],
-      "explanation": "« Beau » et « joli » sont des synonymes : ils veulent dire la même chose."
+      "explanation": "« Beau » et « joli » sont des synonymes : ils veulent dire la même chose.",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est le pluriel de « animal » ?",
       "answers": [
-        { "text": "animaux", "correct": true },
-        { "text": "animals", "correct": false },
-        { "text": "animales", "correct": false },
-        { "text": "animeaux", "correct": false }
+        {
+          "text": "animaux",
+          "correct": true
+        },
+        {
+          "text": "animals",
+          "correct": false
+        },
+        {
+          "text": "animales",
+          "correct": false
+        },
+        {
+          "text": "animeaux",
+          "correct": false
+        }
       ],
-      "explanation": "Les mots en -al font leur pluriel en -aux : un animal → des animaux !"
+      "explanation": "Les mots en -al font leur pluriel en -aux : un animal → des animaux !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel déterminant convient : « ___ arbre » ?",
       "answers": [
-        { "text": "un", "correct": true },
-        { "text": "une", "correct": false },
-        { "text": "la", "correct": false },
-        { "text": "les", "correct": false }
+        {
+          "text": "un",
+          "correct": true
+        },
+        {
+          "text": "une",
+          "correct": false
+        },
+        {
+          "text": "la",
+          "correct": false
+        },
+        {
+          "text": "les",
+          "correct": false
+        }
       ],
-      "explanation": "« Arbre » est masculin singulier, on dit « un arbre ». Bravo !"
+      "explanation": "« Arbre » est masculin singulier, on dit « un arbre ». Bravo !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est l'intrus dans cette liste : rouge, bleu, vert, carré ?",
       "answers": [
-        { "text": "carré", "correct": true },
-        { "text": "rouge", "correct": false },
-        { "text": "bleu", "correct": false },
-        { "text": "vert", "correct": false }
+        {
+          "text": "carré",
+          "correct": true
+        },
+        {
+          "text": "rouge",
+          "correct": false
+        },
+        {
+          "text": "bleu",
+          "correct": false
+        },
+        {
+          "text": "vert",
+          "correct": false
+        }
       ],
-      "explanation": "« Carré » est l'intrus : c'est une forme, pas une couleur comme les autres mots."
+      "explanation": "« Carré » est l'intrus : c'est une forme, pas une couleur comme les autres mots.",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot convient dans la phrase : « Lucie est ___ de ses amis. »",
       "answers": [
-        { "text": "entourée", "correct": true },
-        { "text": "tournée", "correct": false },
-        { "text": "regardée", "correct": false },
-        { "text": "partie", "correct": false }
+        {
+          "text": "entourée",
+          "correct": true
+        },
+        {
+          "text": "tournée",
+          "correct": false
+        },
+        {
+          "text": "regardée",
+          "correct": false
+        },
+        {
+          "text": "partie",
+          "correct": false
+        }
       ],
-      "explanation": "On dit « entourée de ses amis » : cela veut dire qu'ils sont tous autour d'elle."
+      "explanation": "On dit « entourée de ses amis » : cela veut dire qu'ils sont tous autour d'elle.",
+      "difficulty": 3
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est le contraire de « jour » ?",
       "answers": [
-        { "text": "nuit", "correct": true },
-        { "text": "matin", "correct": false },
-        { "text": "soir", "correct": false },
-        { "text": "après-midi", "correct": false }
+        {
+          "text": "nuit",
+          "correct": true
+        },
+        {
+          "text": "matin",
+          "correct": false
+        },
+        {
+          "text": "soir",
+          "correct": false
+        },
+        {
+          "text": "après-midi",
+          "correct": false
+        }
       ],
-      "explanation": "Le contraire de « jour » est « nuit ». Quand il fait nuit, le jour est terminé !"
+      "explanation": "Le contraire de « jour » est « nuit ». Quand il fait nuit, le jour est terminé !",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Lequel de ces mots vient en dernier dans l'ordre alphabétique ?",
       "answers": [
-        { "text": "zèbre", "correct": true },
-        { "text": "yeux", "correct": false },
-        { "text": "wagon", "correct": false },
-        { "text": "violon", "correct": false }
+        {
+          "text": "zèbre",
+          "correct": true
+        },
+        {
+          "text": "yeux",
+          "correct": false
+        },
+        {
+          "text": "wagon",
+          "correct": false
+        },
+        {
+          "text": "violon",
+          "correct": false
+        }
       ],
-      "explanation": "Z est la dernière lettre de l'alphabet, donc « zèbre » vient en dernier !"
+      "explanation": "Z est la dernière lettre de l'alphabet, donc « zèbre » vient en dernier !",
+      "difficulty": 3
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot de la famille de « terre » signifie « mettre sous la terre » ?",
       "answers": [
-        { "text": "enterrer", "correct": true },
-        { "text": "terrifier", "correct": false },
-        { "text": "détester", "correct": false },
-        { "text": "terrasse", "correct": false }
+        {
+          "text": "enterrer",
+          "correct": true
+        },
+        {
+          "text": "terrifier",
+          "correct": false
+        },
+        {
+          "text": "détester",
+          "correct": false
+        },
+        {
+          "text": "terrasse",
+          "correct": false
+        }
       ],
-      "explanation": "« Enterrer » vient de « terre » : c'est mettre quelque chose sous la terre."
+      "explanation": "« Enterrer » vient de « terre » : c'est mettre quelque chose sous la terre.",
+      "difficulty": 3
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Combien de syllabes y a-t-il dans le mot « éléphant » ?",
       "answers": [
-        { "text": "3", "correct": true },
-        { "text": "2", "correct": false },
-        { "text": "4", "correct": false },
-        { "text": "5", "correct": false }
+        {
+          "text": "3",
+          "correct": true
+        },
+        {
+          "text": "2",
+          "correct": false
+        },
+        {
+          "text": "4",
+          "correct": false
+        },
+        {
+          "text": "5",
+          "correct": false
+        }
       ],
-      "explanation": "É-lé-phant : le mot « éléphant » a 3 syllabes. Excellent !"
+      "explanation": "É-lé-phant : le mot « éléphant » a 3 syllabes. Excellent !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot veut dire la même chose que « triste » ?",
       "answers": [
-        { "text": "malheureux", "correct": true },
-        { "text": "joyeux", "correct": false },
-        { "text": "calme", "correct": false },
-        { "text": "surpris", "correct": false }
+        {
+          "text": "malheureux",
+          "correct": true
+        },
+        {
+          "text": "joyeux",
+          "correct": false
+        },
+        {
+          "text": "calme",
+          "correct": false
+        },
+        {
+          "text": "surpris",
+          "correct": false
+        }
       ],
-      "explanation": "« Triste » et « malheureux » sont des synonymes : ils veulent dire la même chose."
+      "explanation": "« Triste » et « malheureux » sont des synonymes : ils veulent dire la même chose.",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Lequel de ces mots est masculin ?",
       "answers": [
-        { "text": "le soleil", "correct": true },
-        { "text": "la lune", "correct": false },
-        { "text": "la mer", "correct": false },
-        { "text": "la forêt", "correct": false }
+        {
+          "text": "le soleil",
+          "correct": true
+        },
+        {
+          "text": "la lune",
+          "correct": false
+        },
+        {
+          "text": "la mer",
+          "correct": false
+        },
+        {
+          "text": "la forêt",
+          "correct": false
+        }
       ],
-      "explanation": "On dit « le soleil » : c'est masculin. Les autres sont féminins (la lune, la mer, la forêt)."
+      "explanation": "On dit « le soleil » : c'est masculin. Les autres sont féminins (la lune, la mer, la forêt).",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel déterminant convient : « ___ enfants jouent. »",
       "answers": [
-        { "text": "Les", "correct": true },
-        { "text": "La", "correct": false },
-        { "text": "Le", "correct": false },
-        { "text": "Un", "correct": false }
+        {
+          "text": "Les",
+          "correct": true
+        },
+        {
+          "text": "La",
+          "correct": false
+        },
+        {
+          "text": "Le",
+          "correct": false
+        },
+        {
+          "text": "Un",
+          "correct": false
+        }
       ],
-      "explanation": "« Enfants » est pluriel, on dit « les enfants ». Bien joué !"
+      "explanation": "« Enfants » est pluriel, on dit « les enfants ». Bien joué !",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est le contraire de « ouvert » ?",
       "answers": [
-        { "text": "fermé", "correct": true },
-        { "text": "cassé", "correct": false },
-        { "text": "bruyant", "correct": false },
-        { "text": "propre", "correct": false }
+        {
+          "text": "fermé",
+          "correct": true
+        },
+        {
+          "text": "cassé",
+          "correct": false
+        },
+        {
+          "text": "bruyant",
+          "correct": false
+        },
+        {
+          "text": "propre",
+          "correct": false
+        }
       ],
-      "explanation": "Le contraire de « ouvert » est « fermé » : une porte peut être ouverte ou fermée."
+      "explanation": "Le contraire de « ouvert » est « fermé » : une porte peut être ouverte ou fermée.",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est l'intrus dans cette liste : pomme, poire, banane, carotte ?",
       "answers": [
-        { "text": "carotte", "correct": true },
-        { "text": "pomme", "correct": false },
-        { "text": "poire", "correct": false },
-        { "text": "banane", "correct": false }
+        {
+          "text": "carotte",
+          "correct": true
+        },
+        {
+          "text": "pomme",
+          "correct": false
+        },
+        {
+          "text": "poire",
+          "correct": false
+        },
+        {
+          "text": "banane",
+          "correct": false
+        }
       ],
-      "explanation": "« Carotte » est l'intrus : c'est un légume, pas un fruit comme les autres !"
+      "explanation": "« Carotte » est l'intrus : c'est un légume, pas un fruit comme les autres !",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Lis cette phrase : « Paul pose son cartable et s'assoit à sa place. » Qu'est-ce que Paul pose ?",
       "answers": [
-        { "text": "son cartable", "correct": true },
-        { "text": "son manteau", "correct": false },
-        { "text": "son livre", "correct": false },
-        { "text": "sa trousse", "correct": false }
+        {
+          "text": "son cartable",
+          "correct": true
+        },
+        {
+          "text": "son manteau",
+          "correct": false
+        },
+        {
+          "text": "son livre",
+          "correct": false
+        },
+        {
+          "text": "sa trousse",
+          "correct": false
+        }
       ],
-      "explanation": "La phrase dit « Paul pose son cartable » : tu as bien lu !"
+      "explanation": "La phrase dit « Paul pose son cartable » : tu as bien lu !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot convient dans la phrase : « Le chat dort ___ le canapé. »",
       "answers": [
-        { "text": "sur", "correct": true },
-        { "text": "dans", "correct": false },
-        { "text": "entre", "correct": false },
-        { "text": "sous", "correct": false }
+        {
+          "text": "sur",
+          "correct": true
+        },
+        {
+          "text": "dans",
+          "correct": false
+        },
+        {
+          "text": "entre",
+          "correct": false
+        },
+        {
+          "text": "sous",
+          "correct": false
+        }
       ],
-      "explanation": "On dit « le chat dort sur le canapé » : il est posé dessus."
+      "explanation": "On dit « le chat dort sur le canapé » : il est posé dessus.",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est le pluriel de « bateau » ?",
       "answers": [
-        { "text": "bateaux", "correct": true },
-        { "text": "bateaus", "correct": false },
-        { "text": "bateaues", "correct": false },
-        { "text": "batous", "correct": false }
+        {
+          "text": "bateaux",
+          "correct": true
+        },
+        {
+          "text": "bateaus",
+          "correct": false
+        },
+        {
+          "text": "bateaues",
+          "correct": false
+        },
+        {
+          "text": "batous",
+          "correct": false
+        }
       ],
-      "explanation": "Les mots en -eau font leur pluriel en -eaux : un bateau → des bateaux !"
+      "explanation": "Les mots en -eau font leur pluriel en -eaux : un bateau → des bateaux !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Combien de syllabes y a-t-il dans le mot « chocolat » ?",
       "answers": [
-        { "text": "3", "correct": true },
-        { "text": "2", "correct": false },
-        { "text": "4", "correct": false },
-        { "text": "1", "correct": false }
+        {
+          "text": "3",
+          "correct": true
+        },
+        {
+          "text": "2",
+          "correct": false
+        },
+        {
+          "text": "4",
+          "correct": false
+        },
+        {
+          "text": "1",
+          "correct": false
+        }
       ],
-      "explanation": "Cho-co-lat : « chocolat » a 3 syllabes. Délicieux et bien compté !"
+      "explanation": "Cho-co-lat : « chocolat » a 3 syllabes. Délicieux et bien compté !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot de la famille de « lire » désigne une personne qui lit ?",
       "answers": [
-        { "text": "lecteur", "correct": true },
-        { "text": "écrivain", "correct": false },
-        { "text": "libraire", "correct": false },
-        { "text": "éditeur", "correct": false }
+        {
+          "text": "lecteur",
+          "correct": true
+        },
+        {
+          "text": "écrivain",
+          "correct": false
+        },
+        {
+          "text": "libraire",
+          "correct": false
+        },
+        {
+          "text": "éditeur",
+          "correct": false
+        }
       ],
-      "explanation": "Un lecteur est une personne qui lit. « Lire » et « lecteur » sont de la même famille de mots."
+      "explanation": "Un lecteur est une personne qui lit. « Lire » et « lecteur » sont de la même famille de mots.",
+      "difficulty": 4
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Lequel de ces mots vient en premier dans l'ordre alphabétique ?",
       "answers": [
-        { "text": "fenêtre", "correct": false },
-        { "text": "école", "correct": true },
-        { "text": "garçon", "correct": false },
-        { "text": "hibou", "correct": false }
+        {
+          "text": "fenêtre",
+          "correct": false
+        },
+        {
+          "text": "école",
+          "correct": true
+        },
+        {
+          "text": "garçon",
+          "correct": false
+        },
+        {
+          "text": "hibou",
+          "correct": false
+        }
       ],
-      "explanation": "E vient avant F, G et H dans l'alphabet, donc « école » est en premier !"
+      "explanation": "E vient avant F, G et H dans l'alphabet, donc « école » est en premier !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est le contraire de « propre » ?",
       "answers": [
-        { "text": "sale", "correct": true },
-        { "text": "beau", "correct": false },
-        { "text": "neuf", "correct": false },
-        { "text": "doux", "correct": false }
+        {
+          "text": "sale",
+          "correct": true
+        },
+        {
+          "text": "beau",
+          "correct": false
+        },
+        {
+          "text": "neuf",
+          "correct": false
+        },
+        {
+          "text": "doux",
+          "correct": false
+        }
       ],
-      "explanation": "Le contraire de « propre » est « sale ». Il faut se laver pour être propre !"
+      "explanation": "Le contraire de « propre » est « sale ». Il faut se laver pour être propre !",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot veut dire la même chose que « fatigué » ?",
       "answers": [
-        { "text": "épuisé", "correct": true },
-        { "text": "reposé", "correct": false },
-        { "text": "excité", "correct": false },
-        { "text": "affamé", "correct": false }
+        {
+          "text": "épuisé",
+          "correct": true
+        },
+        {
+          "text": "reposé",
+          "correct": false
+        },
+        {
+          "text": "excité",
+          "correct": false
+        },
+        {
+          "text": "affamé",
+          "correct": false
+        }
       ],
-      "explanation": "« Fatigué » et « épuisé » sont des synonymes : les deux veulent dire qu'on a besoin de se reposer."
+      "explanation": "« Fatigué » et « épuisé » sont des synonymes : les deux veulent dire qu'on a besoin de se reposer.",
+      "difficulty": 3
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel déterminant convient : « ___ oiseau chante. »",
       "answers": [
-        { "text": "Un", "correct": true },
-        { "text": "Une", "correct": false },
-        { "text": "Des", "correct": false },
-        { "text": "Les", "correct": false }
+        {
+          "text": "Un",
+          "correct": true
+        },
+        {
+          "text": "Une",
+          "correct": false
+        },
+        {
+          "text": "Des",
+          "correct": false
+        },
+        {
+          "text": "Les",
+          "correct": false
+        }
       ],
-      "explanation": "« Oiseau » est masculin singulier, on dit « un oiseau ». Super !"
+      "explanation": "« Oiseau » est masculin singulier, on dit « un oiseau ». Super !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est l'intrus dans cette liste : lundi, mardi, août, vendredi ?",
       "answers": [
-        { "text": "août", "correct": true },
-        { "text": "lundi", "correct": false },
-        { "text": "mardi", "correct": false },
-        { "text": "vendredi", "correct": false }
+        {
+          "text": "août",
+          "correct": true
+        },
+        {
+          "text": "lundi",
+          "correct": false
+        },
+        {
+          "text": "mardi",
+          "correct": false
+        },
+        {
+          "text": "vendredi",
+          "correct": false
+        }
       ],
-      "explanation": "« Août » est l'intrus : c'est un mois de l'année, pas un jour de la semaine comme les autres !"
+      "explanation": "« Août » est l'intrus : c'est un mois de l'année, pas un jour de la semaine comme les autres !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Combien de syllabes y a-t-il dans le mot « tortue » ?",
       "answers": [
-        { "text": "2", "correct": true },
-        { "text": "1", "correct": false },
-        { "text": "3", "correct": false },
-        { "text": "4", "correct": false }
+        {
+          "text": "2",
+          "correct": true
+        },
+        {
+          "text": "1",
+          "correct": false
+        },
+        {
+          "text": "3",
+          "correct": false
+        },
+        {
+          "text": "4",
+          "correct": false
+        }
       ],
-      "explanation": "Tor-tue : « tortue » a 2 syllabes. Bien compté !"
+      "explanation": "Tor-tue : « tortue » a 2 syllabes. Bien compté !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot convient dans la phrase : « Il fait froid, je mets mon ___ . »",
       "answers": [
-        { "text": "manteau", "correct": true },
-        { "text": "maillot", "correct": false },
-        { "text": "chapeau de paille", "correct": false },
-        { "text": "short", "correct": false }
+        {
+          "text": "manteau",
+          "correct": true
+        },
+        {
+          "text": "maillot",
+          "correct": false
+        },
+        {
+          "text": "chapeau de paille",
+          "correct": false
+        },
+        {
+          "text": "short",
+          "correct": false
+        }
       ],
-      "explanation": "Quand il fait froid, on met un manteau pour se réchauffer !"
+      "explanation": "Quand il fait froid, on met un manteau pour se réchauffer !",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est le féminin de « boulanger » ?",
       "answers": [
-        { "text": "boulangère", "correct": true },
-        { "text": "boulangeuse", "correct": false },
-        { "text": "boulangère-sse", "correct": false },
-        { "text": "boulangue", "correct": false }
+        {
+          "text": "boulangère",
+          "correct": true
+        },
+        {
+          "text": "boulangeuse",
+          "correct": false
+        },
+        {
+          "text": "boulangère-sse",
+          "correct": false
+        },
+        {
+          "text": "boulangue",
+          "correct": false
+        }
       ],
-      "explanation": "Le féminin de « boulanger » est « boulangère ». Elle fait aussi de très bons pains !"
+      "explanation": "Le féminin de « boulanger » est « boulangère ». Elle fait aussi de très bons pains !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot de la famille de « port » désigne ce que l'on porte ?",
       "answers": [
-        { "text": "portée", "correct": false },
-        { "text": "portable", "correct": false },
-        { "text": "portefeuille", "correct": false },
-        { "text": "portage", "correct": true }
+        {
+          "text": "portée",
+          "correct": false
+        },
+        {
+          "text": "portable",
+          "correct": false
+        },
+        {
+          "text": "portefeuille",
+          "correct": false
+        },
+        {
+          "text": "portage",
+          "correct": true
+        }
       ],
-      "explanation": "Le « portage » désigne l'action de porter quelque chose. C'est de la même famille que « port » et « porter »."
+      "explanation": "Le « portage » désigne l'action de porter quelque chose. C'est de la même famille que « port » et « porter ».",
+      "difficulty": 5
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est le contraire de « monter » ?",
       "answers": [
-        { "text": "descendre", "correct": true },
-        { "text": "courir", "correct": false },
-        { "text": "sauter", "correct": false },
-        { "text": "marcher", "correct": false }
+        {
+          "text": "descendre",
+          "correct": true
+        },
+        {
+          "text": "courir",
+          "correct": false
+        },
+        {
+          "text": "sauter",
+          "correct": false
+        },
+        {
+          "text": "marcher",
+          "correct": false
+        }
       ],
-      "explanation": "Le contraire de « monter » est « descendre » : quand on ne monte pas, on descend !"
+      "explanation": "Le contraire de « monter » est « descendre » : quand on ne monte pas, on descend !",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Lis cette phrase : « Emma offre un cadeau à sa grand-mère. » À qui Emma offre-t-elle un cadeau ?",
       "answers": [
-        { "text": "À sa grand-mère.", "correct": true },
-        { "text": "À sa sœur.", "correct": false },
-        { "text": "À son ami.", "correct": false },
-        { "text": "À sa mère.", "correct": false }
+        {
+          "text": "À sa grand-mère.",
+          "correct": true
+        },
+        {
+          "text": "À sa sœur.",
+          "correct": false
+        },
+        {
+          "text": "À son ami.",
+          "correct": false
+        },
+        {
+          "text": "À sa mère.",
+          "correct": false
+        }
       ],
-      "explanation": "La phrase dit « à sa grand-mère » : tu as bien lu, bravo !"
+      "explanation": "La phrase dit « à sa grand-mère » : tu as bien lu, bravo !",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est le pluriel de « genou » ?",
       "answers": [
-        { "text": "genoux", "correct": true },
-        { "text": "genous", "correct": false },
-        { "text": "genoux's", "correct": false },
-        { "text": "genoues", "correct": false }
+        {
+          "text": "genoux",
+          "correct": true
+        },
+        {
+          "text": "genous",
+          "correct": false
+        },
+        {
+          "text": "genoux's",
+          "correct": false
+        },
+        {
+          "text": "genoues",
+          "correct": false
+        }
       ],
-      "explanation": "Les mots en -ou avec un pluriel en -oux : genou → genoux (comme chou, hibou, pou, caillou) !"
+      "explanation": "Les mots en -ou avec un pluriel en -oux : genou → genoux (comme chou, hibou, pou, caillou) !",
+      "difficulty": 3
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot veut dire la même chose que « commencer » ?",
       "answers": [
-        { "text": "démarrer", "correct": true },
-        { "text": "terminer", "correct": false },
-        { "text": "arrêter", "correct": false },
-        { "text": "attendre", "correct": false }
+        {
+          "text": "démarrer",
+          "correct": true
+        },
+        {
+          "text": "terminer",
+          "correct": false
+        },
+        {
+          "text": "arrêter",
+          "correct": false
+        },
+        {
+          "text": "attendre",
+          "correct": false
+        }
       ],
-      "explanation": "« Commencer » et « démarrer » sont des synonymes : on peut démarrer une activité pour dire qu'on commence !"
+      "explanation": "« Commencer » et « démarrer » sont des synonymes : on peut démarrer une activité pour dire qu'on commence !",
+      "difficulty": 3
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel déterminant convient : « ___ fleurs sont jolies. »",
       "answers": [
-        { "text": "Les", "correct": true },
-        { "text": "La", "correct": false },
-        { "text": "Le", "correct": false },
-        { "text": "Un", "correct": false }
+        {
+          "text": "Les",
+          "correct": true
+        },
+        {
+          "text": "La",
+          "correct": false
+        },
+        {
+          "text": "Le",
+          "correct": false
+        },
+        {
+          "text": "Un",
+          "correct": false
+        }
       ],
-      "explanation": "« Fleurs » est pluriel, on dit « les fleurs ». Bien joué !"
+      "explanation": "« Fleurs » est pluriel, on dit « les fleurs ». Bien joué !",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Combien de syllabes y a-t-il dans le mot « dinosaure » ?",
       "answers": [
-        { "text": "4", "correct": true },
-        { "text": "3", "correct": false },
-        { "text": "5", "correct": false },
-        { "text": "2", "correct": false }
+        {
+          "text": "4",
+          "correct": true
+        },
+        {
+          "text": "3",
+          "correct": false
+        },
+        {
+          "text": "5",
+          "correct": false
+        },
+        {
+          "text": "2",
+          "correct": false
+        }
       ],
-      "explanation": "Di-no-sau-re : « dinosaure » a 4 syllabes. Fantastique !"
+      "explanation": "Di-no-sau-re : « dinosaure » a 4 syllabes. Fantastique !",
+      "difficulty": 3
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est le féminin de « directeur » ?",
       "answers": [
-        { "text": "directrice", "correct": true },
-        { "text": "directeure", "correct": false },
-        { "text": "directeuse", "correct": false },
-        { "text": "directe", "correct": false }
+        {
+          "text": "directrice",
+          "correct": true
+        },
+        {
+          "text": "directeure",
+          "correct": false
+        },
+        {
+          "text": "directeuse",
+          "correct": false
+        },
+        {
+          "text": "directe",
+          "correct": false
+        }
       ],
-      "explanation": "Le féminin de « directeur » est « directrice ». Elle dirige l'école !"
+      "explanation": "Le féminin de « directeur » est « directrice ». Elle dirige l'école !",
+      "difficulty": 3
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Lequel de ces mots vient en deuxième dans l'ordre alphabétique : lion, lapin, lumière, loup ?",
       "answers": [
-        { "text": "lapin", "correct": false },
-        { "text": "lion", "correct": true },
-        { "text": "lumière", "correct": false },
-        { "text": "loup", "correct": false }
+        {
+          "text": "lapin",
+          "correct": false
+        },
+        {
+          "text": "lion",
+          "correct": true
+        },
+        {
+          "text": "lumière",
+          "correct": false
+        },
+        {
+          "text": "loup",
+          "correct": false
+        }
       ],
-      "explanation": "L-a vient avant L-i, L-o, L-u. Ordre : lapin, lion, loup, lumière. « Lion » est en deuxième !"
+      "explanation": "L-a vient avant L-i, L-o, L-u. Ordre : lapin, lion, loup, lumière. « Lion » est en deuxième !",
+      "difficulty": 4
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot veut dire la même chose que « courageux » ?",
       "answers": [
-        { "text": "brave", "correct": true },
-        { "text": "peureux", "correct": false },
-        { "text": "prudent", "correct": false },
-        { "text": "fort", "correct": false }
+        {
+          "text": "brave",
+          "correct": true
+        },
+        {
+          "text": "peureux",
+          "correct": false
+        },
+        {
+          "text": "prudent",
+          "correct": false
+        },
+        {
+          "text": "fort",
+          "correct": false
+        }
       ],
-      "explanation": "« Courageux » et « brave » sont des synonymes : un chevalier brave est courageux !"
+      "explanation": "« Courageux » et « brave » sont des synonymes : un chevalier brave est courageux !",
+      "difficulty": 3
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est l'intrus dans cette liste : triangle, cercle, rouge, carré ?",
       "answers": [
-        { "text": "rouge", "correct": true },
-        { "text": "triangle", "correct": false },
-        { "text": "cercle", "correct": false },
-        { "text": "carré", "correct": false }
+        {
+          "text": "rouge",
+          "correct": true
+        },
+        {
+          "text": "triangle",
+          "correct": false
+        },
+        {
+          "text": "cercle",
+          "correct": false
+        },
+        {
+          "text": "carré",
+          "correct": false
+        }
       ],
-      "explanation": "« Rouge » est l'intrus : c'est une couleur, pas une forme géométrique comme les autres !"
+      "explanation": "« Rouge » est l'intrus : c'est une couleur, pas une forme géométrique comme les autres !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot convient dans la phrase : « Le chien ___ dans le jardin. »",
       "answers": [
-        { "text": "court", "correct": true },
-        { "text": "vole", "correct": false },
-        { "text": "nage", "correct": false },
-        { "text": "grimpe", "correct": false }
+        {
+          "text": "court",
+          "correct": true
+        },
+        {
+          "text": "vole",
+          "correct": false
+        },
+        {
+          "text": "nage",
+          "correct": false
+        },
+        {
+          "text": "grimpe",
+          "correct": false
+        }
       ],
-      "explanation": "Un chien court dans le jardin : c'est l'action la plus naturelle pour un chien !"
+      "explanation": "Un chien court dans le jardin : c'est l'action la plus naturelle pour un chien !",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est le contraire de « allumer » ?",
       "answers": [
-        { "text": "éteindre", "correct": true },
-        { "text": "brûler", "correct": false },
-        { "text": "chauffer", "correct": false },
-        { "text": "souffler", "correct": false }
+        {
+          "text": "éteindre",
+          "correct": true
+        },
+        {
+          "text": "brûler",
+          "correct": false
+        },
+        {
+          "text": "chauffer",
+          "correct": false
+        },
+        {
+          "text": "souffler",
+          "correct": false
+        }
       ],
-      "explanation": "Le contraire de « allumer » est « éteindre » : on allume la lumière, puis on l'éteint !"
+      "explanation": "Le contraire de « allumer » est « éteindre » : on allume la lumière, puis on l'éteint !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Combien de syllabes y a-t-il dans le mot « bicycle » ?",
       "answers": [
-        { "text": "3", "correct": true },
-        { "text": "2", "correct": false },
-        { "text": "4", "correct": false },
-        { "text": "1", "correct": false }
+        {
+          "text": "3",
+          "correct": true
+        },
+        {
+          "text": "2",
+          "correct": false
+        },
+        {
+          "text": "4",
+          "correct": false
+        },
+        {
+          "text": "1",
+          "correct": false
+        }
       ],
-      "explanation": "Bi-cy-cle : « bicycle » a 3 syllabes. Excellent !"
+      "explanation": "Bi-cy-cle : « bicycle » a 3 syllabes. Excellent !",
+      "difficulty": 3
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot de la famille de « jardin » désigne une personne qui s'occupe d'un jardin ?",
       "answers": [
-        { "text": "jardinier", "correct": true },
-        { "text": "jardinage", "correct": false },
-        { "text": "jardinière", "correct": false },
-        { "text": "jardinet", "correct": false }
+        {
+          "text": "jardinier",
+          "correct": true
+        },
+        {
+          "text": "jardinage",
+          "correct": false
+        },
+        {
+          "text": "jardinière",
+          "correct": false
+        },
+        {
+          "text": "jardinet",
+          "correct": false
+        }
       ],
-      "explanation": "Un jardinier est une personne qui s'occupe d'un jardin. C'est de la même famille que « jardin » !"
+      "explanation": "Un jardinier est une personne qui s'occupe d'un jardin. C'est de la même famille que « jardin » !",
+      "difficulty": 4
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel déterminant convient : « ___ ami de Léo est gentil. »",
       "answers": [
-        { "text": "L'", "correct": true },
-        { "text": "La", "correct": false },
-        { "text": "Un", "correct": false },
-        { "text": "Des", "correct": false }
+        {
+          "text": "L'",
+          "correct": true
+        },
+        {
+          "text": "La",
+          "correct": false
+        },
+        {
+          "text": "Un",
+          "correct": false
+        },
+        {
+          "text": "Des",
+          "correct": false
+        }
       ],
-      "explanation": "Devant une voyelle, « le » s'écrit « l' » : l'ami. C'est l'élision !"
+      "explanation": "Devant une voyelle, « le » s'écrit « l' » : l'ami. C'est l'élision !",
+      "difficulty": 3
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est le contraire de « avant » ?",
       "answers": [
-        { "text": "après", "correct": true },
-        { "text": "pendant", "correct": false },
-        { "text": "encore", "correct": false },
-        { "text": "toujours", "correct": false }
+        {
+          "text": "après",
+          "correct": true
+        },
+        {
+          "text": "pendant",
+          "correct": false
+        },
+        {
+          "text": "encore",
+          "correct": false
+        },
+        {
+          "text": "toujours",
+          "correct": false
+        }
       ],
-      "explanation": "Le contraire de « avant » est « après » : avant le repas, puis après le repas !"
+      "explanation": "Le contraire de « avant » est « après » : avant le repas, puis après le repas !",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Lis cette phrase : « Le renard roux bondit par-dessus la clôture. » De quelle couleur est le renard ?",
       "answers": [
-        { "text": "roux", "correct": true },
-        { "text": "brun", "correct": false },
-        { "text": "blanc", "correct": false },
-        { "text": "gris", "correct": false }
+        {
+          "text": "roux",
+          "correct": true
+        },
+        {
+          "text": "brun",
+          "correct": false
+        },
+        {
+          "text": "blanc",
+          "correct": false
+        },
+        {
+          "text": "gris",
+          "correct": false
+        }
       ],
-      "explanation": "La phrase dit « le renard roux » : tu as bien lu le mot difficile !"
+      "explanation": "La phrase dit « le renard roux » : tu as bien lu le mot difficile !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est le féminin de « acteur » ?",
       "answers": [
-        { "text": "actrice", "correct": true },
-        { "text": "acteuse", "correct": false },
-        { "text": "acteure", "correct": false },
-        { "text": "actresse", "correct": false }
+        {
+          "text": "actrice",
+          "correct": true
+        },
+        {
+          "text": "acteuse",
+          "correct": false
+        },
+        {
+          "text": "acteure",
+          "correct": false
+        },
+        {
+          "text": "actresse",
+          "correct": false
+        }
       ],
-      "explanation": "Le féminin de « acteur » est « actrice » : elle joue dans des films !"
+      "explanation": "Le féminin de « acteur » est « actrice » : elle joue dans des films !",
+      "difficulty": 3
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot veut dire la même chose que « chercher » ?",
       "answers": [
-        { "text": "rechercher", "correct": true },
-        { "text": "trouver", "correct": false },
-        { "text": "montrer", "correct": false },
-        { "text": "cacher", "correct": false }
+        {
+          "text": "rechercher",
+          "correct": true
+        },
+        {
+          "text": "trouver",
+          "correct": false
+        },
+        {
+          "text": "montrer",
+          "correct": false
+        },
+        {
+          "text": "cacher",
+          "correct": false
+        }
       ],
-      "explanation": "« Chercher » et « rechercher » sont des synonymes : on peut dire « je cherche » ou « je recherche »."
+      "explanation": "« Chercher » et « rechercher » sont des synonymes : on peut dire « je cherche » ou « je recherche ».",
+      "difficulty": 3
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est l'intrus dans cette liste : printemps, été, automne, matin ?",
       "answers": [
-        { "text": "matin", "correct": true },
-        { "text": "printemps", "correct": false },
-        { "text": "été", "correct": false },
-        { "text": "automne", "correct": false }
+        {
+          "text": "matin",
+          "correct": true
+        },
+        {
+          "text": "printemps",
+          "correct": false
+        },
+        {
+          "text": "été",
+          "correct": false
+        },
+        {
+          "text": "automne",
+          "correct": false
+        }
       ],
-      "explanation": "« Matin » est l'intrus : c'est un moment de la journée, pas une saison comme les autres !"
+      "explanation": "« Matin » est l'intrus : c'est un moment de la journée, pas une saison comme les autres !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Combien de syllabes y a-t-il dans le mot « ordinateur » ?",
       "answers": [
-        { "text": "5", "correct": true },
-        { "text": "4", "correct": false },
-        { "text": "6", "correct": false },
-        { "text": "3", "correct": false }
+        {
+          "text": "4",
+          "correct": true
+        },
+        {
+          "text": "5",
+          "correct": false
+        },
+        {
+          "text": "6",
+          "correct": false
+        },
+        {
+          "text": "3",
+          "correct": false
+        }
       ],
-      "explanation": "Or-di-na-teur : attention, on compte bien 4 syllabes ! Or-di-na-teur = 4. Relisons ensemble : or-di-na-teur. C'est 4 !"
+      "explanation": "Or-di-na-teur : on compte 4 syllabes. Relisons ensemble : or-di-na-teur.",
+      "difficulty": 4
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Combien de syllabes y a-t-il dans le mot « soleil » ?",
       "answers": [
-        { "text": "2", "correct": true },
-        { "text": "1", "correct": false },
-        { "text": "3", "correct": false },
-        { "text": "4", "correct": false }
+        {
+          "text": "2",
+          "correct": true
+        },
+        {
+          "text": "1",
+          "correct": false
+        },
+        {
+          "text": "3",
+          "correct": false
+        },
+        {
+          "text": "4",
+          "correct": false
+        }
       ],
-      "explanation": "So-leil : « soleil » a 2 syllabes. Il brille et tu as bien compté !"
+      "explanation": "So-leil : « soleil » a 2 syllabes. Il brille et tu as bien compté !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot convient dans la phrase : « Nous avons ___ notre promenade. » ?",
       "answers": [
-        { "text": "terminé", "correct": true },
-        { "text": "ouvert", "correct": false },
-        { "text": "mangé", "correct": false },
-        { "text": "lavé", "correct": false }
+        {
+          "text": "terminé",
+          "correct": true
+        },
+        {
+          "text": "ouvert",
+          "correct": false
+        },
+        {
+          "text": "mangé",
+          "correct": false
+        },
+        {
+          "text": "lavé",
+          "correct": false
+        }
       ],
-      "explanation": "On « termine » une promenade quand on s'arrête. Bravo !"
+      "explanation": "On « termine » une promenade quand on s'arrête. Bravo !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "multi",
       "statement": "Quels mots sont des synonymes de « maison » ?",
       "answers": [
-        { "text": "demeure", "correct": true },
-        { "text": "habitation", "correct": true },
-        { "text": "forêt", "correct": false },
-        { "text": "école", "correct": false }
+        {
+          "text": "demeure",
+          "correct": true
+        },
+        {
+          "text": "habitation",
+          "correct": true
+        },
+        {
+          "text": "forêt",
+          "correct": false
+        },
+        {
+          "text": "école",
+          "correct": false
+        }
       ],
-      "explanation": "« Demeure » et « habitation » veulent dire la même chose que « maison » : ce sont des synonymes !"
+      "explanation": "« Demeure » et « habitation » veulent dire la même chose que « maison » : ce sont des synonymes !",
+      "difficulty": 4
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "multi",
       "statement": "Quels mots font partie de la famille de « eau » ?",
       "answers": [
-        { "text": "arroser", "correct": false },
-        { "text": "aquatique", "correct": false },
-        { "text": "eaude", "correct": false },
-        { "text": "eau", "correct": true }
+        {
+          "text": "arroser",
+          "correct": false
+        },
+        {
+          "text": "aquatique",
+          "correct": false
+        },
+        {
+          "text": "eaude",
+          "correct": false
+        },
+        {
+          "text": "eau",
+          "correct": true
+        }
       ],
-      "explanation": "Seul « eau » fait partie du mot lui-même. « Arroser » et « aquatique » sont liés à l'eau mais viennent de racines latines différentes."
+      "explanation": "Seul « eau » fait partie du mot lui-même. « Arroser » et « aquatique » sont liés à l'eau mais viennent de racines latines différentes.",
+      "difficulty": 5
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "multi",
       "statement": "Quels mots sont des contraires de « facile » ?",
       "answers": [
-        { "text": "difficile", "correct": true },
-        { "text": "compliqué", "correct": true },
-        { "text": "simple", "correct": false },
-        { "text": "clair", "correct": false }
+        {
+          "text": "difficile",
+          "correct": true
+        },
+        {
+          "text": "compliqué",
+          "correct": true
+        },
+        {
+          "text": "simple",
+          "correct": false
+        },
+        {
+          "text": "clair",
+          "correct": false
+        }
       ],
-      "explanation": "« Difficile » et « compliqué » sont tous les deux des contraires de « facile » : ce sont des antonymes !"
+      "explanation": "« Difficile » et « compliqué » sont tous les deux des contraires de « facile » : ce sont des antonymes !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "multi",
       "statement": "Quels mots font partie de la famille du mot « chant » ?",
       "answers": [
-        { "text": "chanter", "correct": true },
-        { "text": "chanteur", "correct": true },
-        { "text": "chapeau", "correct": false },
-        { "text": "chanson", "correct": true }
+        {
+          "text": "chanter",
+          "correct": true
+        },
+        {
+          "text": "chanteur",
+          "correct": true
+        },
+        {
+          "text": "chapeau",
+          "correct": false
+        },
+        {
+          "text": "chanson",
+          "correct": true
+        }
       ],
-      "explanation": "« Chanter », « chanteur » et « chanson » viennent tous du mot « chant » : ils sont de la même famille !"
+      "explanation": "« Chanter », « chanteur » et « chanson » viennent tous du mot « chant » : ils sont de la même famille !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "multi",
       "statement": "Quels mots sont des noms d'animaux qui vivent dans l'eau ?",
       "answers": [
-        { "text": "poisson", "correct": true },
-        { "text": "dauphin", "correct": true },
-        { "text": "aigle", "correct": false },
-        { "text": "grenouille", "correct": true }
+        {
+          "text": "poisson",
+          "correct": true
+        },
+        {
+          "text": "dauphin",
+          "correct": true
+        },
+        {
+          "text": "aigle",
+          "correct": false
+        },
+        {
+          "text": "grenouille",
+          "correct": true
+        }
       ],
-      "explanation": "Le poisson, le dauphin et la grenouille vivent dans l'eau. L'aigle vit dans les airs et non dans l'eau !"
+      "explanation": "Le poisson, le dauphin et la grenouille vivent dans l'eau. L'aigle vit dans les airs et non dans l'eau !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "multi",
       "statement": "Quels mots peuvent compléter la phrase : « Je suis ___ de voir mes amis. »",
       "answers": [
-        { "text": "content", "correct": true },
-        { "text": "heureux", "correct": true },
-        { "text": "fatigué", "correct": false },
-        { "text": "ravi", "correct": true }
+        {
+          "text": "content",
+          "correct": true
+        },
+        {
+          "text": "heureux",
+          "correct": true
+        },
+        {
+          "text": "fatigué",
+          "correct": false
+        },
+        {
+          "text": "ravi",
+          "correct": true
+        }
       ],
-      "explanation": "« Content », « heureux » et « ravi » expriment tous la joie. Ces mots sont interchangeables ici !"
+      "explanation": "« Content », « heureux » et « ravi » expriment tous la joie. Ces mots sont interchangeables ici !",
+      "difficulty": 3
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "multi",
       "statement": "Lis cette phrase : « La petite fille cueille des fleurs rouges dans le jardin. » Quelles informations sont vraies ?",
       "answers": [
-        { "text": "La fille est dans le jardin.", "correct": true },
-        { "text": "Les fleurs sont rouges.", "correct": true },
-        { "text": "La fille est grande.", "correct": false },
-        { "text": "Elle cueille des fruits.", "correct": false }
+        {
+          "text": "La fille est dans le jardin.",
+          "correct": true
+        },
+        {
+          "text": "Les fleurs sont rouges.",
+          "correct": true
+        },
+        {
+          "text": "La fille est grande.",
+          "correct": false
+        },
+        {
+          "text": "Elle cueille des fruits.",
+          "correct": false
+        }
       ],
-      "explanation": "La phrase dit bien « jardin » et « fleurs rouges ». Elle est « petite » (pas grande) et cueille des fleurs (pas des fruits) !"
+      "explanation": "La phrase dit bien « jardin » et « fleurs rouges ». Elle est « petite » (pas grande) et cueille des fleurs (pas des fruits) !",
+      "difficulty": 3
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "multi",
       "statement": "Quels mots font partie de la famille du mot « école » ?",
       "answers": [
-        { "text": "écolier", "correct": true },
-        { "text": "scolarité", "correct": false },
-        { "text": "préscolarité", "correct": false },
-        { "text": "écolière", "correct": true }
+        {
+          "text": "écolier",
+          "correct": true
+        },
+        {
+          "text": "scolarité",
+          "correct": false
+        },
+        {
+          "text": "préscolarité",
+          "correct": false
+        },
+        {
+          "text": "écolière",
+          "correct": true
+        }
       ],
-      "explanation": "« Écolier » et « écolière » viennent directement du mot « école » : ils sont de la même famille !"
+      "explanation": "« Écolier » et « écolière » viennent directement du mot « école » : ils sont de la même famille !",
+      "difficulty": 4
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "multi",
       "statement": "Quels mots sont des jours de la semaine ?",
       "answers": [
-        { "text": "lundi", "correct": true },
-        { "text": "janvier", "correct": false },
-        { "text": "jeudi", "correct": true },
-        { "text": "samedi", "correct": true }
+        {
+          "text": "lundi",
+          "correct": true
+        },
+        {
+          "text": "janvier",
+          "correct": false
+        },
+        {
+          "text": "jeudi",
+          "correct": true
+        },
+        {
+          "text": "samedi",
+          "correct": true
+        }
       ],
-      "explanation": "Lundi, jeudi et samedi sont des jours de la semaine. Janvier est un mois de l'année !"
+      "explanation": "Lundi, jeudi et samedi sont des jours de la semaine. Janvier est un mois de l'année !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot veut dire la même chose que « apercevoir » ?",
       "answers": [
-        { "text": "voir", "correct": true },
-        { "text": "entendre", "correct": false },
-        { "text": "toucher", "correct": false },
-        { "text": "sentir", "correct": false }
+        {
+          "text": "voir",
+          "correct": true
+        },
+        {
+          "text": "entendre",
+          "correct": false
+        },
+        {
+          "text": "toucher",
+          "correct": false
+        },
+        {
+          "text": "sentir",
+          "correct": false
+        }
       ],
-      "explanation": "« Apercevoir » signifie voir quelque chose brièvement : c'est un synonyme de « voir »."
+      "explanation": "« Apercevoir » signifie voir quelque chose brièvement : c'est un synonyme de « voir ».",
+      "difficulty": 4
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est le contraire de « léger » ?",
       "answers": [
-        { "text": "lourd", "correct": true },
-        { "text": "petit", "correct": false },
-        { "text": "mince", "correct": false },
-        { "text": "doux", "correct": false }
+        {
+          "text": "lourd",
+          "correct": true
+        },
+        {
+          "text": "petit",
+          "correct": false
+        },
+        {
+          "text": "mince",
+          "correct": false
+        },
+        {
+          "text": "doux",
+          "correct": false
+        }
       ],
-      "explanation": "Le contraire de « léger » est « lourd » : une plume est légère, une pierre est lourde !"
+      "explanation": "Le contraire de « léger » est « lourd » : une plume est légère, une pierre est lourde !",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot convient dans la phrase : « Mon père lit le ___ chaque matin. »",
       "answers": [
-        { "text": "journal", "correct": true },
-        { "text": "chaussure", "correct": false },
-        { "text": "citron", "correct": false },
-        { "text": "ballon", "correct": false }
+        {
+          "text": "journal",
+          "correct": true
+        },
+        {
+          "text": "chaussure",
+          "correct": false
+        },
+        {
+          "text": "citron",
+          "correct": false
+        },
+        {
+          "text": "ballon",
+          "correct": false
+        }
       ],
-      "explanation": "On lit le journal pour avoir les nouvelles du jour. C'est le bon mot ici !"
+      "explanation": "On lit le journal pour avoir les nouvelles du jour. C'est le bon mot ici !",
+      "difficulty": 1
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est le pluriel de « œil » ?",
       "answers": [
-        { "text": "yeux", "correct": true },
-        { "text": "œils", "correct": false },
-        { "text": "œilles", "correct": false },
-        { "text": "œilleaux", "correct": false }
+        {
+          "text": "yeux",
+          "correct": true
+        },
+        {
+          "text": "œils",
+          "correct": false
+        },
+        {
+          "text": "œilles",
+          "correct": false
+        },
+        {
+          "text": "œilleaux",
+          "correct": false
+        }
       ],
-      "explanation": "Le pluriel de « œil » est « yeux » : c'est un pluriel irrégulier, il faut le retenir !"
+      "explanation": "Le pluriel de « œil » est « yeux » : c'est un pluriel irrégulier, il faut le retenir !",
+      "difficulty": 3
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est le féminin de « chanteur » ?",
       "answers": [
-        { "text": "chanteuse", "correct": true },
-        { "text": "chantrice", "correct": false },
-        { "text": "chanteresse", "correct": false },
-        { "text": "chanteure", "correct": false }
+        {
+          "text": "chanteuse",
+          "correct": true
+        },
+        {
+          "text": "chantrice",
+          "correct": false
+        },
+        {
+          "text": "chanteresse",
+          "correct": false
+        },
+        {
+          "text": "chanteure",
+          "correct": false
+        }
       ],
-      "explanation": "Le féminin de « chanteur » est « chanteuse » : elle chante très bien !"
+      "explanation": "Le féminin de « chanteur » est « chanteuse » : elle chante très bien !",
+      "difficulty": 2
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Lequel de ces mots vient en premier dans l'ordre alphabétique : tigre, serpent, renard, ours ?",
       "answers": [
-        { "text": "ours", "correct": true },
-        { "text": "renard", "correct": false },
-        { "text": "serpent", "correct": false },
-        { "text": "tigre", "correct": false }
+        {
+          "text": "ours",
+          "correct": true
+        },
+        {
+          "text": "renard",
+          "correct": false
+        },
+        {
+          "text": "serpent",
+          "correct": false
+        },
+        {
+          "text": "tigre",
+          "correct": false
+        }
       ],
-      "explanation": "O vient avant R, S et T dans l'alphabet. Donc « ours » est en premier !"
+      "explanation": "O vient avant R, S et T dans l'alphabet. Donc « ours » est en premier !",
+      "difficulty": 3
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Combien de syllabes y a-t-il dans le mot « araignée » ?",
       "answers": [
-        { "text": "3", "correct": true },
-        { "text": "2", "correct": false },
-        { "text": "4", "correct": false },
-        { "text": "5", "correct": false }
+        {
+          "text": "3",
+          "correct": true
+        },
+        {
+          "text": "2",
+          "correct": false
+        },
+        {
+          "text": "4",
+          "correct": false
+        },
+        {
+          "text": "5",
+          "correct": false
+        }
       ],
-      "explanation": "A-rai-gnée : « araignée » a 3 syllabes. Bien compté, même si le mot est difficile !"
+      "explanation": "A-rai-gnée : « araignée » a 3 syllabes. Bien compté, même si le mot est difficile !",
+      "difficulty": 3
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel est l'intrus dans cette liste : table, chaise, armoire, fenêtre ?",
       "answers": [
-        { "text": "fenêtre", "correct": true },
-        { "text": "table", "correct": false },
-        { "text": "chaise", "correct": false },
-        { "text": "armoire", "correct": false }
+        {
+          "text": "fenêtre",
+          "correct": true
+        },
+        {
+          "text": "table",
+          "correct": false
+        },
+        {
+          "text": "chaise",
+          "correct": false
+        },
+        {
+          "text": "armoire",
+          "correct": false
+        }
       ],
-      "explanation": "« Fenêtre » est l'intrus : c'est une ouverture dans le mur, pas un meuble comme les autres !"
+      "explanation": "« Fenêtre » est l'intrus : c'est une ouverture dans le mur, pas un meuble comme les autres !",
+      "difficulty": 3
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel mot veut dire la même chose que « répondre » ?",
       "answers": [
-        { "text": "répliquer", "correct": true },
-        { "text": "demander", "correct": false },
-        { "text": "questionner", "correct": false },
-        { "text": "ignorer", "correct": false }
+        {
+          "text": "répliquer",
+          "correct": true
+        },
+        {
+          "text": "demander",
+          "correct": false
+        },
+        {
+          "text": "questionner",
+          "correct": false
+        },
+        {
+          "text": "ignorer",
+          "correct": false
+        }
       ],
-      "explanation": "« Répondre » et « répliquer » sont des synonymes : les deux veulent dire donner une réponse."
+      "explanation": "« Répondre » et « répliquer » sont des synonymes : les deux veulent dire donner une réponse.",
+      "difficulty": 4
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "multi",
       "statement": "Quels mots font partie de la famille du mot « livre » ?",
       "answers": [
-        { "text": "librairie", "correct": true },
-        { "text": "livret", "correct": true },
-        { "text": "lecture", "correct": false },
-        { "text": "libraire", "correct": true }
+        {
+          "text": "librairie",
+          "correct": true
+        },
+        {
+          "text": "livret",
+          "correct": true
+        },
+        {
+          "text": "lecture",
+          "correct": false
+        },
+        {
+          "text": "libraire",
+          "correct": true
+        }
       ],
-      "explanation": "« Librairie », « livret » et « libraire » viennent du mot « livre ». « Lecture » vient du latin « legere » (lire), pas de « livre » !"
+      "explanation": "« Librairie », « livret » et « libraire » viennent du mot « livre ». « Lecture » vient du latin « legere » (lire), pas de « livre » !",
+      "difficulty": 5
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Quel déterminant convient : « ___ eau est froide. »",
       "answers": [
-        { "text": "L'", "correct": true },
-        { "text": "Le", "correct": false },
-        { "text": "Un", "correct": false },
-        { "text": "Des", "correct": false }
+        {
+          "text": "L'",
+          "correct": true
+        },
+        {
+          "text": "Le",
+          "correct": false
+        },
+        {
+          "text": "Un",
+          "correct": false
+        },
+        {
+          "text": "Des",
+          "correct": false
+        }
       ],
-      "explanation": "« Eau » est féminin singulier et commence par une voyelle, donc on écrit « l'eau » grâce à l'élision !"
+      "explanation": "« Eau » est féminin singulier et commence par une voyelle, donc on écrit « l'eau » grâce à l'élision !",
+      "difficulty": 3
     },
     {
       "subject": "Lecture et vocabulaire",
       "kind": "single",
       "statement": "Lis cette phrase : « Le matin, Théo range sa chambre avant d'aller à l'école. » Que fait Théo avant d'aller à l'école ?",
       "answers": [
-        { "text": "Il range sa chambre.", "correct": true },
-        { "text": "Il mange son petit-déjeuner.", "correct": false },
-        { "text": "Il se brosse les dents.", "correct": false },
-        { "text": "Il lit un livre.", "correct": false }
+        {
+          "text": "Il range sa chambre.",
+          "correct": true
+        },
+        {
+          "text": "Il mange son petit-déjeuner.",
+          "correct": false
+        },
+        {
+          "text": "Il se brosse les dents.",
+          "correct": false
+        },
+        {
+          "text": "Il lit un livre.",
+          "correct": false
+        }
       ],
-      "explanation": "La phrase dit clairement « range sa chambre avant d'aller à l'école ». Excellent !"
+      "explanation": "La phrase dit clairement « range sa chambre avant d'aller à l'école ». Excellent !",
+      "difficulty": 2
     }
   ]
 }

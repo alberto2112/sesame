@@ -184,6 +184,25 @@ fn validate_question(q: &ImportQuestion) -> Result<(), String> {
             q.answers.len()
         ));
     }
+
+    // Deux options au MÊME texte : l'enfant les voit deux fois (les options sont
+    // mélangées au rendu) et n'a aucun moyen de distinguer « la bonne » de « la
+    // mauvaise ». Il joue à pile ou face, et `grade` compare des IDENTIFIANTS,
+    // pas du texte : le mauvais jumeau est compté FAUX alors qu'il a écrit la
+    // bonne réponse. C'est arrivé — cf. « Ils ___ leurs parents » (voir), où
+    // « voient » figurait deux fois, une correcte et une incorrecte.
+    let mut seen: Vec<String> = Vec::with_capacity(q.answers.len());
+    for a in &q.answers {
+        let key = a.text.trim().to_lowercase();
+        if seen.contains(&key) {
+            return Err(format!(
+                "la réponse '{}' apparaît deux fois : l'enfant ne pourrait pas les distinguer",
+                a.text.trim()
+            ));
+        }
+        seen.push(key);
+    }
+
     match q.kind.as_str() {
         "single" => {
             if correct != 1 {

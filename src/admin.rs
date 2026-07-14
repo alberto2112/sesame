@@ -1585,6 +1585,20 @@ fn parse_question_form(pairs: &[(String, String)]) -> Result<ParsedQuestion, Str
     if answers.len() < 2 {
         return Err("Au moins 2 réponses non vides sont requises.".into());
     }
+
+    // Deux options au même texte : l'enfant les voit deux fois et joue à pile ou
+    // face. Même garde que l'importeur (importer.rs).
+    let mut seen: Vec<String> = Vec::with_capacity(answers.len());
+    for (text, _) in &answers {
+        let key = text.to_lowercase();
+        if seen.contains(&key) {
+            return Err(format!(
+                "La réponse « {text} » apparaît deux fois. L'enfant ne pourrait pas les distinguer."
+            ));
+        }
+        seen.push(key);
+    }
+
     match kind.as_str() {
         "single" => {
             if nb_correct != 1 {

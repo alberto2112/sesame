@@ -1,6 +1,9 @@
 {
   "subjects": [
-    { "name": "Culture générale", "weight": 1.0 }
+    {
+      "name": "Culture générale",
+      "weight": 1.0
+    }
   ],
   "questions": [
     {
@@ -8,912 +11,1900 @@
       "kind": "single",
       "statement": "Combien y a-t-il de jours dans une semaine ?",
       "answers": [
-        { "text": "7", "correct": true },
-        { "text": "5", "correct": false },
-        { "text": "10", "correct": false },
-        { "text": "12", "correct": false }
+        {
+          "text": "7",
+          "correct": true
+        },
+        {
+          "text": "5",
+          "correct": false
+        },
+        {
+          "text": "10",
+          "correct": false
+        },
+        {
+          "text": "12",
+          "correct": false
+        }
       ],
-      "explanation": "Une semaine compte 7 jours, du lundi au dimanche."
+      "explanation": "Une semaine compte 7 jours, du lundi au dimanche.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel est le premier jour de la semaine en France ?",
       "answers": [
-        { "text": "Lundi", "correct": true },
-        { "text": "Dimanche", "correct": false },
-        { "text": "Mardi", "correct": false },
-        { "text": "Samedi", "correct": false }
+        {
+          "text": "Lundi",
+          "correct": true
+        },
+        {
+          "text": "Dimanche",
+          "correct": false
+        },
+        {
+          "text": "Mardi",
+          "correct": false
+        },
+        {
+          "text": "Samedi",
+          "correct": false
+        }
       ],
-      "explanation": "En France, la semaine commence le lundi."
+      "explanation": "En France, la semaine commence le lundi.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Combien y a-t-il de mois dans une année ?",
       "answers": [
-        { "text": "12", "correct": true },
-        { "text": "10", "correct": false },
-        { "text": "7", "correct": false },
-        { "text": "365", "correct": false }
+        {
+          "text": "12",
+          "correct": true
+        },
+        {
+          "text": "10",
+          "correct": false
+        },
+        {
+          "text": "7",
+          "correct": false
+        },
+        {
+          "text": "365",
+          "correct": false
+        }
       ],
-      "explanation": "Il y a 12 mois dans une année, de janvier à décembre."
+      "explanation": "Il y a 12 mois dans une année, de janvier à décembre.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel est le dernier mois de l'année ?",
       "answers": [
-        { "text": "Décembre", "correct": true },
-        { "text": "Novembre", "correct": false },
-        { "text": "Janvier", "correct": false },
-        { "text": "Octobre", "correct": false }
+        {
+          "text": "Décembre",
+          "correct": true
+        },
+        {
+          "text": "Novembre",
+          "correct": false
+        },
+        {
+          "text": "Janvier",
+          "correct": false
+        },
+        {
+          "text": "Octobre",
+          "correct": false
+        }
       ],
-      "explanation": "Décembre est le douzième et dernier mois de l'année."
+      "explanation": "Décembre est le douzième et dernier mois de l'année.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel mois vient après janvier ?",
       "answers": [
-        { "text": "Février", "correct": true },
-        { "text": "Mars", "correct": false },
-        { "text": "Décembre", "correct": false },
-        { "text": "Avril", "correct": false }
+        {
+          "text": "Février",
+          "correct": true
+        },
+        {
+          "text": "Mars",
+          "correct": false
+        },
+        {
+          "text": "Décembre",
+          "correct": false
+        },
+        {
+          "text": "Avril",
+          "correct": false
+        }
       ],
-      "explanation": "Février est le deuxième mois de l'année, il vient après janvier."
+      "explanation": "Février est le deuxième mois de l'année, il vient après janvier.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Combien y a-t-il de saisons dans une année ?",
       "answers": [
-        { "text": "4", "correct": true },
-        { "text": "2", "correct": false },
-        { "text": "3", "correct": false },
-        { "text": "6", "correct": false }
+        {
+          "text": "4",
+          "correct": true
+        },
+        {
+          "text": "2",
+          "correct": false
+        },
+        {
+          "text": "3",
+          "correct": false
+        },
+        {
+          "text": "6",
+          "correct": false
+        }
       ],
-      "explanation": "Il y a 4 saisons : le printemps, l'été, l'automne et l'hiver."
+      "explanation": "Il y a 4 saisons : le printemps, l'été, l'automne et l'hiver.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quelle saison vient après l'hiver ?",
       "answers": [
-        { "text": "Le printemps", "correct": true },
-        { "text": "L'été", "correct": false },
-        { "text": "L'automne", "correct": false },
-        { "text": "Décembre", "correct": false }
+        {
+          "text": "Le printemps",
+          "correct": true
+        },
+        {
+          "text": "L'été",
+          "correct": false
+        },
+        {
+          "text": "L'automne",
+          "correct": false
+        },
+        {
+          "text": "Décembre",
+          "correct": false
+        }
       ],
-      "explanation": "Après l'hiver vient le printemps, quand les fleurs recommencent à pousser."
+      "explanation": "Après l'hiver vient le printemps, quand les fleurs recommencent à pousser.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Pendant quelle saison les feuilles des arbres tombent-elles ?",
       "answers": [
-        { "text": "L'automne", "correct": true },
-        { "text": "Le printemps", "correct": false },
-        { "text": "L'été", "correct": false },
-        { "text": "L'hiver", "correct": false }
+        {
+          "text": "L'automne",
+          "correct": true
+        },
+        {
+          "text": "Le printemps",
+          "correct": false
+        },
+        {
+          "text": "L'été",
+          "correct": false
+        },
+        {
+          "text": "L'hiver",
+          "correct": false
+        }
       ],
-      "explanation": "En automne, les feuilles changent de couleur et tombent des arbres."
+      "explanation": "En automne, les feuilles changent de couleur et tombent des arbres.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Combien y a-t-il d'heures dans une journée ?",
       "answers": [
-        { "text": "24", "correct": true },
-        { "text": "12", "correct": false },
-        { "text": "60", "correct": false },
-        { "text": "7", "correct": false }
+        {
+          "text": "24",
+          "correct": true
+        },
+        {
+          "text": "12",
+          "correct": false
+        },
+        {
+          "text": "60",
+          "correct": false
+        },
+        {
+          "text": "7",
+          "correct": false
+        }
       ],
-      "explanation": "Une journée complète dure 24 heures."
+      "explanation": "Une journée complète dure 24 heures.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Combien y a-t-il de minutes dans une heure ?",
       "answers": [
-        { "text": "60", "correct": true },
-        { "text": "100", "correct": false },
-        { "text": "24", "correct": false },
-        { "text": "30", "correct": false }
+        {
+          "text": "60",
+          "correct": true
+        },
+        {
+          "text": "100",
+          "correct": false
+        },
+        {
+          "text": "24",
+          "correct": false
+        },
+        {
+          "text": "30",
+          "correct": false
+        }
       ],
-      "explanation": "Il y a 60 minutes dans une heure."
+      "explanation": "Il y a 60 minutes dans une heure.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel est le pays dont Paris est la capitale ?",
       "answers": [
-        { "text": "La France", "correct": true },
-        { "text": "La Belgique", "correct": false },
-        { "text": "L'Italie", "correct": false },
-        { "text": "L'Espagne", "correct": false }
+        {
+          "text": "La France",
+          "correct": true
+        },
+        {
+          "text": "La Belgique",
+          "correct": false
+        },
+        {
+          "text": "L'Italie",
+          "correct": false
+        },
+        {
+          "text": "L'Espagne",
+          "correct": false
+        }
       ],
-      "explanation": "Paris est la capitale de la France."
+      "explanation": "Paris est la capitale de la France.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel est le plus grand océan du monde ?",
       "answers": [
-        { "text": "L'océan Pacifique", "correct": true },
-        { "text": "L'océan Atlantique", "correct": false },
-        { "text": "L'océan Indien", "correct": false },
-        { "text": "L'océan Arctique", "correct": false }
+        {
+          "text": "L'océan Pacifique",
+          "correct": true
+        },
+        {
+          "text": "L'océan Atlantique",
+          "correct": false
+        },
+        {
+          "text": "L'océan Indien",
+          "correct": false
+        },
+        {
+          "text": "L'océan Arctique",
+          "correct": false
+        }
       ],
-      "explanation": "L'océan Pacifique est le plus grand océan de notre planète."
+      "explanation": "L'océan Pacifique est le plus grand océan de notre planète.",
+      "difficulty": 4
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel océan se trouve à l'ouest de la France ?",
       "answers": [
-        { "text": "L'océan Atlantique", "correct": true },
-        { "text": "L'océan Pacifique", "correct": false },
-        { "text": "L'océan Indien", "correct": false },
-        { "text": "La Méditerranée", "correct": false }
+        {
+          "text": "L'océan Atlantique",
+          "correct": true
+        },
+        {
+          "text": "L'océan Pacifique",
+          "correct": false
+        },
+        {
+          "text": "L'océan Indien",
+          "correct": false
+        },
+        {
+          "text": "La Méditerranée",
+          "correct": false
+        }
       ],
-      "explanation": "L'océan Atlantique borde la côte ouest de la France."
+      "explanation": "L'océan Atlantique borde la côte ouest de la France.",
+      "difficulty": 3
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel est le plus haut sommet de France et d'Europe occidentale ?",
       "answers": [
-        { "text": "Le Mont-Blanc", "correct": true },
-        { "text": "Le Mont Fuji", "correct": false },
-        { "text": "Le Massif Central", "correct": false },
-        { "text": "Les Pyrénées", "correct": false }
+        {
+          "text": "Le Mont-Blanc",
+          "correct": true
+        },
+        {
+          "text": "Le Mont Fuji",
+          "correct": false
+        },
+        {
+          "text": "Le Massif Central",
+          "correct": false
+        },
+        {
+          "text": "Les Pyrénées",
+          "correct": false
+        }
       ],
-      "explanation": "Le Mont-Blanc, dans les Alpes, est le plus haut sommet de France."
+      "explanation": "Le Mont-Blanc, dans les Alpes, est le plus haut sommet de France.",
+      "difficulty": 4
     },
     {
       "subject": "Culture générale",
       "kind": "multi",
       "statement": "Quels sont les pays qui sont voisins de la France ? (plusieurs réponses correctes)",
       "answers": [
-        { "text": "L'Espagne", "correct": true },
-        { "text": "L'Italie", "correct": true },
-        { "text": "La Belgique", "correct": true },
-        { "text": "Le Portugal", "correct": false }
+        {
+          "text": "L'Espagne",
+          "correct": true
+        },
+        {
+          "text": "L'Italie",
+          "correct": true
+        },
+        {
+          "text": "La Belgique",
+          "correct": true
+        },
+        {
+          "text": "Le Portugal",
+          "correct": false
+        }
       ],
-      "explanation": "L'Espagne, l'Italie et la Belgique partagent une frontière avec la France. Le Portugal ne touche pas la France."
+      "explanation": "L'Espagne, l'Italie et la Belgique partagent une frontière avec la France. Le Portugal ne touche pas la France.",
+      "difficulty": 4
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "De quelles couleurs est le drapeau français ?",
       "answers": [
-        { "text": "Bleu, blanc et rouge", "correct": true },
-        { "text": "Rouge, blanc et vert", "correct": false },
-        { "text": "Bleu, jaune et rouge", "correct": false },
-        { "text": "Noir, rouge et or", "correct": false }
+        {
+          "text": "Bleu, blanc et rouge",
+          "correct": true
+        },
+        {
+          "text": "Rouge, blanc et vert",
+          "correct": false
+        },
+        {
+          "text": "Bleu, jaune et rouge",
+          "correct": false
+        },
+        {
+          "text": "Noir, rouge et or",
+          "correct": false
+        }
       ],
-      "explanation": "Le drapeau français est composé de trois bandes verticales : bleu, blanc et rouge."
+      "explanation": "Le drapeau français est composé de trois bandes verticales : bleu, blanc et rouge.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Combien de couleurs y a-t-il sur le drapeau français ?",
       "answers": [
-        { "text": "3", "correct": true },
-        { "text": "2", "correct": false },
-        { "text": "4", "correct": false },
-        { "text": "5", "correct": false }
+        {
+          "text": "3",
+          "correct": true
+        },
+        {
+          "text": "2",
+          "correct": false
+        },
+        {
+          "text": "4",
+          "correct": false
+        },
+        {
+          "text": "5",
+          "correct": false
+        }
       ],
-      "explanation": "Le drapeau français, appelé le tricolore, a 3 couleurs : bleu, blanc et rouge."
+      "explanation": "Le drapeau français, appelé le tricolore, a 3 couleurs : bleu, blanc et rouge.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Que fait un médecin ?",
       "answers": [
-        { "text": "Il soigne les malades", "correct": true },
-        { "text": "Il répare les voitures", "correct": false },
-        { "text": "Il construit des maisons", "correct": false },
-        { "text": "Il enseigne dans une école", "correct": false }
+        {
+          "text": "Il soigne les malades",
+          "correct": true
+        },
+        {
+          "text": "Il répare les voitures",
+          "correct": false
+        },
+        {
+          "text": "Il construit des maisons",
+          "correct": false
+        },
+        {
+          "text": "Il enseigne dans une école",
+          "correct": false
+        }
       ],
-      "explanation": "Le médecin examine et soigne les personnes qui sont malades."
+      "explanation": "Le médecin examine et soigne les personnes qui sont malades.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel outil utilise principalement un menuisier ?",
       "answers": [
-        { "text": "Le marteau et le bois", "correct": true },
-        { "text": "Le stéthoscope", "correct": false },
-        { "text": "Le pinceau", "correct": false },
-        { "text": "La calculatrice", "correct": false }
+        {
+          "text": "Le marteau et le bois",
+          "correct": true
+        },
+        {
+          "text": "Le stéthoscope",
+          "correct": false
+        },
+        {
+          "text": "Le pinceau",
+          "correct": false
+        },
+        {
+          "text": "La calculatrice",
+          "correct": false
+        }
       ],
-      "explanation": "Le menuisier travaille le bois avec des outils comme le marteau, le ciseau à bois et la scie."
+      "explanation": "Le menuisier travaille le bois avec des outils comme le marteau, le ciseau à bois et la scie.",
+      "difficulty": 3
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel métier conduit une ambulance ?",
       "answers": [
-        { "text": "Ambulancier", "correct": true },
-        { "text": "Pompier", "correct": false },
-        { "text": "Pilote", "correct": false },
-        { "text": "Chauffeur de taxi", "correct": false }
+        {
+          "text": "Ambulancier",
+          "correct": true
+        },
+        {
+          "text": "Pompier",
+          "correct": false
+        },
+        {
+          "text": "Pilote",
+          "correct": false
+        },
+        {
+          "text": "Chauffeur de taxi",
+          "correct": false
+        }
       ],
-      "explanation": "L'ambulancier conduit l'ambulance pour transporter les personnes blessées ou malades."
+      "explanation": "L'ambulancier conduit l'ambulance pour transporter les personnes blessées ou malades.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Que fait un boulanger ?",
       "answers": [
-        { "text": "Il fabrique du pain", "correct": true },
-        { "text": "Il vend des légumes", "correct": false },
-        { "text": "Il répare les chaussures", "correct": false },
-        { "text": "Il coupe les cheveux", "correct": false }
+        {
+          "text": "Il fabrique du pain",
+          "correct": true
+        },
+        {
+          "text": "Il vend des légumes",
+          "correct": false
+        },
+        {
+          "text": "Il répare les chaussures",
+          "correct": false
+        },
+        {
+          "text": "Il coupe les cheveux",
+          "correct": false
+        }
       ],
-      "explanation": "Le boulanger fabrique et vend du pain et des viennoiseries."
+      "explanation": "Le boulanger fabrique et vend du pain et des viennoiseries.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel est le métier de quelqu'un qui enseigne dans une école primaire ?",
       "answers": [
-        { "text": "Instituteur ou institutrice", "correct": true },
-        { "text": "Directeur d'entreprise", "correct": false },
-        { "text": "Médecin", "correct": false },
-        { "text": "Bibliothécaire", "correct": false }
+        {
+          "text": "Instituteur ou institutrice",
+          "correct": true
+        },
+        {
+          "text": "Directeur d'entreprise",
+          "correct": false
+        },
+        {
+          "text": "Médecin",
+          "correct": false
+        },
+        {
+          "text": "Bibliothécaire",
+          "correct": false
+        }
       ],
-      "explanation": "L'instituteur (ou l'institutrice) enseigne les matières scolaires aux enfants à l'école primaire."
+      "explanation": "L'instituteur (ou l'institutrice) enseigne les matières scolaires aux enfants à l'école primaire.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quelle fête célèbre-t-on le 25 décembre ?",
       "answers": [
-        { "text": "Noël", "correct": true },
-        { "text": "La Toussaint", "correct": false },
-        { "text": "Pâques", "correct": false },
-        { "text": "Le Nouvel An", "correct": false }
+        {
+          "text": "Noël",
+          "correct": true
+        },
+        {
+          "text": "La Toussaint",
+          "correct": false
+        },
+        {
+          "text": "Pâques",
+          "correct": false
+        },
+        {
+          "text": "Le Nouvel An",
+          "correct": false
+        }
       ],
-      "explanation": "Le 25 décembre, on fête Noël en famille et on s'offre des cadeaux."
+      "explanation": "Le 25 décembre, on fête Noël en famille et on s'offre des cadeaux.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Que retrouve-t-on souvent autour d'un gâteau d'anniversaire ?",
       "answers": [
-        { "text": "Des bougies", "correct": true },
-        { "text": "Des étoiles de mer", "correct": false },
-        { "text": "Des cailloux", "correct": false },
-        { "text": "Des feuilles d'automne", "correct": false }
+        {
+          "text": "Des bougies",
+          "correct": true
+        },
+        {
+          "text": "Des étoiles de mer",
+          "correct": false
+        },
+        {
+          "text": "Des cailloux",
+          "correct": false
+        },
+        {
+          "text": "Des feuilles d'automne",
+          "correct": false
+        }
       ],
-      "explanation": "On met des bougies sur le gâteau d'anniversaire, autant que l'age de la personne fêtée."
+      "explanation": "On met des bougies sur le gâteau d'anniversaire, autant que l'age de la personne fêtée.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel personnage apporte les cadeaux aux enfants sages à Noël ?",
       "answers": [
-        { "text": "Le Père Noël", "correct": true },
-        { "text": "La fée clochette", "correct": false },
-        { "text": "Le roi des neiges", "correct": false },
-        { "text": "Le lapin de Pâques", "correct": false }
+        {
+          "text": "Le Père Noël",
+          "correct": true
+        },
+        {
+          "text": "La fée clochette",
+          "correct": false
+        },
+        {
+          "text": "Le roi des neiges",
+          "correct": false
+        },
+        {
+          "text": "Le lapin de Pâques",
+          "correct": false
+        }
       ],
-      "explanation": "Dans la tradition, c'est le Père Noël qui apporte des cadeaux aux enfants sages pendant la nuit du 24 au 25 décembre."
+      "explanation": "Dans la tradition, c'est le Père Noël qui apporte des cadeaux aux enfants sages pendant la nuit du 24 au 25 décembre.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel moyen de transport roule sur des rails ?",
       "answers": [
-        { "text": "Le train", "correct": true },
-        { "text": "L'avion", "correct": false },
-        { "text": "Le bateau", "correct": false },
-        { "text": "La voiture", "correct": false }
+        {
+          "text": "Le train",
+          "correct": true
+        },
+        {
+          "text": "L'avion",
+          "correct": false
+        },
+        {
+          "text": "Le bateau",
+          "correct": false
+        },
+        {
+          "text": "La voiture",
+          "correct": false
+        }
       ],
-      "explanation": "Le train roule sur des rails en métal posés sur le sol."
+      "explanation": "Le train roule sur des rails en métal posés sur le sol.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel moyen de transport vole dans le ciel ?",
       "answers": [
-        { "text": "L'avion", "correct": true },
-        { "text": "Le bus", "correct": false },
-        { "text": "Le métro", "correct": false },
-        { "text": "Le tramway", "correct": false }
+        {
+          "text": "L'avion",
+          "correct": true
+        },
+        {
+          "text": "Le bus",
+          "correct": false
+        },
+        {
+          "text": "Le métro",
+          "correct": false
+        },
+        {
+          "text": "Le tramway",
+          "correct": false
+        }
       ],
-      "explanation": "L'avion est un moyen de transport qui vole dans le ciel grâce à ses ailes et ses moteurs."
+      "explanation": "L'avion est un moyen de transport qui vole dans le ciel grâce à ses ailes et ses moteurs.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel moyen de transport navigue sur l'eau ?",
       "answers": [
-        { "text": "Le bateau", "correct": true },
-        { "text": "Le vélo", "correct": false },
-        { "text": "Le train", "correct": false },
-        { "text": "La moto", "correct": false }
+        {
+          "text": "Le bateau",
+          "correct": true
+        },
+        {
+          "text": "Le vélo",
+          "correct": false
+        },
+        {
+          "text": "Le train",
+          "correct": false
+        },
+        {
+          "text": "La moto",
+          "correct": false
+        }
       ],
-      "explanation": "Le bateau est fait pour naviguer sur les rivières, les lacs et les mers."
+      "explanation": "Le bateau est fait pour naviguer sur les rivières, les lacs et les mers.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "multi",
       "statement": "Parmi ces animaux, lesquels sont des animaux domestiques ? (plusieurs réponses correctes)",
       "answers": [
-        { "text": "Le chien", "correct": true },
-        { "text": "Le chat", "correct": true },
-        { "text": "Le lion", "correct": false },
-        { "text": "L'éléphant", "correct": false }
+        {
+          "text": "Le chien",
+          "correct": true
+        },
+        {
+          "text": "Le chat",
+          "correct": true
+        },
+        {
+          "text": "Le lion",
+          "correct": false
+        },
+        {
+          "text": "L'éléphant",
+          "correct": false
+        }
       ],
-      "explanation": "Le chien et le chat sont des animaux qu'on élève à la maison. Le lion et l'éléphant vivent à l'état sauvage."
+      "explanation": "Le chien et le chat sont des animaux qu'on élève à la maison. Le lion et l'éléphant vivent à l'état sauvage.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel animal sauvage est connu pour sa longue trompe ?",
       "answers": [
-        { "text": "L'éléphant", "correct": true },
-        { "text": "La girafe", "correct": false },
-        { "text": "Le rhinocéros", "correct": false },
-        { "text": "Le zèbre", "correct": false }
+        {
+          "text": "L'éléphant",
+          "correct": true
+        },
+        {
+          "text": "La girafe",
+          "correct": false
+        },
+        {
+          "text": "Le rhinocéros",
+          "correct": false
+        },
+        {
+          "text": "Le zèbre",
+          "correct": false
+        }
       ],
-      "explanation": "L'éléphant possède une longue trompe qu'il utilise pour boire, attraper sa nourriture et communiquer."
+      "explanation": "L'éléphant possède une longue trompe qu'il utilise pour boire, attraper sa nourriture et communiquer.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel est le cri de la vache ?",
       "answers": [
-        { "text": "Meuglement", "correct": true },
-        { "text": "Aboiement", "correct": false },
-        { "text": "Rugissement", "correct": false },
-        { "text": "Miaulement", "correct": false }
+        {
+          "text": "Meuglement",
+          "correct": true
+        },
+        {
+          "text": "Aboiement",
+          "correct": false
+        },
+        {
+          "text": "Rugissement",
+          "correct": false
+        },
+        {
+          "text": "Miaulement",
+          "correct": false
+        }
       ],
-      "explanation": "La vache meugle, le chien aboie, le lion rugit et le chat miaule."
+      "explanation": "La vache meugle, le chien aboie, le lion rugit et le chat miaule.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel animal pond des œufs et donne aussi du lait ?",
       "answers": [
-        { "text": "Aucun : les animaux qui pondent ne donnent pas de lait", "correct": true },
-        { "text": "La poule", "correct": false },
-        { "text": "La vache", "correct": false },
-        { "text": "La chèvre", "correct": false }
+        {
+          "text": "Aucun : les animaux qui pondent ne donnent pas de lait",
+          "correct": true
+        },
+        {
+          "text": "La poule",
+          "correct": false
+        },
+        {
+          "text": "La vache",
+          "correct": false
+        },
+        {
+          "text": "La chèvre",
+          "correct": false
+        }
       ],
-      "explanation": "Les animaux qui pondent des œufs (oiseaux, reptiles) ne produisent pas de lait. Les mammifères donnent du lait mais n'pondent pas d'œufs."
+      "explanation": "Les animaux qui pondent des œufs (oiseaux, reptiles) ne produisent pas de lait. Les mammifères donnent du lait mais n'pondent pas d'œufs.",
+      "difficulty": 5
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel animal est le meilleur ami de l'homme, selon le dicton ?",
       "answers": [
-        { "text": "Le chien", "correct": true },
-        { "text": "Le chat", "correct": false },
-        { "text": "Le cheval", "correct": false },
-        { "text": "Le lapin", "correct": false }
+        {
+          "text": "Le chien",
+          "correct": true
+        },
+        {
+          "text": "Le chat",
+          "correct": false
+        },
+        {
+          "text": "Le cheval",
+          "correct": false
+        },
+        {
+          "text": "Le lapin",
+          "correct": false
+        }
       ],
-      "explanation": "On dit que le chien est le meilleur ami de l'homme car il est fidèle et loyal."
+      "explanation": "On dit que le chien est le meilleur ami de l'homme car il est fidèle et loyal.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Que sert un couteau dans la cuisine ?",
       "answers": [
-        { "text": "À couper les aliments", "correct": true },
-        { "text": "À mélanger les soupes", "correct": false },
-        { "text": "À mesurer la température", "correct": false },
-        { "text": "À ouvrir les boîtes de conserve", "correct": false }
+        {
+          "text": "À couper les aliments",
+          "correct": true
+        },
+        {
+          "text": "À mélanger les soupes",
+          "correct": false
+        },
+        {
+          "text": "À mesurer la température",
+          "correct": false
+        },
+        {
+          "text": "À ouvrir les boîtes de conserve",
+          "correct": false
+        }
       ],
-      "explanation": "Le couteau est un outil de cuisine qui sert à couper les légumes, la viande et les fruits."
+      "explanation": "Le couteau est un outil de cuisine qui sert à couper les légumes, la viande et les fruits.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "À quoi sert un réfrigérateur ?",
       "answers": [
-        { "text": "À conserver les aliments au frais", "correct": true },
-        { "text": "À cuire les plats", "correct": false },
-        { "text": "À laver le linge", "correct": false },
-        { "text": "À chauffer la maison", "correct": false }
+        {
+          "text": "À conserver les aliments au frais",
+          "correct": true
+        },
+        {
+          "text": "À cuire les plats",
+          "correct": false
+        },
+        {
+          "text": "À laver le linge",
+          "correct": false
+        },
+        {
+          "text": "À chauffer la maison",
+          "correct": false
+        }
       ],
-      "explanation": "Le réfrigérateur garde les aliments au froid pour qu'ils restent frais plus longtemps."
+      "explanation": "Le réfrigérateur garde les aliments au froid pour qu'ils restent frais plus longtemps.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "À quoi sert un parapluie ?",
       "answers": [
-        { "text": "À se protéger de la pluie", "correct": true },
-        { "text": "À voler dans les airs", "correct": false },
-        { "text": "À faire de l'ombre en été", "correct": false },
-        { "text": "À mesurer la vitesse du vent", "correct": false }
+        {
+          "text": "À se protéger de la pluie",
+          "correct": true
+        },
+        {
+          "text": "À voler dans les airs",
+          "correct": false
+        },
+        {
+          "text": "À faire de l'ombre en été",
+          "correct": false
+        },
+        {
+          "text": "À mesurer la vitesse du vent",
+          "correct": false
+        }
       ],
-      "explanation": "On utilise un parapluie pour ne pas se mouiller quand il pleut."
+      "explanation": "On utilise un parapluie pour ne pas se mouiller quand il pleut.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "À quoi sert une boîte aux lettres ?",
       "answers": [
-        { "text": "À recevoir du courrier", "correct": true },
-        { "text": "À ranger ses jouets", "correct": false },
-        { "text": "À stocker des livres", "correct": false },
-        { "text": "À garder la nourriture", "correct": false }
+        {
+          "text": "À recevoir du courrier",
+          "correct": true
+        },
+        {
+          "text": "À ranger ses jouets",
+          "correct": false
+        },
+        {
+          "text": "À stocker des livres",
+          "correct": false
+        },
+        {
+          "text": "À garder la nourriture",
+          "correct": false
+        }
       ],
-      "explanation": "La boîte aux lettres est posée devant la maison pour recevoir les lettres et les colis."
+      "explanation": "La boîte aux lettres est posée devant la maison pour recevoir les lettres et les colis.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Que signifie un feu rouge pour un piéton ?",
       "answers": [
-        { "text": "S'arrêter et attendre", "correct": true },
-        { "text": "Traverser en courant", "correct": false },
-        { "text": "Regarder son téléphone", "correct": false },
-        { "text": "Avancer normalement", "correct": false }
+        {
+          "text": "S'arrêter et attendre",
+          "correct": true
+        },
+        {
+          "text": "Traverser en courant",
+          "correct": false
+        },
+        {
+          "text": "Regarder son téléphone",
+          "correct": false
+        },
+        {
+          "text": "Avancer normalement",
+          "correct": false
+        }
       ],
-      "explanation": "Un feu rouge signifie STOP ! Il faut toujours s'arrêter et attendre que le feu passe au vert."
+      "explanation": "Un feu rouge signifie STOP ! Il faut toujours s'arrêter et attendre que le feu passe au vert.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Que signifie un feu vert pour un conducteur ?",
       "answers": [
-        { "text": "Il peut avancer", "correct": true },
-        { "text": "Il doit s'arrêter", "correct": false },
-        { "text": "Il doit faire demi-tour", "correct": false },
-        { "text": "Il doit klaxonner", "correct": false }
+        {
+          "text": "Il peut avancer",
+          "correct": true
+        },
+        {
+          "text": "Il doit s'arrêter",
+          "correct": false
+        },
+        {
+          "text": "Il doit faire demi-tour",
+          "correct": false
+        },
+        {
+          "text": "Il doit klaxonner",
+          "correct": false
+        }
       ],
-      "explanation": "Un feu vert indique au conducteur qu'il peut avancer en sécurité."
+      "explanation": "Un feu vert indique au conducteur qu'il peut avancer en sécurité.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Que doit-on faire avant de traverser la rue ?",
       "answers": [
-        { "text": "Regarder à gauche, à droite, puis à gauche encore", "correct": true },
-        { "text": "Fermer les yeux et courir", "correct": false },
-        { "text": "Regarder uniquement à droite", "correct": false },
-        { "text": "Attendre qu'un bus passe", "correct": false }
+        {
+          "text": "Regarder à gauche, à droite, puis à gauche encore",
+          "correct": true
+        },
+        {
+          "text": "Fermer les yeux et courir",
+          "correct": false
+        },
+        {
+          "text": "Regarder uniquement à droite",
+          "correct": false
+        },
+        {
+          "text": "Attendre qu'un bus passe",
+          "correct": false
+        }
       ],
-      "explanation": "Pour traverser en sécurité, on regarde à gauche, à droite, puis encore à gauche avant de s'engager."
+      "explanation": "Pour traverser en sécurité, on regarde à gauche, à droite, puis encore à gauche avant de s'engager.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Lequel de ces aliments est un fruit ?",
       "answers": [
-        { "text": "La pomme", "correct": true },
-        { "text": "La carotte", "correct": false },
-        { "text": "La laitue", "correct": false },
-        { "text": "L'oignon", "correct": false }
+        {
+          "text": "La pomme",
+          "correct": true
+        },
+        {
+          "text": "La carotte",
+          "correct": false
+        },
+        {
+          "text": "La laitue",
+          "correct": false
+        },
+        {
+          "text": "L'oignon",
+          "correct": false
+        }
       ],
-      "explanation": "La pomme est un fruit qui pousse sur un arbre appelé le pommier."
+      "explanation": "La pomme est un fruit qui pousse sur un arbre appelé le pommier.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Lequel de ces aliments est un légume ?",
       "answers": [
-        { "text": "La tomate", "correct": true },
-        { "text": "La fraise", "correct": false },
-        { "text": "La banane", "correct": false },
-        { "text": "La poire", "correct": false }
+        {
+          "text": "La tomate",
+          "correct": true
+        },
+        {
+          "text": "La fraise",
+          "correct": false
+        },
+        {
+          "text": "La banane",
+          "correct": false
+        },
+        {
+          "text": "La poire",
+          "correct": false
+        }
       ],
-      "explanation": "La tomate est un légume (même si botaniquement c'est un fruit, on la mange comme légume en cuisine)."
+      "explanation": "La tomate est un légume (même si botaniquement c'est un fruit, on la mange comme légume en cuisine).",
+      "difficulty": 3
     },
     {
       "subject": "Culture générale",
       "kind": "multi",
       "statement": "Parmi ces aliments, lesquels sont des fruits ? (plusieurs réponses correctes)",
       "answers": [
-        { "text": "La banane", "correct": true },
-        { "text": "L'orange", "correct": true },
-        { "text": "La pomme de terre", "correct": false },
-        { "text": "Le poireau", "correct": false }
+        {
+          "text": "La banane",
+          "correct": true
+        },
+        {
+          "text": "L'orange",
+          "correct": true
+        },
+        {
+          "text": "La pomme de terre",
+          "correct": false
+        },
+        {
+          "text": "Le poireau",
+          "correct": false
+        }
       ],
-      "explanation": "La banane et l'orange sont des fruits. La pomme de terre et le poireau sont des légumes."
+      "explanation": "La banane et l'orange sont des fruits. La pomme de terre et le poireau sont des légumes.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quelle couleur obtient-on en mélangeant du bleu et du jaune ?",
       "answers": [
-        { "text": "Du vert", "correct": true },
-        { "text": "Du violet", "correct": false },
-        { "text": "Du orange", "correct": false },
-        { "text": "Du marron", "correct": false }
+        {
+          "text": "Du vert",
+          "correct": true
+        },
+        {
+          "text": "Du violet",
+          "correct": false
+        },
+        {
+          "text": "Du orange",
+          "correct": false
+        },
+        {
+          "text": "Du marron",
+          "correct": false
+        }
       ],
-      "explanation": "En peinture, mélanger du bleu et du jaune donne du vert."
+      "explanation": "En peinture, mélanger du bleu et du jaune donne du vert.",
+      "difficulty": 3
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quelle couleur obtient-on en mélangeant du rouge et du bleu ?",
       "answers": [
-        { "text": "Du violet", "correct": true },
-        { "text": "Du vert", "correct": false },
-        { "text": "Du orange", "correct": false },
-        { "text": "Du rose", "correct": false }
+        {
+          "text": "Du violet",
+          "correct": true
+        },
+        {
+          "text": "Du vert",
+          "correct": false
+        },
+        {
+          "text": "Du orange",
+          "correct": false
+        },
+        {
+          "text": "Du rose",
+          "correct": false
+        }
       ],
-      "explanation": "En mélangeant du rouge et du bleu, on obtient du violet ou du mauve."
+      "explanation": "En mélangeant du rouge et du bleu, on obtient du violet ou du mauve.",
+      "difficulty": 3
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Combien y a-t-il de jours dans le mois de février d'une année ordinaire (non bissextile) ?",
       "answers": [
-        { "text": "28", "correct": true },
-        { "text": "30", "correct": false },
-        { "text": "31", "correct": false },
-        { "text": "29", "correct": false }
+        {
+          "text": "28",
+          "correct": true
+        },
+        {
+          "text": "30",
+          "correct": false
+        },
+        {
+          "text": "31",
+          "correct": false
+        },
+        {
+          "text": "29",
+          "correct": false
+        }
       ],
-      "explanation": "Février a 28 jours les années ordinaires, et 29 jours les années bissextiles."
+      "explanation": "Février a 28 jours les années ordinaires, et 29 jours les années bissextiles.",
+      "difficulty": 4
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel est le mois le plus court de l'année ?",
       "answers": [
-        { "text": "Février", "correct": true },
-        { "text": "Janvier", "correct": false },
-        { "text": "Novembre", "correct": false },
-        { "text": "Avril", "correct": false }
+        {
+          "text": "Février",
+          "correct": true
+        },
+        {
+          "text": "Janvier",
+          "correct": false
+        },
+        {
+          "text": "Novembre",
+          "correct": false
+        },
+        {
+          "text": "Avril",
+          "correct": false
+        }
       ],
-      "explanation": "Février est le mois le plus court : il n'a que 28 ou 29 jours."
+      "explanation": "Février est le mois le plus court : il n'a que 28 ou 29 jours.",
+      "difficulty": 3
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Dans quelle chaîne de montagnes se trouve le Mont-Blanc ?",
       "answers": [
-        { "text": "Les Alpes", "correct": true },
-        { "text": "Les Pyrénées", "correct": false },
-        { "text": "Les Vosges", "correct": false },
-        { "text": "Le Massif central", "correct": false }
+        {
+          "text": "Les Alpes",
+          "correct": true
+        },
+        {
+          "text": "Les Pyrénées",
+          "correct": false
+        },
+        {
+          "text": "Les Vosges",
+          "correct": false
+        },
+        {
+          "text": "Le Massif central",
+          "correct": false
+        }
       ],
-      "explanation": "Le Mont-Blanc se trouve dans les Alpes, à la frontière entre la France et l'Italie."
+      "explanation": "Le Mont-Blanc se trouve dans les Alpes, à la frontière entre la France et l'Italie.",
+      "difficulty": 4
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel fleuve traverse Paris ?",
       "answers": [
-        { "text": "La Seine", "correct": true },
-        { "text": "La Loire", "correct": false },
-        { "text": "Le Rhône", "correct": false },
-        { "text": "La Garonne", "correct": false }
+        {
+          "text": "La Seine",
+          "correct": true
+        },
+        {
+          "text": "La Loire",
+          "correct": false
+        },
+        {
+          "text": "Le Rhône",
+          "correct": false
+        },
+        {
+          "text": "La Garonne",
+          "correct": false
+        }
       ],
-      "explanation": "La Seine traverse Paris et continue jusqu'à la Manche."
+      "explanation": "La Seine traverse Paris et continue jusqu'à la Manche.",
+      "difficulty": 3
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Que fait un pompier ?",
       "answers": [
-        { "text": "Il éteint les incendies et secourt les personnes en danger", "correct": true },
-        { "text": "Il livre le courrier", "correct": false },
-        { "text": "Il répare les routes", "correct": false },
-        { "text": "Il plante des arbres", "correct": false }
+        {
+          "text": "Il éteint les incendies et secourt les personnes en danger",
+          "correct": true
+        },
+        {
+          "text": "Il livre le courrier",
+          "correct": false
+        },
+        {
+          "text": "Il répare les routes",
+          "correct": false
+        },
+        {
+          "text": "Il plante des arbres",
+          "correct": false
+        }
       ],
-      "explanation": "Le pompier éteint les incendies, porte secours aux blessés et intervient lors d'accidents."
+      "explanation": "Le pompier éteint les incendies, porte secours aux blessés et intervient lors d'accidents.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel outil utilise principalement un peintre en bâtiment ?",
       "answers": [
-        { "text": "Un pinceau ou un rouleau", "correct": true },
-        { "text": "Une scie", "correct": false },
-        { "text": "Un stéthoscope", "correct": false },
-        { "text": "Un thermomètre", "correct": false }
+        {
+          "text": "Un pinceau ou un rouleau",
+          "correct": true
+        },
+        {
+          "text": "Une scie",
+          "correct": false
+        },
+        {
+          "text": "Un stéthoscope",
+          "correct": false
+        },
+        {
+          "text": "Un thermomètre",
+          "correct": false
+        }
       ],
-      "explanation": "Le peintre en bâtiment utilise un pinceau ou un rouleau pour peindre les murs."
+      "explanation": "Le peintre en bâtiment utilise un pinceau ou un rouleau pour peindre les murs.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel animal est le roi de la jungle ?",
       "answers": [
-        { "text": "Le lion", "correct": true },
-        { "text": "Le tigre", "correct": false },
-        { "text": "L'ours", "correct": false },
-        { "text": "Le loup", "correct": false }
+        {
+          "text": "Le lion",
+          "correct": true
+        },
+        {
+          "text": "Le tigre",
+          "correct": false
+        },
+        {
+          "text": "L'ours",
+          "correct": false
+        },
+        {
+          "text": "Le loup",
+          "correct": false
+        }
       ],
-      "explanation": "Dans les contes et les fables, le lion est souvent appelé le roi de la jungle."
+      "explanation": "Dans les contes et les fables, le lion est souvent appelé le roi de la jungle.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Combien de pattes a un insecte ?",
       "answers": [
-        { "text": "6", "correct": true },
-        { "text": "4", "correct": false },
-        { "text": "8", "correct": false },
-        { "text": "10", "correct": false }
+        {
+          "text": "6",
+          "correct": true
+        },
+        {
+          "text": "4",
+          "correct": false
+        },
+        {
+          "text": "8",
+          "correct": false
+        },
+        {
+          "text": "10",
+          "correct": false
+        }
       ],
-      "explanation": "Tous les insectes ont 6 pattes. Les araignées, elles, en ont 8 et ne sont pas des insectes."
+      "explanation": "Tous les insectes ont 6 pattes. Les araignées, elles, en ont 8 et ne sont pas des insectes.",
+      "difficulty": 4
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel insecte produit du miel ?",
       "answers": [
-        { "text": "L'abeille", "correct": true },
-        { "text": "La guêpe", "correct": false },
-        { "text": "Le papillon", "correct": false },
-        { "text": "La coccinelle", "correct": false }
+        {
+          "text": "L'abeille",
+          "correct": true
+        },
+        {
+          "text": "La guêpe",
+          "correct": false
+        },
+        {
+          "text": "Le papillon",
+          "correct": false
+        },
+        {
+          "text": "La coccinelle",
+          "correct": false
+        }
       ],
-      "explanation": "L'abeille récolte le nectar des fleurs pour fabriquer du miel dans la ruche."
+      "explanation": "L'abeille récolte le nectar des fleurs pour fabriquer du miel dans la ruche.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Où vit un poisson ?",
       "answers": [
-        { "text": "Dans l'eau", "correct": true },
-        { "text": "Dans les arbres", "correct": false },
-        { "text": "Dans les terriers", "correct": false },
-        { "text": "Dans les nuages", "correct": false }
+        {
+          "text": "Dans l'eau",
+          "correct": true
+        },
+        {
+          "text": "Dans les arbres",
+          "correct": false
+        },
+        {
+          "text": "Dans les terriers",
+          "correct": false
+        },
+        {
+          "text": "Dans les nuages",
+          "correct": false
+        }
       ],
-      "explanation": "Les poissons respirent sous l'eau grâce à leurs branchies et y passent toute leur vie."
+      "explanation": "Les poissons respirent sous l'eau grâce à leurs branchies et y passent toute leur vie.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "À quoi sert une ceinture de sécurité dans une voiture ?",
       "answers": [
-        { "text": "À protéger les passagers en cas d'accident", "correct": true },
-        { "text": "À tenir le pantalon", "correct": false },
-        { "text": "À signaler la voiture aux autres conducteurs", "correct": false },
-        { "text": "À attacher les bagages", "correct": false }
+        {
+          "text": "À protéger les passagers en cas d'accident",
+          "correct": true
+        },
+        {
+          "text": "À tenir le pantalon",
+          "correct": false
+        },
+        {
+          "text": "À signaler la voiture aux autres conducteurs",
+          "correct": false
+        },
+        {
+          "text": "À attacher les bagages",
+          "correct": false
+        }
       ],
-      "explanation": "La ceinture de sécurité protège les passagers en les maintenant sur leur siège en cas de choc."
+      "explanation": "La ceinture de sécurité protège les passagers en les maintenant sur leur siège en cas de choc.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Que signifie un feu orange pour un conducteur ?",
       "answers": [
-        { "text": "Se préparer à s'arrêter", "correct": true },
-        { "text": "Accélérer", "correct": false },
-        { "text": "Faire demi-tour", "correct": false },
-        { "text": "Klaxonner", "correct": false }
+        {
+          "text": "Se préparer à s'arrêter",
+          "correct": true
+        },
+        {
+          "text": "Accélérer",
+          "correct": false
+        },
+        {
+          "text": "Faire demi-tour",
+          "correct": false
+        },
+        {
+          "text": "Klaxonner",
+          "correct": false
+        }
       ],
-      "explanation": "Le feu orange est un avertissement : il faut ralentir et se préparer à s'arrêter car le rouge va arriver."
+      "explanation": "Le feu orange est un avertissement : il faut ralentir et se préparer à s'arrêter car le rouge va arriver.",
+      "difficulty": 3
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quelle est la forme d'un panneau stop ?",
       "answers": [
-        { "text": "Octogone (8 côtés)", "correct": true },
-        { "text": "Rond", "correct": false },
-        { "text": "Triangle", "correct": false },
-        { "text": "Carré", "correct": false }
+        {
+          "text": "Octogone (8 côtés)",
+          "correct": true
+        },
+        {
+          "text": "Rond",
+          "correct": false
+        },
+        {
+          "text": "Triangle",
+          "correct": false
+        },
+        {
+          "text": "Carré",
+          "correct": false
+        }
       ],
-      "explanation": "Le panneau STOP a une forme particulière à 8 côtés (octogone) pour être reconnaissable de loin."
+      "explanation": "Le panneau STOP a une forme particulière à 8 côtés (octogone) pour être reconnaissable de loin.",
+      "difficulty": 4
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Dans quel fruit trouve-t-on des pépins en son centre ?",
       "answers": [
-        { "text": "Dans la pomme", "correct": true },
-        { "text": "Dans la banane", "correct": false },
-        { "text": "Dans la fraise", "correct": false },
-        { "text": "Dans la cerise", "correct": false }
+        {
+          "text": "Dans la pomme",
+          "correct": true
+        },
+        {
+          "text": "Dans la banane",
+          "correct": false
+        },
+        {
+          "text": "Dans la fraise",
+          "correct": false
+        },
+        {
+          "text": "Dans la cerise",
+          "correct": false
+        }
       ],
-      "explanation": "En coupant une pomme, on trouve des pépins en son centre."
+      "explanation": "En coupant une pomme, on trouve des pépins en son centre.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quelle couleur ont les feuilles des arbres au printemps ?",
       "answers": [
-        { "text": "Vert", "correct": true },
-        { "text": "Jaune", "correct": false },
-        { "text": "Rouge", "correct": false },
-        { "text": "Blanc", "correct": false }
+        {
+          "text": "Vert",
+          "correct": true
+        },
+        {
+          "text": "Jaune",
+          "correct": false
+        },
+        {
+          "text": "Rouge",
+          "correct": false
+        },
+        {
+          "text": "Blanc",
+          "correct": false
+        }
       ],
-      "explanation": "Au printemps, les arbres font de nouvelles feuilles bien vertes."
+      "explanation": "Au printemps, les arbres font de nouvelles feuilles bien vertes.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel légume est orange et pousse sous terre ?",
       "answers": [
-        { "text": "La carotte", "correct": true },
-        { "text": "La tomate", "correct": false },
-        { "text": "Le concombre", "correct": false },
-        { "text": "Le chou", "correct": false }
+        {
+          "text": "La carotte",
+          "correct": true
+        },
+        {
+          "text": "La tomate",
+          "correct": false
+        },
+        {
+          "text": "Le concombre",
+          "correct": false
+        },
+        {
+          "text": "Le chou",
+          "correct": false
+        }
       ],
-      "explanation": "La carotte est un légume orange que l'on plante en terre et qu'on arrache pour la manger."
+      "explanation": "La carotte est un légume orange que l'on plante en terre et qu'on arrache pour la manger.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel fruit tropical est jaune, long et courbé ?",
       "answers": [
-        { "text": "La banane", "correct": true },
-        { "text": "L'ananas", "correct": false },
-        { "text": "La mangue", "correct": false },
-        { "text": "La noix de coco", "correct": false }
+        {
+          "text": "La banane",
+          "correct": true
+        },
+        {
+          "text": "L'ananas",
+          "correct": false
+        },
+        {
+          "text": "La mangue",
+          "correct": false
+        },
+        {
+          "text": "La noix de coco",
+          "correct": false
+        }
       ],
-      "explanation": "La banane est un fruit tropical jaune, long et courbé que l'on épluche avant de manger."
+      "explanation": "La banane est un fruit tropical jaune, long et courbé que l'on épluche avant de manger.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel moyen de transport à deux roues fonctionne sans moteur ?",
       "answers": [
-        { "text": "Le vélo", "correct": true },
-        { "text": "La moto", "correct": false },
-        { "text": "Le scooter", "correct": false },
-        { "text": "La trottinette électrique", "correct": false }
+        {
+          "text": "Le vélo",
+          "correct": true
+        },
+        {
+          "text": "La moto",
+          "correct": false
+        },
+        {
+          "text": "Le scooter",
+          "correct": false
+        },
+        {
+          "text": "La trottinette électrique",
+          "correct": false
+        }
       ],
-      "explanation": "Le vélo fonctionne grâce aux jambes du cycliste qui pédale, sans besoin de moteur ni d'essence."
+      "explanation": "Le vélo fonctionne grâce aux jambes du cycliste qui pédale, sans besoin de moteur ni d'essence.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Combien de roues a une voiture normale ?",
       "answers": [
-        { "text": "4", "correct": true },
-        { "text": "2", "correct": false },
-        { "text": "3", "correct": false },
-        { "text": "6", "correct": false }
+        {
+          "text": "4",
+          "correct": true
+        },
+        {
+          "text": "2",
+          "correct": false
+        },
+        {
+          "text": "3",
+          "correct": false
+        },
+        {
+          "text": "6",
+          "correct": false
+        }
       ],
-      "explanation": "Une voiture classique possède 4 roues."
+      "explanation": "Une voiture classique possède 4 roues.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "multi",
       "statement": "Parmi ces moyens de transport, lesquels peuvent se déplacer sur l'eau ? (plusieurs réponses correctes)",
       "answers": [
-        { "text": "Le bateau", "correct": true },
-        { "text": "Le sous-marin", "correct": true },
-        { "text": "Le train", "correct": false },
-        { "text": "La voiture", "correct": false }
+        {
+          "text": "Le bateau",
+          "correct": true
+        },
+        {
+          "text": "Le sous-marin",
+          "correct": true
+        },
+        {
+          "text": "Le train",
+          "correct": false
+        },
+        {
+          "text": "La voiture",
+          "correct": false
+        }
       ],
-      "explanation": "Le bateau navigue à la surface de l'eau et le sous-marin plonge sous l'eau. Le train et la voiture ne peuvent pas aller sur l'eau."
+      "explanation": "Le bateau navigue à la surface de l'eau et le sous-marin plonge sous l'eau. Le train et la voiture ne peuvent pas aller sur l'eau.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel est l'animal qui ressemble au cheval mais a des rayures noires et blanches ?",
       "answers": [
-        { "text": "Le zèbre", "correct": true },
-        { "text": "Le panda", "correct": false },
-        { "text": "La hyène", "correct": false },
-        { "text": "L'âne", "correct": false }
+        {
+          "text": "Le zèbre",
+          "correct": true
+        },
+        {
+          "text": "Le panda",
+          "correct": false
+        },
+        {
+          "text": "La hyène",
+          "correct": false
+        },
+        {
+          "text": "L'âne",
+          "correct": false
+        }
       ],
-      "explanation": "Le zèbre ressemble au cheval mais il est reconnaissable grâce à ses rayures noires et blanches."
+      "explanation": "Le zèbre ressemble au cheval mais il est reconnaissable grâce à ses rayures noires et blanches.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel animal a la plus longue nuque du monde animal ?",
       "answers": [
-        { "text": "La girafe", "correct": true },
-        { "text": "L'autruche", "correct": false },
-        { "text": "L'éléphant", "correct": false },
-        { "text": "Le chameau", "correct": false }
+        {
+          "text": "La girafe",
+          "correct": true
+        },
+        {
+          "text": "L'autruche",
+          "correct": false
+        },
+        {
+          "text": "L'éléphant",
+          "correct": false
+        },
+        {
+          "text": "Le chameau",
+          "correct": false
+        }
       ],
-      "explanation": "La girafe a un très long cou qui lui permet d'atteindre les feuilles en haut des arbres."
+      "explanation": "La girafe a un très long cou qui lui permet d'atteindre les feuilles en haut des arbres.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Combien y a-t-il de semaines dans une année ?",
       "answers": [
-        { "text": "52", "correct": true },
-        { "text": "12", "correct": false },
-        { "text": "365", "correct": false },
-        { "text": "24", "correct": false }
+        {
+          "text": "52",
+          "correct": true
+        },
+        {
+          "text": "12",
+          "correct": false
+        },
+        {
+          "text": "365",
+          "correct": false
+        },
+        {
+          "text": "24",
+          "correct": false
+        }
       ],
-      "explanation": "Une année compte environ 52 semaines."
+      "explanation": "Une année compte environ 52 semaines.",
+      "difficulty": 5
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel métier s'occupe de couper et coiffer les cheveux ?",
       "answers": [
-        { "text": "Le coiffeur", "correct": true },
-        { "text": "Le tailleur", "correct": false },
-        { "text": "L'esthéticien", "correct": false },
-        { "text": "Le chirurgien", "correct": false }
+        {
+          "text": "Le coiffeur",
+          "correct": true
+        },
+        {
+          "text": "Le tailleur",
+          "correct": false
+        },
+        {
+          "text": "L'esthéticien",
+          "correct": false
+        },
+        {
+          "text": "Le chirurgien",
+          "correct": false
+        }
       ],
-      "explanation": "Le coiffeur ou la coiffeuse coupe, colore et coiffe les cheveux."
+      "explanation": "Le coiffeur ou la coiffeuse coupe, colore et coiffe les cheveux.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quelle saison est la plus chaude en France ?",
       "answers": [
-        { "text": "L'été", "correct": true },
-        { "text": "Le printemps", "correct": false },
-        { "text": "L'automne", "correct": false },
-        { "text": "L'hiver", "correct": false }
+        {
+          "text": "L'été",
+          "correct": true
+        },
+        {
+          "text": "Le printemps",
+          "correct": false
+        },
+        {
+          "text": "L'automne",
+          "correct": false
+        },
+        {
+          "text": "L'hiver",
+          "correct": false
+        }
       ],
-      "explanation": "L'été est la saison la plus chaude, avec le plus de soleil. En France, il dure de juin à août."
+      "explanation": "L'été est la saison la plus chaude, avec le plus de soleil. En France, il dure de juin à août.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel objet utilise-t-on pour écrire sur un tableau noir ou blanc en classe ?",
       "answers": [
-        { "text": "La craie ou le marqueur", "correct": true },
-        { "text": "Le stylo bille", "correct": false },
-        { "text": "La règle", "correct": false },
-        { "text": "Le compas", "correct": false }
+        {
+          "text": "La craie ou le marqueur",
+          "correct": true
+        },
+        {
+          "text": "Le stylo bille",
+          "correct": false
+        },
+        {
+          "text": "La règle",
+          "correct": false
+        },
+        {
+          "text": "Le compas",
+          "correct": false
+        }
       ],
-      "explanation": "On utilise la craie sur un tableau noir et un marqueur effaçable sur un tableau blanc."
+      "explanation": "On utilise la craie sur un tableau noir et un marqueur effaçable sur un tableau blanc.",
+      "difficulty": 2
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quelle mer se trouve au sud de la France ?",
       "answers": [
-        { "text": "La mer Méditerranée", "correct": true },
-        { "text": "La mer du Nord", "correct": false },
-        { "text": "La mer Noire", "correct": false },
-        { "text": "La mer Rouge", "correct": false }
+        {
+          "text": "La mer Méditerranée",
+          "correct": true
+        },
+        {
+          "text": "La mer du Nord",
+          "correct": false
+        },
+        {
+          "text": "La mer Noire",
+          "correct": false
+        },
+        {
+          "text": "La mer Rouge",
+          "correct": false
+        }
       ],
-      "explanation": "La mer Méditerranée borde le sud de la France, notamment la Côte d'Azur."
+      "explanation": "La mer Méditerranée borde le sud de la France, notamment la Côte d'Azur.",
+      "difficulty": 3
     },
     {
       "subject": "Culture générale",
       "kind": "multi",
       "statement": "Parmi ces animaux, lesquels sont des mammifères ? (plusieurs réponses correctes)",
       "answers": [
-        { "text": "La baleine", "correct": true },
-        { "text": "Le chien", "correct": true },
-        { "text": "La tortue", "correct": false },
-        { "text": "Le crocodile", "correct": false }
+        {
+          "text": "La baleine",
+          "correct": true
+        },
+        {
+          "text": "Le chien",
+          "correct": true
+        },
+        {
+          "text": "La tortue",
+          "correct": false
+        },
+        {
+          "text": "Le crocodile",
+          "correct": false
+        }
       ],
-      "explanation": "La baleine et le chien sont des mammifères (ils allaitent leurs petits). La tortue et le crocodile sont des reptiles."
+      "explanation": "La baleine et le chien sont des mammifères (ils allaitent leurs petits). La tortue et le crocodile sont des reptiles.",
+      "difficulty": 5
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quel outil sert à dessiner des cercles parfaits ?",
       "answers": [
-        { "text": "Le compas", "correct": true },
-        { "text": "La règle", "correct": false },
-        { "text": "L'équerre", "correct": false },
-        { "text": "La gomme", "correct": false }
+        {
+          "text": "Le compas",
+          "correct": true
+        },
+        {
+          "text": "La règle",
+          "correct": false
+        },
+        {
+          "text": "L'équerre",
+          "correct": false
+        },
+        {
+          "text": "La gomme",
+          "correct": false
+        }
       ],
-      "explanation": "Le compas est un outil scolaire qui sert à tracer des cercles de taille précise."
+      "explanation": "Le compas est un outil scolaire qui sert à tracer des cercles de taille précise.",
+      "difficulty": 3
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "Quelle est la couleur du soleil ?",
       "answers": [
-        { "text": "Jaune", "correct": true },
-        { "text": "Bleu", "correct": false },
-        { "text": "Vert", "correct": false },
-        { "text": "Violet", "correct": false }
+        {
+          "text": "Jaune",
+          "correct": true
+        },
+        {
+          "text": "Bleu",
+          "correct": false
+        },
+        {
+          "text": "Vert",
+          "correct": false
+        },
+        {
+          "text": "Violet",
+          "correct": false
+        }
       ],
-      "explanation": "Le soleil apparaît jaune dans le ciel et nous donne lumière et chaleur."
+      "explanation": "Le soleil apparaît jaune dans le ciel et nous donne lumière et chaleur.",
+      "difficulty": 1
     },
     {
       "subject": "Culture générale",
       "kind": "single",
       "statement": "À quoi sert un casque de vélo ?",
       "answers": [
-        { "text": "À protéger la tête en cas de chute", "correct": true },
-        { "text": "À aller plus vite", "correct": false },
-        { "text": "À se protéger de la pluie", "correct": false },
-        { "text": "À voir la nuit", "correct": false }
+        {
+          "text": "À protéger la tête en cas de chute",
+          "correct": true
+        },
+        {
+          "text": "À aller plus vite",
+          "correct": false
+        },
+        {
+          "text": "À se protéger de la pluie",
+          "correct": false
+        },
+        {
+          "text": "À voir la nuit",
+          "correct": false
+        }
       ],
-      "explanation": "Le casque protège la tête d'un cycliste en cas de chute ou d'accident."
+      "explanation": "Le casque protège la tête d'un cycliste en cas de chute ou d'accident.",
+      "difficulty": 1
     }
   ]
 }
