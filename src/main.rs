@@ -8,7 +8,7 @@ use tracing_subscriber::EnvFilter;
 
 use sesame::config::Config;
 use sesame::quiz::{Given, Submission};
-use sesame::{auth, db, importer, policy, quiz, web};
+use sesame::{auth, db, dedup, importer, policy, quiz, web};
 
 const HELP: &str = "\
 sesame — portail de contrôle avant d'utiliser l'ordinateur
@@ -21,6 +21,8 @@ COMMANDES :
                         admin si aucun mot de passe administrateur n'existe.
     admin               Démarre le serveur et ouvre directement /admin.
     import <fichier>    Importe des questions depuis un fichier JSON.
+    dedupe              Supprime les questions au même énoncé. Dans chaque
+                        groupe, la plus récente est conservée.
     preview [n]         Simulation console d'un contrôle (outil d'admin).
 
 OPTIONS :
@@ -38,6 +40,7 @@ CONFIGURATION :
 enum Command {
     Server { force_admin: bool },
     Import { path: PathBuf },
+    Dedupe,
     Preview { count: Option<usize> },
 }
 
@@ -92,6 +95,7 @@ impl Cli {
                     path: PathBuf::from(path),
                 }
             }
+            Some("dedupe") => Command::Dedupe,
             Some("preview") => {
                 let count = positionals
                     .get(1)
@@ -139,6 +143,10 @@ async fn main() -> Result<()> {
         Command::Import { path } => {
             let pool = db::init(&cfg.paths.database).await?;
             run_import(&pool, &path).await?;
+        }
+        Command::Dedupe => {
+            let pool = db::init(&cfg.paths.database).await?;
+            run_dedupe(&pool).await?;
         }
         Command::Preview { count } => {
             let pool = db::init(&cfg.paths.database).await?;
@@ -267,6 +275,33 @@ async fn run_import(pool: &SqlitePool, path: &Path) -> Result<()> {
             println!("  - #{idx}: {err}");
         }
     }
+    Ok(())
+}
+
+/// Le pendant en ligne de commande du bloc « Doublons » de /admin/questions.
+/// L'installeur s'en sert : il importe plusieurs banques d'un coup, et deux
+/// banques finissent toujours par se recouper quelque part.
+async fn run_dedupe(pool: &SqlitePool) -> Result<()> {
+    let groups = dedup::find_duplicates(pool).await?;
+    if groups.is_empty() {
+        println!("Aucun doublon.");
+        return Ok(());
+    }
+    println!("=== Doublons ===");
+    for g in &groups {
+        let victims: Vec<String> = g.victims.iter().map(|v| format!("#{}", v.id)).collect();
+        println!(
+            "  {} → on garde #{}, on supprime {}",
+            g.statement,
+            g.keep_id,
+            victims.join(", ")
+        );
+    }
+    let r = dedup::purge(pool).await?;
+    println!(
+        "\n{} doublon(s) supprimé(s) dans {} groupe(s) — {} ligne(s) d'historique réaffectée(s).",
+        r.deleted, r.groups, r.repointed
+    );
     Ok(())
 }
 

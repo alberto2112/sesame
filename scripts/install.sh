@@ -88,12 +88,20 @@ else
     install -Dm0644 config.toml "$CONFIG_DIR/config.toml"
 fi
 
+# `data/*.json` et non `data/questions_*.json` : les banques importées
+# (data/import_*.json) sont arrivées après, et le motif d'origine les laissait
+# dehors — des milliers de questions qui n'atteignaient jamais la machine.
 say "Import des questions…"
-for f in data/questions_*.json; do
+for f in data/*.json; do
     [[ -e "$f" ]] || continue
     echo "    $f"
     "$BIN_DIR/sesame" import "$f" >/dev/null || warn "échec sur $f"
 done
+
+# Deux banques finissent toujours par se recouper. On nettoie tout de suite :
+# sans ça, un enfant peut recevoir deux fois le même énoncé au même contrôle.
+say "Suppression des doublons…"
+"$BIN_DIR/sesame" dedupe | tail -1
 
 # ===== Durcissement (facultatif) ============================================
 
