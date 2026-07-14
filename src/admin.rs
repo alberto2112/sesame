@@ -1421,8 +1421,8 @@ fn parse_question_form(pairs: &[(String, String)]) -> Result<ParsedQuestion, Str
         .parse()
         .map_err(|_| "Choisis une matière.".to_string())?;
     let kind = pair_get(pairs, "kind");
-    if kind != "single" && kind != "multi" {
-        return Err("Type invalide (single ou multi).".into());
+    if !matches!(kind.as_str(), "single" | "multi" | "exact" | "number") {
+        return Err("Type invalide (single, multi, exact ou number).".into());
     }
     let difficulty: i64 = pair_get_or(pairs, "difficulty", "3")
         .parse()
@@ -1442,11 +1442,36 @@ fn parse_question_form(pairs: &[(String, String)]) -> Result<ParsedQuestion, Str
         .map(|(t, c)| (t.trim().to_string(), c))
         .collect();
 
+    let nb_correct = answers.iter().filter(|(_, c)| *c).count();
+    let nb_wrong = answers.len() - nb_correct;
+
+    // 'exact'/'number' : une seule réponse, la bonne. Pas d'options à proposer —
+    // l'enfant l'écrit. Mêmes règles que l'importeur (importer.rs).
+    if crate::quiz::is_free_input(&kind) {
+        if answers.len() != 1 || nb_correct != 1 {
+            return Err(format!(
+                "Type '{kind}' : remplis UNE seule réponse (la bonne) et coche « correcte »."
+            ));
+        }
+        if kind == "number" && crate::quiz::parse_number(&answers[0].0).is_none() {
+            return Err(format!(
+                "Type 'number' : « {} » n'est pas un nombre.",
+                answers[0].0
+            ));
+        }
+        return Ok(ParsedQuestion {
+            subject_id,
+            kind,
+            statement,
+            explanation,
+            difficulty,
+            answers,
+        });
+    }
+
     if answers.len() < 2 {
         return Err("Au moins 2 réponses non vides sont requises.".into());
     }
-    let nb_correct = answers.iter().filter(|(_, c)| *c).count();
-    let nb_wrong = answers.len() - nb_correct;
     match kind.as_str() {
         "single" => {
             if nb_correct != 1 {

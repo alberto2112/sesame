@@ -1,0 +1,1186 @@
+{
+  "subjects": [
+    {
+      "name": "Sciences",
+      "weight": 1.0
+    }
+  ],
+  "questions": [
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Combien de pattes a une araignée ?",
+      "answers": [
+        {
+          "text": "4",
+          "correct": false
+        },
+        {
+          "text": "6",
+          "correct": false
+        },
+        {
+          "text": "8",
+          "correct": true
+        }
+      ],
+      "explanation": "Une araignée a 8 pattes ; ce n'est pas un insecte.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Combien de pattes a un insecte ?",
+      "answers": [
+        {
+          "text": "6",
+          "correct": true
+        },
+        {
+          "text": "4",
+          "correct": false
+        },
+        {
+          "text": "8",
+          "correct": false
+        }
+      ],
+      "explanation": "Tous les insectes ont 6 pattes.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Combien de pattes a un chien ?",
+      "answers": [
+        {
+          "text": "4",
+          "correct": true
+        },
+        {
+          "text": "6",
+          "correct": false
+        },
+        {
+          "text": "2",
+          "correct": false
+        }
+      ],
+      "explanation": "Le chien a 4 pattes.",
+      "difficulty": 1
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Combien d'ailes a un papillon ?",
+      "answers": [
+        {
+          "text": "4",
+          "correct": true
+        },
+        {
+          "text": "6",
+          "correct": false
+        },
+        {
+          "text": "2",
+          "correct": false
+        }
+      ],
+      "explanation": "Le papillon a 4 ailes.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel animal fait « miaou » ?",
+      "answers": [
+        {
+          "text": "le chat",
+          "correct": true
+        },
+        {
+          "text": "le chien",
+          "correct": false
+        },
+        {
+          "text": "la vache",
+          "correct": false
+        }
+      ],
+      "explanation": "Le chat fait « miaou ».",
+      "difficulty": 1
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel animal fait « meuh » ?",
+      "answers": [
+        {
+          "text": "le coq",
+          "correct": false
+        },
+        {
+          "text": "le chat",
+          "correct": false
+        },
+        {
+          "text": "la vache",
+          "correct": true
+        }
+      ],
+      "explanation": "La vache fait « meuh ».",
+      "difficulty": 1
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Qui dit « cocorico » le matin ?",
+      "answers": [
+        {
+          "text": "le coq",
+          "correct": true
+        },
+        {
+          "text": "la poule",
+          "correct": false
+        },
+        {
+          "text": "le canard",
+          "correct": false
+        }
+      ],
+      "explanation": "Le coq chante « cocorico ».",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel animal fait « coin coin » ?",
+      "answers": [
+        {
+          "text": "la poule",
+          "correct": false
+        },
+        {
+          "text": "le coq",
+          "correct": false
+        },
+        {
+          "text": "le canard",
+          "correct": true
+        }
+      ],
+      "explanation": "Le canard fait « coin coin ».",
+      "difficulty": 1
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Le petit du chien s'appelle...",
+      "answers": [
+        {
+          "text": "le poulain",
+          "correct": false
+        },
+        {
+          "text": "le chiot",
+          "correct": true
+        },
+        {
+          "text": "le chaton",
+          "correct": false
+        }
+      ],
+      "explanation": "Le petit du chien est le chiot.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Le petit du chat s'appelle...",
+      "answers": [
+        {
+          "text": "l'agneau",
+          "correct": false
+        },
+        {
+          "text": "le chiot",
+          "correct": false
+        },
+        {
+          "text": "le chaton",
+          "correct": true
+        }
+      ],
+      "explanation": "Le petit du chat est le chaton.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Le petit de la vache s'appelle...",
+      "answers": [
+        {
+          "text": "le veau",
+          "correct": true
+        },
+        {
+          "text": "le poulain",
+          "correct": false
+        },
+        {
+          "text": "l'agneau",
+          "correct": false
+        }
+      ],
+      "explanation": "Le petit de la vache est le veau.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Le petit du mouton s'appelle...",
+      "answers": [
+        {
+          "text": "le chiot",
+          "correct": false
+        },
+        {
+          "text": "l'agneau",
+          "correct": true
+        },
+        {
+          "text": "le veau",
+          "correct": false
+        }
+      ],
+      "explanation": "Le petit du mouton est l'agneau.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Le petit du cheval s'appelle...",
+      "answers": [
+        {
+          "text": "le veau",
+          "correct": false
+        },
+        {
+          "text": "le chaton",
+          "correct": false
+        },
+        {
+          "text": "le poulain",
+          "correct": true
+        }
+      ],
+      "explanation": "Le petit du cheval est le poulain.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel animal pond des œufs ?",
+      "answers": [
+        {
+          "text": "la poule",
+          "correct": true
+        },
+        {
+          "text": "le chien",
+          "correct": false
+        },
+        {
+          "text": "la vache",
+          "correct": false
+        }
+      ],
+      "explanation": "La poule pond des œufs.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "De quel animal vient la laine ?",
+      "answers": [
+        {
+          "text": "la vache",
+          "correct": false
+        },
+        {
+          "text": "la poule",
+          "correct": false
+        },
+        {
+          "text": "le mouton",
+          "correct": true
+        }
+      ],
+      "explanation": "La laine vient du mouton.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Qui fabrique le miel ?",
+      "answers": [
+        {
+          "text": "l'abeille",
+          "correct": true
+        },
+        {
+          "text": "le papillon",
+          "correct": false
+        },
+        {
+          "text": "la fourmi",
+          "correct": false
+        }
+      ],
+      "explanation": "L'abeille fabrique le miel.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "La grenouille est un...",
+      "answers": [
+        {
+          "text": "amphibien",
+          "correct": true
+        },
+        {
+          "text": "oiseau",
+          "correct": false
+        },
+        {
+          "text": "mammifère",
+          "correct": false
+        }
+      ],
+      "explanation": "La grenouille est un amphibien.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Le serpent est un...",
+      "answers": [
+        {
+          "text": "mammifère",
+          "correct": false
+        },
+        {
+          "text": "oiseau",
+          "correct": false
+        },
+        {
+          "text": "reptile",
+          "correct": true
+        }
+      ],
+      "explanation": "Le serpent est un reptile.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "La baleine est un...",
+      "answers": [
+        {
+          "text": "poisson",
+          "correct": false
+        },
+        {
+          "text": "reptile",
+          "correct": false
+        },
+        {
+          "text": "mammifère",
+          "correct": true
+        }
+      ],
+      "explanation": "La baleine est un mammifère, même si elle vit dans la mer.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "La chauve-souris est un...",
+      "answers": [
+        {
+          "text": "mammifère",
+          "correct": true
+        },
+        {
+          "text": "oiseau",
+          "correct": false
+        },
+        {
+          "text": "insecte",
+          "correct": false
+        }
+      ],
+      "explanation": "La chauve-souris est un mammifère qui vole.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Avec quoi le poisson respire-t-il ?",
+      "answers": [
+        {
+          "text": "les poumons",
+          "correct": false
+        },
+        {
+          "text": "les branchies",
+          "correct": true
+        },
+        {
+          "text": "la peau",
+          "correct": false
+        }
+      ],
+      "explanation": "Le poisson respire avec ses branchies.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Qu'est-ce qui couvre le corps de l'oiseau ?",
+      "answers": [
+        {
+          "text": "les écailles",
+          "correct": false
+        },
+        {
+          "text": "les plumes",
+          "correct": true
+        },
+        {
+          "text": "les poils",
+          "correct": false
+        }
+      ],
+      "explanation": "L'oiseau est couvert de plumes.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Qu'est-ce qui couvre le corps du poisson ?",
+      "answers": [
+        {
+          "text": "les écailles",
+          "correct": true
+        },
+        {
+          "text": "les plumes",
+          "correct": false
+        },
+        {
+          "text": "les poils",
+          "correct": false
+        }
+      ],
+      "explanation": "Le poisson est couvert d'écailles.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel animal a une trompe ?",
+      "answers": [
+        {
+          "text": "le lion",
+          "correct": false
+        },
+        {
+          "text": "l'éléphant",
+          "correct": true
+        },
+        {
+          "text": "le zèbre",
+          "correct": false
+        }
+      ],
+      "explanation": "L'éléphant a une trompe.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel animal a un très long cou ?",
+      "answers": [
+        {
+          "text": "le singe",
+          "correct": false
+        },
+        {
+          "text": "le lion",
+          "correct": false
+        },
+        {
+          "text": "la girafe",
+          "correct": true
+        }
+      ],
+      "explanation": "La girafe a un très long cou.",
+      "difficulty": 1
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "D'où vient le papillon ?",
+      "answers": [
+        {
+          "text": "d'une mouche",
+          "correct": false
+        },
+        {
+          "text": "d'une chenille",
+          "correct": true
+        },
+        {
+          "text": "d'une abeille",
+          "correct": false
+        }
+      ],
+      "explanation": "Le papillon vient d'une chenille.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel animal vit dans une ruche ?",
+      "answers": [
+        {
+          "text": "la fourmi",
+          "correct": false
+        },
+        {
+          "text": "l'abeille",
+          "correct": true
+        },
+        {
+          "text": "l'araignée",
+          "correct": false
+        }
+      ],
+      "explanation": "Les abeilles vivent dans une ruche.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel animal se déplace très lentement ?",
+      "answers": [
+        {
+          "text": "le lièvre",
+          "correct": false
+        },
+        {
+          "text": "la tortue",
+          "correct": true
+        },
+        {
+          "text": "le guépard",
+          "correct": false
+        }
+      ],
+      "explanation": "La tortue se déplace lentement.",
+      "difficulty": 1
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Où vivent les poissons ?",
+      "answers": [
+        {
+          "text": "sous la terre",
+          "correct": false
+        },
+        {
+          "text": "dans l'eau",
+          "correct": true
+        },
+        {
+          "text": "dans les arbres",
+          "correct": false
+        }
+      ],
+      "explanation": "Les poissons vivent dans l'eau.",
+      "difficulty": 1
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel animal peut voler ?",
+      "answers": [
+        {
+          "text": "l'oiseau",
+          "correct": true
+        },
+        {
+          "text": "le poisson",
+          "correct": false
+        },
+        {
+          "text": "le lapin",
+          "correct": false
+        }
+      ],
+      "explanation": "L'oiseau peut voler.",
+      "difficulty": 1
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Combien y a-t-il de saisons dans l'année ?",
+      "answers": [
+        {
+          "text": "3",
+          "correct": false
+        },
+        {
+          "text": "5",
+          "correct": false
+        },
+        {
+          "text": "4",
+          "correct": true
+        }
+      ],
+      "explanation": "Il y a 4 saisons : printemps, été, automne, hiver.",
+      "difficulty": 1
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quelle saison vient après l'hiver ?",
+      "answers": [
+        {
+          "text": "l'automne",
+          "correct": false
+        },
+        {
+          "text": "le printemps",
+          "correct": true
+        },
+        {
+          "text": "l'été",
+          "correct": false
+        }
+      ],
+      "explanation": "Après l'hiver vient le printemps.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "En quelle saison fait-il le plus chaud ?",
+      "answers": [
+        {
+          "text": "l'automne",
+          "correct": false
+        },
+        {
+          "text": "l'été",
+          "correct": true
+        },
+        {
+          "text": "l'hiver",
+          "correct": false
+        }
+      ],
+      "explanation": "C'est en été qu'il fait le plus chaud.",
+      "difficulty": 1
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "En quelle saison les feuilles tombent-elles des arbres ?",
+      "answers": [
+        {
+          "text": "le printemps",
+          "correct": false
+        },
+        {
+          "text": "l'automne",
+          "correct": true
+        },
+        {
+          "text": "l'été",
+          "correct": false
+        }
+      ],
+      "explanation": "Les feuilles tombent en automne.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Qu'apparaît-il dans le ciel après la pluie et le soleil ?",
+      "answers": [
+        {
+          "text": "un arc-en-ciel",
+          "correct": true
+        },
+        {
+          "text": "la lune",
+          "correct": false
+        },
+        {
+          "text": "la neige",
+          "correct": false
+        }
+      ],
+      "explanation": "Un arc-en-ciel apparaît après la pluie et le soleil.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "De quelle couleur est le ciel quand il fait beau ?",
+      "answers": [
+        {
+          "text": "bleu",
+          "correct": true
+        },
+        {
+          "text": "rouge",
+          "correct": false
+        },
+        {
+          "text": "vert",
+          "correct": false
+        }
+      ],
+      "explanation": "Par beau temps, le ciel est bleu.",
+      "difficulty": 1
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Que nous donne le Soleil ?",
+      "answers": [
+        {
+          "text": "du vent",
+          "correct": false
+        },
+        {
+          "text": "de la lumière et de la chaleur",
+          "correct": true
+        },
+        {
+          "text": "de la pluie",
+          "correct": false
+        }
+      ],
+      "explanation": "Le Soleil donne de la lumière et de la chaleur.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Autour de quoi la Terre tourne-t-elle ?",
+      "answers": [
+        {
+          "text": "Mars",
+          "correct": false
+        },
+        {
+          "text": "la Lune",
+          "correct": false
+        },
+        {
+          "text": "le Soleil",
+          "correct": true
+        }
+      ],
+      "explanation": "La Terre tourne autour du Soleil.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Que voit-on surtout dans le ciel la nuit ?",
+      "answers": [
+        {
+          "text": "l'arc-en-ciel",
+          "correct": false
+        },
+        {
+          "text": "la Lune et les étoiles",
+          "correct": true
+        },
+        {
+          "text": "le Soleil",
+          "correct": false
+        }
+      ],
+      "explanation": "La nuit, on voit la Lune et les étoiles.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "À quelle température l'eau se transforme-t-elle en glace ?",
+      "answers": [
+        {
+          "text": "100 degrés",
+          "correct": false
+        },
+        {
+          "text": "10 degrés",
+          "correct": false
+        },
+        {
+          "text": "0 degré",
+          "correct": true
+        }
+      ],
+      "explanation": "L'eau gèle à 0 degré.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "De quoi les plantes ont-elles besoin pour pousser ?",
+      "answers": [
+        {
+          "text": "d'obscurité",
+          "correct": false
+        },
+        {
+          "text": "d'eau et de soleil",
+          "correct": true
+        },
+        {
+          "text": "de neige",
+          "correct": false
+        }
+      ],
+      "explanation": "Les plantes ont besoin d'eau et de soleil.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quelle partie de la plante est sous la terre ?",
+      "answers": [
+        {
+          "text": "les racines",
+          "correct": true
+        },
+        {
+          "text": "les feuilles",
+          "correct": false
+        },
+        {
+          "text": "les fleurs",
+          "correct": false
+        }
+      ],
+      "explanation": "Les racines sont sous la terre.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Qu'est-ce qui tombe des nuages quand il pleut ?",
+      "answers": [
+        {
+          "text": "de l'eau",
+          "correct": true
+        },
+        {
+          "text": "du sable",
+          "correct": false
+        },
+        {
+          "text": "des cailloux",
+          "correct": false
+        }
+      ],
+      "explanation": "Quand il pleut, c'est de l'eau qui tombe.",
+      "difficulty": 1
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Comment s'appelle l'eau gelée qui tombe du ciel en hiver ?",
+      "answers": [
+        {
+          "text": "la pluie",
+          "correct": false
+        },
+        {
+          "text": "la neige",
+          "correct": true
+        },
+        {
+          "text": "le vent",
+          "correct": false
+        }
+      ],
+      "explanation": "En hiver, il tombe de la neige.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Combien y a-t-il de planètes dans le système solaire ?",
+      "answers": [
+        {
+          "text": "7",
+          "correct": false
+        },
+        {
+          "text": "8",
+          "correct": true
+        },
+        {
+          "text": "9",
+          "correct": false
+        }
+      ],
+      "explanation": "Le système solaire compte 8 planètes.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Sur quelle planète vivons-nous ?",
+      "answers": [
+        {
+          "text": "Mars",
+          "correct": false
+        },
+        {
+          "text": "la Terre",
+          "correct": true
+        },
+        {
+          "text": "Jupiter",
+          "correct": false
+        }
+      ],
+      "explanation": "Nous vivons sur la Terre.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Qu'est-ce qui fait bouger les feuilles des arbres ?",
+      "answers": [
+        {
+          "text": "le vent",
+          "correct": true
+        },
+        {
+          "text": "la pluie",
+          "correct": false
+        },
+        {
+          "text": "le soleil",
+          "correct": false
+        }
+      ],
+      "explanation": "C'est le vent qui fait bouger les feuilles.",
+      "difficulty": 1
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Que faut-il planter pour faire pousser une fleur ?",
+      "answers": [
+        {
+          "text": "un jouet",
+          "correct": false
+        },
+        {
+          "text": "une pierre",
+          "correct": false
+        },
+        {
+          "text": "une graine",
+          "correct": true
+        }
+      ],
+      "explanation": "On plante une graine pour faire pousser une fleur.",
+      "difficulty": 1
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Quel astre nous éclaire la nuit ?",
+      "answers": [
+        {
+          "text": "le Soleil",
+          "correct": false
+        },
+        {
+          "text": "l'arc-en-ciel",
+          "correct": false
+        },
+        {
+          "text": "la Lune",
+          "correct": true
+        }
+      ],
+      "explanation": "La Lune nous éclaire la nuit.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "La glace, c'est de l'eau...",
+      "answers": [
+        {
+          "text": "gelée",
+          "correct": true
+        },
+        {
+          "text": "chaude",
+          "correct": false
+        },
+        {
+          "text": "sale",
+          "correct": false
+        }
+      ],
+      "explanation": "La glace est de l'eau gelée.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Que respirons-nous pour vivre ?",
+      "answers": [
+        {
+          "text": "l'air",
+          "correct": true
+        },
+        {
+          "text": "le sable",
+          "correct": false
+        },
+        {
+          "text": "l'eau",
+          "correct": false
+        }
+      ],
+      "explanation": "Nous respirons de l'air.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "D'où vient la pluie ?",
+      "answers": [
+        {
+          "text": "de la lune",
+          "correct": false
+        },
+        {
+          "text": "des nuages",
+          "correct": true
+        },
+        {
+          "text": "du soleil",
+          "correct": false
+        }
+      ],
+      "explanation": "La pluie vient des nuages.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Combien de temps la Terre met-elle pour faire le tour du Soleil ?",
+      "answers": [
+        {
+          "text": "un jour",
+          "correct": false
+        },
+        {
+          "text": "un an",
+          "correct": true
+        },
+        {
+          "text": "une heure",
+          "correct": false
+        }
+      ],
+      "explanation": "La Terre met un an pour faire le tour du Soleil.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Combien d'heures dure une journée ?",
+      "answers": [
+        {
+          "text": "24 heures",
+          "correct": true
+        },
+        {
+          "text": "12 heures",
+          "correct": false
+        },
+        {
+          "text": "60 heures",
+          "correct": false
+        }
+      ],
+      "explanation": "Une journée dure 24 heures.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "De quelle couleur sont les feuilles des arbres au printemps ?",
+      "answers": [
+        {
+          "text": "rouges",
+          "correct": false
+        },
+        {
+          "text": "vertes",
+          "correct": true
+        },
+        {
+          "text": "blanches",
+          "correct": false
+        }
+      ],
+      "explanation": "Au printemps, les feuilles sont vertes.",
+      "difficulty": 1
+    },
+    {
+      "subject": "Sciences",
+      "kind": "single",
+      "statement": "Où poussent les pommes ?",
+      "answers": [
+        {
+          "text": "sur un arbre",
+          "correct": true
+        },
+        {
+          "text": "dans l'eau",
+          "correct": false
+        },
+        {
+          "text": "sous la terre",
+          "correct": false
+        }
+      ],
+      "explanation": "Les pommes poussent sur un arbre, le pommier.",
+      "difficulty": 1
+    }
+  ]
+}

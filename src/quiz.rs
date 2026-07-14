@@ -20,8 +20,26 @@ pub struct QuizAnswer {
     pub text: String,
 }
 
-/// What the child submitted: question_id → chosen answer_ids.
-pub type Submission = HashMap<i64, Vec<i64>>;
+/// Ce que l'enfant a donné pour UNE question. Le type de la question décide
+/// laquelle des deux formes est valable ; c'est `grade` qui tranche, à partir du
+/// `kind` en base — jamais à partir de ce que le formulaire prétend être.
+#[derive(Debug, Clone)]
+pub enum Given {
+    /// 'single' / 'multi' : les identifiants des réponses cochées.
+    Choices(Vec<i64>),
+    /// 'exact' / 'number' : le texte saisi.
+    Text(String),
+}
+
+impl Default for Given {
+    /// Une question sautée : aucune case cochée, aucun texte. Toujours fausse.
+    fn default() -> Self {
+        Given::Choices(Vec::new())
+    }
+}
+
+/// What the child submitted: question_id → what they gave.
+pub type Submission = HashMap<i64, Given>;
 
 #[derive(Debug, Clone)]
 pub struct GradedAttempt {
@@ -40,6 +58,9 @@ pub struct GradedQuestion {
     pub statement: String,
     pub explanation: Option<String>,
     pub answers: Vec<GradedAnswer>,
+    /// Ce que l'enfant a écrit ('exact'/'number' seulement). None pour les types
+    /// à choix : l'information y vit déjà dans `was_chosen`.
+    pub given_text: Option<String>,
     pub correct: bool,
 }
 
@@ -119,23 +140,38 @@ pub async fn pick_questions(
                 .bind(qid)
                 .fetch_one(pool)
                 .await?;
-        let answers: Vec<(i64, String)> = sqlx::query_as(
-            "SELECT id, text FROM answers WHERE question_id = ? ORDER BY RANDOM()",
-        )
-        .bind(qid)
-        .fetch_all(pool)
-        .await?;
+
+        // Pour 'exact'/'number', la table `answers` ne contient PAS des options :
+        // elle contient LA bonne réponse. La joindre au rendu, c'est l'écrire dans
+        // le HTML — un Ctrl+U et l'enfant lit le résultat. On ne la charge donc
+        // même pas : la correction se fait côté serveur, dans `grade`.
+        let answers = if is_free_input(&q.1) {
+            Vec::new()
+        } else {
+            sqlx::query_as::<_, (i64, String)>(
+                "SELECT id, text FROM answers WHERE question_id = ? ORDER BY RANDOM()",
+            )
+            .bind(qid)
+            .fetch_all(pool)
+            .await?
+            .into_iter()
+            .map(|(id, text)| QuizAnswer { id, text })
+            .collect()
+        };
+
         result.push(QuizQuestion {
             id: q.0,
             kind: q.1,
             statement: q.2,
-            answers: answers
-                .into_iter()
-                .map(|(id, text)| QuizAnswer { id, text })
-                .collect(),
+            answers,
         });
     }
     Ok(result)
+}
+
+/// Types dont la réponse s'écrit au clavier, par opposition aux types à choix.
+pub fn is_free_input(kind: &str) -> bool {
+    matches!(kind, "exact" | "number")
 }
 
 /// Pure allocation algorithm (Hamilton/largest remainder + iterative cap).
@@ -200,6 +236,47 @@ fn distribute(subjects: &[(i64, f64, usize)], n: usize) -> Vec<(i64, usize)> {
     result.into_iter().collect()
 }
 
+// ===== Comparaison des réponses écrites =====
+
+/// 'exact' : extrémités rognées, casse ignorée. `to_lowercase` est Unicode —
+/// « ÉTÉ » vaut « été ». Les ACCENTS, eux, comptent : « ou » n'est pas « où »,
+/// et sur une question d'orthographe c'est précisément ce qu'on évalue.
+fn text_matches(given: &str, expected: &str) -> bool {
+    given.trim().to_lowercase() == expected.trim().to_lowercase()
+}
+
+/// 'number' : on compare des NOMBRES, pas des chaînes. Un enfant qui écrit
+/// « 08 », « +8 » ou « 8,0 » a donné la bonne réponse — le recaler sur la forme
+/// serait lui refuser l'ordinateur pour un zéro devant.
+fn number_matches(given: &str, expected: &str) -> bool {
+    match (parse_number(given), parse_number(expected)) {
+        (Some(a), Some(b)) => (a - b).abs() < 1e-9,
+        // Réponse attendue non numérique : la question est mal saisie. On retombe
+        // sur la comparaison texte au lieu de punir l'enfant d'une faute d'adulte.
+        _ => text_matches(given, expected),
+    }
+}
+
+/// Virgule décimale française acceptée, espaces (y compris insécables des
+/// milliers) ignorés.
+///
+/// Publique à dessein : l'importeur et le panel admin valident « est-ce un
+/// nombre ? » avec CETTE fonction. Deux définitions divergentes de « nombre »
+/// (l'une à l'écriture, l'autre à la correction) laisseraient passer une
+/// question impossible à réussir — « 2,5 » acceptée à l'import, jamais reconnue
+/// à la correction.
+pub fn parse_number(s: &str) -> Option<f64> {
+    let cleaned: String = s
+        .chars()
+        .filter(|c| !c.is_whitespace())
+        .map(|c| if c == ',' { '.' } else { c })
+        .collect();
+    if cleaned.is_empty() {
+        return None;
+    }
+    cleaned.parse().ok()
+}
+
 // ===== Grader =====
 
 /// `threshold_pct` vient de l'enfant, pas des réglages globaux : un enfant de
@@ -211,13 +288,14 @@ pub async fn grade(
 ) -> Result<GradedAttempt> {
     let mut graded = Vec::with_capacity(submission.len());
 
-    for (&question_id, chosen_ids) in submission {
+    for (&question_id, given) in submission {
         let q: (i64, String, String, Option<String>) = sqlx::query_as(
             "SELECT id, kind, statement, explanation FROM questions WHERE id = ?",
         )
         .bind(question_id)
         .fetch_one(pool)
         .await?;
+        let kind = q.1.as_str();
 
         let answer_rows: Vec<(i64, String, i64)> =
             sqlx::query_as("SELECT id, text, is_correct FROM answers WHERE question_id = ?")
@@ -225,22 +303,64 @@ pub async fn grade(
                 .fetch_all(pool)
                 .await?;
 
-        let chosen_set: HashSet<i64> = chosen_ids.iter().copied().collect();
-        let correct_set: HashSet<i64> = answer_rows
-            .iter()
-            .filter(|(_, _, c)| *c == 1)
-            .map(|(id, _, _)| *id)
-            .collect();
+        // La forme de la réponse est dictée par le `kind` EN BASE, pas par celle
+        // que le formulaire a envoyée : un couple incohérent (du texte pour un
+        // QCM, des cases pour une question écrite) est un formulaire trafiqué, et
+        // se solde par « faux ». On ne fait jamais confiance au client.
+        let (correct, given_text) = match (kind, given) {
+            ("single" | "multi", Given::Choices(ids)) => {
+                let chosen: HashSet<i64> = ids.iter().copied().collect();
+                let expected: HashSet<i64> = answer_rows
+                    .iter()
+                    .filter(|(_, _, c)| *c == 1)
+                    .map(|(id, _, _)| *id)
+                    .collect();
+                (chosen == expected, None)
+            }
+            ("exact" | "number", Given::Text(typed)) => {
+                let expected = answer_rows.iter().find(|(_, _, c)| *c == 1);
+                let correct = match expected {
+                    Some((_, text, _)) if kind == "number" => number_matches(typed, text),
+                    Some((_, text, _)) => text_matches(typed, text),
+                    // Question sans bonne réponse en base : impossible de la
+                    // réussir. Elle ne devrait pas exister (importeur + admin la
+                    // refusent), mais on ne devine pas.
+                    None => false,
+                };
+                // Rien de saisi = question sautée : `None`, pas `Some("")`. La page
+                // de correction et l'historique n'ont pas à distinguer les deux, et
+                // ça évite d'avoir à tester le vide dans un template Askama.
+                let typed = if typed.trim().is_empty() {
+                    None
+                } else {
+                    Some(typed.clone())
+                };
+                (correct, typed)
+            }
+            _ => (false, None),
+        };
 
-        let correct = chosen_set == correct_set;
-
+        // Pour 'exact'/'number', `answer_rows` tient l'unique bonne réponse :
+        // `was_chosen` y vaut « l'enfant est tombé dessus ». La page de correction
+        // affiche donc « c'était la bonne réponse » exactement comme pour un QCM.
+        let chosen_ids: HashSet<i64> = match given {
+            Given::Choices(ids) => ids.iter().copied().collect(),
+            Given::Text(_) => HashSet::new(),
+        };
         let answers = answer_rows
             .into_iter()
-            .map(|(id, text, is_corr)| GradedAnswer {
-                answer_id: id,
-                text,
-                is_correct: is_corr == 1,
-                was_chosen: chosen_set.contains(&id),
+            .map(|(id, text, is_corr)| {
+                let is_correct = is_corr == 1;
+                GradedAnswer {
+                    answer_id: id,
+                    text,
+                    is_correct,
+                    was_chosen: if is_free_input(kind) {
+                        is_correct && correct
+                    } else {
+                        chosen_ids.contains(&id)
+                    },
+                }
             })
             .collect();
 
@@ -250,6 +370,7 @@ pub async fn grade(
             statement: q.2,
             explanation: q.3,
             answers,
+            given_text,
             correct,
         });
     }
@@ -326,5 +447,49 @@ mod tests {
     fn zero_n_returns_empty() {
         let subjects = vec![(1, 1.0, 5)];
         assert!(distribute(&subjects, 0).is_empty());
+    }
+
+    // ===== Comparaisons =====
+    // Le faux négatif est le pire bug de cette application : l'enfant a juste,
+    // et la machine reste verrouillée. Ces cas sont là pour ça.
+
+    #[test]
+    fn exact_ignores_case_and_surrounding_space() {
+        assert!(text_matches("  Chien ", "chien"));
+        assert!(text_matches("ÉTÉ", "été"));
+    }
+
+    #[test]
+    fn exact_keeps_accents_significant() {
+        // Sur une question d'orthographe, c'est justement ce qu'on évalue.
+        assert!(!text_matches("ou", "où"));
+    }
+
+    #[test]
+    fn number_ignores_formatting() {
+        for given in ["8", "08", "+8", " 8 ", "8,0", "8.0"] {
+            assert!(number_matches(given, "8"), "« {given} » devrait valoir 8");
+        }
+    }
+
+    #[test]
+    fn number_handles_negatives_and_decimals() {
+        assert!(number_matches("-12", "-12"));
+        assert!(number_matches("2,5", "2.5"));
+        assert!(!number_matches("9", "8"));
+        assert!(!number_matches("-8", "8"));
+    }
+
+    #[test]
+    fn number_rejects_empty_or_garbage() {
+        assert!(!number_matches("", "8"));
+        assert!(!number_matches("huit", "8"));
+    }
+
+    #[test]
+    fn number_falls_back_to_text_when_expected_is_not_a_number() {
+        // Question mal saisie : on compare comme du texte plutôt que de recaler
+        // l'enfant pour une faute qui n'est pas la sienne.
+        assert!(number_matches("Huit", "huit"));
     }
 }

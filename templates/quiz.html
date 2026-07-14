@@ -35,21 +35,43 @@
     </div>
     {% if q.kind == "single" %}
       <p class="hint">Choisis une seule réponse.</p>
-    {% else %}
+    {% else if q.kind == "multi" %}
       <p class="hint">Plusieurs réponses possibles. Coche toutes les bonnes.</p>
+    {% else if q.kind == "number" %}
+      <p class="hint">Écris le résultat en chiffres.</p>
+    {% else %}
+      <p class="hint">Écris ta réponse.</p>
     {% endif %}
-    <div class="answers">
-      {% for a in q.answers %}
-        <label class="answer">
-          {% if q.kind == "single" %}
-            <input type="radio" name="q_{{ q.id }}" value="{{ a.id }}">
-          {% else %}
-            <input type="checkbox" name="q_{{ q.id }}" value="{{ a.id }}">
-          {% endif %}
-          <span>{{ a.text }}</span>
-        </label>
-      {% endfor %}
-    </div>
+
+    {# 'exact'/'number' : aucune option n'est rendue — et pour cause, `answers` est
+       VIDE ici (voir quiz.rs::pick_questions). La bonne réponse ne quitte jamais
+       le serveur : sinon un Ctrl+U suffirait à la lire. Le champ s'appelle `t_`,
+       pas `q_` : l'un porte du texte, l'autre des identifiants. #}
+    {% if q.kind == "number" %}
+      <div class="answers">
+        <input class="free-answer" type="text" name="t_{{ q.id }}"
+               inputmode="numeric" pattern="-?[0-9]*[.,]?[0-9]*"
+               autocomplete="off" placeholder="Ton résultat">
+      </div>
+    {% else if q.kind == "exact" %}
+      <div class="answers">
+        <input class="free-answer" type="text" name="t_{{ q.id }}"
+               autocomplete="off" spellcheck="false" placeholder="Ta réponse">
+      </div>
+    {% else %}
+      <div class="answers">
+        {% for a in q.answers %}
+          <label class="answer">
+            {% if q.kind == "single" %}
+              <input type="radio" name="q_{{ q.id }}" value="{{ a.id }}">
+            {% else %}
+              <input type="checkbox" name="q_{{ q.id }}" value="{{ a.id }}">
+            {% endif %}
+            <span>{{ a.text }}</span>
+          </label>
+        {% endfor %}
+      </div>
+    {% endif %}
   </section>
   {% endfor %}
 

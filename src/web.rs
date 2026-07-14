@@ -15,7 +15,7 @@ use tower_http::trace::TraceLayer;
 
 use crate::admin;
 use crate::policy::{self, BlockReason, Child, GateDecision};
-use crate::quiz::{self, GradedAttempt, QuizQuestion, Submission};
+use crate::quiz::{self, Given, GradedAttempt, QuizQuestion, Submission};
 
 /// Cookie qui retient quel enfant est devant l'écran, posé par le sélecteur de
 /// profils (/profiles). Cookie de session : à chaque redémarrage du navigateur
@@ -491,9 +491,14 @@ fn blocked_page(child: &Child, reason: &BlockReason) -> BlockedTemplate {
 
 // ===== Form parsing =====
 
+/// Deux préfixes, et ce n'est pas cosmétique : `q_` porte des identifiants de
+/// réponse, `t_` du texte libre. Les confondre serait fatal — la réponse « 8 »
+/// d'une addition se parserait en `answer_id = 8`, et corrigerait la question
+/// contre une option d'un tout autre QCM. Le préfixe rend l'ambiguïté impossible
+/// à écrire.
 fn parse_form(pairs: &[(String, String)]) -> Result<(Vec<i64>, Submission), AppError> {
     let mut question_ids: Vec<i64> = Vec::new();
-    let mut chosen: HashMap<i64, Vec<i64>> = HashMap::new();
+    let mut given: Submission = HashMap::new();
 
     for (k, v) in pairs {
         if k == "question_ids" {
@@ -511,14 +516,24 @@ fn parse_form(pairs: &[(String, String)]) -> Result<(Vec<i64>, Submission), AppE
             let aid: i64 = v
                 .parse()
                 .with_context(|| format!("invalid answer id '{v}'"))?;
-            chosen.entry(qid).or_default().push(aid);
+            match given.entry(qid).or_default() {
+                Given::Choices(ids) => ids.push(aid),
+                // Texte ET cases pour la même question : formulaire trafiqué.
+                // On ignore ici, `grade` tranchera contre le `kind` en base.
+                Given::Text(_) => {}
+            }
+        } else if let Some(suffix) = k.strip_prefix("t_") {
+            let qid: i64 = suffix
+                .parse()
+                .with_context(|| format!("invalid t_ key '{suffix}'"))?;
+            given.insert(qid, Given::Text(v.clone()));
         }
     }
 
     if question_ids.is_empty() {
         return Err(AppError::bad_request("aucune question soumise"));
     }
-    Ok((question_ids, chosen))
+    Ok((question_ids, given))
 }
 
 // ===== Persistence =====
@@ -556,8 +571,9 @@ async fn persist_attempt(pool: &SqlitePool, child_id: i64, attempt: &GradedAttem
             sqlx::query(
                 "INSERT INTO attempt_answers
                    (attempt_id, question_id, kind_snapshot, statement_snapshot,
-                    answer_id, answer_text_snapshot, was_chosen, is_correct)
-                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                    answer_id, answer_text_snapshot, given_text_snapshot,
+                    was_chosen, is_correct)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
             )
             .bind(attempt_id)
             .bind(q.question_id)
@@ -565,6 +581,7 @@ async fn persist_attempt(pool: &SqlitePool, child_id: i64, attempt: &GradedAttem
             .bind(&q.statement)
             .bind(a.answer_id)
             .bind(&a.text)
+            .bind(q.given_text.as_ref())
             .bind(if a.was_chosen { 1 } else { 0 })
             .bind(if a.is_correct { 1 } else { 0 })
             .execute(&mut *tx)

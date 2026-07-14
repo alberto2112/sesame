@@ -7,7 +7,7 @@ use sqlx::SqlitePool;
 use tracing_subscriber::EnvFilter;
 
 use sesame::config::Config;
-use sesame::quiz::Submission;
+use sesame::quiz::{Given, Submission};
 use sesame::{auth, db, importer, policy, quiz, web};
 
 const HELP: &str = "\
@@ -283,6 +283,11 @@ async fn run_preview(pool: &SqlitePool, n_override: Option<usize>) -> Result<()>
     );
     for (i, q) in questions.iter().enumerate() {
         println!("\n{}. [{}] {}", i + 1, q.kind, q.statement);
+        if quiz::is_free_input(&q.kind) {
+            // `pick_questions` ne charge pas la bonne réponse pour ces types-là :
+            // elle ne doit pas fuiter vers le rendu. L'aperçu ne la voit pas non plus.
+            println!("   - (réponse à écrire)");
+        }
         for a in &q.answers {
             println!("   - ({}) {}", a.id, a.text);
         }
@@ -290,12 +295,26 @@ async fn run_preview(pool: &SqlitePool, n_override: Option<usize>) -> Result<()>
 
     let mut submission: Submission = HashMap::new();
     for q in &questions {
-        let correct: Vec<(i64,)> =
-            sqlx::query_as("SELECT id FROM answers WHERE question_id = ? AND is_correct = 1")
-                .bind(q.id)
-                .fetch_all(pool)
-                .await?;
-        submission.insert(q.id, correct.into_iter().map(|(id,)| id).collect());
+        // Simulation « tout juste » : on va chercher la bonne réponse en base, sous
+        // la forme qu'attend le type — des identifiants pour un QCM, du texte pour
+        // une réponse écrite.
+        let given = if quiz::is_free_input(&q.kind) {
+            let correct: Option<(String,)> = sqlx::query_as(
+                "SELECT text FROM answers WHERE question_id = ? AND is_correct = 1 LIMIT 1",
+            )
+            .bind(q.id)
+            .fetch_optional(pool)
+            .await?;
+            Given::Text(correct.map(|(t,)| t).unwrap_or_default())
+        } else {
+            let correct: Vec<(i64,)> =
+                sqlx::query_as("SELECT id FROM answers WHERE question_id = ? AND is_correct = 1")
+                    .bind(q.id)
+                    .fetch_all(pool)
+                    .await?;
+            Given::Choices(correct.into_iter().map(|(id,)| id).collect())
+        };
+        submission.insert(q.id, given);
     }
     let result = quiz::grade(pool, &submission, child.pass_threshold_pct).await?;
     println!("\n=== Simulation: toutes les réponses correctes ===");

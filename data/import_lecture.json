@@ -1,0 +1,1900 @@
+{
+  "subjects": [
+    {
+      "name": "Lecture et vocabulaire",
+      "weight": 1.0
+    }
+  ],
+  "questions": [
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Léa a un chat noir. Elle joue avec lui dans le jardin. De quelle couleur est le chat de Léa ?",
+      "answers": [
+        {
+          "text": "Noir",
+          "correct": true
+        },
+        {
+          "text": "Blanc",
+          "correct": false
+        },
+        {
+          "text": "Gris",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que Léa a un chat noir.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Tom mange une pomme rouge à la récréation. Que mange Tom ?",
+      "answers": [
+        {
+          "text": "Une pomme",
+          "correct": true
+        },
+        {
+          "text": "Une banane",
+          "correct": false
+        },
+        {
+          "text": "Un gâteau",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que Tom mange une pomme.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Papa lit le journal dans le salon. Où est papa ?",
+      "answers": [
+        {
+          "text": "Dans le salon",
+          "correct": true
+        },
+        {
+          "text": "Dans la cuisine",
+          "correct": false
+        },
+        {
+          "text": "Dans le jardin",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que papa est dans le salon.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Marie va à l'école le matin. Quand Marie va-t-elle à l'école ?",
+      "answers": [
+        {
+          "text": "Le matin",
+          "correct": true
+        },
+        {
+          "text": "Le soir",
+          "correct": false
+        },
+        {
+          "text": "La nuit",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que Marie va à l'école le matin.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Il pleut, alors Paul prend son parapluie. Pourquoi Paul prend-il son parapluie ?",
+      "answers": [
+        {
+          "text": "Parce qu'il pleut",
+          "correct": true
+        },
+        {
+          "text": "Parce qu'il fait chaud",
+          "correct": false
+        },
+        {
+          "text": "Parce qu'il neige",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit qu'il pleut, donc Paul prend son parapluie.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Sophie a très faim. Elle prépare un sandwich. Que fait Sophie parce qu'elle a faim ?",
+      "answers": [
+        {
+          "text": "Elle prépare un sandwich",
+          "correct": true
+        },
+        {
+          "text": "Elle dort",
+          "correct": false
+        },
+        {
+          "text": "Elle joue au ballon",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que Sophie prépare un sandwich parce qu'elle a faim.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Le petit chien s'appelle Rex. Il aboie très fort. Comment s'appelle le chien ?",
+      "answers": [
+        {
+          "text": "Rex",
+          "correct": true
+        },
+        {
+          "text": "Max",
+          "correct": false
+        },
+        {
+          "text": "Bella",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que le chien s'appelle Rex.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Julie plante trois fleurs jaunes dans le jardin. Combien de fleurs Julie plante-t-elle ?",
+      "answers": [
+        {
+          "text": "Trois",
+          "correct": true
+        },
+        {
+          "text": "Deux",
+          "correct": false
+        },
+        {
+          "text": "Cinq",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que Julie plante trois fleurs.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Lucas oublie son cartable à la maison. Il retourne vite le chercher. Qu'est-ce que Lucas a oublié ?",
+      "answers": [
+        {
+          "text": "Son cartable",
+          "correct": true
+        },
+        {
+          "text": "Son chapeau",
+          "correct": false
+        },
+        {
+          "text": "Ses chaussures",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que Lucas oublie son cartable.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Grand-mère fait un gâteau au chocolat. La cuisine sent très bon. Qui fait le gâteau ?",
+      "answers": [
+        {
+          "text": "Grand-mère",
+          "correct": true
+        },
+        {
+          "text": "Le boulanger",
+          "correct": false
+        },
+        {
+          "text": "Maman",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que grand-mère fait le gâteau.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Le soleil brille et il fait chaud. Les enfants vont à la plage. Quel temps fait-il ?",
+      "answers": [
+        {
+          "text": "Il fait beau",
+          "correct": true
+        },
+        {
+          "text": "Il neige",
+          "correct": false
+        },
+        {
+          "text": "Il y a de l'orage",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que le soleil brille : il fait beau.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Emma met son maillot de bain et ses lunettes de natation. Elle va nager. Que va faire Emma ?",
+      "answers": [
+        {
+          "text": "Elle va nager",
+          "correct": true
+        },
+        {
+          "text": "Elle va dormir",
+          "correct": false
+        },
+        {
+          "text": "Elle va lire",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit qu'Emma va nager.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Nicolas a mal aux dents. Maman l'emmène chez le dentiste. Pourquoi Nicolas va-t-il chez le dentiste ?",
+      "answers": [
+        {
+          "text": "Parce qu'il a mal aux dents",
+          "correct": true
+        },
+        {
+          "text": "Parce qu'il a faim",
+          "correct": false
+        },
+        {
+          "text": "Parce qu'il est fatigué",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que Nicolas a mal aux dents.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Chaque dimanche, la famille mange chez mamie. Quand la famille va-t-elle chez mamie ?",
+      "answers": [
+        {
+          "text": "Le dimanche",
+          "correct": true
+        },
+        {
+          "text": "Le lundi",
+          "correct": false
+        },
+        {
+          "text": "Le mercredi",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que la famille va chez mamie chaque dimanche.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Le chat dort sur le canapé rouge. Où dort le chat ?",
+      "answers": [
+        {
+          "text": "Sur le canapé",
+          "correct": true
+        },
+        {
+          "text": "Sous la table",
+          "correct": false
+        },
+        {
+          "text": "Dans le lit",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que le chat dort sur le canapé.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Théo boit un grand verre de lait le matin. Que boit Théo ?",
+      "answers": [
+        {
+          "text": "Du lait",
+          "correct": true
+        },
+        {
+          "text": "De l'eau",
+          "correct": false
+        },
+        {
+          "text": "Du jus d'orange",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que Théo boit un verre de lait.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Il fait froid et il neige. Clara met son bonnet et ses gants. Pourquoi Clara met-elle ses gants ?",
+      "answers": [
+        {
+          "text": "Parce qu'il fait froid",
+          "correct": true
+        },
+        {
+          "text": "Parce qu'il fait chaud",
+          "correct": false
+        },
+        {
+          "text": "Parce qu'elle a soif",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit qu'il fait froid, donc Clara met ses gants.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Dans la ferme, il y a des vaches, des poules et un cheval. Quel animal vit dans la ferme ?",
+      "answers": [
+        {
+          "text": "Une vache",
+          "correct": true
+        },
+        {
+          "text": "Un lion",
+          "correct": false
+        },
+        {
+          "text": "Un dauphin",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit qu'il y a des vaches dans la ferme.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Le facteur apporte une lettre pour papa. Qui apporte la lettre ?",
+      "answers": [
+        {
+          "text": "Le facteur",
+          "correct": true
+        },
+        {
+          "text": "Le maître",
+          "correct": false
+        },
+        {
+          "text": "Le voisin",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que le facteur apporte la lettre.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Zoé range ses jouets dans une grande boîte bleue. De quelle couleur est la boîte ?",
+      "answers": [
+        {
+          "text": "Bleue",
+          "correct": true
+        },
+        {
+          "text": "Verte",
+          "correct": false
+        },
+        {
+          "text": "Rouge",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que la boîte est bleue.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "À midi, les enfants mangent à la cantine de l'école. Où mangent les enfants à midi ?",
+      "answers": [
+        {
+          "text": "À la cantine",
+          "correct": true
+        },
+        {
+          "text": "À la maison",
+          "correct": false
+        },
+        {
+          "text": "Au restaurant",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que les enfants mangent à la cantine.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Le bébé pleure parce qu'il a sommeil. Pourquoi le bébé pleure-t-il ?",
+      "answers": [
+        {
+          "text": "Parce qu'il a sommeil",
+          "correct": true
+        },
+        {
+          "text": "Parce qu'il rit",
+          "correct": false
+        },
+        {
+          "text": "Parce qu'il joue",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que le bébé pleure parce qu'il a sommeil.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Antoine gagne la course. Il saute de joie et il sourit. Comment se sent Antoine ?",
+      "answers": [
+        {
+          "text": "Content",
+          "correct": true
+        },
+        {
+          "text": "Triste",
+          "correct": false
+        },
+        {
+          "text": "Fâché",
+          "correct": false
+        }
+      ],
+      "explanation": "Antoine gagne, saute de joie et sourit : il est content.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "La maîtresse écrit au tableau avec une craie blanche. Avec quoi écrit la maîtresse ?",
+      "answers": [
+        {
+          "text": "Une craie",
+          "correct": true
+        },
+        {
+          "text": "Un crayon",
+          "correct": false
+        },
+        {
+          "text": "Un pinceau",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que la maîtresse écrit avec une craie.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Le train part de la gare à huit heures. D'où part le train ?",
+      "answers": [
+        {
+          "text": "De la gare",
+          "correct": true
+        },
+        {
+          "text": "De l'aéroport",
+          "correct": false
+        },
+        {
+          "text": "Du port",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que le train part de la gare.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Camille a perdu une dent. Le soir, elle la met sous son oreiller. Où Camille met-elle sa dent ?",
+      "answers": [
+        {
+          "text": "Sous son oreiller",
+          "correct": true
+        },
+        {
+          "text": "Dans sa poche",
+          "correct": false
+        },
+        {
+          "text": "Sur la table",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que Camille met sa dent sous son oreiller.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Le ciel est plein de nuages gris. Les gens ouvrent leurs parapluies. Qu'est-ce qui va arriver ?",
+      "answers": [
+        {
+          "text": "Il va pleuvoir",
+          "correct": true
+        },
+        {
+          "text": "Il va faire très chaud",
+          "correct": false
+        },
+        {
+          "text": "La lune va briller",
+          "correct": false
+        }
+      ],
+      "explanation": "Les gens ouvrent leurs parapluies : il va pleuvoir.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Hugo aime lire. Il va souvent à la bibliothèque pour emprunter des livres. Pourquoi Hugo va-t-il à la bibliothèque ?",
+      "answers": [
+        {
+          "text": "Pour emprunter des livres",
+          "correct": true
+        },
+        {
+          "text": "Pour manger",
+          "correct": false
+        },
+        {
+          "text": "Pour nager",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit qu'Hugo va à la bibliothèque pour emprunter des livres.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Le jardinier arrose les tomates tous les soirs. Que fait le jardinier avec les tomates ?",
+      "answers": [
+        {
+          "text": "Il les arrose",
+          "correct": true
+        },
+        {
+          "text": "Il les mange",
+          "correct": false
+        },
+        {
+          "text": "Il les jette",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que le jardinier arrose les tomates.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Manon a deux frères et une sœur. Combien de frères a Manon ?",
+      "answers": [
+        {
+          "text": "Deux",
+          "correct": true
+        },
+        {
+          "text": "Un",
+          "correct": false
+        },
+        {
+          "text": "Trois",
+          "correct": false
+        }
+      ],
+      "explanation": "Le texte dit que Manon a deux frères.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Quelle est la nature du mot « chat » ?",
+      "answers": [
+        {
+          "text": "un nom",
+          "correct": true
+        },
+        {
+          "text": "un verbe",
+          "correct": false
+        },
+        {
+          "text": "un adjectif",
+          "correct": false
+        }
+      ],
+      "explanation": "« chat » est un nom, il désigne un animal.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Quelle est la nature du mot « manger » ?",
+      "answers": [
+        {
+          "text": "un verbe",
+          "correct": true
+        },
+        {
+          "text": "un nom",
+          "correct": false
+        },
+        {
+          "text": "un article",
+          "correct": false
+        }
+      ],
+      "explanation": "« manger » est un verbe, c'est une action.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Dans « une fleur rouge », quelle est la nature du mot « rouge » ?",
+      "answers": [
+        {
+          "text": "un adjectif",
+          "correct": true
+        },
+        {
+          "text": "un nom",
+          "correct": false
+        },
+        {
+          "text": "un verbe",
+          "correct": false
+        }
+      ],
+      "explanation": "Dans « une fleur rouge », « rouge » décrit la fleur : c'est un adjectif.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Dans « le soleil », quel mot est l'article ?",
+      "answers": [
+        {
+          "text": "le",
+          "correct": true
+        },
+        {
+          "text": "soleil",
+          "correct": false
+        },
+        {
+          "text": "grand",
+          "correct": false
+        }
+      ],
+      "explanation": "« le » est un article, il se place devant le nom.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Quelle est la nature du mot « elle » ?",
+      "answers": [
+        {
+          "text": "un pronom",
+          "correct": true
+        },
+        {
+          "text": "un nom",
+          "correct": false
+        },
+        {
+          "text": "un adjectif",
+          "correct": false
+        }
+      ],
+      "explanation": "« elle » est un pronom, il remplace un nom.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Dans « une pomme », quel mot est l'article ?",
+      "answers": [
+        {
+          "text": "une",
+          "correct": true
+        },
+        {
+          "text": "pomme",
+          "correct": false
+        },
+        {
+          "text": "mange",
+          "correct": false
+        }
+      ],
+      "explanation": "« une » est un article, il se place devant le nom.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Quelle est la nature du mot « courir » ?",
+      "answers": [
+        {
+          "text": "un verbe",
+          "correct": true
+        },
+        {
+          "text": "un adjectif",
+          "correct": false
+        },
+        {
+          "text": "un nom",
+          "correct": false
+        }
+      ],
+      "explanation": "« courir » est un verbe, c'est une action.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Quelle est la nature du mot « maison » ?",
+      "answers": [
+        {
+          "text": "un nom",
+          "correct": true
+        },
+        {
+          "text": "un verbe",
+          "correct": false
+        },
+        {
+          "text": "un pronom",
+          "correct": false
+        }
+      ],
+      "explanation": "« maison » est un nom, il désigne une chose.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Quelle est la nature du mot « petit » ?",
+      "answers": [
+        {
+          "text": "un adjectif",
+          "correct": true
+        },
+        {
+          "text": "un article",
+          "correct": false
+        },
+        {
+          "text": "un verbe",
+          "correct": false
+        }
+      ],
+      "explanation": "« petit » est un adjectif, il décrit une chose ou une personne.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Parmi ces mots, lequel est un pronom ?",
+      "answers": [
+        {
+          "text": "il",
+          "correct": true
+        },
+        {
+          "text": "chien",
+          "correct": false
+        },
+        {
+          "text": "sauter",
+          "correct": false
+        }
+      ],
+      "explanation": "« il » est un pronom, il remplace un nom.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « le chien » ?",
+      "answers": [
+        {
+          "text": "les chiens",
+          "correct": true
+        },
+        {
+          "text": "le chien",
+          "correct": false
+        },
+        {
+          "text": "un chien",
+          "correct": false
+        }
+      ],
+      "explanation": "Au pluriel, on ajoute un « s » : les chiens.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Quel est le singulier de « des fleurs » ?",
+      "answers": [
+        {
+          "text": "une fleur",
+          "correct": true
+        },
+        {
+          "text": "des fleurs",
+          "correct": false
+        },
+        {
+          "text": "les fleurs",
+          "correct": false
+        }
+      ],
+      "explanation": "Le singulier de « des fleurs » est « une fleur ».",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Parmi ces mots, lequel est au pluriel ?",
+      "answers": [
+        {
+          "text": "oiseaux",
+          "correct": true
+        },
+        {
+          "text": "oiseau",
+          "correct": false
+        },
+        {
+          "text": "nid",
+          "correct": false
+        }
+      ],
+      "explanation": "« oiseaux » se termine par « -x » : c'est le pluriel (plusieurs oiseaux).",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un jouet » ?",
+      "answers": [
+        {
+          "text": "des jouets",
+          "correct": true
+        },
+        {
+          "text": "un jouet",
+          "correct": false
+        },
+        {
+          "text": "le jouet",
+          "correct": false
+        }
+      ],
+      "explanation": "Au pluriel, on ajoute un « s » : des jouets.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis le pluriel du mot « journal ».",
+      "answers": [
+        {
+          "text": "journaux",
+          "correct": true
+        },
+        {
+          "text": "journals",
+          "correct": false
+        },
+        {
+          "text": "journeaux",
+          "correct": false
+        }
+      ],
+      "explanation": "« journal » devient « journaux » au pluriel.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un gâteau » ?",
+      "answers": [
+        {
+          "text": "des gâteaux",
+          "correct": true
+        },
+        {
+          "text": "des gâteaus",
+          "correct": false
+        },
+        {
+          "text": "des gâteaues",
+          "correct": false
+        }
+      ],
+      "explanation": "Les mots en -eau prennent un « x » au pluriel : des gâteaux.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Quel mot va avec l'article « le » ?",
+      "answers": [
+        {
+          "text": "garçon",
+          "correct": true
+        },
+        {
+          "text": "fille",
+          "correct": false
+        },
+        {
+          "text": "table",
+          "correct": false
+        }
+      ],
+      "explanation": "On dit « le garçon », c'est un mot masculin.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Quel article va avec le mot « lune » ?",
+      "answers": [
+        {
+          "text": "la",
+          "correct": true
+        },
+        {
+          "text": "le",
+          "correct": false
+        },
+        {
+          "text": "un",
+          "correct": false
+        }
+      ],
+      "explanation": "On dit « la lune », c'est un mot féminin.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Quel article va avec le mot « fille » ?",
+      "answers": [
+        {
+          "text": "une",
+          "correct": true
+        },
+        {
+          "text": "un",
+          "correct": false
+        },
+        {
+          "text": "le",
+          "correct": false
+        }
+      ],
+      "explanation": "On dit « une fille », c'est un mot féminin.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Parmi ces mots, lequel est un mot féminin ?",
+      "answers": [
+        {
+          "text": "chaise",
+          "correct": true
+        },
+        {
+          "text": "ballon",
+          "correct": false
+        },
+        {
+          "text": "stylo",
+          "correct": false
+        }
+      ],
+      "explanation": "« chaise » est un mot féminin : on dit « une chaise ».",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Quel est le féminin de « un ami » ?",
+      "answers": [
+        {
+          "text": "une amie",
+          "correct": true
+        },
+        {
+          "text": "un amie",
+          "correct": false
+        },
+        {
+          "text": "une ami",
+          "correct": false
+        }
+      ],
+      "explanation": "Le féminin de « ami » est « amie », avec un « e ».",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Quel est le féminin de « le lion » ?",
+      "answers": [
+        {
+          "text": "la lionne",
+          "correct": true
+        },
+        {
+          "text": "la lione",
+          "correct": false
+        },
+        {
+          "text": "le lionne",
+          "correct": false
+        }
+      ],
+      "explanation": "Le féminin de « lion » est « lionne ».",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Dans la phrase « Le chien aboie. », quel est le verbe ?",
+      "answers": [
+        {
+          "text": "aboie",
+          "correct": true
+        },
+        {
+          "text": "chien",
+          "correct": false
+        },
+        {
+          "text": "le",
+          "correct": false
+        }
+      ],
+      "explanation": "« aboie » est le verbe, c'est l'action du chien.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Dans la phrase « Marie mange une pomme. », quel est le sujet ?",
+      "answers": [
+        {
+          "text": "Marie",
+          "correct": true
+        },
+        {
+          "text": "mange",
+          "correct": false
+        },
+        {
+          "text": "pomme",
+          "correct": false
+        }
+      ],
+      "explanation": "« Marie » est le sujet, c'est elle qui fait l'action.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Dans la phrase « Les enfants jouent. », quel est le verbe ?",
+      "answers": [
+        {
+          "text": "jouent",
+          "correct": true
+        },
+        {
+          "text": "enfants",
+          "correct": false
+        },
+        {
+          "text": "les",
+          "correct": false
+        }
+      ],
+      "explanation": "« jouent » est le verbe, c'est l'action des enfants.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Dans la phrase « Le chat dort. », quel est le sujet ?",
+      "answers": [
+        {
+          "text": "Le chat",
+          "correct": true
+        },
+        {
+          "text": "dort",
+          "correct": false
+        },
+        {
+          "text": "chat dort",
+          "correct": false
+        }
+      ],
+      "explanation": "« Le chat » est le sujet, c'est lui qui dort.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Dans la phrase « Papa lit le journal. », quel est le sujet ?",
+      "answers": [
+        {
+          "text": "Papa",
+          "correct": true
+        },
+        {
+          "text": "lit",
+          "correct": false
+        },
+        {
+          "text": "journal",
+          "correct": false
+        }
+      ],
+      "explanation": "« Papa » est le sujet, c'est lui qui lit.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Quel est le contraire de « grand » ?",
+      "answers": [
+        {
+          "text": "petit",
+          "correct": true
+        },
+        {
+          "text": "gros",
+          "correct": false
+        },
+        {
+          "text": "long",
+          "correct": false
+        }
+      ],
+      "explanation": "Le contraire de « grand » est « petit ».",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Quel est le contraire du mot « chaud » ?",
+      "answers": [
+        {
+          "text": "froid",
+          "correct": true
+        },
+        {
+          "text": "tiède",
+          "correct": false
+        },
+        {
+          "text": "brûlant",
+          "correct": false
+        }
+      ],
+      "explanation": "Le contraire de « chaud » est « froid ».",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Quel est le contraire de « jour » ?",
+      "answers": [
+        {
+          "text": "nuit",
+          "correct": true
+        },
+        {
+          "text": "soir",
+          "correct": false
+        },
+        {
+          "text": "matin",
+          "correct": false
+        }
+      ],
+      "explanation": "Le contraire de « jour » est « nuit ».",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Complète : « Papa ___ une belle voiture. »",
+      "answers": [
+        {
+          "text": "a",
+          "correct": true
+        },
+        {
+          "text": "à",
+          "correct": false
+        },
+        {
+          "text": "as",
+          "correct": false
+        }
+      ],
+      "explanation": "« a » sans accent est le verbe avoir (il/elle a). « à » avec accent est un petit mot pour dire où on va.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Complète : « Il va ___ l'école tous les matins. »",
+      "answers": [
+        {
+          "text": "a",
+          "correct": false
+        },
+        {
+          "text": "à",
+          "correct": true
+        },
+        {
+          "text": "as",
+          "correct": false
+        }
+      ],
+      "explanation": "« à » avec accent indique le lieu (aller à l'école). « a » sans accent est le verbe avoir.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Complète : « La pomme ___ rouge. »",
+      "answers": [
+        {
+          "text": "est",
+          "correct": true
+        },
+        {
+          "text": "et",
+          "correct": false
+        },
+        {
+          "text": "es",
+          "correct": false
+        }
+      ],
+      "explanation": "« est » est le verbe être (il/elle est). On peut le remplacer par « était ».",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Complète : « J'aime courir ___ sauter. »",
+      "answers": [
+        {
+          "text": "et",
+          "correct": true
+        },
+        {
+          "text": "est",
+          "correct": false
+        },
+        {
+          "text": "es",
+          "correct": false
+        }
+      ],
+      "explanation": "« et » sert à relier deux mots (courir et sauter). On peut le remplacer par « et puis ».",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe : le nom d'un félin qui miaule (plusieurs).",
+      "answers": [
+        {
+          "text": "chats",
+          "correct": true
+        },
+        {
+          "text": "chates",
+          "correct": false
+        },
+        {
+          "text": "chat",
+          "correct": false
+        }
+      ],
+      "explanation": "Au pluriel, la plupart des noms prennent un « -s » : un chat, des chats.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe : plusieurs jolies ___ dans le jardin.",
+      "answers": [
+        {
+          "text": "fleurs",
+          "correct": true
+        },
+        {
+          "text": "fleures",
+          "correct": false
+        },
+        {
+          "text": "fleur",
+          "correct": false
+        }
+      ],
+      "explanation": "Au pluriel, on ajoute un « -s » : une fleur, des fleurs.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe du mot : l'endroit où on habite.",
+      "answers": [
+        {
+          "text": "maison",
+          "correct": true
+        },
+        {
+          "text": "mèson",
+          "correct": false
+        },
+        {
+          "text": "meson",
+          "correct": false
+        }
+      ],
+      "explanation": "On écrit « maison » avec « ai » qui fait le son [è].",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Complète : « Les oiseaux ___ des ailes. »",
+      "answers": [
+        {
+          "text": "ont",
+          "correct": true
+        },
+        {
+          "text": "on",
+          "correct": false
+        },
+        {
+          "text": "onts",
+          "correct": false
+        }
+      ],
+      "explanation": "« ont » est le verbe avoir (ils ont). On peut le remplacer par « avaient ».",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Complète : « ___ mange à midi. »",
+      "answers": [
+        {
+          "text": "On",
+          "correct": true
+        },
+        {
+          "text": "Ont",
+          "correct": false
+        },
+        {
+          "text": "Ons",
+          "correct": false
+        }
+      ],
+      "explanation": "« on » est un petit mot comme « il » (on mange = il mange). « ont » est le verbe avoir.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Complète : « Mes parents ___ gentils. »",
+      "answers": [
+        {
+          "text": "sont",
+          "correct": true
+        },
+        {
+          "text": "son",
+          "correct": false
+        },
+        {
+          "text": "sons",
+          "correct": false
+        }
+      ],
+      "explanation": "« sont » est le verbe être (ils sont). On peut le remplacer par « étaient ».",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Complète : « Léa cherche ___ crayon. »",
+      "answers": [
+        {
+          "text": "son",
+          "correct": true
+        },
+        {
+          "text": "sont",
+          "correct": false
+        },
+        {
+          "text": "sson",
+          "correct": false
+        }
+      ],
+      "explanation": "« son » montre à qui appartient la chose (son crayon = le crayon de Léa).",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe : celle qui s'occupe de toi et te fait des câlins.",
+      "answers": [
+        {
+          "text": "maman",
+          "correct": true
+        },
+        {
+          "text": "mamen",
+          "correct": false
+        },
+        {
+          "text": "manman",
+          "correct": false
+        }
+      ],
+      "explanation": "« maman » s'écrit m-a-m-a-n.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe : l'homme qui s'occupe de toi avec ta maman.",
+      "answers": [
+        {
+          "text": "papa",
+          "correct": true
+        },
+        {
+          "text": "pappa",
+          "correct": false
+        },
+        {
+          "text": "papaa",
+          "correct": false
+        }
+      ],
+      "explanation": "« papa » s'écrit p-a-p-a.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe du mot : un tout petit enfant.",
+      "answers": [
+        {
+          "text": "bébé",
+          "correct": true
+        },
+        {
+          "text": "bèbè",
+          "correct": false
+        },
+        {
+          "text": "bébè",
+          "correct": false
+        }
+      ],
+      "explanation": "On écrit « bébé » avec deux accents aigus (é), qui font le son [é].",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe du mot : l'endroit où on apprend à lire.",
+      "answers": [
+        {
+          "text": "école",
+          "correct": true
+        },
+        {
+          "text": "ècole",
+          "correct": false
+        },
+        {
+          "text": "écolle",
+          "correct": false
+        }
+      ],
+      "explanation": "On écrit « école » avec un accent aigu (é) au début.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe : « un ___ chien » (pas grand).",
+      "answers": [
+        {
+          "text": "petit",
+          "correct": true
+        },
+        {
+          "text": "peti",
+          "correct": false
+        },
+        {
+          "text": "petti",
+          "correct": false
+        }
+      ],
+      "explanation": "« petit » se termine par un « -t » qu'on n'entend pas (on l'entend au féminin : petite).",
+      "difficulty": 3
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe : un gâteau, plusieurs ___.",
+      "answers": [
+        {
+          "text": "gâteaux",
+          "correct": true
+        },
+        {
+          "text": "gâteaus",
+          "correct": false
+        },
+        {
+          "text": "gâteau",
+          "correct": false
+        }
+      ],
+      "explanation": "Les mots en « -eau » prennent un « -x » au pluriel : un gâteau, des gâteaux.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe : un cheval, plusieurs ___.",
+      "answers": [
+        {
+          "text": "chevaux",
+          "correct": true
+        },
+        {
+          "text": "chevals",
+          "correct": false
+        },
+        {
+          "text": "chevaus",
+          "correct": false
+        }
+      ],
+      "explanation": "La plupart des mots en « -al » font « -aux » au pluriel : un cheval, des chevaux (il y a quelques exceptions).",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe : un jeu, plusieurs ___.",
+      "answers": [
+        {
+          "text": "jeux",
+          "correct": true
+        },
+        {
+          "text": "jeus",
+          "correct": false
+        },
+        {
+          "text": "jeu",
+          "correct": false
+        }
+      ],
+      "explanation": "Presque tous les mots en « -eu » prennent un « -x » au pluriel : un jeu, des jeux (sauf quelques-uns comme un pneu, des pneus).",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe : un oiseau, plusieurs ___.",
+      "answers": [
+        {
+          "text": "oiseaux",
+          "correct": true
+        },
+        {
+          "text": "oiseaus",
+          "correct": false
+        },
+        {
+          "text": "oiseau",
+          "correct": false
+        }
+      ],
+      "explanation": "Les mots en « -eau » prennent un « -x » au pluriel : un oiseau, des oiseaux.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe du mot : le jour où on est.",
+      "answers": [
+        {
+          "text": "aujourd'hui",
+          "correct": true
+        },
+        {
+          "text": "aujourdui",
+          "correct": false
+        },
+        {
+          "text": "aujourdhui",
+          "correct": false
+        }
+      ],
+      "explanation": "On écrit « aujourd'hui » avec une apostrophe après « aujourd ».",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe du mot qui veut dire « énormément ».",
+      "answers": [
+        {
+          "text": "beaucoup",
+          "correct": true
+        },
+        {
+          "text": "beaucou",
+          "correct": false
+        },
+        {
+          "text": "bocoup",
+          "correct": false
+        }
+      ],
+      "explanation": "On écrit « beaucoup » avec « eau » au début et un « -p » muet à la fin.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe du mot qui veut dire « tout le temps ».",
+      "answers": [
+        {
+          "text": "toujours",
+          "correct": true
+        },
+        {
+          "text": "toujour",
+          "correct": false
+        },
+        {
+          "text": "toujourd",
+          "correct": false
+        }
+      ],
+      "explanation": "« toujours » se termine toujours par un « -s ».",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe du mot : une friandise marron très sucrée.",
+      "answers": [
+        {
+          "text": "chocolat",
+          "correct": true
+        },
+        {
+          "text": "chocola",
+          "correct": false
+        },
+        {
+          "text": "chocolate",
+          "correct": false
+        }
+      ],
+      "explanation": "« chocolat » se termine par un « -t » muet (on l'entend dans « chocolatier »).",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe : « un ___ chien » (contraire de petit).",
+      "answers": [
+        {
+          "text": "grand",
+          "correct": true
+        },
+        {
+          "text": "gran",
+          "correct": false
+        },
+        {
+          "text": "grant",
+          "correct": false
+        }
+      ],
+      "explanation": "« grand » se termine par un « -d » muet ; on l'entend au féminin : « grande ».",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe du mot : un enfant qui va à l'école.",
+      "answers": [
+        {
+          "text": "élève",
+          "correct": true
+        },
+        {
+          "text": "éléve",
+          "correct": false
+        },
+        {
+          "text": "èlève",
+          "correct": false
+        }
+      ],
+      "explanation": "On écrit « élève » : accent aigu (é) au début, puis accent grave (è).",
+      "difficulty": 4
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe du mot : l'ouverture dans le mur avec une vitre.",
+      "answers": [
+        {
+          "text": "fenêtre",
+          "correct": true
+        },
+        {
+          "text": "fenètre",
+          "correct": false
+        },
+        {
+          "text": "fenétre",
+          "correct": false
+        }
+      ],
+      "explanation": "On écrit « fenêtre » avec un accent circonflexe (le petit chapeau) sur le « ê ».",
+      "difficulty": 5
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe du mot : le grand animal gris avec une trompe.",
+      "answers": [
+        {
+          "text": "éléphant",
+          "correct": true
+        },
+        {
+          "text": "éléfant",
+          "correct": false
+        },
+        {
+          "text": "élephant",
+          "correct": false
+        }
+      ],
+      "explanation": "Dans « éléphant », le son [f] s'écrit « ph », et il y a deux accents aigus.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe : un bijou, plusieurs ___.",
+      "answers": [
+        {
+          "text": "bijoux",
+          "correct": true
+        },
+        {
+          "text": "bijous",
+          "correct": false
+        },
+        {
+          "text": "bijoue",
+          "correct": false
+        }
+      ],
+      "explanation": "« bijou » fait partie des mots en « -ou » qui prennent « -x » au pluriel (bijou, caillou, chou, genou, hibou, joujou, pou).",
+      "difficulty": 5
+    },
+    {
+      "subject": "Lecture et vocabulaire",
+      "kind": "single",
+      "statement": "Choisis la bonne orthographe du mot : une petite personne, une jeune ___.",
+      "answers": [
+        {
+          "text": "fille",
+          "correct": true
+        },
+        {
+          "text": "fiye",
+          "correct": false
+        },
+        {
+          "text": "fye",
+          "correct": false
+        }
+      ],
+      "explanation": "On écrit « fille » : le groupe « ill » se prononce comme le « y » de « yaourt » (le son [j]).",
+      "difficulty": 3
+    }
+  ]
+}

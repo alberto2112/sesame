@@ -39,6 +39,18 @@
     {% if q.correct %}✅{% else %}❌{% endif %}
     {{ loop.index }}. {{ q.statement }}
   </div>
+  {# Types écrits ('exact'/'number') : ce que l'enfant a tapé, montré seulement
+     s'il s'est trompé — quand il a juste, la liste ci-dessous l'affiche déjà en
+     « bonne réponse, choisie ✓ ». None = rien saisi. Pour les QCM, l'info vit
+     dans le `was_chosen` de chaque option. #}
+  {% if !q.correct %}
+    {% match q.given_text %}
+      {% when Some with (typed) %}
+        <p class="given">Ta réponse : <span class="a-ko-chosen">{{ typed }}</span></p>
+      {% when None %}
+    {% endmatch %}
+  {% endif %}
+
   <ul>
     {% for a in q.answers %}
       <li>

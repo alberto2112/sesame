@@ -34,8 +34,10 @@
     <label>
       Type
       <select name="kind" required>
-        <option value="single" {% if kind == "single" %}selected{% endif %}>Réponse unique</option>
-        <option value="multi" {% if kind == "multi" %}selected{% endif %}>Réponses multiples</option>
+        <option value="single" {% if kind == "single" %}selected{% endif %}>Réponse unique (QCM)</option>
+        <option value="multi" {% if kind == "multi" %}selected{% endif %}>Réponses multiples (QCM)</option>
+        <option value="exact" {% if kind == "exact" %}selected{% endif %}>Réponse écrite</option>
+        <option value="number" {% if kind == "number" %}selected{% endif %}>Réponse numérique</option>
       </select>
     </label>
   </div>
@@ -57,8 +59,13 @@
   </label>
 
   <h3>Réponses</h3>
-  <p class="hint">Jusqu'à 6. Laisse vide ce que tu n'utilises pas, et coche
-    « correcte » pour les bonnes réponses.</p>
+  <p class="hint"><strong>QCM</strong> (réponse unique / multiple) : jusqu'à 6 options.
+    Laisse vide ce que tu n'utilises pas, et coche « correcte » pour les bonnes.</p>
+  <p class="hint"><strong>Réponse écrite / numérique</strong> : l'enfant tape sa réponse,
+    il n'y a pas d'options. Remplis <strong>uniquement la première ligne</strong> avec la
+    bonne réponse, et coche « correcte ».
+    La casse et les espaces autour sont ignorés ; pour le type numérique,
+    « 08 » et « 8 » sont acceptés indifféremment.</p>
   {% for a in answers %}
     {% let i = loop.index %}
     <div class="answer-row">

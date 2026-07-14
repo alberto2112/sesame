@@ -79,6 +79,29 @@ main { max-width: 640px; margin: 0 auto; padding: 2rem 1rem 3rem; }
 .answer input { flex: none; width: 1.15rem; height: 1.15rem; accent-color: var(--teal); }
 .answer:has(input:checked) input { accent-color: #fff; }
 
+/* ---- Réponse écrite ('exact' / 'number') ----
+   Même habit que les cartes-réponses : c'est un champ, pas un formulaire
+   d'adulte. Gros, centré, lisible à un mètre. */
+.free-answer {
+  width: 100%;
+  padding: .95rem 1.1rem;
+  font: inherit;
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--navy);
+  background: #fff;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color .15s;
+}
+.free-answer::placeholder { color: #c3c9d6; font-weight: 400; font-size: 1rem; }
+.free-answer:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(31, 157, 143, .18);
+}
+
 /* ---- Boutons ---- */
 .btn {
   display: block; width: 100%;
@@ -230,6 +253,7 @@ h2.section { margin: 1.5rem 0 .8rem; font-size: 1.2rem; }
 .review-title { font-weight: 700; margin-bottom: .5rem; }
 .review ul { list-style: none; }
 .review li { padding: .15rem 0; }
+.given { margin: .1rem 0 .35rem; color: var(--muted); font-size: .95rem; }
 .a-ok-chosen { color: var(--green); font-weight: 700; }
 .a-ok-missed { color: var(--gold); font-weight: 700; }
 .a-ko-chosen { color: var(--soft-red); text-decoration: line-through; }

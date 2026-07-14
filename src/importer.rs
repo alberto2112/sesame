@@ -145,12 +145,6 @@ fn validate_question(q: &ImportQuestion) -> Result<(), String> {
     if !(1..=5).contains(&q.difficulty) {
         return Err(format!("difficulté {} hors de [1,5]", q.difficulty));
     }
-    if q.answers.len() < 2 {
-        return Err(format!(
-            "au moins 2 réponses requises, {} fournies",
-            q.answers.len()
-        ));
-    }
     for (i, a) in q.answers.iter().enumerate() {
         if a.text.trim().is_empty() {
             return Err(format!("texte de la réponse #{} vide", i + 1));
@@ -158,6 +152,38 @@ fn validate_question(q: &ImportQuestion) -> Result<(), String> {
     }
     let correct = q.answers.iter().filter(|a| a.correct).count();
     let incorrect = q.answers.len() - correct;
+
+    // 'exact'/'number' : la bonne réponse est STOCKÉE, une seule ligne. Elle n'est
+    // jamais déduite de l'énoncé — voir migrations/0006.
+    if crate::quiz::is_free_input(&q.kind) {
+        if q.answers.len() != 1 {
+            return Err(format!(
+                "type '{}' exige exactement 1 réponse (la bonne), {} fournies",
+                q.kind,
+                q.answers.len()
+            ));
+        }
+        if correct != 1 {
+            return Err(format!(
+                "type '{}' exige que sa réponse soit marquée correcte",
+                q.kind
+            ));
+        }
+        if q.kind == "number" && crate::quiz::parse_number(&q.answers[0].text).is_none() {
+            return Err(format!(
+                "type 'number' : la réponse '{}' n'est pas un nombre",
+                q.answers[0].text.trim()
+            ));
+        }
+        return Ok(());
+    }
+
+    if q.answers.len() < 2 {
+        return Err(format!(
+            "au moins 2 réponses requises, {} fournies",
+            q.answers.len()
+        ));
+    }
     match q.kind.as_str() {
         "single" => {
             if correct != 1 {
@@ -176,7 +202,7 @@ fn validate_question(q: &ImportQuestion) -> Result<(), String> {
         }
         other => {
             return Err(format!(
-                "type '{other}' invalide (attendu 'single' ou 'multi')"
+                "type '{other}' invalide (attendu 'single', 'multi', 'exact' ou 'number')"
             ));
         }
     }
