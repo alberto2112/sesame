@@ -11,16 +11,25 @@
   const form = document.getElementById("quiz");
   if (!form) return;
 
-  /* --- Point d'extension : « cette carte est-elle répondue ? » -------------
-   * Un nouveau type de question (ordre, saisie, appariement…) ajoute ici sa
-   * règle, indexée par le `data-kind` de la carte. Le reste du pas-à-pas ne
-   * change pas. Type inconnu -> considéré comme répondu (on ne bloque jamais
-   * l'enfant à cause d'un type qu'on ne sait pas encore mesurer). */
-  const ANSWERED = {
-    single: (card) => !!card.querySelector("input:checked"),
-    multiple: (card) => !!card.querySelector("input:checked"),
+  /* --- « cette carte est-elle répondue ? » --------------------------------
+   * Par défaut : au moins un champ coché ou rempli. Cette règle couvre les
+   * types actuels ('single', 'multi' — voir le CHECK de la table questions)
+   * et tout type futur bâti sur des champs de formulaire.
+   *
+   * Point d'extension : un type qui ne se mesure pas ainsi (ordre à remettre,
+   * appariement…) inscrit sa règle dans ANSWERED, indexée par son `data-kind`.
+   * Le défaut n'est JAMAIS « répondu » : un type mal orthographié doit sauter
+   * aux yeux, pas ouvrir une porte dérobée qui laisse passer une carte vide. */
+  const ANSWERED = {};
+
+  const isFilled = (f) =>
+    f.type === "radio" || f.type === "checkbox" ? f.checked : f.value.trim() !== "";
+
+  const isAnswered = (card) => {
+    const rule = ANSWERED[card.dataset.kind];
+    if (rule) return rule(card);
+    return [...card.querySelectorAll("input, select, textarea")].some(isFilled);
   };
-  const isAnswered = (card) => (ANSWERED[card.dataset.kind] ?? (() => true))(card);
 
   const cards = [...form.querySelectorAll("[data-card]")];
   const questions = cards.filter((c) => !c.hasAttribute("data-recap"));
