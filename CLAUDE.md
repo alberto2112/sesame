@@ -56,11 +56,23 @@ The core rule: **`policy::evaluate(pool, &child) -> GateDecision` is the single 
 
 ## Roadmap (pivot in progress)
 
-Done: policy engine + grants/usage ledger (1), profiles + per-child difficulty (2), schedules + cooldown (3), renewal (4), admin children CRUD + parent panic-grant (5), `sesame-kiosk` supervising a kiosk browser (6). Pending: `sesame-lock` X11 overlay, parent/child à la xsecurelock, honouring the `lock_mode` setting (7); `sesame-timer` heartbeat daemon with a **monotonic** clock (8); SDDM session entry + hardening + installer (9).
+Done: policy engine + grants/usage ledger (1), profiles + per-child difficulty (2), schedules + cooldown (3), renewal (4), admin children CRUD + parent panic-grant (5), `sesame-kiosk` supervising a kiosk browser under `cage` (6), `sesame-timer` heartbeat daemon with a **monotonic** clock (8), SDDM session entry + hardening + installer (9).
 
-**X11-without-a-WM gotchas** (the whole reason phase 6 looks the way it does): `_NET_WM_STATE_FULLSCREEN` is a *protocol addressed to the WM* — with no WM, `--kiosk`/`gtk_window_fullscreen()` silently do nothing, so you must ask for the screen's geometry at 0,0 yourself (`screen_size()` in `kiosk.rs` reads it via x11rb). Nobody assigns keyboard focus either — browsers cope as the sole X client, but a native window would need `XSetInputFocus`/`XGrabKeyboard`.
+**Phase 7 (`sesame-lock`) is cancelled, not pending.** It was designed as an X11 override-redirect overlay à la xsecurelock. Wayland does not allow that — a client cannot grab input or cover the screen; the only sanctioned path is `ext-session-lock-v1`. It isn't needed: when the grant runs out, `sesame-timer` **terminates the session**, which returns to SDDM, which re-runs the gate. Backend-agnostic, already implemented, and the right failure direction.
 
-**Phase 6 uses a supervised browser, not an embedded webview.** The renderer is swappable: everything outside `Browser::spawn` is renderer-agnostic, and the exit-0 contract wouldn't change. Known tradeoff: a browser has an escape surface a native WebKitGTK window wouldn't (devtools, `Ctrl+N`), though with no WM there is no desktop to escape *to*. Architecture decisions live in engram (`kidgate/*`).
+## The display stack — read this before touching the gate
+
+Both target machines run **Plasma 6 on Wayland**. `plasma-x11-session` is a *separate package* in Plasma 6 and is **not installed**: an X11 desktop is not merely non-default, it is **unavailable**. Anything below that assumes X11 is stale.
+
+**Who starts the display server is the whole design.** An entry in `/usr/share/xsessions/` makes SDDM start Xorg *before* running your script — that is how the gate used to get a screen with no WM. A **Wayland** entry (`/usr/share/wayland-sessions/`, which is what `install.sh` now writes) makes SDDM start **nothing**: the compositor *is* the server. So `sesame-session` brings its own — **`cage`**, a kiosk compositor whose only policy is *one app, fullscreen*. Alt+Tab, Alt+F4, taskbar: cage doesn't implement them. Same guarantee as a bare X server, but by design rather than by absence.
+
+Consequences, all of them load-bearing:
+- **`--kiosk` finally works.** A real compositor honours fullscreen, so the old x11rb `screen_size()` geometry hack is gone, and `x11rb` with it.
+- **Each browser needs its Wayland key** or it hunts for an X server and dies: Chromium `--ozone-platform=wayland`, Firefox `MOZ_ENABLE_WAYLAND=1`. See `Flavour::command` in `kiosk.rs`.
+- **`DontZap` is gone** — no X server to kill, so Ctrl+Alt+Backspace has no meaning. `NAutoVTs=0` stays: it's a *logind* setting, and it still hides the text consoles behind Ctrl+Alt+F2…F6.
+- **The exit-0 contract now passes *through* cage**, and nothing guarantees cage propagates its child's status. So it isn't trusted: after cage returns, `sesame-session` asks the API again via `sesame-kiosk --check` (one request, no browser, exit 0/1). Missing cage, broken cage, crashed kiosk, silent server — all land on exit 1. **A lock that fails open is not a lock.** Never let the desktop start on anything but a positive answer from `policy::evaluate`.
+
+**Phase 6 uses a supervised browser, not an embedded webview.** The renderer is swappable: everything outside `Browser::spawn` is renderer-agnostic, and the exit-0 contract wouldn't change. Known tradeoff: a browser has an escape surface a native window wouldn't (devtools, `Ctrl+N`) — cage neither adds to it nor removes it. Architecture decisions live in engram (`kidgate/*`).
 
 ## Database
 

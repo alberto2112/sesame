@@ -1,34 +1,41 @@
 //! `sesame-kiosk` — la porte.
 //!
-//! Tourne dans un serveur X **nu**, sans gestionnaire de fenêtres, AVANT que
-//! le bureau n'existe. Il affiche le contrôle, attend que l'ordinateur soit
-//! gagné, et **sort avec le code 0**. C'est tout son contrat avec le système :
+//! Tourne **dans `cage`**, un compositeur kiosque, AVANT que le bureau
+//! n'existe. Il affiche le contrôle, attend que l'ordinateur soit gagné, et
+//! **sort avec le code 0**. C'est tout son contrat avec le système :
 //!
 //! ```sh
-//! sesame-kiosk || exit 1     # pas de code 0 → pas de bureau
-//! exec startplasma-x11
+//! cage -- sesame-kiosk
+//! sesame-kiosk --check || exit 1     # pas débloqué → pas de bureau
+//! exec startplasma-wayland
 //! ```
 //!
 //! ## Pourquoi il n'y a rien à fuir
 //!
 //! Alt+Tab, Alt+F4, « toujours au-dessus », minimiser : **rien de tout cela
-//! n'est implémenté par X11**. C'est le gestionnaire de fenêtres qui le fait.
-//! Il n'y en a pas ici : ces raccourcis ne sont pas désactivés, ils n'existent
-//! pas. Personne à qui parler.
+//! n'est implémenté par Wayland**. C'est le compositeur qui le fait — et cage
+//! n'en fait rien du tout. Il n'a qu'une politique : une application, plein
+//! écran. Ces raccourcis ne sont pas désactivés, ils n'existent pas. Personne
+//! à qui parler.
 //!
-//! ## Les deux pièges d'un X sans gestionnaire de fenêtres
+//! ## Ce que cage nous a rendu
 //!
-//! 1. **`fullscreen` ne marche pas.** Passer une fenêtre en plein écran est un
-//!    *protocole* (`_NET_WM_STATE_FULLSCREEN`) adressé au gestionnaire de
-//!    fenêtres. Sans lui, la demande tombe dans le vide et le navigateur
-//!    s'ouvre à sa taille par défaut. On lui donne donc la géométrie
-//!    explicitement : la taille de l'écran, en 0,0. Sans gestionnaire, la
-//!    géométrie demandée est la géométrie obtenue.
+//! Cette porte a vécu jusqu'à Plasma 5 dans un serveur X **nu**, sans
+//! gestionnaire de fenêtres. Le plein écran y était un *protocole*
+//! (`_NET_WM_STATE_FULLSCREEN`) adressé à un gestionnaire… qui n'existait pas :
+//! `--kiosk` tombait dans le vide, et il fallait lire la taille de l'écran sur
+//! le serveur X pour la passer à la main au navigateur.
 //!
-//! 2. **Personne n'attribue le focus clavier.** C'est aussi le travail du
-//!    gestionnaire de fenêtres. Les navigateurs s'en sortent seuls quand ils
-//!    sont l'unique client X ; si un jour ce n'est plus le cas, c'est ici
-//!    qu'il faudra un `XSetInputFocus`.
+//! Sous cage il y a un vrai compositeur, qui honore le plein écran. `--kiosk`
+//! suffit. Toute la géométrie explicite a disparu — et `x11rb` avec elle.
+//!
+//! ## Les deux navigateurs ont chacun leur clé Wayland
+//!
+//! Sans elle, ils tentent X11, ne trouvent personne (cage n'apporte pas
+//! forcément XWayland) et meurent :
+//!
+//! - Chromium : `--ozone-platform=wayland`
+//! - Firefox : `MOZ_ENABLE_WAYLAND=1` dans l'environnement
 //!
 //! ## Le navigateur peut mourir, la porte non
 //!
@@ -56,6 +63,10 @@ signal, pour le script de session, qu'il peut lancer le bureau.
 
 OPTIONS :
     -c, --config <fichier>   Utilise ce fichier de configuration.
+        --check              Demande une seule fois si l'ordinateur est
+                             débloqué, sans rien afficher. Sort 0 (oui) ou
+                             1 (non, ou serveur muet). C'est le verdict que
+                             sesame-session interroge après cage.
     -h, --help               Affiche cette aide.
 
 Le navigateur est choisi automatiquement, sauf si config.toml le précise :
@@ -91,6 +102,7 @@ fn main() {
 
 fn run() -> Result<()> {
     let mut config_path: Option<PathBuf> = None;
+    let mut check_only = false;
     let mut args = std::env::args().skip(1);
     while let Some(arg) = args.next() {
         match arg.as_str() {
@@ -98,6 +110,7 @@ fn run() -> Result<()> {
                 println!("{HELP}");
                 return Ok(());
             }
+            "--check" => check_only = true,
             "-c" | "--config" => {
                 config_path = Some(PathBuf::from(
                     args.next()
@@ -118,6 +131,28 @@ fn run() -> Result<()> {
     eprintln!("sesame-kiosk : configuration {}", cfg_path.display());
 
     let base = cfg.local_url();
+
+    // `--check` : le verdict, rien d'autre. `sesame-session` le pose APRÈS
+    // cage, parce que le code de sortie de cage ne dit rien de fiable sur ce
+    // qui s'est passé dedans. La seule source de vérité, c'est
+    // `policy::evaluate` derrière /api/gate — alors on la lui demande.
+    //
+    // Serveur muet, réponse illisible, ordinateur verrouillé : tout tombe du
+    // même côté, le code 1. Une serrure doit échouer FERMÉE.
+    if check_only {
+        wait_for_server(&base)?;
+        let g = gate(&base)?;
+        if !g.unlocked {
+            bail!("ordinateur verrouillé — aucune concession de temps vivante");
+        }
+        let who = g.child_name.unwrap_or_else(|| "quelqu'un".into());
+        eprintln!(
+            "sesame-kiosk : débloqué pour {who} ({} min) — on ouvre le bureau",
+            (g.remaining_secs + 59) / 60
+        );
+        return Ok(());
+    }
+
     wait_for_server(&base)?;
 
     // Déjà gagné ? Rien à afficher. Arrive après un plantage : on ne va pas
@@ -128,7 +163,7 @@ fn run() -> Result<()> {
     }
 
     let command = browser_command(&cfg)?;
-    eprintln!("sesame-kiosk : navigateur → {}", command.join(" "));
+    eprintln!("sesame-kiosk : navigateur → {command}");
 
     let mut browser = Browser::spawn(&command, &base)?;
 
@@ -194,12 +229,13 @@ fn wait_for_server(base: &str) -> Result<()> {
 struct Browser(Option<Child>);
 
 impl Browser {
-    fn spawn(command: &[String], base: &str) -> Result<Self> {
-        let child = Command::new(&command[0])
-            .args(&command[1..])
+    fn spawn(command: &BrowserCmd, base: &str) -> Result<Self> {
+        let child = Command::new(&command.argv[0])
+            .args(&command.argv[1..])
             .arg(base)
+            .envs(command.env.iter().map(|(k, v)| (k.as_str(), v.as_str())))
             .spawn()
-            .with_context(|| format!("lancement du navigateur « {} »", command[0]))?;
+            .with_context(|| format!("lancement du navigateur « {} »", command.argv[0]))?;
         Ok(Self(Some(child)))
     }
 
@@ -224,23 +260,39 @@ impl Drop for Browser {
     }
 }
 
-/// Construit la ligne de commande du navigateur (l'URL est ajoutée à la fin
-/// par [`Browser::spawn`]).
-fn browser_command(cfg: &Config) -> Result<Vec<String>> {
-    // Choix explicite du parent : on lui fait confiance, on n'ajoute rien.
+/// Ce qu'il faut pour lancer le navigateur : sa ligne de commande, et
+/// l'environnement sans lequel il ne trouverait pas Wayland.
+struct BrowserCmd {
+    argv: Vec<String>,
+    env: Vec<(String, String)>,
+}
+
+impl std::fmt::Display for BrowserCmd {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        for (k, v) in &self.env {
+            write!(f, "{k}={v} ")?;
+        }
+        f.write_str(&self.argv.join(" "))
+    }
+}
+
+/// Construit la commande du navigateur (l'URL est ajoutée à la fin par
+/// [`Browser::spawn`]).
+fn browser_command(cfg: &Config) -> Result<BrowserCmd> {
+    // Choix explicite du parent : on lui fait confiance, on n'ajoute rien. À
+    // lui de mettre la clé Wayland de son navigateur — elle est documentée
+    // dans config.toml.
     if let Some(custom) = &cfg.kiosk.browser {
-        let parts: Vec<String> = custom.split_whitespace().map(String::from).collect();
-        if parts.is_empty() {
+        let argv: Vec<String> = custom.split_whitespace().map(String::from).collect();
+        if argv.is_empty() {
             bail!("[kiosk] browser est vide dans la configuration");
         }
-        return Ok(parts);
+        return Ok(BrowserCmd { argv, env: vec![] });
     }
-
-    let (w, h) = screen_size().unwrap_or((1920, 1080));
 
     for (bin, flavour) in CANDIDATES {
         if which(bin).is_some() {
-            return Ok(flavour.args(bin, w, h));
+            return Ok(flavour.command(bin));
         }
     }
 
@@ -257,36 +309,32 @@ enum Flavour {
 }
 
 impl Flavour {
-    /// `--window-size` / `--width` : la géométrie explicite, indispensable sans
-    /// gestionnaire de fenêtres (`--kiosk` seul ne suffit pas — voir l'en-tête).
-    fn args(self, bin: &str, w: u16, h: u16) -> Vec<String> {
-        let mut v = vec![bin.to_string()];
+    /// Plus de géométrie explicite : sous cage il y a un vrai compositeur, et
+    /// `--kiosk` est enfin honoré. Ne reste que la clé Wayland — sans elle, le
+    /// navigateur part chercher un serveur X et meurt. Les versions récentes la
+    /// devinent seules ; on la donne quand même, parce qu'un kiosque qui
+    /// affiche un écran noir, c'est un enfant enfermé dehors.
+    fn command(self, bin: &str) -> BrowserCmd {
+        let mut argv = vec![bin.to_string()];
+        let mut env = vec![];
         match self {
-            Flavour::Chromium => v.extend(
+            Flavour::Chromium => argv.extend(
                 [
                     "--kiosk",
+                    "--ozone-platform=wayland",
                     "--incognito",
                     "--no-first-run",
                     "--no-default-browser-check",
                     "--disable-features=TranslateUI",
-                    "--window-position=0,0",
-                    &format!("--window-size={w},{h}"),
                 ]
                 .map(String::from),
             ),
-            Flavour::Firefox => v.extend(
-                [
-                    "--kiosk",
-                    "--private-window",
-                    "--width",
-                    &w.to_string(),
-                    "--height",
-                    &h.to_string(),
-                ]
-                .map(String::from),
-            ),
+            Flavour::Firefox => {
+                argv.extend(["--kiosk", "--private-window"].map(String::from));
+                env.push(("MOZ_ENABLE_WAYLAND".to_string(), "1".to_string()));
+            }
         }
-        v
+        BrowserCmd { argv, env }
     }
 }
 
@@ -305,19 +353,4 @@ fn which(bin: &str) -> Option<PathBuf> {
     std::env::split_paths(&path)
         .map(|dir| dir.join(bin))
         .find(|p| p.is_file())
-}
-
-// ===== La taille de l'écran =================================================
-
-/// Sans gestionnaire de fenêtres, personne ne redimensionne rien : c'est à
-/// nous de demander la bonne taille. On la lit directement sur le serveur X.
-/// Hors X (poste de développement), on retombe sur les valeurs par défaut du
-/// navigateur — sans intérêt pour un kiosque, mais ça ne l'empêche pas de
-/// tourner.
-fn screen_size() -> Option<(u16, u16)> {
-    use x11rb::connection::Connection;
-
-    let (conn, screen_num) = x11rb::connect(None).ok()?;
-    let screen = conn.setup().roots.get(screen_num)?;
-    Some((screen.width_in_pixels, screen.height_in_pixels))
 }

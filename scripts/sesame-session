@@ -1,16 +1,28 @@
 #!/usr/bin/env bash
 #
-# Session X11 de l'enfant. C'est SDDM qui lance ce script (via l'entrée
-# /usr/share/xsessions/sesame.desktop).
+# Session Wayland de l'enfant. C'est SDDM qui lance ce script (via l'entrée
+# /usr/share/wayland-sessions/sesame.desktop).
 #
-# Tout le système tient dans ces quatre étapes. Lis-les dans l'ordre :
+# ## Pourquoi Wayland, et pourquoi `cage`
+#
+# En session X11, SDDM démarrait le serveur X AVANT d'exécuter ce script : le
+# kiosque héritait d'un écran tout prêt, sans gestionnaire de fenêtres. Cette
+# époque est finie — Plasma 6 a sorti la session X11 dans un paquet séparé
+# (`plasma-x11-session`), et ces machines ne l'ont pas.
+#
+# En session Wayland, SDDM ne démarre RIEN : le compositeur EST le serveur.
+# C'est donc à nous d'apporter le nôtre pour la porte. Ce sera `cage`, un
+# compositeur kiosque qui n'implémente qu'une seule politique : une
+# application, plein écran, et rien d'autre. Alt+Tab, Alt+F4, barre des tâches :
+# cage ne les implémente pas. Ils ne sont pas désactivés, ils N'EXISTENT PAS.
+# Même garantie qu'un X nu, mais par conception plutôt que par absence — et en
+# prime, `--kiosk` fonctionne enfin pour de vrai.
+#
+# ## Les quatre étapes. Lis-les dans l'ordre :
 #
 #   1. le serveur démarre ;
-#   2. le kiosque prend l'écran — SEUL client X, sans gestionnaire de fenêtres,
-#      donc rien à fuir : ni Alt+Tab, ni Alt+F4, ni barre des tâches. Ces
-#      raccourcis ne sont pas désactivés, ils N'EXISTENT PAS, parce que c'est
-#      le gestionnaire de fenêtres qui les implémente et qu'il n'y en a pas ;
-#   3. il ne rend la main (code 0) que lorsqu'un enfant a gagné du temps ;
+#   2. cage prend l'écran et y affiche le contrôle ;
+#   3. on ne passe la main que si l'API dit que l'ordinateur est gagné ;
 #   4. ALORS SEULEMENT le bureau est lancé.
 #
 # Le bureau n'est pas « bloqué » : il n'existe simplement pas encore. C'est
@@ -25,17 +37,37 @@ log() {
     command -v logger >/dev/null 2>&1 && logger -t sesame "$*"
 }
 
+refuser() {
+    log "$* — pas de bureau"
+    kill "$SERVER_PID" 2>/dev/null
+    exit 1
+}
+
 # --- 1. Le serveur : unique propriétaire de la base, vivant toute la session.
 "$BIN_DIR/sesame" &
 SERVER_PID=$!
 log "serveur démarré (pid $SERVER_PID)"
 
-# --- 2 et 3. La porte.
-if ! "$BIN_DIR/sesame-kiosk"; then
-    log "le kiosque n'a pas rendu 0 — pas de bureau"
-    kill "$SERVER_PID" 2>/dev/null
-    exit 1
-fi
+# --- 2. La porte, dans son compositeur.
+#
+# Si `cage` manque, ou s'il n'obtient pas l'écran (siège déjà pris, DRM occupé),
+# il sort en erreur et le contrôle n'a jamais été affiché. L'étape 3 le verra.
+cage -- "$BIN_DIR/sesame-kiosk"
+log "le kiosque a rendu la main (cage a rendu $?)"
+
+# --- 3. La vérité, c'est l'API — PAS le code de sortie de cage.
+#
+# Le contrat « code 0 → bureau » passe désormais À TRAVERS cage, et rien ne
+# garantit que cage propage le code de son enfant. S'il rendait 0 quoi qu'il
+# arrive, la serrure s'ouvrirait toute seule.
+#
+# Une serrure qui échoue OUVERTE n'est pas une serrure. On repose donc la
+# question à la seule source de vérité — `policy::evaluate`, derrière
+# /api/gate. `--check` : une requête, pas de navigateur, sort 0 ou 1.
+#
+# Conséquence voulue : cage absent, cage cassé, kiosque planté, serveur muet →
+# tout finit ici, sur un exit 1. Fermé par construction, pas par confiance.
+"$BIN_DIR/sesame-kiosk" --check || refuser "l'ordinateur n'est pas débloqué"
 log "contrôle réussi — on ouvre le bureau"
 
 # --- L'horloge. Elle décompte, prévient, et ferme la session à la fin.
@@ -44,4 +76,4 @@ log "minuteur démarré"
 
 # --- 4. Le bureau. `exec` : quand Plasma s'arrête, la session s'arrête, et
 # logind nettoie le serveur et le minuteur avec elle.
-exec startplasma-x11
+exec startplasma-wayland

@@ -9,9 +9,13 @@
 set -euo pipefail
 
 BIN_DIR=/usr/local/bin
-SESSION_DIR=/usr/share/xsessions
+SESSION_DIR=/usr/share/wayland-sessions
 LOGIND_DROPIN=/etc/systemd/logind.conf.d/50-sesame.conf
-XORG_DROPIN=/etc/X11/xorg.conf.d/50-sesame.conf
+
+# Les traces de l'époque X11 (Plasma 5). Une machine installée avant le passage
+# à Wayland les a encore ; on nettoie les deux mondes, pas seulement le nôtre.
+OLD_SESSION_X11=/usr/share/xsessions/sesame.desktop
+OLD_XORG_DROPIN=/etc/X11/xorg.conf.d/50-sesame.conf
 
 CONFIG_DIR="$HOME/.config/sesame"
 DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/sesame"
@@ -23,12 +27,11 @@ sudo rm -f "$BIN_DIR"/sesame "$BIN_DIR"/sesame-kiosk \
            "$BIN_DIR"/sesame-timer "$BIN_DIR"/sesame-session
 
 say "Suppression de la session SDDM…"
-sudo rm -f "$SESSION_DIR/sesame.desktop"
+sudo rm -f "$SESSION_DIR/sesame.desktop" "$OLD_SESSION_X11"
 
 say "Retrait du durcissement…"
-sudo rm -f "$LOGIND_DROPIN" "$XORG_DROPIN"
-echo "    Les consoles texte et Ctrl+Alt+Retour arrière reviendront au"
-echo "    prochain démarrage."
+sudo rm -f "$LOGIND_DROPIN" "$OLD_XORG_DROPIN"
+echo "    Les consoles texte reviendront au prochain démarrage."
 
 say "Suppression de la configuration…"
 rm -rf "$CONFIG_DIR"

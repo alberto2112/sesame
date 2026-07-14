@@ -21,8 +21,16 @@ database = "questions.db"
 
 [kiosk]
 # Navigateur utilisé par sesame-kiosk pour afficher le contrôle en plein écran.
-# Commenté = détection automatique (chromium, chrome, brave, firefox…).
-# Les bons arguments (plein écran, navigation privée, géométrie de l'écran)
-# sont ajoutés automatiquement pour les navigateurs connus.
+# Commenté = détection automatique (chromium, chrome, brave, firefox…), avec
+# les bons arguments : plein écran, navigation privée, et la clé Wayland.
 #
-# browser = "chromium"
+# Si tu précises TON navigateur, sesame n'ajoute plus rien : c'est à toi de
+# mettre cette clé. Le kiosque tourne dans `cage`, un compositeur Wayland — un
+# navigateur qui part chercher un serveur X ne trouvera personne, et l'enfant
+# aura un écran noir.
+#
+#   Chromium : browser = "chromium --kiosk --ozone-platform=wayland"
+#   Firefox  : browser = "firefox --kiosk"   + MOZ_ENABLE_WAYLAND=1 dans
+#              l'environnement (les versions récentes la devinent seules)
+#
+# browser = "chromium --kiosk --ozone-platform=wayland"

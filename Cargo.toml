@@ -19,8 +19,8 @@ path = "src/lib.rs"
 name = "sesame"
 path = "src/main.rs"
 
-# La porte : tourne dans un X nu, sans gestionnaire de fenêtres, AVANT que le
-# bureau n'existe. Sort avec le code 0 quand l'ordinateur est gagné.
+# La porte : tourne dans `cage` (compositeur kiosque), AVANT que le bureau
+# n'existe. Sort avec le code 0 quand l'ordinateur est gagné.
 [[bin]]
 name = "sesame-kiosk"
 path = "src/bin/kiosk.rs"
@@ -65,11 +65,10 @@ dirs = "5"
 # serveur en boucle. Pas de TLS — tout se passe sur la boucle locale.
 ureq = { version = "2", default-features = false, features = ["json"] }
 
-# X11 en Rust pur (pas de liaison C) : compile partout, ne se connecte que là
-# où un serveur X existe. Sert à lire la taille de l'écran — sans gestionnaire
-# de fenêtres, `fullscreen` n'existe pas, il faut demander la bonne géométrie
-# soi-même.
-x11rb = "0.13"
+# `x11rb` vivait ici. Il lisait la taille de l'écran, parce que sans
+# gestionnaire de fenêtres le plein écran n'existait pas et qu'il fallait la
+# demander à la main. Sous `cage`, il y a un compositeur : `--kiosk` suffit.
+# Une dépendance de moins.
 
 [profile.release]
 opt-level = 3

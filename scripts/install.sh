@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #
-# Sésame — installation (Arch / Manjaro, KDE Plasma 5, X11).
+# Sésame — installation (Arch / Manjaro, KDE Plasma 6, Wayland).
 #
-# Compile, installe les trois binaires, déclare une session SDDM, et propose
+# Compile, installe les quatre binaires, déclare une session SDDM, et propose
 # (sans jamais l'imposer) de fermer les portes de sortie.
 #
 # À lancer en utilisateur normal, PAS en root : le script demande sudo quand il
@@ -14,9 +14,14 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT"
 
 BIN_DIR=/usr/local/bin
-SESSION_DIR=/usr/share/xsessions
+SESSION_DIR=/usr/share/wayland-sessions
 LOGIND_DROPIN=/etc/systemd/logind.conf.d/50-sesame.conf
-XORG_DROPIN=/etc/X11/xorg.conf.d/50-sesame.conf
+
+# Sésame a vécu en X11 jusqu'à Plasma 5. Les machines qui viennent de cette
+# époque gardent une entrée de session périmée : elle lance `startplasma-x11`,
+# qui n'existe plus. On la retire, sinon SDDM propose une session morte.
+OLD_SESSION_X11=/usr/share/xsessions/sesame.desktop
+OLD_XORG_DROPIN=/etc/X11/xorg.conf.d/50-sesame.conf
 
 say()  { printf '\n\033[1;36m==>\033[0m %s\n' "$*"; }
 warn() { printf '\033[1;33m/!\\\033[0m %s\n' "$*"; }
@@ -33,6 +38,26 @@ ask() {  # ask "question" -> 0 si oui
 [[ "$(uname -s)" == Linux ]] || die "ce script ne fonctionne que sous Linux."
 [[ $EUID -ne 0 ]] || die "ne lance pas ce script en root. Lance-le normalement : ./scripts/install.sh"
 command -v cargo >/dev/null || die "cargo est introuvable. Installe Rust : sudo pacman -S rust"
+
+# La porte tient sur trois pièces. On les vérifie AVANT de compiler quoi que ce
+# soit : découvrir qu'il manque `cage` après le premier redémarrage, c'est
+# découvrir un enfant devant un écran noir.
+say "Vérification de la plateforme…"
+
+command -v cage >/dev/null \
+    || die "« cage » est introuvable. C'est le compositeur qui porte le contrôle.
+    Installe-le :  sudo pacman -S cage"
+echo "    cage           : $(command -v cage)"
+
+command -v startplasma-wayland >/dev/null \
+    || die "« startplasma-wayland » est introuvable : pas de bureau à ouvrir.
+    Installe Plasma :  sudo pacman -S plasma-desktop"
+echo "    Plasma Wayland : $(command -v startplasma-wayland)"
+
+[[ -d /usr/share/wayland-sessions ]] \
+    || die "/usr/share/wayland-sessions n'existe pas : SDDM n'attend aucune
+    session Wayland sur cette machine."
+echo "    Sessions       : $SESSION_DIR"
 
 KID_USER="$USER"
 say "Compte des enfants : $KID_USER"
@@ -79,6 +104,22 @@ sudo install -Dm0755 scripts/sesame-session      "$BIN_DIR/sesame-session"
 say "Déclaration de la session SDDM dans $SESSION_DIR…"
 sudo install -Dm0644 scripts/sesame.desktop "$SESSION_DIR/sesame.desktop"
 
+# L'entrée X11 d'avant. Si on la laisse, SDDM propose DEUX sessions « Sésame »,
+# dont une qui mène à un écran noir : elle exécute `startplasma-x11`, absent de
+# Plasma 6 (la session X11 y est un paquet séparé, `plasma-x11-session`).
+if [[ -f "$OLD_SESSION_X11" ]]; then
+    say "Retrait de l'ancienne session X11 (périmée)…"
+    sudo rm -f "$OLD_SESSION_X11"
+    echo "    Supprimée : $OLD_SESSION_X11"
+fi
+if [[ -f "$OLD_XORG_DROPIN" ]]; then
+    # DontZap : « Ctrl+Alt+Retour arrière ne tue plus le serveur X ». Sous
+    # Wayland il n'y a pas de serveur X, et ce raccourci n'existe pas — le
+    # réglage ne protège plus rien, il traîne.
+    sudo rm -f "$OLD_XORG_DROPIN"
+    echo "    Supprimé  : $OLD_XORG_DROPIN (DontZap — sans objet sous Wayland)"
+fi
+
 # ===== Configuration ========================================================
 
 if [[ -f "$CONFIG_DIR/config.toml" ]]; then
@@ -105,36 +146,32 @@ say "Suppression des doublons…"
 
 # ===== Durcissement (facultatif) ============================================
 
-say "Fermer les portes de sortie ? (facultatif, réversible)"
+say "Fermer la porte de sortie ? (facultatif, réversible)"
 cat <<'EOF'
-    Un enfant curieux finit par trouver ces deux-là :
+    Il n'en reste qu'une, et c'est celle qu'un enfant curieux finit par
+    trouver :
 
       * Ctrl+Alt+F2 … F6  → une console en texte, hors de la session.
         Remède : ne plus faire apparaître de console sur ces touches
         (NAutoVTs=0). Le changement d'écran reste possible, mais il n'y a
         plus rien à y trouver.
 
-      * Ctrl+Alt+Retour arrière  → tue le serveur X d'un coup.
-        Remède : DontZap.
+    Ce qu'on ne fait PAS : interdire le changement d'écran. Ça t'enfermerait
+    TOI aussi, le jour où l'affichage se fige, sans aucune console de secours.
+    On laisse toujours une sortie à l'adulte.
 
-    Ce qu'on ne fait PAS : interdire le changement d'écran (DontVTSwitch).
-    Ça t'enfermerait TOI aussi, le jour où l'affichage se fige, sans aucune
-    console de secours. On laisse toujours une sortie à l'adulte.
+    Ce qui a DISPARU en passant à Wayland : Ctrl+Alt+Retour arrière tuait le
+    serveur X d'un coup, et il fallait le désarmer (DontZap). Sous Wayland il
+    n'y a pas de serveur X à tuer, et cage ne lie ce raccourci à rien. Le
+    problème n'est pas corrigé : il n'existe plus.
 EOF
 
-if ask "Appliquer ces deux réglages ?"; then
+if ask "Appliquer ce réglage ?"; then
     sudo install -Dm0644 /dev/stdin "$LOGIND_DROPIN" <<'EOF'
 # Sésame — pas de console en texte derrière Ctrl+Alt+F2…F6.
 # Supprimer ce fichier annule le réglage.
 [Login]
 NAutoVTs=0
-EOF
-    sudo install -Dm0644 /dev/stdin "$XORG_DROPIN" <<'EOF'
-# Sésame — Ctrl+Alt+Retour arrière ne tue plus le serveur X.
-# Supprimer ce fichier annule le réglage.
-Section "ServerFlags"
-    Option "DontZap" "true"
-EndSection
 EOF
     echo "    Écrit. Actif au prochain démarrage."
 else
@@ -158,7 +195,8 @@ cat <<EOF
   Sésame est installé.
 
   Binaires      : $BIN_DIR/sesame{,-kiosk,-timer,-session}
-  Session SDDM  : $SESSION_DIR/sesame.desktop
+  Session SDDM  : $SESSION_DIR/sesame.desktop   (Wayland)
+  Compositeur   : $(command -v cage)
   Configuration : $CONFIG_DIR/config.toml
 
   IL RESTE DEUX CHOSES À FAIRE :

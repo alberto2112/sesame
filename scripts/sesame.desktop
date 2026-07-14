@@ -1,3 +1,7 @@
+# Va dans /usr/share/wayland-sessions/, PAS dans /usr/share/xsessions/.
+# Ce n'est pas un détail : une entrée dans xsessions ferait démarrer un serveur
+# X à SDDM, et `sesame-session` lance son propre compositeur (cage). Les deux se
+# disputeraient l'écran. Voir l'en-tête de scripts/sesame-session.
 [Desktop Entry]
 Type=Application
 Name=Sésame (contrôle)
