@@ -26,6 +26,7 @@ pub fn router() -> Router<AppState> {
         .route("/logout", post(logout_post))
         .route("/questions", get(questions_list))
         .route("/questions/dedupe", post(questions_dedupe_post))
+        .route("/questions/difficulty", post(questions_difficulty_post))
         .route("/questions/new", get(question_new_get).post(question_new_post))
         .route("/questions/:id/edit", get(question_edit_get).post(question_edit_post))
         .route("/questions/:id/delete", post(question_delete_post))
@@ -115,6 +116,12 @@ struct QuestionsListTemplate {
     duplicates: Vec<DuplicateRow>,
     /// Total des questions qui disparaîtraient.
     duplicate_count: usize,
+    /// Le filtre courant, renvoyé tel quel pour y revenir après un lot.
+    filter_subject: Option<i64>,
+    filter_difficulty: Option<i64>,
+    /// (valeur, sélectionnée) — le booléen est calculé ICI, pas dans le gabarit :
+    /// Askama compare mal une liaison déréférencée à un champ (cf. CLAUDE.md).
+    difficulty_opts: Vec<(i64, bool)>,
     flash: Option<String>,
 }
 
@@ -354,6 +361,11 @@ async fn dashboard(
 #[derive(Deserialize)]
 struct QuestionsListQuery {
     subject: Option<i64>,
+    /// Filtre par difficulté. Sert surtout à retrouver le lot des questions
+    /// jamais notées : importées sans `difficulty`, elles valent toutes 3 par
+    /// défaut (importer.rs). Un 3 « par défaut » et un 3 « choisi » se
+    /// ressemblent en base — c'est en les filtrant qu'on les retrouve.
+    difficulty: Option<i64>,
     msg: Option<String>,
 }
 
@@ -367,29 +379,36 @@ async fn questions_list(
             .fetch_all(&state.pool)
             .await?;
 
-    let rows: Vec<(i64, String, String, String, i64, i64)> = if let Some(sid) = q.subject {
-        sqlx::query_as(
-            "SELECT q.id, q.statement, q.kind, s.name, q.difficulty, COUNT(a.id)
-             FROM questions q
-             JOIN subjects s ON s.id = q.subject_id
-             LEFT JOIN answers a ON a.question_id = q.id
-             WHERE q.subject_id = ?
-             GROUP BY q.id ORDER BY q.id DESC",
-        )
-        .bind(sid)
-        .fetch_all(&state.pool)
-        .await?
-    } else {
-        sqlx::query_as(
-            "SELECT q.id, q.statement, q.kind, s.name, q.difficulty, COUNT(a.id)
-             FROM questions q
-             JOIN subjects s ON s.id = q.subject_id
-             LEFT JOIN answers a ON a.question_id = q.id
-             GROUP BY q.id ORDER BY q.id DESC",
-        )
-        .fetch_all(&state.pool)
-        .await?
-    };
+    // Deux filtres facultatifs = quatre combinaisons. Plutôt que quatre requêtes
+    // recopiées, on construit le WHERE : les valeurs restent liées (`bind`),
+    // seuls les fragments SQL sont concaténés — aucune donnée ne touche le SQL.
+    let mut sql = String::from(
+        "SELECT q.id, q.statement, q.kind, s.name, q.difficulty, COUNT(a.id)
+         FROM questions q
+         JOIN subjects s ON s.id = q.subject_id
+         LEFT JOIN answers a ON a.question_id = q.id",
+    );
+    let mut conds: Vec<&str> = Vec::new();
+    if q.subject.is_some() {
+        conds.push("q.subject_id = ?");
+    }
+    if q.difficulty.is_some() {
+        conds.push("q.difficulty = ?");
+    }
+    if !conds.is_empty() {
+        sql.push_str(" WHERE ");
+        sql.push_str(&conds.join(" AND "));
+    }
+    sql.push_str(" GROUP BY q.id ORDER BY q.id DESC");
+
+    let mut query = sqlx::query_as::<_, (i64, String, String, String, i64, i64)>(&sql);
+    if let Some(sid) = q.subject {
+        query = query.bind(sid);
+    }
+    if let Some(d) = q.difficulty {
+        query = query.bind(d);
+    }
+    let rows = query.fetch_all(&state.pool).await?;
 
     let questions = rows
         .into_iter()
@@ -436,10 +455,76 @@ async fn questions_list(
     Ok(render(QuestionsListTemplate {
         questions,
         subjects: subject_opts,
+        // Renvoyés au gabarit pour que l'action en lot revienne sur le MÊME
+        // filtre : on note une matière entière en plusieurs passes, ce serait
+        // absurde de repartir de la liste complète à chaque enregistrement.
+        filter_subject: q.subject,
+        filter_difficulty: q.difficulty,
+        difficulty_opts: (1..=5).map(|d| (d, q.difficulty == Some(d))).collect(),
         duplicates,
         duplicate_count,
         flash: q.msg,
     }))
+}
+
+/// Note plusieurs questions d'un coup. Sans ça, les 390 questions importées
+/// sans `difficulty` (toutes à 3 par défaut) se corrigeraient une par une : 390
+/// formulaires. Ce n'est pas du travail, c'est une punition.
+async fn questions_difficulty_post(
+    _: AdminAuth,
+    State(state): State<AppState>,
+    Form(pairs): Form<Vec<(String, String)>>,
+) -> Result<Response, AppError> {
+    let difficulty: i64 = pair_get(&pairs, "difficulty")
+        .parse()
+        .map_err(|_| AppError::bad_request("difficulté invalide"))?;
+    if !(1..=5).contains(&difficulty) {
+        return Err(AppError::bad_request("la difficulté doit être entre 1 et 5"));
+    }
+
+    let ids: Vec<i64> = pairs
+        .iter()
+        .filter(|(k, _)| k == "ids")
+        .filter_map(|(_, v)| v.parse::<i64>().ok())
+        .collect();
+
+    // Le filtre courant est réinjecté dans la redirection : on revient là où on
+    // était, pas en haut d'une liste de 3000 lignes.
+    let back = {
+        let mut q: Vec<String> = Vec::new();
+        if let Some(s) = pair_get_opt(&pairs, "filter_subject") {
+            q.push(format!("subject={s}"));
+        }
+        if let Some(d) = pair_get_opt(&pairs, "filter_difficulty") {
+            q.push(format!("difficulty={d}"));
+        }
+        q
+    };
+    let query_of = |msg: String| {
+        let mut parts = back.clone();
+        parts.push(format!("msg={msg}"));
+        format!("/admin/questions?{}", parts.join("&"))
+    };
+
+    if ids.is_empty() {
+        return Ok(Redirect::to(&query_of("Aucune+question+sélectionnée".into())).into_response());
+    }
+
+    let placeholders = std::iter::repeat("?")
+        .take(ids.len())
+        .collect::<Vec<_>>()
+        .join(",");
+    let sql = format!("UPDATE questions SET difficulty = ? WHERE id IN ({placeholders})");
+    let mut query = sqlx::query(&sql).bind(difficulty);
+    for id in &ids {
+        query = query.bind(id);
+    }
+    let updated = query.execute(&state.pool).await?.rows_affected();
+
+    Ok(Redirect::to(&query_of(format!(
+        "{updated}+question(s)+notée(s)+en+difficulté+{difficulty}"
+    )))
+    .into_response())
 }
 
 /// Supprime les doublons : le plus RÉCENT de chaque groupe survit, l'historique
@@ -1564,6 +1649,16 @@ fn pair_get(pairs: &[(String, String)], key: &str) -> String {
 fn pair_get_or(pairs: &[(String, String)], key: &str, default: &str) -> String {
     let s = pair_get(pairs, key);
     if s.is_empty() { default.into() } else { s }
+}
+
+/// Comme `pair_get`, mais distingue « absent » de « vide » : un filtre non posé
+/// ne doit pas repartir dans l'URL sous la forme `subject=`.
+fn pair_get_opt(pairs: &[(String, String)], key: &str) -> Option<String> {
+    pairs
+        .iter()
+        .find(|(k, _)| k == key)
+        .map(|(_, v)| v.clone())
+        .filter(|v| !v.is_empty())
 }
 
 async fn list_subjects(state: &AppState) -> Result<Vec<(i64, String)>, AppError> {
