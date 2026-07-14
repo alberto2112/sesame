@@ -56,21 +56,11 @@
   <button type="submit">Enregistrer les poids</button>
 </form>
 
+{# Les doublons ont déménagé dans « Questions » : c'est de questions qu'il s'agit,
+   pas de matières — et le bloc y montre ce qu'il va supprimer avant de le faire. #}
 <h3>Doublons</h3>
-<form method="post" action="/admin/subjects/dedupe">
-  <p class="hint">
-    Supprime les questions au même énoncé, toutes matières confondues. La plus
-    ancienne de chaque groupe est conservée.
-  </p>
-  {% if duplicate_count > 0 %}
-    <p><strong>{{ duplicate_count }}</strong> question(s) en double détectée(s).</p>
-    <button type="submit" class="secondary btn-auto"
-            onclick="return confirm('Supprimer les {{ duplicate_count }} question(s) en double ? Cette action est définitive.')">
-      Supprimer les doublons
-    </button>
-  {% else %}
-    <p>Aucun doublon détecté.</p>
-    <button type="submit" class="secondary btn-auto" disabled>Supprimer les doublons</button>
-  {% endif %}
-</form>
+<p class="hint">
+  La détection et la purge des questions en double sont dans
+  <a href="/admin/questions">Questions</a>.
+</p>
 {% endblock %}

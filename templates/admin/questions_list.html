@@ -14,6 +14,48 @@
   {% when None %}
 {% endmatch %}
 
+{# Bloc doublons — visible seulement s'il y en a. On MONTRE ce qui va disparaître
+   avant de le supprimer : un bouton qui efface sans dire quoi n'est pas un
+   outil, c'est un pari. #}
+{% if duplicate_count > 0 %}
+<section class="dupes">
+  <h2>Doublons — {{ duplicate_count }} question(s) en trop</h2>
+  <p class="hint">
+    Même énoncé (majuscules et espaces ignorés), toutes matières confondues.
+    Dans chaque groupe, la <strong>plus récente est conservée</strong> ; les
+    autres sont supprimées avec leurs réponses. Si une supprimée est déjà tombée
+    à un contrôle, son historique est <strong>rattaché à celle qui reste</strong> —
+    l'énoncé étant le même, l'historique reste vrai.
+  </p>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Énoncé</th><th>Conservée</th><th>Supprimée(s)</th></tr>
+    </thead>
+    <tbody>
+      {% for d in duplicates %}
+      <tr>
+        <td data-label="Énoncé"><strong>{{ d.statement }}</strong></td>
+        <td data-label="Conservée"><span class="keep">#{{ d.keep_id }}</span></td>
+        <td data-label="Supprimée(s)">
+          {% for v in d.victims %}<span class="drop">{{ v }}</span>{% endfor %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+  <form method="post" action="/admin/questions/dedupe">
+    <button type="submit" class="secondary btn-auto"
+            onclick="return confirm('Supprimer les {{ duplicate_count }} question(s) en double ? Cette action est définitive.')">
+      Supprimer les {{ duplicate_count }} doublon(s)
+    </button>
+  </form>
+</section>
+{% endif %}
+
 <form method="get" action="/admin/questions">
   <label>
     Filtrer par matière

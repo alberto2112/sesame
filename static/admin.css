@@ -337,3 +337,29 @@ article.q-incorrect { border-color: var(--red); }
 .answer-correct-chosen { color: var(--green); font-weight: 700; }
 .answer-correct-missed { color: #5fb98a;      font-weight: 700; }
 .answer-wrong-chosen   { color: var(--red);   font-weight: 700; }
+
+/* ---- Bloc doublons (liste des questions) ----
+   Ambre, pas rouge : ce n'est pas une erreur, c'est un ménage à faire. */
+.dupes {
+  background: var(--amber-bg);
+  border: 1px solid #f0dcb8;
+  border-radius: var(--radius);
+  padding: 1rem 1.15rem;
+  margin-bottom: 1.5rem;
+}
+.dupes h2 { margin: 0 0 .35rem; font-size: 1.05rem; color: var(--amber); }
+.dupes .hint { margin-bottom: .9rem; }
+.dupes table { margin-bottom: .9rem; background: var(--surface); }
+.dupes form { margin: 0; }
+
+.keep, .drop {
+  display: inline-block;
+  padding: .1rem .5rem;
+  margin: .1rem .2rem .1rem 0;
+  border-radius: 999px;
+  font-size: .8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.keep { background: #eaf7f1; color: #1c7a4b; }
+.drop { background: #fdeced; color: #a32a35; text-decoration: line-through; }

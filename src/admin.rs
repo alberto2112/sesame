@@ -11,6 +11,7 @@ use serde::Deserialize;
 use tower_cookies::{Cookie, Cookies};
 
 use crate::auth;
+use crate::dedup;
 use crate::importer::{self, ImportFile};
 use crate::policy;
 use crate::web::{AppError, AppState, render};
@@ -24,6 +25,7 @@ pub fn router() -> Router<AppState> {
         .route("/login", get(login_get).post(login_post))
         .route("/logout", post(logout_post))
         .route("/questions", get(questions_list))
+        .route("/questions/dedupe", post(questions_dedupe_post))
         .route("/questions/new", get(question_new_get).post(question_new_post))
         .route("/questions/:id/edit", get(question_edit_get).post(question_edit_post))
         .route("/questions/:id/delete", post(question_delete_post))
@@ -36,7 +38,6 @@ pub fn router() -> Router<AppState> {
         .route("/children/:id/schedules/:sid/delete", post(schedule_delete_post))
         .route("/subjects", get(subjects_get).post(subjects_post))
         .route("/subjects/:id/delete", post(subject_delete_post))
-        .route("/subjects/dedupe", post(subjects_dedupe_post))
         .route("/settings", get(settings_get).post(settings_post))
         .route("/import", get(import_get).post(import_post))
         .route("/history", get(history_list))
@@ -109,7 +110,21 @@ struct DashboardTemplate {
 struct QuestionsListTemplate {
     questions: Vec<QuestionRow>,
     subjects: Vec<SubjectOption>,
+    /// Groupes de doublons — montrés AVANT de supprimer quoi que ce soit. Un
+    /// bouton qui efface sans dire quoi n'est pas un outil, c'est un pari.
+    duplicates: Vec<DuplicateRow>,
+    /// Total des questions qui disparaîtraient.
+    duplicate_count: usize,
     flash: Option<String>,
+}
+
+/// Un groupe de doublons, aplati pour le gabarit.
+struct DuplicateRow {
+    statement: String,
+    keep_id: i64,
+    /// « #412 (Sciences) », « #98 (Sciences, 3 contrôles) » — l'historique est
+    /// signalé : c'est lui qui sera réaffecté au survivant.
+    victims: Vec<String>,
 }
 
 struct SubjectOption {
@@ -146,8 +161,6 @@ struct QuestionFormTemplate {
 struct SubjectsTemplate {
     // (id, nom, poids, nb_questions, activée)
     subjects: Vec<(i64, String, f64, i64, bool)>,
-    // Nombre de questions en double (énoncés identiques) toutes matières confondues.
-    duplicate_count: i64,
     flash: Option<String>,
 }
 
@@ -399,11 +412,49 @@ async fn questions_list(
         })
         .collect();
 
+    // Les doublons se cherchent sur TOUTE la banque, jamais dans le filtre de
+    // matière courant : deux questions au même énoncé dans deux matières
+    // différentes restent un doublon, et c'est même le cas le plus sournois.
+    let groups = dedup::find_duplicates(&state.pool).await?;
+    let duplicate_count = groups.iter().map(|g| g.victims.len()).sum();
+    let duplicates = groups
+        .into_iter()
+        .map(|g| DuplicateRow {
+            statement: g.statement,
+            keep_id: g.keep_id,
+            victims: g
+                .victims
+                .iter()
+                .map(|v| match v.history_count {
+                    0 => format!("#{} ({})", v.id, v.subject_name),
+                    n => format!("#{} ({}, {} contrôle(s))", v.id, v.subject_name, n),
+                })
+                .collect(),
+        })
+        .collect();
+
     Ok(render(QuestionsListTemplate {
         questions,
         subjects: subject_opts,
+        duplicates,
+        duplicate_count,
         flash: q.msg,
     }))
+}
+
+/// Supprime les doublons : le plus RÉCENT de chaque groupe survit, l'historique
+/// des autres lui est réaffecté. Toute la logique est dans `dedup` — un handler
+/// ne décide de rien.
+async fn questions_dedupe_post(
+    _: AdminAuth,
+    State(state): State<AppState>,
+) -> Result<Response, AppError> {
+    let r = dedup::purge(&state.pool).await?;
+    let msg = format!(
+        "{}+doublon(s)+supprimé(s)+dans+{}+groupe(s)+—+{}+ligne(s)+d'historique+réaffectée(s)",
+        r.deleted, r.groups, r.repointed
+    );
+    Ok(Redirect::to(&format!("/admin/questions?msg={msg}")).into_response())
 }
 
 fn build_subject_options(rows: Vec<(i64, String)>, selected: Option<i64>) -> Vec<SubjectOption> {
@@ -620,14 +671,8 @@ async fn subjects_get(
     )
     .fetch_all(&state.pool)
     .await?;
-    // Doublons = total de questions moins le nombre d'énoncés distincts.
-    let (duplicate_count,): (i64,) =
-        sqlx::query_as("SELECT COUNT(*) - COUNT(DISTINCT statement) FROM questions")
-            .fetch_one(&state.pool)
-            .await?;
     Ok(render(SubjectsTemplate {
         subjects: rows,
-        duplicate_count,
         flash: q.msg,
     }))
 }
@@ -693,23 +738,6 @@ async fn subject_delete_post(
 /// Le doublon est défini par un `statement` identique ; on conserve la
 /// question la plus ancienne (`id` minimal) de chaque groupe et on efface
 /// les autres. Les réponses partent en cascade (`ON DELETE CASCADE`).
-async fn subjects_dedupe_post(
-    _: AdminAuth,
-    State(state): State<AppState>,
-) -> Result<Response, AppError> {
-    let result = sqlx::query(
-        "DELETE FROM questions
-         WHERE id NOT IN (SELECT MIN(id) FROM questions GROUP BY statement)",
-    )
-    .execute(&state.pool)
-    .await?;
-    let removed = result.rows_affected();
-    Ok(Redirect::to(&format!(
-        "/admin/subjects?msg={removed}+doublon(s)+supprimé(s)"
-    ))
-    .into_response())
-}
-
 // ===== Enfants ===============================================================
 
 #[derive(Template)]
