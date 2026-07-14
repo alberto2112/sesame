@@ -3,16 +3,14 @@
 {% block title %}Configuration initiale — Sésame{% endblock %}
 
 {% block shell %}
-<header>
+<div class="page-head">
   <h1>Bienvenue !</h1>
   <p>Définis le mot de passe d'administration. Tu en auras besoin pour gérer les questions, les matières et consulter l'historique.</p>
-</header>
+</div>
 
 {% match error %}
   {% when Some with (msg) %}
-    <article style="border-left:4px solid var(--pico-color-red-500); padding-left:1rem;">
-      <strong>{{ msg }}</strong>
-    </article>
+    <div class="error-box">{{ msg }}</div>
   {% when None %}
 {% endmatch %}
 

@@ -3,11 +3,12 @@
 {% block title %}Historique — admin{% endblock %}
 
 {% block admin_content %}
-<header>
-  <h1>Historique (20 derniers contrôles)</h1>
-</header>
+<div class="page-head">
+  <h1>Historique</h1>
+  <p>Les 20 derniers contrôles.</p>
+</div>
 
-<form method="get" action="/admin/history" style="margin:1rem 0;">
+<form method="get" action="/admin/history">
   <label>
     Filtrer par enfant
     <select name="child" onchange="this.form.submit()">
@@ -22,28 +23,34 @@
 {% if attempts.is_empty() %}
   <p><em>Aucun contrôle pour l'instant.</em></p>
 {% else %}
+  <div class="table-wrap">
   <table>
     <thead>
-      <tr><th>#</th><th>Date</th><th>Enfant</th><th>Score</th><th>Résultat</th><th>Détail</th></tr>
+      <tr><th>#</th><th>Date</th><th>Enfant</th><th>Score</th><th>Résultat</th><th></th></tr>
     </thead>
     <tbody>
       {% for a in attempts %}
       <tr>
-        <td>{{ a.id }}</td>
-        <td>{{ a.when }}</td>
-        <td>{{ a.child }}</td>
-        <td>{{ a.score_fmt }}%</td>
-        <td>
+        <td data-label="#">{{ a.id }}</td>
+        <td data-label="Date">{{ a.when }}</td>
+        <td data-label="Enfant">{{ a.child }}</td>
+        <td data-label="Score">{{ a.score_fmt }}%</td>
+        <td data-label="Résultat">
           {% if a.passed %}
-            <span class="score-pass">Réussi</span>
+            <span class="badge badge-ok">Réussi</span>
           {% else %}
-            <span class="score-fail">Échec</span>
+            <span class="badge badge-ko">Échec</span>
           {% endif %}
         </td>
-        <td><a href="/admin/history/{{ a.id }}">Voir</a></td>
+        <td data-label="">
+          <div class="actions">
+            <a href="/admin/history/{{ a.id }}" role="button" class="btn-sm outline">Voir le détail</a>
+          </div>
+        </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+  </div>
 {% endif %}
 {% endblock %}

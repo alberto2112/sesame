@@ -3,21 +3,19 @@
 {% block title %}{{ name }} — admin{% endblock %}
 
 {% block admin_content %}
-<header>
-  <h1>{{ avatar }} {{ name }}</h1>
+<div class="page-head">
+  <h1><span class="avatar">{{ avatar }}</span> {{ name }}</h1>
   <p><a href="/admin/children">← Retour à la liste</a></p>
-</header>
+</div>
 
 {% match error %}
   {% when Some with (msg) %}
-    <article style="border-left:4px solid var(--pico-color-red-500); padding-left:1rem;">
-      <strong>{{ msg }}</strong>
-    </article>
+    <div class="error-box">{{ msg }}</div>
   {% when None %}
 {% endmatch %}
 
 <form method="post" action="/admin/children/{{ child_id }}/edit">
-  <div style="display:grid; grid-template-columns:2fr 1fr 1fr; gap:1rem; align-items:end;">
+  <div class="form-grid">
     <label>
       Prénom
       <input type="text" name="name" value="{{ name }}" required>
@@ -33,7 +31,7 @@
   </div>
 
   <h3>Contrôle</h3>
-  <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:1rem;">
+  <div class="form-grid tight">
     <label>
       Difficulté min
       <input type="number" name="difficulty_min" min="1" max="5" value="{{ difficulty_min }}" required>
@@ -43,18 +41,18 @@
       <input type="number" name="difficulty_max" min="1" max="5" value="{{ difficulty_max }}" required>
     </label>
     <label>
-      Questions par contrôle
+      Questions
       <input type="number" name="questions_per_test" min="1" value="{{ questions_per_test }}" required>
     </label>
     <label>
-      Seuil de réussite (%)
+      Seuil (%)
       <input type="number" name="pass_threshold_pct" min="0" max="100" step="1"
              value="{{ pass_threshold_pct }}" required>
     </label>
   </div>
 
   <h3>Temps</h3>
-  <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:1rem;">
+  <div class="form-grid tight">
     <label>
       Session (min)
       <input type="number" name="session_minutes" min="1" value="{{ session_minutes }}" required>
@@ -64,53 +62,61 @@
       <input type="number" name="daily_budget_minutes" min="0" value="{{ daily_budget_minutes }}" required>
     </label>
     <label>
-      Budget week-end (min)
+      Budget week-end
       <input type="number" name="weekend_budget_minutes" min="0" value="{{ weekend_budget_minutes }}" required>
     </label>
     <label>
-      Attente entre contrôles (min)
+      Attente après échec
       <input type="number" name="exam_cooldown_minutes" min="0" value="{{ exam_cooldown_minutes }}" required>
     </label>
   </div>
-  <p><small>L'attente entre contrôles s'applique après un contrôle raté :
-    l'enfant doit patienter avant de réessayer. 0 = pas d'attente.</small></p>
+  <p class="hint">
+    L'attente s'applique après un contrôle <strong>raté</strong> : l'enfant doit
+    patienter avant de réessayer, au lieu de mitrailler au hasard. 0 = pas d'attente.
+  </p>
 
   <button type="submit">Enregistrer</button>
 </form>
 
 <h3>Plages horaires</h3>
-<p><small>Hors de ces fenêtres, l'ordinateur est bloqué (« C'est l'heure de
-  dormir »). <strong>Aucune plage = toujours autorisé.</strong></small></p>
+<p class="hint">
+  Hors de ces fenêtres, l'ordinateur est bloqué (« C'est l'heure de dormir »).
+  <strong>Aucune plage = toujours autorisé.</strong>
+</p>
 
 {% if schedules.is_empty() %}
-  <p><em>Aucune plage — {{ name }} peut utiliser l'ordinateur à toute heure
-    (dans la limite de son budget).</em></p>
+  <p><em>Aucune plage — {{ name }} peut utiliser l'ordinateur à toute heure,
+    dans la limite de son budget.</em></p>
 {% else %}
+  <div class="table-wrap">
   <table>
-    <thead><tr><th>Jour</th><th>De</th><th>À</th><th></th></tr></thead>
+    <thead>
+      <tr><th>Jour</th><th>De</th><th>À</th><th></th></tr>
+    </thead>
     <tbody>
       {% for sc in schedules %}
       <tr>
-        <td>{{ sc.weekday_name }}</td>
-        <td>{{ sc.start_fmt }}</td>
-        <td>{{ sc.end_fmt }}</td>
-        <td>
-          <form method="post" action="/admin/children/{{ child_id }}/schedules/{{ sc.id }}/delete"
-                style="display:inline;">
-            <button type="submit" class="secondary outline"
-                    style="width:auto; padding:0.1rem 0.5rem; font-size:0.85rem;">Retirer</button>
-          </form>
+        <td data-label="Jour">{{ sc.weekday_name }}</td>
+        <td data-label="De">{{ sc.start_fmt }}</td>
+        <td data-label="À">{{ sc.end_fmt }}</td>
+        <td data-label="">
+          <div class="actions">
+            <form method="post" action="/admin/children/{{ child_id }}/schedules/{{ sc.id }}/delete">
+              <button type="submit" class="btn-sm secondary outline">Retirer</button>
+            </form>
+          </div>
         </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+  </div>
 {% endif %}
 
 <form method="post" action="/admin/children/{{ child_id }}/schedules">
   <fieldset>
     <legend>Ajouter une fenêtre</legend>
-    <div style="display:flex; flex-wrap:wrap; gap:0.8rem;">
+    <div class="checks">
       <label><input type="checkbox" name="day" value="0"> lundi</label>
       <label><input type="checkbox" name="day" value="1"> mardi</label>
       <label><input type="checkbox" name="day" value="2"> mercredi</label>
@@ -119,7 +125,7 @@
       <label><input type="checkbox" name="day" value="5"> samedi</label>
       <label><input type="checkbox" name="day" value="6"> dimanche</label>
     </div>
-    <div style="display:grid; grid-template-columns:1fr 1fr auto; gap:1rem; align-items:end; margin-top:0.8rem;">
+    <div class="form-grid tight">
       <label>
         De
         <input type="time" name="start" value="17:00" required>
@@ -128,7 +134,7 @@
         À
         <input type="time" name="end" value="19:00" required>
       </label>
-      <button type="submit" style="width:auto;">Ajouter</button>
+      <button type="submit" class="btn-auto">Ajouter</button>
     </div>
   </fieldset>
 </form>

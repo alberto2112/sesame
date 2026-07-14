@@ -3,90 +3,111 @@
 {% block title %}Enfants — admin{% endblock %}
 
 {% block admin_content %}
-<header>
+<div class="page-head">
   <h1>Enfants</h1>
-</header>
+  <p>Un profil par enfant. Chacun a sa difficulté, son budget et ses horaires.</p>
+</div>
 
 {% match flash %}
   {% when Some with (msg) %}
-    <article style="border-left:4px solid var(--pico-color-green-500); padding-left:1rem;">
-      <strong>{{ msg }}</strong>
-    </article>
+    <div class="flash">{{ msg }}</div>
   {% when None %}
 {% endmatch %}
 
 {% if children.is_empty() %}
   <p><em>Aucun enfant. Crée le premier ci-dessous.</em></p>
 {% else %}
+  {# Cette liste répond à « où en sont-ils, là, maintenant ? » — pas « quels
+     sont leurs réglages ». La difficulté, la durée de session et le budget
+     vivent dans la fiche : les remettre ici ne ferait que pousser les boutons
+     hors de l'écran. #}
+  <div class="table-wrap">
   <table>
     <thead>
       <tr>
-        <th></th><th>Prénom</th><th>Difficulté</th><th>Session</th>
-        <th>Budget/jour</th><th>Aujourd'hui</th><th>Questions dispo</th>
-        <th>Contrôles</th><th>Actif</th><th>Actions</th>
+        <th>Enfant</th><th>Aujourd'hui</th><th>Contrôles</th>
+        <th>Questions</th><th>Actif</th><th></th>
       </tr>
     </thead>
     <tbody>
       {% for c in children %}
       <tr>
-        <td style="font-size:1.6rem;">{{ c.avatar }}</td>
-        <td>
-          <strong>{{ c.name }}</strong>
-          {% if c.has_grant %}<br><small>⏱ temps en cours</small>{% endif %}
+        {# Un SEUL élément dans la cellule : en mode carte, la cellule est une
+           grille et chaque enfant direct tomberait dans une case différente
+           (l'emoji d'un côté, le prénom à la ligne). #}
+        <td data-label="Enfant">
+          <span class="who">
+            <span class="avatar">{{ c.avatar }}</span>
+            <strong>{{ c.name }}</strong>
+            {% if c.has_grant %}<span class="badge badge-live">⏱ en cours</span>{% endif %}
+          </span>
         </td>
-        <td>{{ c.difficulty_min }}–{{ c.difficulty_max }}</td>
-        <td>{{ c.session_minutes }} min</td>
-        <td>{{ c.daily_budget_minutes }} min</td>
-        <td>{{ c.used_today_min }} min</td>
-        <td>
+        <td data-label="Aujourd'hui">
+          {{ c.used_today_min }} / {{ c.daily_budget_minutes }} min
+        </td>
+        <td data-label="Contrôles">{{ c.attempts_passed }}/{{ c.attempts_total }} réussis</td>
+        <td data-label="Questions">
           {% if c.available_questions == 0 %}
-            <mark>0 — aucun contrôle possible !</mark>
+            <span class="badge badge-warn">0 — aucun contrôle possible</span>
           {% else %}
             {{ c.available_questions }}
           {% endif %}
         </td>
-        <td>{{ c.attempts_passed }}/{{ c.attempts_total }} réussis</td>
-        <td>{% if c.enabled %}✅{% else %}⛔{% endif %}</td>
-        <td style="white-space:nowrap;">
-          <a href="/admin/children/{{ c.id }}/edit">Modifier</a>
-          <form method="post" action="/admin/children/{{ c.id }}/grant"
-                style="display:flex; gap:0.3rem; align-items:center; margin:0.3rem 0;">
-            <input type="number" name="minutes" value="30" min="1" max="600"
-                   style="width:4.5rem; margin:0; padding:0.1rem 0.3rem;">
-            <button type="submit" style="width:auto; padding:0.1rem 0.5rem; font-size:0.85rem;"
-                    title="Donner du temps sans contrôle (ignore budget et horaires)">Donner</button>
-          </form>
-          {% if c.has_grant %}
-          <form method="post" action="/admin/children/{{ c.id }}/revoke" style="display:inline;">
-            <button type="submit" class="secondary outline"
-                    style="width:auto; padding:0.1rem 0.5rem; font-size:0.85rem;">Couper le temps</button>
-          </form>
+        <td data-label="Actif">
+          {% if c.enabled %}
+            <span class="badge badge-ok">oui</span>
+          {% else %}
+            <span class="badge badge-ko">non</span>
           {% endif %}
-          <form method="post" action="/admin/children/{{ c.id }}/delete" style="display:inline;"
-                onsubmit="return confirm('Supprimer {{ c.name }} ? Son historique de contrôles sera conservé mais anonymisé.')">
-            <button type="submit" class="secondary outline"
-                    style="width:auto; padding:0.1rem 0.5rem; font-size:0.85rem;">Supprimer</button>
-          </form>
+        </td>
+        <td data-label="">
+          <div class="actions">
+            <a href="/admin/children/{{ c.id }}/edit" role="button" class="btn-sm outline">Modifier</a>
+
+            <form method="post" action="/admin/children/{{ c.id }}/grant">
+              <input type="number" name="minutes" value="30" min="1" max="600"
+                     aria-label="Minutes à accorder">
+              <button type="submit" class="btn-sm"
+                      title="Donner du temps sans contrôle — ignore le budget et les horaires">
+                Donner
+              </button>
+            </form>
+
+            {% if c.has_grant %}
+            <form method="post" action="/admin/children/{{ c.id }}/revoke">
+              <button type="submit" class="btn-sm secondary outline">Couper le temps</button>
+            </form>
+            {% endif %}
+
+            <form method="post" action="/admin/children/{{ c.id }}/delete"
+                  onsubmit="return confirm('Supprimer {{ c.name }} ? Son historique sera conservé mais anonymisé.')">
+              <button type="submit" class="btn-sm secondary outline">Supprimer</button>
+            </form>
+          </div>
         </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+  </div>
 {% endif %}
 
 <h3>Ajouter un enfant</h3>
-<form method="post" action="/admin/children"
-      style="display:grid; grid-template-columns: 2fr 1fr auto; gap:1rem; align-items:end;">
-  <label>
-    Prénom
-    <input type="text" name="name" required placeholder="Zoé">
-  </label>
-  <label>
-    Emoji
-    <input type="text" name="avatar" placeholder="🦊" maxlength="8">
-  </label>
-  <button type="submit" style="width:auto;">Créer</button>
+<form method="post" action="/admin/children">
+  <div class="form-grid">
+    <label>
+      Prénom
+      <input type="text" name="name" required placeholder="Zoé">
+    </label>
+    <label>
+      Emoji
+      <input type="text" name="avatar" placeholder="🦊" maxlength="8">
+    </label>
+    <button type="submit" class="btn-auto">Créer</button>
+  </div>
 </form>
-<p><small>L'enfant est créé avec les réglages par défaut — clique ensuite sur
-  « Modifier » pour ajuster difficulté, budgets et durée de session.</small></p>
+<p class="hint">
+  L'enfant naît avec les réglages par défaut — clique ensuite sur « Modifier »
+  pour ajuster sa difficulté, ses budgets et ses horaires.
+</p>
 {% endblock %}

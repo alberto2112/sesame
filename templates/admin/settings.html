@@ -3,18 +3,15 @@
 {% block title %}Réglages — admin{% endblock %}
 
 {% block admin_content %}
-<header>
+<div class="page-head">
   <h1>Réglages par défaut</h1>
-  <p>Ces valeurs servent de gabarit pour les nouveaux enfants. Chaque enfant
-     garde ensuite ses propres réglages (difficulté, budget, durée de session)
-     dans sa fiche.</p>
-</header>
+  <p>Ces valeurs servent de gabarit pour les <strong>nouveaux</strong> enfants.
+     Chaque enfant garde ensuite ses propres réglages dans sa fiche.</p>
+</div>
 
 {% match flash %}
   {% when Some with (msg) %}
-    <article style="border-left:4px solid var(--pico-color-green-500); padding-left:1rem;">
-      <strong>{{ msg }}</strong>
-    </article>
+    <div class="flash">{{ msg }}</div>
   {% when None %}
 {% endmatch %}
 

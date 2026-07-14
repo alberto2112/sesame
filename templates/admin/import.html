@@ -3,16 +3,14 @@
 {% block title %}Importer — admin{% endblock %}
 
 {% block admin_content %}
-<header>
+<div class="page-head">
   <h1>Importer des questions (JSON)</h1>
   <p><small>Le fichier doit suivre le format <code>{ "subjects": [...], "questions": [...] }</code>. Les matières inconnues font échouer leurs questions.</small></p>
-</header>
+</div>
 
 {% match flash %}
   {% when Some with (msg) %}
-    <article style="border-left:4px solid var(--pico-color-green-500); padding-left:1rem;">
-      <strong>{{ msg }}</strong>
-    </article>
+    <div class="flash">{{ msg }}</div>
   {% when None %}
 {% endmatch %}
 

@@ -1,80 +1,311 @@
-/* luanti-gate — thème de l'interface d'administration.
-   Reprend l'accent teal des pages publiques, mais en plus sobre :
-   neutre, dense, sans fioritures. Superposé à Pico CSS v2.1. */
+/* Sésame — interface d'administration.
+   Sobre, dense, lisible. Superposé à Pico CSS v2.1.
 
+   Le parent règle Sésame depuis son téléphone, debout dans le couloir — pas
+   assis devant un 27 pouces. Tout ici doit tenir dans 360 px de large.
+   L'essentiel se joue dans la section « Tableaux », tout en bas. */
+
+:root {
+  --teal:       #1f9d8f;
+  --teal-dark:  #17786d;
+  --navy:       #243049;
+  --muted:      #5c6680;
+  --line:       #e3e5ea;
+  --surface:    #ffffff;
+  --page:       #f3f4f6;
+  --green:      #2fae66;
+  --red:        #d64550;
+  --amber:      #b06f12;
+  --amber-bg:   #fdf3e3;
+  --radius:     10px;
+  --shadow:     0 1px 3px rgba(36, 48, 73, .06);
+}
+
+/* Pico définit sa palette claire avec `:root:not([data-theme=dark])`, dont la
+   spécificité est (0,2,0). Un simple `[data-theme="light"]` vaut (0,1,0) : il
+   PERD, quel que soit l'ordre de chargement. C'est pour ça que cette interface
+   est restée bleu Pico pendant que les pages de l'enfant étaient teal.
+   On reprend le même sélecteur pour être à égalité — et on passe après. */
+:root:not([data-theme="dark"]),
 [data-theme="light"] {
-  --pico-primary:                  #1f9d8f;
-  --pico-primary-background:       #1f9d8f;
-  --pico-primary-border:           #1f9d8f;
+  --pico-primary:                  var(--teal);
+  --pico-primary-background:       var(--teal);
+  --pico-primary-border:           var(--teal);
   --pico-primary-underline:        rgba(31, 157, 143, .5);
-  --pico-primary-hover:            #17786d;
-  --pico-primary-hover-background: #17786d;
-  --pico-primary-hover-border:     #17786d;
+  --pico-primary-hover:            var(--teal-dark);
+  --pico-primary-hover-background: var(--teal-dark);
+  --pico-primary-hover-border:     var(--teal-dark);
   --pico-primary-focus:            rgba(31, 157, 143, .35);
   --pico-primary-inverse:          #ffffff;
 
-  --pico-background-color:         #f3f4f6;
-  --pico-color:                    #243049;
-  --pico-border-radius:            10px;
+  --pico-background-color:         var(--page);
+  --pico-color:                    var(--navy);
+  --pico-border-radius:            var(--radius);
+  --pico-form-element-spacing-vertical: .55rem;
 }
 
-main { max-width: 920px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
-h1 { font-size: 1.6rem; }
-h2 { font-size: 1.25rem; }
-
-/* ---- Cartes ---- */
-article {
-  background: #fff;
-  border: 1px solid #e3e5ea;
-  box-shadow: 0 1px 3px rgba(36, 48, 73, .05);
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 4rem;
 }
 
-/* ---- Barre de navigation ---- */
+h1 { font-size: 1.55rem; margin-bottom: .2rem; }
+h2 { font-size: 1.2rem; }
+h3 { font-size: 1.05rem; margin-top: 2rem; }
+
+/* ===== Navigation ==========================================================
+   Sur téléphone elle défile horizontalement au lieu de partir en cascade sur
+   quatre lignes : la navigation ne doit pas manger l'écran. */
+
 .admin-nav {
-  display: flex; align-items: center; gap: .2rem; flex-wrap: wrap;
-  background: #fff;
-  border: 1px solid #e3e5ea;
+  display: flex;
+  align-items: center;
+  gap: .2rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: 12px;
   padding: .4rem;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
+.admin-nav::-webkit-scrollbar { display: none; }
+
 .admin-nav a {
-  padding: .45rem .85rem;
+  padding: .45rem .8rem;
   border-radius: 8px;
-  color: #5c6680;
-  font-weight: 600; font-size: .95rem;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: .93rem;
   text-decoration: none;
+  white-space: nowrap;
 }
-.admin-nav a:hover { background: #f3f4f6; color: var(--pico-primary); }
-.admin-nav .spacer { margin-left: auto; }
+.admin-nav a:hover,
+.admin-nav a:focus-visible { background: var(--page); color: var(--teal); }
+
+.admin-nav .spacer { flex: 1 0 .5rem; }
 .admin-nav form { margin: 0; }
-.admin-nav button { width: auto; margin: 0; padding: .4rem .8rem; font-size: .9rem; }
+.admin-nav button { width: auto; margin: 0; padding: .4rem .8rem; font-size: .88rem; white-space: nowrap; }
 
-/* ---- Tableau de bord : statistiques ---- */
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+/* ===== En-tête de page ===================================================== */
+
+.page-head { margin-bottom: 1.25rem; }
+.page-head p { color: var(--muted); margin: .3rem 0 0; font-size: .95rem; }
+.page-head a { font-size: .95rem; }
+
+/* Titre + bouton d'action : côte à côte, empilés quand c'est trop étroit. */
+.page-head.with-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.page-head.with-action h1 { margin: 0; }
+.page-head.with-action a[role="button"] { width: auto; white-space: nowrap; }
+
+/* ===== Messages ============================================================ */
+
+.flash,
+.error-box {
+  border-radius: var(--radius);
+  padding: .8rem 1rem;
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+  border: 1px solid;
+}
+.flash     { background: #eaf7f1; border-color: #b8e3cd; color: #1c7a4b; }
+.error-box { background: #fdeced; border-color: #f2c2c6; color: #a32a35; }
+
+/* ===== Cartes ============================================================== */
+
+article {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+/* ===== Tableau de bord ===================================================== */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
 .stat {
-  background: #fff;
-  border: 1px solid #e3e5ea;
-  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
   padding: 1.1rem 1.25rem;
+  box-shadow: var(--shadow);
 }
-.stat .label { color: #5c6680; font-size: .9rem; font-weight: 600; }
-.stat .value { font-size: 2.2rem; font-weight: 800; color: var(--pico-primary); }
+.stat .label { color: var(--muted); font-size: .88rem; font-weight: 600; }
+.stat .value { font-size: 2.1rem; font-weight: 800; color: var(--teal); line-height: 1.2; }
 
-@media (max-width: 540px) {
-  .stats { grid-template-columns: 1fr; }
+/* ===== Formulaires =========================================================
+   Une grille qui se replie toute seule : aucune largeur en dur, aucune media
+   query. `auto-fit` + `minmax` suffisent — sous la largeur minimale, les
+   colonnes tombent les unes sous les autres. */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--min, 190px), 1fr));
+  gap: 1rem;
+  align-items: end;
+}
+.form-grid.tight { --min: 140px; }
+.form-grid label { margin: 0; }
+
+fieldset { border: none; padding: 0; margin: 0 0 1rem; }
+legend { font-weight: 700; padding: 0; margin-bottom: .5rem; }
+
+.hint { color: var(--muted); font-size: .88rem; margin-top: .35rem; }
+
+/* Cases à cocher en ligne : les jours de la semaine. */
+.checks { display: flex; flex-wrap: wrap; gap: .35rem .9rem; margin-bottom: .8rem; }
+.checks label { margin: 0; display: flex; align-items: center; gap: .35rem; white-space: nowrap; }
+
+/* Une réponse possible d'une question : le texte, puis « correcte ». */
+.answer-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .6rem;
+  align-items: center;
+  margin-bottom: .4rem;
+}
+.answer-row label { margin: 0; display: flex; align-items: center; gap: .35rem; white-space: nowrap; }
+.answer-row input[type="text"] { margin: 0; }
+
+/* ===== Boutons ============================================================= */
+
+.btn-sm {
+  width: auto;
+  margin: 0;
+  padding: .25rem .7rem;
+  font-size: .85rem;
+  white-space: nowrap;
+}
+.btn-auto { width: auto; }
+
+/* Groupe d'actions d'une ligne de tableau. */
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+.actions form { margin: 0; display: flex; gap: .3rem; align-items: center; }
+.actions input[type="number"] { width: 4.5rem; margin: 0; padding: .25rem .4rem; font-size: .85rem; }
+
+/* ===== Étiquettes ========================================================== */
+
+.badge {
+  display: inline-block;
+  padding: .12rem .55rem;
+  border-radius: 999px;
+  font-size: .8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.badge-ok   { background: #eaf7f1; color: #1c7a4b; }
+.badge-ko   { background: #fdeced; color: #a32a35; }
+.badge-warn { background: var(--amber-bg); color: var(--amber); }
+.badge-live { background: #e8f2fb; color: #1f6296; }
+
+.score-pass { color: var(--green); font-weight: 700; }
+.score-fail { color: var(--red);   font-weight: 700; }
+
+.avatar { font-size: 1.5rem; line-height: 1; }
+.narrow { width: 5.5rem; }
+
+/* Emoji + prénom + « en cours » : un seul bloc, jamais coupé en deux. */
+.who { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+
+/* Sans largeur minimale, la colonne se règle sur son contenu : « Zoé » tient
+   sur une ligne, « Hugo » passe à la suivante, et ça sent le travail bâclé. */
+@media (min-width: 901px) {
+  td:first-child { min-width: 10rem; }
 }
 
-/* ---- Historique : détail d'un contrôle ---- */
-.score-pass { color: #2fae66; font-weight: 700; }
-.score-fail { color: #d64550; font-weight: 700; }
+/* ===== Tableaux ============================================================
+   LE point de cette feuille de style.
 
-/* Carte d'une question ratée : bordure rouge. */
-article.q-incorrect { border-color: #d64550; }
+   Une ligne à dix colonnes ne « rétrécit » pas : sur un téléphone ça donne
+   37 px par colonne. Illisible. En dessous de 760 px, chaque LIGNE devient
+   donc une CARTE : l'en-tête disparaît et chaque cellule affiche elle-même son
+   intitulé, via le `data-label` que les gabarits lui donnent.
 
-/* Réponse juste et choisie : vert. */
-.answer-correct-chosen { color: #2fae66; font-weight: 700; }
-/* Réponse qu'il aurait fallu choisir (ratée) : vert clair. */
-.answer-correct-missed { color: #5fb98a; font-weight: 700; }
-/* Réponse choisie mais fausse : rouge. */
-.answer-wrong-chosen   { color: #d64550; font-weight: 700; }
+   Une cellule sans intitulé (les actions) prend toute la largeur. */
+
+table { margin-bottom: 0; }
+th { font-size: .85rem; text-transform: uppercase; letter-spacing: .02em; color: var(--muted); }
+td, th { vertical-align: middle; }
+
+/* Filet de sécurité : entre le point de bascule et la largeur naturelle du
+   tableau, on défile au lieu de déborder de la page. Le tableau glisse, la
+   mise en page tient. */
+.table-wrap { overflow-x: auto; margin-bottom: 1rem; }
+
+@media (max-width: 900px) {
+  .table-wrap { overflow-x: visible; }
+}
+
+@media (max-width: 900px) {
+  table, tbody, tr, td { display: block; width: 100%; }
+  thead { display: none; }
+
+  tr {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: .75rem 1rem;
+    margin-bottom: .8rem;
+  }
+
+  td {
+    display: grid;
+    grid-template-columns: 42% 1fr;
+    gap: .75rem;
+    align-items: center;
+    /* Sans ça, une étiquette ou une case à cocher s'étirerait sur toute la
+       colonne : dans une grille, un élément s'étale par défaut. */
+    justify-items: start;
+    padding: .4rem 0;
+    border: none;
+    border-bottom: 1px solid var(--page);
+  }
+  td:last-child { border-bottom: none; }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    font-size: .82rem;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    color: var(--muted);
+  }
+
+  /* Cellules sans intitulé (les actions) : pleine largeur, sous le reste. */
+  td[data-label=""] {
+    display: block;
+    padding-top: .7rem;
+  }
+  td[data-label=""]::before { content: none; }
+
+  .narrow { width: 100%; }
+}
+
+/* ===== Historique : détail d'un contrôle =================================== */
+
+article.q-incorrect { border-color: var(--red); }
+
+/* Énoncé à gauche, type à droite — et l'un sous l'autre quand c'est étroit. */
+.q-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+.q-head small { color: var(--muted); white-space: nowrap; }
+
+.answer-correct-chosen { color: var(--green); font-weight: 700; }
+.answer-correct-missed { color: #5fb98a;      font-weight: 700; }
+.answer-wrong-chosen   { color: var(--red);   font-weight: 700; }

@@ -3,15 +3,13 @@
 {% block title %}Connexion — Sésame{% endblock %}
 
 {% block shell %}
-<header>
+<div class="page-head">
   <h1>Connexion administrateur</h1>
-</header>
+</div>
 
 {% match error %}
   {% when Some with (msg) %}
-    <article style="border-left:4px solid var(--pico-color-red-500); padding-left:1rem;">
-      <strong>{{ msg }}</strong>
-    </article>
+    <div class="error-box">{{ msg }}</div>
   {% when None %}
 {% endmatch %}
 

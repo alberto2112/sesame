@@ -719,14 +719,13 @@ struct ChildrenTemplate {
     flash: Option<String>,
 }
 
+/// Ce que la LISTE montre : l'état, pas les réglages. La difficulté et la
+/// durée de session vivent dans la fiche de l'enfant, pas ici.
 struct ChildRow {
     id: i64,
     name: String,
     avatar: String,
     enabled: bool,
-    difficulty_min: i64,
-    difficulty_max: i64,
-    session_minutes: i64,
     daily_budget_minutes: i64,
     used_today_min: i64,
     /// Questions visibles pour sa plage de difficulté — 0 = examen impossible.
@@ -767,44 +766,37 @@ async fn children_list(
     Query(q): Query<ChildrenQuery>,
 ) -> Result<Response, AppError> {
     let today = chrono::Local::now().format("%Y-%m-%d").to_string();
-    let rows: Vec<(i64, String, String, i64, i64, i64, i64, i64, i64, i64, i64, i64, i64)> =
-        sqlx::query_as(
-            "SELECT c.id, c.name, c.avatar, c.enabled, c.difficulty_min, c.difficulty_max,
-                    c.session_minutes, c.daily_budget_minutes,
-                    COALESCE(u.consumed_secs, 0) / 60,
-                    (SELECT COUNT(*) FROM questions q
-                      JOIN subjects s ON s.id = q.subject_id AND s.enabled = 1
-                      WHERE q.difficulty BETWEEN c.difficulty_min AND c.difficulty_max),
-                    (SELECT COUNT(*) FROM attempts a WHERE a.child_id = c.id AND a.passed = 1),
-                    (SELECT COUNT(*) FROM attempts a WHERE a.child_id = c.id),
-                    EXISTS(SELECT 1 FROM grants g WHERE g.child_id = c.id AND g.closed_at IS NULL)
-             FROM children c
-             LEFT JOIN daily_usage u ON u.child_id = c.id AND u.day = ?
-             ORDER BY c.position, c.id",
-        )
-        .bind(&today)
-        .fetch_all(&state.pool)
-        .await?;
+    let rows: Vec<(i64, String, String, i64, i64, i64, i64, i64, i64, i64)> = sqlx::query_as(
+        "SELECT c.id, c.name, c.avatar, c.enabled, c.daily_budget_minutes,
+                COALESCE(u.consumed_secs, 0) / 60,
+                (SELECT COUNT(*) FROM questions q
+                  JOIN subjects s ON s.id = q.subject_id AND s.enabled = 1
+                  WHERE q.difficulty BETWEEN c.difficulty_min AND c.difficulty_max),
+                (SELECT COUNT(*) FROM attempts a WHERE a.child_id = c.id AND a.passed = 1),
+                (SELECT COUNT(*) FROM attempts a WHERE a.child_id = c.id),
+                EXISTS(SELECT 1 FROM grants g WHERE g.child_id = c.id AND g.closed_at IS NULL)
+         FROM children c
+         LEFT JOIN daily_usage u ON u.child_id = c.id AND u.day = ?
+         ORDER BY c.position, c.id",
+    )
+    .bind(&today)
+    .fetch_all(&state.pool)
+    .await?;
 
     let children = rows
         .into_iter()
         .map(
-            |(id, name, avatar, enabled, dmin, dmax, session, budget, used, avail, passed, total, grant)| {
-                ChildRow {
-                    id,
-                    name,
-                    avatar,
-                    enabled: enabled == 1,
-                    difficulty_min: dmin,
-                    difficulty_max: dmax,
-                    session_minutes: session,
-                    daily_budget_minutes: budget,
-                    used_today_min: used,
-                    available_questions: avail,
-                    attempts_passed: passed,
-                    attempts_total: total,
-                    has_grant: grant == 1,
-                }
+            |(id, name, avatar, enabled, budget, used, avail, passed, total, grant)| ChildRow {
+                id,
+                name,
+                avatar,
+                enabled: enabled == 1,
+                daily_budget_minutes: budget,
+                used_today_min: used,
+                available_questions: avail,
+                attempts_passed: passed,
+                attempts_total: total,
+                has_grant: grant == 1,
             },
         )
         .collect();

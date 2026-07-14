@@ -3,16 +3,14 @@
 {% block title %}{{ title }} — admin{% endblock %}
 
 {% block admin_content %}
-<header>
+<div class="page-head">
   <h1>{{ title }}</h1>
   <p><a href="/admin/questions">← Retour à la liste</a></p>
-</header>
+</div>
 
 {% match error %}
   {% when Some with (msg) %}
-    <article style="border-left:4px solid var(--pico-color-red-500); padding-left:1rem;">
-      <strong>{{ msg }}</strong>
-    </article>
+    <div class="error-box">{{ msg }}</div>
   {% when None %}
 {% endmatch %}
 
@@ -22,7 +20,7 @@
     <textarea name="statement" rows="2" required>{{ statement }}</textarea>
   </label>
 
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+  <div class="form-grid">
     <label>
       Matière
       <select name="subject_id" required>
@@ -58,13 +56,14 @@
     <textarea name="explanation" rows="2">{{ explanation }}</textarea>
   </label>
 
-  <h3>Réponses (jusqu'à 6 — laisse vide ce que tu n'utilises pas)</h3>
-  <p><small>Coche la case « correcte » à droite pour les bonnes réponses.</small></p>
+  <h3>Réponses</h3>
+  <p class="hint">Jusqu'à 6. Laisse vide ce que tu n'utilises pas, et coche
+    « correcte » pour les bonnes réponses.</p>
   {% for a in answers %}
     {% let i = loop.index %}
-    <div style="display:grid; grid-template-columns:1fr auto; gap:0.5rem; align-items:center; margin-bottom:0.4rem;">
+    <div class="answer-row">
       <input type="text" name="ans_{{ i }}_text" value="{{ a.0 }}" placeholder="Réponse {{ i }}">
-      <label style="margin:0; padding:0;">
+      <label>
         <input type="checkbox" name="ans_{{ i }}_correct" value="1" {% if a.1 %}checked{% endif %}>
         correcte
       </label>

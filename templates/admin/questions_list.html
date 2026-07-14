@@ -3,20 +3,18 @@
 {% block title %}Questions — admin{% endblock %}
 
 {% block admin_content %}
-<header style="display:flex; justify-content:space-between; align-items:center; gap:1rem;">
-  <h1 style="margin:0;">Questions</h1>
-  <a href="/admin/questions/new" role="button" style="width:auto;">+ Nouvelle question</a>
-</header>
+<div class="page-head with-action">
+  <h1>Questions</h1>
+  <a href="/admin/questions/new" role="button">+ Nouvelle question</a>
+</div>
 
 {% match flash %}
   {% when Some with (msg) %}
-    <article style="border-left:4px solid var(--pico-color-green-500); padding-left:1rem;">
-      <strong>{{ msg }}</strong>
-    </article>
+    <div class="flash">{{ msg }}</div>
   {% when None %}
 {% endmatch %}
 
-<form method="get" action="/admin/questions" style="margin:1rem 0;">
+<form method="get" action="/admin/questions">
   <label>
     Filtrer par matière
     <select name="subject" onchange="this.form.submit()">
@@ -31,32 +29,36 @@
 {% if questions.is_empty() %}
   <p><em>Aucune question pour ce filtre.</em></p>
 {% else %}
+  <div class="table-wrap">
   <table>
     <thead>
       <tr>
-        <th>#</th><th>Énoncé</th><th>Matière</th><th>Type</th><th>Diff.</th><th>Réponses</th><th>Actions</th>
+        <th>#</th><th>Énoncé</th><th>Matière</th><th>Type</th>
+        <th>Diff.</th><th>Réponses</th><th></th>
       </tr>
     </thead>
     <tbody>
       {% for q in questions %}
       <tr>
-        <td>{{ q.id }}</td>
-        <td>{{ q.statement }}</td>
-        <td>{{ q.subject_name }}</td>
-        <td>{{ q.kind }}</td>
-        <td>{{ q.difficulty }}</td>
-        <td>{{ q.nb_answers }}</td>
-        <td>
-          <a href="/admin/questions/{{ q.id }}/edit">Modifier</a>
-          —
-          <form method="post" action="/admin/questions/{{ q.id }}/delete" style="display:inline;"
-                onsubmit="return confirm('Supprimer cette question ?')">
-            <button type="submit" class="secondary outline" style="width:auto; padding:0.1rem 0.5rem; font-size:0.85rem;">Supprimer</button>
-          </form>
+        <td data-label="#">{{ q.id }}</td>
+        <td data-label="Énoncé"><strong>{{ q.statement }}</strong></td>
+        <td data-label="Matière">{{ q.subject_name }}</td>
+        <td data-label="Type">{{ q.kind }}</td>
+        <td data-label="Difficulté">{{ q.difficulty }}</td>
+        <td data-label="Réponses">{{ q.nb_answers }}</td>
+        <td data-label="">
+          <div class="actions">
+            <a href="/admin/questions/{{ q.id }}/edit" role="button" class="btn-sm outline">Modifier</a>
+            <form method="post" action="/admin/questions/{{ q.id }}/delete"
+                  onsubmit="return confirm('Supprimer cette question ?')">
+              <button type="submit" class="btn-sm secondary outline">Supprimer</button>
+            </form>
+          </div>
         </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+  </div>
 {% endif %}
 {% endblock %}

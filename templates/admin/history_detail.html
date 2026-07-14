@@ -3,7 +3,7 @@
 {% block title %}Contrôle #{{ attempt_id }} — admin{% endblock %}
 
 {% block admin_content %}
-<header>
+<div class="page-head">
   <h1>Contrôle #{{ attempt_id }}</h1>
   <p>
     Date : {{ when }}
@@ -16,13 +16,13 @@
     {% endif %}
   </p>
   <p><a href="/admin/history">← Retour à l'historique</a></p>
-</header>
+</div>
 
 {% for q in questions %}
 <article class="{% if q.correct_overall %}q-correct{% else %}q-incorrect{% endif %}">
-  <header>
+  <header class="q-head">
     <strong>{{ loop.index }}. {{ q.statement }}</strong>
-    <span style="float:right;"><small>({{ q.kind }})</small></span>
+    <small>({{ q.kind }})</small>
   </header>
   <ul>
     {% for a in q.answers %}
