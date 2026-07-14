@@ -195,9 +195,7 @@ async fn run_server(cfg: Config, pool: SqlitePool, force_admin: bool) -> Result<
     println!();
     tracing::info!(%browse_url, listen = %actual, "server listening");
 
-    // Le kiosque intègre ce serveur et affiche la page dans SA fenêtre : il ne
-    // doit surtout pas ouvrir un navigateur par-dessus. SESAME_NO_BROWSER=1.
-    if std::env::var_os("SESAME_NO_BROWSER").is_none() {
+    if should_open_browser() {
         let url_for_open = browse_url.clone();
         tokio::spawn(async move {
             tokio::time::sleep(Duration::from_millis(300)).await;
@@ -209,6 +207,24 @@ async fn run_server(cfg: Config, pool: SqlitePool, force_admin: bool) -> Result<
         .with_graceful_shutdown(shutdown_signal())
         .await?;
     Ok(())
+}
+
+/// Le confort du parent qui lance `sesame` à la main sur son bureau — jamais
+/// une obligation. Le serveur est un SERVICE : c'est le kiosque qui affiche la
+/// page, pas lui.
+///
+/// Sans `$DISPLAY` (console pure, service systemd, session à peine née), il
+/// n'y a aucun bureau où ouvrir quoi que ce soit : `xdg-open` s'y perdrait et
+/// se mettrait à proposer des navigateurs en mode texte. On n'essaie même pas.
+fn should_open_browser() -> bool {
+    if std::env::var_os("SESAME_NO_BROWSER").is_some() {
+        return false;
+    }
+    if cfg!(target_os = "linux") {
+        return std::env::var_os("DISPLAY").is_some()
+            || std::env::var_os("WAYLAND_DISPLAY").is_some();
+    }
+    true
 }
 
 /// Ouvre le navigateur par défaut sur `url`, selon le système d'exploitation.
