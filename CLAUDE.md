@@ -72,6 +72,18 @@ Consequences, all of them load-bearing:
 - **`DontZap` is gone** — no X server to kill, so Ctrl+Alt+Backspace has no meaning. `NAutoVTs=0` stays: it's a *logind* setting, and it still hides the text consoles behind Ctrl+Alt+F2…F6.
 - **The exit-0 contract now passes *through* cage**, and nothing guarantees cage propagates its child's status. So it isn't trusted: after cage returns, `sesame-session` asks the API again via `sesame-kiosk --check` (one request, no browser, exit 0/1). Missing cage, broken cage, crashed kiosk, silent server — all land on exit 1. **A lock that fails open is not a lock.** Never let the desktop start on anything but a positive answer from `policy::evaluate`.
 
+### SDDM reads the session's exit code — and a non-zero one kills the autologin
+
+**`sesame-session` must exit 0 when the session ends normally.** SDDM logs any non-zero exit from an autologin session as `Process crashed`, **disables the autologin, and stops** — no retry, no greeter, black screen until an adult reboots. That anti-crash-loop guard is *correct*; the bug is lying to it.
+
+This is why `sesame-session` no longer ends in `exec startplasma-wayland`: with `exec`, Plasma's exit code *was* the session's, and the timer killed Plasma, so Plasma died with an error, so SDDM saw a crash. A session ending because time ran out is not a crash. It runs Plasma as a child, then `exit 0` (plus a `TERM` trap for the force path).
+
+The other half of the same bug is in `timer.rs::logout()`, and **the order of the two paths is load-bearing**:
+1. **Ask politely first** — `qdbus6 org.kde.Shutdown /Shutdown org.kde.Shutdown.logout` (no args, no confirmation). Plasma leaves on its own and returns 0, SDDM re-autologins, the child is back at the gate. **This is the path that must normally run.** Note the Qt6 binary is **`qdbus6`**; `qdbus` may be Qt5's or absent, so try both. (Plasma 5's `org.kde.ksmserver` `/KSMServer logout 0 0 0` is the *old* signature — the bus name still exists in Plasma 6, but don't use it.)
+2. **`loginctl terminate-session` last, never first.** It doesn't ask, it *kills* — and a killed Plasma exits with an error. It's the emergency hammer, not the normal path.
+
+The whole loop of the design (earn time → use it → time runs out → back to the gate → earn more) depends on that clean exit. Break it and the child is locked out after their first session, which is the *opposite* failure of the one everyone worries about — but a failure all the same.
+
 **Phase 6 uses a supervised browser, not an embedded webview.** The renderer is swappable: everything outside `Browser::spawn` is renderer-agnostic, and the exit-0 contract wouldn't change. Known tradeoff: a browser has an escape surface a native window wouldn't (devtools, `Ctrl+N`) — cage neither adds to it nor removes it. Architecture decisions live in engram (`kidgate/*`).
 
 ## Database

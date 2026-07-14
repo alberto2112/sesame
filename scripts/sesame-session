@@ -72,8 +72,36 @@ log "contrôle réussi — on ouvre le bureau"
 
 # --- L'horloge. Elle décompte, prévient, et ferme la session à la fin.
 "$BIN_DIR/sesame-timer" &
-log "minuteur démarré"
+TIMER_PID=$!
+log "minuteur démarré (pid $TIMER_PID)"
 
-# --- 4. Le bureau. `exec` : quand Plasma s'arrête, la session s'arrête, et
-# logind nettoie le serveur et le minuteur avec elle.
-exec startplasma-wayland
+# --- 4. Le bureau.
+#
+# PAS de `exec`, et ce n'est pas un détail de style. SDDM lit le code de sortie
+# de CE script comme le verdict de la session : tout ce qui n'est pas 0, il
+# l'appelle « Process crashed », il COUPE l'autologin, et il s'arrête là.
+#
+# Avec `exec`, le code de sortie de la session était celui de Plasma. Et quand
+# le minuteur fermait la session en TUANT Plasma, Plasma mourait avec une
+# erreur : SDDM croyait à un plantage, coupait l'autologin, et l'enfant restait
+# dehors — écran noir, jusqu'à ce qu'un adulte redémarre la machine.
+#
+# Cette protection de SDDM est BONNE : un vrai plantage ne doit pas boucler à
+# l'infini devant un enfant. Le tort était de lui mentir. Une session qui se
+# termine parce que le temps est écoulé n'est PAS un plantage — alors on lui
+# rend 0, et SDDM ramène l'enfant à la porte, comme prévu.
+#
+# Le piège inverse est gardé plus haut : contrôle non passé, cage cassé, kiosque
+# planté → on est déjà sorti en 1, et là oui, SDDM doit s'arrêter et laisser
+# entrer un adulte.
+#
+# Le `trap` couvre le dernier recours du minuteur (`loginctl terminate-session`,
+# qui nous envoie un SIGTERM à nous aussi) : là encore, la session se termine,
+# elle ne plante pas.
+trap 'exit 0' TERM
+
+startplasma-wayland
+log "le bureau s'est terminé (code $?) — fin de session"
+
+kill "$SERVER_PID" "$TIMER_PID" 2>/dev/null
+exit 0

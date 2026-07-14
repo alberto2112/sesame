@@ -59,6 +59,11 @@ const WARNINGS: &[i64] = &[300, 120, 60, 30, 10];
 /// Sursis après le dernier avertissement, avant de couper pour de bon.
 const GRACE: Duration = Duration::from_secs(10);
 
+/// Le temps qu'on laisse à Plasma pour s'en aller de lui-même après qu'on le
+/// lui a demandé. Normalement on ne voit jamais la fin de cette attente : la
+/// session meurt, et le minuteur avec elle.
+const PLASMA_EXIT_WAIT: Duration = Duration::from_secs(20);
+
 #[derive(Debug, Deserialize)]
 struct Gate {
     unlocked: bool,
@@ -182,13 +187,13 @@ fn plural(n: i64) -> &'static str {
 
 fn expire(lock_mode: &str) -> Result<()> {
     match lock_mode {
-        // Phase 7. Tant que la fenêtre de verrouillage n'existe pas, on ne
-        // fait pas semblant : on ferme la session. Mieux vaut une coupure
-        // franche qu'un verrou qui n'en est pas un.
+        // La fenêtre de verrouillage (phase 7) a été ANNULÉE : sous Wayland, un
+        // client ne peut ni capter le clavier ni recouvrir l'écran. Fermer la
+        // session ramène à la porte — même résultat, et ça marche partout.
         "overlay" => {
             eprintln!(
-                "sesame-timer : mode « overlay » pas encore disponible — \
-                 on ferme la session à la place"
+                "sesame-timer : mode « overlay » abandonné (impossible sous Wayland) — \
+                 on ferme la session"
             );
             logout()
         }
@@ -199,25 +204,56 @@ fn expire(lock_mode: &str) -> Result<()> {
 /// Ferme la session. Le script de session rend alors la main à SDDM, qui
 /// relance… le kiosque. La boucle est bouclée : pour revenir, il faut repasser
 /// un contrôle.
+///
+/// ## L'ordre n'est PAS un détail — il a coûté une soirée
+///
+/// SDDM lit le code de sortie de la session. **Tout ce qui n'est pas 0, il
+/// l'appelle « Process crashed », il COUPE l'autologin, et il s'arrête là.**
+/// C'est une protection anti-boucle, et elle a raison d'exister.
+///
+/// `loginctl terminate-session` ne demande rien à personne : il TUE. Plasma
+/// meurt avec un code d'erreur, `sesame-session` le propage, SDDM croit à un
+/// plantage — et l'enfant ne revient JAMAIS à la porte. Il reste dehors jusqu'à
+/// ce qu'un adulte redémarre la machine. C'est exactement ce qui est arrivé le
+/// soir du premier contrôle de Maël.
+///
+/// Alors on demande d'abord POLIMENT. Plasma s'en va de lui-même et rend 0 ;
+/// SDDM voit une fin de session normale et ramène l'enfant à la porte. Le
+/// marteau reste, mais en DERNIER : mieux vaut une session tuée qu'une session
+/// qui refuse de se fermer après l'heure.
 fn logout() -> Result<()> {
-    // La voie propre : logind. `self` désigne notre propre session.
-    let session = std::env::var("XDG_SESSION_ID").unwrap_or_else(|_| "self".into());
-    if run_ok("loginctl", &["terminate-session", &session]) {
-        eprintln!("sesame-timer : session {session} fermée (loginctl)");
-        return Ok(());
+    // `org.kde.Shutdown.logout()` : sans argument, sans confirmation. Vérifié
+    // sur la machine — c'est l'interface de Plasma 6 (l'ancienne, sur
+    // `/KSMServer` avec trois entiers, était celle de Plasma 5).
+    //
+    // Le binaire, lui, a changé de nom avec Qt6 : `qdbus6`. `qdbus` peut être
+    // celui de Qt5, ou ne pas exister du tout. On essaie les deux.
+    for qdbus in ["qdbus6", "qdbus"] {
+        if run_ok(
+            qdbus,
+            &["org.kde.Shutdown", "/Shutdown", "org.kde.Shutdown.logout"],
+        ) {
+            eprintln!("sesame-timer : déconnexion demandée à Plasma ({qdbus})");
+
+            // Plasma part de lui-même. On l'attend — et normalement on ne se
+            // réveille pas de ce sommeil : la session meurt, et nous avec elle.
+            // Si on en sort, c'est que Plasma n'est pas parti.
+            sleep(PLASMA_EXIT_WAIT);
+            eprintln!("sesame-timer : Plasma n'est pas parti — on force");
+            break;
+        }
     }
 
-    // Repli : demander poliment à Plasma de partir (sans confirmation).
-    if run_ok(
-        "qdbus",
-        &["org.kde.ksmserver", "/KSMServer", "logout", "0", "0", "0"],
-    ) {
-        eprintln!("sesame-timer : session fermée (ksmserver)");
+    // Le marteau. SDDM criera au plantage et coupera l'autologin — mais un
+    // ordinateur qui reste ouvert après l'heure serait pire qu'une porte close.
+    let session = std::env::var("XDG_SESSION_ID").unwrap_or_else(|_| "self".into());
+    if run_ok("loginctl", &["terminate-session", &session]) {
+        eprintln!("sesame-timer : session {session} fermée de force (loginctl)");
         return Ok(());
     }
 
     bail!(
-        "impossible de fermer la session : ni loginctl ni qdbus n'ont fonctionné. \
+        "impossible de fermer la session : ni Plasma ni loginctl n'ont répondu. \
          Le temps est écoulé mais l'ordinateur reste ouvert — préviens le parent."
     )
 }
