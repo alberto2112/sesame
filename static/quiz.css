@@ -41,8 +41,8 @@ main { max-width: 640px; margin: 0 auto; padding: 2rem 1rem 3rem; }
   padding: .3rem .9rem; border-radius: 999px;
 }
 
-/* ---- Carte de question ---- */
-.question {
+/* ---- Carte de question (et carte de récapitulatif : même habit) ---- */
+.question, .recap {
   background: var(--card-bg);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
@@ -90,6 +90,116 @@ main { max-width: 640px; margin: 0 auto; padding: 2rem 1rem 3rem; }
   transition: background .15s, transform .1s;
 }
 .btn:hover { background: var(--teal-dark); transform: translateY(-1px); }
+.btn:disabled { opacity: .35; cursor: not-allowed; }
+.btn:disabled:hover { background: var(--teal); transform: none; }
+
+/* `hidden` doit gagner contre nos règles d'affichage : sans ça, une règle de
+   classe (spécificité 0,1,0) écrase la feuille du navigateur et le bouton
+   masqué en JS resterait visible. */
+[hidden] { display: none !important; }
+
+/* ===== Contrôle en cartes : une question à la fois =====
+   Tout est accroché à `.js`, posée sur <html> par quiz.html. Sans JavaScript
+   elle n'existe pas : les cartes restent visibles et le formulaire redevient
+   la longue liste d'avant, avec son unique bouton. */
+
+.js [data-card] { display: none; }
+.js [data-card].is-active {
+  display: block;
+  animation: card-in .22s ease-out;
+}
+.recap { display: none; }          /* le récapitulatif n'a de sens qu'avec le pas-à-pas */
+
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---- Barre d'étapes ---- */
+.stepper { display: none; margin-bottom: 1.1rem; }
+.js .stepper { display: block; }
+
+.stepper-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: .5rem;
+}
+.stepper-count { font-weight: 800; font-size: 1.05rem; }
+.stepper-done { color: var(--muted); font-size: .85rem; }
+
+.progress {
+  height: 10px; background: var(--border);
+  border-radius: 999px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; width: 0;
+  background: var(--teal); border-radius: 999px;
+  transition: width .25s ease;
+}
+
+/* ---- Pastilles de navigation ---- */
+.dots { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .75rem; }
+.dot {
+  width: 2rem; height: 2rem;
+  border: 2px solid var(--border); border-radius: 50%;
+  background: #fff; color: var(--muted);
+  font: inherit; font-size: .85rem; font-weight: 700;
+  cursor: pointer;
+  transition: transform .1s, border-color .15s, background .15s;
+}
+.dot:hover { transform: translateY(-2px); border-color: var(--teal); }
+.dot.is-done { background: var(--teal); border-color: var(--teal); color: #fff; }
+.dot.is-current {
+  border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(36, 48, 73, .12);
+}
+
+/* ---- Récapitulatif ---- */
+.recap-list { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+.recap-item {
+  display: flex; align-items: center; gap: .7rem;
+  width: 100%; padding: .7rem .9rem;
+  background: #fff; border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font: inherit; text-align: left; color: inherit; cursor: pointer;
+  transition: border-color .15s, transform .1s;
+}
+.recap-item:hover { border-color: var(--teal); transform: translateY(-1px); }
+.recap-item.is-missing { border-color: var(--gold); background: #fffaf0; }
+.recap-num {
+  flex: none; width: 1.6rem; height: 1.6rem;
+  background: var(--border); color: var(--navy); border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: .8rem; font-weight: 800;
+}
+.recap-statement {
+  flex: 1; font-size: .95rem;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.recap-state { flex: none; font-weight: 800; color: var(--green); }
+.recap-item.is-missing .recap-state { color: var(--gold); }
+
+/* ---- Navigation bas de page ---- */
+.quiz-nav { display: flex; gap: .7rem; }
+.quiz-nav .btn { flex: 1; }
+.quiz-nav [data-prev], .quiz-nav [data-next] { display: none; }
+.js .quiz-nav [data-prev], .js .quiz-nav [data-next] { display: block; }
+
+.btn-ghost {
+  flex: 0 1 42% !important;
+  background: #fff; color: var(--teal);
+  border: 2px solid var(--border);
+  font-size: 1rem;
+}
+.btn-ghost:hover { background: #fff; border-color: var(--teal); }
+.btn-final { background: var(--green); }
+.btn-final:hover { background: #249254; }
+
+.quiz-warn {
+  margin-top: 1rem; padding: .8rem 1rem;
+  background: #fff6e5; border: 2px solid var(--gold);
+  border-radius: var(--radius);
+  color: #8a5b00; font-weight: 700; text-align: center;
+}
 
 /* ---- Résultat ---- */
 .score-hero {

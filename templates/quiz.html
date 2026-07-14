@@ -6,17 +6,29 @@
 <div class="page-head">
   <span class="tag">Contrôle</span>
   <h1>Bonjour {{ child_avatar }} {{ child_name }} !</h1>
-  <p>Réponds aux <strong>{{ questions.len() }} questions</strong>.
+  <p>Réponds aux <strong>{{ questions.len() }} questions</strong>, une par une.
      Il te faut au moins <strong>{{ threshold_fmt }}%</strong> de bonnes réponses
      pour gagner <strong>{{ grant_minutes }} minutes</strong> d'ordinateur.</p>
   <p><a href="/profiles">Ce n'est pas toi ? Change de profil</a></p>
 </div>
 
-<form method="post" action="/submit">
+{# Sans JavaScript, ce formulaire reste une longue liste de questions avec un
+   seul bouton : le pas-à-pas est une couche de présentation, jamais une
+   condition pour pouvoir répondre. quiz.js pose la classe `js-quiz`. #}
+<form method="post" action="/submit" id="quiz" data-total="{{ questions.len() }}">
   <input type="hidden" name="question_ids" value="{{ ids_csv }}">
 
+  <div class="stepper">
+    <div class="stepper-head">
+      <span class="stepper-count" data-step-label>Question 1 / {{ questions.len() }}</span>
+      <span class="stepper-done" data-answered-label></span>
+    </div>
+    <div class="progress"><div class="progress-fill" data-progress></div></div>
+    <div class="dots" data-dots></div>
+  </div>
+
   {% for q in questions %}
-  <div class="question">
+  <section class="card question" data-card data-kind="{{ q.kind }}">
     <div class="question-title">
       <span class="qnum">{{ loop.index }}</span>
       <span>{{ q.statement }}</span>
@@ -30,7 +42,7 @@
       {% for a in q.answers %}
         <label class="answer">
           {% if q.kind == "single" %}
-            <input type="radio" name="q_{{ q.id }}" value="{{ a.id }}" required>
+            <input type="radio" name="q_{{ q.id }}" value="{{ a.id }}">
           {% else %}
             <input type="checkbox" name="q_{{ q.id }}" value="{{ a.id }}">
           {% endif %}
@@ -38,9 +50,41 @@
         </label>
       {% endfor %}
     </div>
-  </div>
+  </section>
   {% endfor %}
 
-  <button type="submit" class="btn">Valider mes réponses</button>
+  <section class="card recap" data-card data-recap>
+    <div class="question-title">
+      <span class="qnum">✓</span>
+      <span>Presque fini !</span>
+    </div>
+    <p class="hint">Relis tes réponses. Clique sur une question pour la corriger.</p>
+    <ul class="recap-list">
+      {% for q in questions %}
+      <li>
+        <button type="button" class="recap-item" data-goto="{{ loop.index0 }}">
+          <span class="recap-num">{{ loop.index }}</span>
+          <span class="recap-statement">{{ q.statement }}</span>
+          <span class="recap-state" data-recap-state></span>
+        </button>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <p class="quiz-warn" data-warn hidden></p>
+
+  <nav class="quiz-nav">
+    <button type="button" class="btn btn-ghost" data-prev>← Précédent</button>
+    <button type="button" class="btn" data-next>Suivant →</button>
+    <button type="submit" class="btn btn-final" data-final>Valider mes réponses</button>
+  </nav>
 </form>
+{% endblock %}
+
+{% block head_extra %}
+{# Posée AVANT le premier rendu : si on attendait quiz.js (defer), les 10
+   questions pourraient s'afficher d'un coup le temps d'un clignement. #}
+<script>document.documentElement.classList.add("js");</script>
+<script src="/static/quiz.js" defer></script>
 {% endblock %}
