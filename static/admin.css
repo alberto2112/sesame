@@ -55,22 +55,26 @@ h2 { font-size: 1.2rem; }
 h3 { font-size: 1.05rem; margin-top: 2rem; }
 
 /* ===== Navigation ==========================================================
-   Sur téléphone elle défile horizontalement au lieu de partir en cascade sur
-   quatre lignes : la navigation ne doit pas manger l'écran. */
+   Au large : une seule ligne. Sur téléphone : une grille de deux colonnes.
+
+   Pas de défilement horizontal : un menu qu'il faut faire glisser pour
+   découvrir cache la moitié de ses entrées, et on ne cherche pas ce qu'on ne
+   sait pas exister. Tout doit être visible d'un coup d'œil. */
 
 .admin-nav {
   display: flex;
   align-items: center;
+  /* Entre le téléphone et le grand écran, il y a les tablettes : sept entrées
+     n'y tiennent pas sur une ligne. Sans `wrap`, elles débordent la page —
+     toutes les pages, y compris celles sans tableau. */
+  flex-wrap: wrap;
   gap: .2rem;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: .4rem;
   margin-bottom: 1.5rem;
-  overflow-x: auto;
-  scrollbar-width: none;
 }
-.admin-nav::-webkit-scrollbar { display: none; }
 
 .admin-nav a {
   padding: .45rem .8rem;
@@ -87,6 +91,24 @@ h3 { font-size: 1.05rem; margin-top: 2rem; }
 .admin-nav .spacer { flex: 1 0 .5rem; }
 .admin-nav form { margin: 0; }
 .admin-nav button { width: auto; margin: 0; padding: .4rem .8rem; font-size: .88rem; white-space: nowrap; }
+
+@media (max-width: 640px) {
+  .admin-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .3rem;
+  }
+  .admin-nav a {
+    text-align: center;
+    padding: .6rem .4rem;
+    background: var(--page);
+    white-space: normal;
+  }
+  .admin-nav .spacer { display: none; }
+  /* Se déconnecter n'est pas une destination : ça va tout en bas, seul. */
+  .admin-nav form { grid-column: 1 / -1; margin-top: .2rem; }
+  .admin-nav button { width: 100%; }
+}
 
 /* ===== En-tête de page ===================================================== */
 
@@ -236,6 +258,12 @@ legend { font-weight: 700; padding: 0; margin-bottom: .5rem; }
 table { margin-bottom: 0; }
 th { font-size: .85rem; text-transform: uppercase; letter-spacing: .02em; color: var(--muted); }
 td, th { vertical-align: middle; }
+
+/* Pico peint le fond des cellules. En mode carte, ça dessine un bloc gris
+   collé aux bords de la carte blanche : on croit à un défaut de marge alors
+   que la marge est là — c'est le gris qui la recouvre. Les cellules ne
+   peignent rien : la carte (ou la page) se voit à travers. */
+td, th { background-color: transparent; }
 
 /* Filet de sécurité : entre le point de bascule et la largeur naturelle du
    tableau, on défile au lieu de déborder de la page. Le tableau glisse, la
