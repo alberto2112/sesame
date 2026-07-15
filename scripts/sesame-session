@@ -52,7 +52,25 @@ log "serveur démarré (pid $SERVER_PID)"
 #
 # Si `cage` manque, ou s'il n'obtient pas l'écran (siège déjà pris, DRM occupé),
 # il sort en erreur et le contrôle n'a jamais été affiché. L'étape 3 le verra.
-cage -- "$BIN_DIR/sesame-kiosk"
+#
+# `-s` : « Allow VT switching ». Par défaut, cage AVALE Ctrl+Alt+F1…F6 : la
+# porte devient un piège dont même l'adulte ne sort plus pendant une plage
+# bloquée. Le bureau n'existe pas encore, donc pas de KWin (lui, honore ces
+# touches) ; la page de blocage n'offre aucun lien vers /admin ; et le SSH
+# tombe si le Wi-Fi dort dans KWallet. Quatre portes fermées d'un coup. Avec
+# `-s`, le parent garde une console de secours ; l'enfant, lui, n'y peut rien —
+# il tombe sur un login qu'il ne connaît pas.
+#
+# DEUX conditions pour que cette sortie existe VRAIMENT :
+#   * NE PAS poser NAutoVTs=0 (le durcissement facultatif de l'installateur) :
+#     sinon la VT s'ouvre mais VIDE, aucun getty où se connecter. `-s` et
+#     NAutoVTs=0 s'annulent l'un l'autre.
+#   * le compte enfant DOIT avoir un mot de passe : sinon Ctrl+Alt+F2 ouvre un
+#     shell enfant sans rien demander — un trou pire que celui qu'on bouche.
+#
+# (Un bug wlroots connu fige l'écran au changement de VT quand `xorg-xwayland`
+# manque : le garder installé rend cette sortie fiable.)
+cage -s -- "$BIN_DIR/sesame-kiosk"
 log "le kiosque a rendu la main (cage a rendu $?)"
 
 # --- 3. La vérité, c'est l'API — PAS le code de sortie de cage.
