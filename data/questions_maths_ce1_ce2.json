@@ -1,0 +1,1261 @@
+{
+  "subjects": [
+    {
+      "name": "Mathématiques",
+      "weight": 1.0
+    }
+  ],
+  "questions": [
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Quel est le chiffre des dizaines dans le nombre 274 ?",
+      "answers": [
+        {
+          "text": "7",
+          "correct": true
+        }
+      ],
+      "explanation": "Dans 274 : 2 centaines, 7 dizaines, 4 unités. Le chiffre des dizaines est 7.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Combien y a-t-il de centaines dans le nombre 358 ?",
+      "answers": [
+        {
+          "text": "3",
+          "correct": true
+        }
+      ],
+      "explanation": "358, c'est 3 centaines, 5 dizaines et 8 unités. Il y a 3 centaines.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Écris en chiffres : trois cent quarante-deux",
+      "answers": [
+        {
+          "text": "342",
+          "correct": true
+        }
+      ],
+      "explanation": "Trois cents (300) + quarante (40) + deux (2) = 342.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Quel nombre vient juste après 199 ?",
+      "answers": [
+        {
+          "text": "200",
+          "correct": true
+        }
+      ],
+      "explanation": "Après 199 vient 200. Les 10 dizaines font une centaine de plus.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Quel nombre vient juste avant 500 ?",
+      "answers": [
+        {
+          "text": "499",
+          "correct": true
+        }
+      ],
+      "explanation": "Juste avant 500, il y a 499.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Dans le nombre 605, quel est le chiffre des unités ?",
+      "answers": [
+        {
+          "text": "5",
+          "correct": true
+        }
+      ],
+      "explanation": "605 : 6 centaines, 0 dizaine, 5 unités. Le chiffre des unités est 5.",
+      "difficulty": 1
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Combien font 10 dizaines ?",
+      "answers": [
+        {
+          "text": "100",
+          "correct": true
+        }
+      ],
+      "explanation": "10 dizaines = 10 paquets de 10 = 100. C'est une centaine !",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "single",
+      "statement": "Quel est le plus grand de ces nombres ?",
+      "answers": [
+        {
+          "text": "470",
+          "correct": true
+        },
+        {
+          "text": "407",
+          "correct": false
+        },
+        {
+          "text": "74",
+          "correct": false
+        },
+        {
+          "text": "47",
+          "correct": false
+        }
+      ],
+      "explanation": "On compare d'abord les centaines : 470 et 407 en ont 4, les autres aucune. Puis les dizaines : 7 > 0. Donc 470.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "single",
+      "statement": "Quel est le plus petit de ces nombres ?",
+      "answers": [
+        {
+          "text": "80",
+          "correct": true
+        },
+        {
+          "text": "89",
+          "correct": false
+        },
+        {
+          "text": "98",
+          "correct": false
+        },
+        {
+          "text": "108",
+          "correct": false
+        }
+      ],
+      "explanation": "108 a une centaine, il est le plus grand. Entre 80, 89 et 98, le plus petit est 80.",
+      "difficulty": 1
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "single",
+      "statement": "Quel nombre est compris entre 350 et 360 ?",
+      "answers": [
+        {
+          "text": "357",
+          "correct": true
+        },
+        {
+          "text": "349",
+          "correct": false
+        },
+        {
+          "text": "362",
+          "correct": false
+        },
+        {
+          "text": "375",
+          "correct": false
+        }
+      ],
+      "explanation": "357 est bien plus grand que 350 et plus petit que 360. Les autres sont en dehors de cet intervalle.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "multi",
+      "statement": "Quels nombres sont pairs ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "12",
+          "correct": true
+        },
+        {
+          "text": "30",
+          "correct": true
+        },
+        {
+          "text": "7",
+          "correct": false
+        },
+        {
+          "text": "25",
+          "correct": false
+        }
+      ],
+      "explanation": "Un nombre pair se termine par 0, 2, 4, 6 ou 8. Ici : 12 et 30.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "single",
+      "statement": "Combien font 8 + 7 ?",
+      "answers": [
+        {
+          "text": "15",
+          "correct": true
+        },
+        {
+          "text": "14",
+          "correct": false
+        },
+        {
+          "text": "16",
+          "correct": false
+        },
+        {
+          "text": "13",
+          "correct": false
+        }
+      ],
+      "explanation": "8 + 7 = 15. Astuce : 8 + 2 = 10, puis il reste 5 à ajouter → 15.",
+      "difficulty": 1
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Julie avait 13 images. Elle en donne 6 à son frère. Combien lui en reste-t-il ?",
+      "answers": [
+        {
+          "text": "7",
+          "correct": true
+        }
+      ],
+      "explanation": "Elle en donne, donc on soustrait : 13 - 6 = 7 images.",
+      "difficulty": 1
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "single",
+      "statement": "45 + 27 = ?",
+      "answers": [
+        {
+          "text": "72",
+          "correct": true
+        },
+        {
+          "text": "62",
+          "correct": false
+        },
+        {
+          "text": "73",
+          "correct": false
+        },
+        {
+          "text": "82",
+          "correct": false
+        }
+      ],
+      "explanation": "45 + 27 : les unités 5 + 7 = 12 (je pose 2, je retiens 1), les dizaines 4 + 2 + 1 = 7. Résultat : 72. Attention à ne pas oublier la retenue !",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "68 + 15 = ?",
+      "answers": [
+        {
+          "text": "83",
+          "correct": true
+        }
+      ],
+      "explanation": "68 + 15 : 8 + 5 = 13 (je retiens 1), puis 6 + 1 + 1 = 8. Résultat : 83.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "56 - 24 = ?",
+      "answers": [
+        {
+          "text": "32",
+          "correct": true
+        }
+      ],
+      "explanation": "56 - 24 : 6 - 4 = 2 pour les unités, 5 - 2 = 3 pour les dizaines. Résultat : 32.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "single",
+      "statement": "100 - 37 = ?",
+      "answers": [
+        {
+          "text": "63",
+          "correct": true
+        },
+        {
+          "text": "73",
+          "correct": false
+        },
+        {
+          "text": "67",
+          "correct": false
+        },
+        {
+          "text": "53",
+          "correct": false
+        }
+      ],
+      "explanation": "100 - 37 = 63. Astuce : de 37 à 40 il y a 3, de 40 à 100 il y a 60. 3 + 60 = 63.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "234 + 100 = ?",
+      "answers": [
+        {
+          "text": "334",
+          "correct": true
+        }
+      ],
+      "explanation": "Ajouter 100, c'est ajouter 1 centaine : 234 → 334. Les dizaines et les unités ne changent pas.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Combien manque-t-il à 60 pour aller jusqu'à 100 ?",
+      "answers": [
+        {
+          "text": "40",
+          "correct": true
+        }
+      ],
+      "explanation": "60 + 40 = 100. Il manque donc 40.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "27 + 30 = ?",
+      "answers": [
+        {
+          "text": "57",
+          "correct": true
+        }
+      ],
+      "explanation": "27 + 30 : on ajoute 3 dizaines. 27 → 37 → 47 → 57.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "150 - 50 = ?",
+      "answers": [
+        {
+          "text": "100",
+          "correct": true
+        }
+      ],
+      "explanation": "150 - 50 = 100. On enlève 5 dizaines.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Complète : 7 + ? = 15",
+      "answers": [
+        {
+          "text": "8",
+          "correct": true
+        }
+      ],
+      "explanation": "7 + 8 = 15. On cherche ce qu'il faut ajouter à 7 pour atteindre 15 : c'est 8.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "4 × 3 = ?",
+      "answers": [
+        {
+          "text": "12",
+          "correct": true
+        }
+      ],
+      "explanation": "4 × 3, c'est 3 + 3 + 3 + 3 = 12.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "2 × 8 = ?",
+      "answers": [
+        {
+          "text": "16",
+          "correct": true
+        }
+      ],
+      "explanation": "2 × 8 = 16. C'est le double de 8.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "6 × 10 = ?",
+      "answers": [
+        {
+          "text": "60",
+          "correct": true
+        }
+      ],
+      "explanation": "Multiplier par 10, c'est ajouter un zéro : 6 × 10 = 60.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "single",
+      "statement": "5 × 5 = ?",
+      "answers": [
+        {
+          "text": "25",
+          "correct": true
+        },
+        {
+          "text": "20",
+          "correct": false
+        },
+        {
+          "text": "30",
+          "correct": false
+        },
+        {
+          "text": "10",
+          "correct": false
+        }
+      ],
+      "explanation": "5 × 5 = 25. C'est dans la table de 5.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "single",
+      "statement": "9 × 3 = ?",
+      "answers": [
+        {
+          "text": "27",
+          "correct": true
+        },
+        {
+          "text": "12",
+          "correct": false
+        },
+        {
+          "text": "24",
+          "correct": false
+        },
+        {
+          "text": "30",
+          "correct": false
+        }
+      ],
+      "explanation": "9 × 3 = 27. Astuce : 10 × 3 = 30, puis on enlève un 3 → 27. Attention : 9 + 3 = 12, ce n'est pas la même chose !",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "8 × 4 = ?",
+      "answers": [
+        {
+          "text": "32",
+          "correct": true
+        }
+      ],
+      "explanation": "8 × 4 = 32. C'est le double de 8 × 2 = 16.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "7 × 5 = ?",
+      "answers": [
+        {
+          "text": "35",
+          "correct": true
+        }
+      ],
+      "explanation": "7 × 5 = 35. Dans la table de 5, les résultats finissent par 0 ou 5.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "3 × 100 = ?",
+      "answers": [
+        {
+          "text": "300",
+          "correct": true
+        }
+      ],
+      "explanation": "Multiplier par 100, c'est ajouter deux zéros : 3 × 100 = 300.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Quel est le double de 14 ?",
+      "answers": [
+        {
+          "text": "28",
+          "correct": true
+        }
+      ],
+      "explanation": "Le double, c'est deux fois : 14 + 14 = 28.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "single",
+      "statement": "Quelle est la moitié de 18 ?",
+      "answers": [
+        {
+          "text": "9",
+          "correct": true
+        },
+        {
+          "text": "36",
+          "correct": false
+        },
+        {
+          "text": "8",
+          "correct": false
+        },
+        {
+          "text": "10",
+          "correct": false
+        }
+      ],
+      "explanation": "La moitié, c'est partager en deux parts égales : 9 + 9 = 18, donc la moitié de 18 est 9. 36, c'est le DOUBLE, pas la moitié !",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Quel est le triple de 5 ?",
+      "answers": [
+        {
+          "text": "15",
+          "correct": true
+        }
+      ],
+      "explanation": "Le triple, c'est trois fois : 5 × 3 = 15.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "multi",
+      "statement": "Quels résultats sont dans la table de 5 ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "20",
+          "correct": true
+        },
+        {
+          "text": "35",
+          "correct": true
+        },
+        {
+          "text": "22",
+          "correct": false
+        },
+        {
+          "text": "18",
+          "correct": false
+        }
+      ],
+      "explanation": "Dans la table de 5, les résultats se terminent par 0 ou 5 : 20 (5 × 4) et 35 (5 × 7).",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "On partage 12 bonbons entre 3 enfants. Combien de bonbons chacun ?",
+      "answers": [
+        {
+          "text": "4",
+          "correct": true
+        }
+      ],
+      "explanation": "12 ÷ 3 = 4. Chaque enfant reçoit 4 bonbons, car 3 × 4 = 12.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "20 ÷ 4 = ?",
+      "answers": [
+        {
+          "text": "5",
+          "correct": true
+        }
+      ],
+      "explanation": "20 ÷ 4 = 5, car 4 × 5 = 20.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "single",
+      "statement": "Combien de fois 6 tient-il dans 30 ?",
+      "answers": [
+        {
+          "text": "5",
+          "correct": true
+        },
+        {
+          "text": "6",
+          "correct": false
+        },
+        {
+          "text": "4",
+          "correct": false
+        },
+        {
+          "text": "24",
+          "correct": false
+        }
+      ],
+      "explanation": "6 × 5 = 30, donc 6 tient 5 fois dans 30.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "On range 24 œufs dans des boîtes de 6. Combien de boîtes ?",
+      "answers": [
+        {
+          "text": "4",
+          "correct": true
+        }
+      ],
+      "explanation": "24 ÷ 6 = 4, car 6 × 4 = 24. Il faut 4 boîtes.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Léa a 35 billes. Elle en gagne 18. Combien de billes a-t-elle maintenant ?",
+      "answers": [
+        {
+          "text": "53",
+          "correct": true
+        }
+      ],
+      "explanation": "Elle en gagne, donc on additionne : 35 + 18 = 53 billes.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Tom avait 50 €. Il dépense 22 €. Combien lui reste-t-il ?",
+      "answers": [
+        {
+          "text": "28",
+          "correct": true
+        }
+      ],
+      "explanation": "Il dépense, donc on soustrait : 50 - 22 = 28 €.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Un paquet contient 8 gâteaux. Combien de gâteaux dans 3 paquets ?",
+      "answers": [
+        {
+          "text": "24",
+          "correct": true
+        }
+      ],
+      "explanation": "3 paquets de 8 : 8 × 3 = 24 gâteaux.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Une place de cinéma coûte 7 €. Combien coûtent 4 places ?",
+      "answers": [
+        {
+          "text": "28",
+          "correct": true
+        }
+      ],
+      "explanation": "4 places à 7 € : 7 × 4 = 28 €.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Dans la salle, il y a 5 rangées de 6 chaises. Combien de chaises en tout ?",
+      "answers": [
+        {
+          "text": "30",
+          "correct": true
+        }
+      ],
+      "explanation": "5 rangées × 6 chaises = 30 chaises.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "single",
+      "statement": "Un livre a 120 pages. J'en ai lu 45. Combien de pages me reste-t-il à lire ?",
+      "answers": [
+        {
+          "text": "75",
+          "correct": true
+        },
+        {
+          "text": "165",
+          "correct": false
+        },
+        {
+          "text": "85",
+          "correct": false
+        },
+        {
+          "text": "65",
+          "correct": false
+        }
+      ],
+      "explanation": "« Il reste » : on soustrait. 120 - 45 = 75 pages. Si tu as trouvé 165, tu as additionné au lieu de soustraire.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Marie achète un cahier à 3 € et un stylo à 2 €. Elle paie avec un billet de 10 €. Combien lui rend-on ?",
+      "answers": [
+        {
+          "text": "5",
+          "correct": true
+        }
+      ],
+      "explanation": "Elle dépense 3 + 2 = 5 €. On lui rend 10 - 5 = 5 €.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "single",
+      "statement": "Dans le bus il y a 28 personnes. À l'arrêt, 9 descendent et 5 montent. Combien de personnes y a-t-il maintenant ?",
+      "answers": [
+        {
+          "text": "24",
+          "correct": true
+        },
+        {
+          "text": "32",
+          "correct": false
+        },
+        {
+          "text": "42",
+          "correct": false
+        },
+        {
+          "text": "14",
+          "correct": false
+        }
+      ],
+      "explanation": "Deux étapes : 28 - 9 = 19 (ceux qui descendent partent), puis 19 + 5 = 24 (ceux qui montent arrivent).",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "J'ai un billet de 10 € et une pièce de 2 €. Combien d'argent ai-je ?",
+      "answers": [
+        {
+          "text": "12",
+          "correct": true
+        }
+      ],
+      "explanation": "10 + 2 = 12 €.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Combien faut-il de pièces de 2 € pour faire 10 € ?",
+      "answers": [
+        {
+          "text": "5",
+          "correct": true
+        }
+      ],
+      "explanation": "2 × 5 = 10, il faut donc 5 pièces de 2 €.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Combien y a-t-il de centimètres dans 1 mètre ?",
+      "answers": [
+        {
+          "text": "100",
+          "correct": true
+        }
+      ],
+      "explanation": "1 mètre = 100 centimètres (1 m = 100 cm).",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Combien y a-t-il de grammes dans 1 kilogramme ?",
+      "answers": [
+        {
+          "text": "1000",
+          "correct": true
+        }
+      ],
+      "explanation": "1 kilogramme = 1000 grammes (1 kg = 1000 g).",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "2 mètres, c'est combien de centimètres ?",
+      "answers": [
+        {
+          "text": "200",
+          "correct": true
+        }
+      ],
+      "explanation": "1 m = 100 cm, donc 2 m = 2 × 100 = 200 cm.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "single",
+      "statement": "1 litre, c'est combien de centilitres ?",
+      "answers": [
+        {
+          "text": "100 cL",
+          "correct": true
+        },
+        {
+          "text": "10 cL",
+          "correct": false
+        },
+        {
+          "text": "1000 cL",
+          "correct": false
+        },
+        {
+          "text": "60 cL",
+          "correct": false
+        }
+      ],
+      "explanation": "1 litre = 100 centilitres (1 L = 100 cL), comme 1 mètre = 100 centimètres. Le préfixe « centi » veut dire centième.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Combien y a-t-il de minutes dans 1 heure ?",
+      "answers": [
+        {
+          "text": "60",
+          "correct": true
+        }
+      ],
+      "explanation": "1 heure = 60 minutes.",
+      "difficulty": 1
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Combien y a-t-il de minutes dans une demi-heure ?",
+      "answers": [
+        {
+          "text": "30",
+          "correct": true
+        }
+      ],
+      "explanation": "Une demi-heure, c'est la moitié de 60 minutes : 30 minutes.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Combien y a-t-il d'heures dans une demi-journée ?",
+      "answers": [
+        {
+          "text": "12",
+          "correct": true
+        }
+      ],
+      "explanation": "Une journée dure 24 heures. La moitié de 24, c'est 12 heures.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Combien y a-t-il de jours dans deux semaines ?",
+      "answers": [
+        {
+          "text": "14",
+          "correct": true
+        }
+      ],
+      "explanation": "Une semaine a 7 jours, donc deux semaines font 7 × 2 = 14 jours.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Combien y a-t-il de mois dans une demi-année ?",
+      "answers": [
+        {
+          "text": "6",
+          "correct": true
+        }
+      ],
+      "explanation": "Une année compte 12 mois. La moitié de 12, c'est 6 mois.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "single",
+      "statement": "Quelle unité utilise-t-on pour mesurer la longueur d'un crayon ?",
+      "answers": [
+        {
+          "text": "le centimètre",
+          "correct": true
+        },
+        {
+          "text": "le litre",
+          "correct": false
+        },
+        {
+          "text": "le kilogramme",
+          "correct": false
+        },
+        {
+          "text": "l'heure",
+          "correct": false
+        }
+      ],
+      "explanation": "Une longueur se mesure en centimètres (cm). Le litre mesure un liquide, le kilogramme une masse.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "single",
+      "statement": "Quel objet pèse environ 1 kilogramme ?",
+      "answers": [
+        {
+          "text": "un paquet de sucre",
+          "correct": true
+        },
+        {
+          "text": "une plume",
+          "correct": false
+        },
+        {
+          "text": "une voiture",
+          "correct": false
+        },
+        {
+          "text": "un crayon",
+          "correct": false
+        }
+      ],
+      "explanation": "Un paquet de sucre pèse environ 1 kg. Une plume est bien plus légère, une voiture bien plus lourde.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Je dessine un carré. Combien de traits dois-je tracer ?",
+      "answers": [
+        {
+          "text": "4",
+          "correct": true
+        }
+      ],
+      "explanation": "Le carré a 4 côtés, tous de la même longueur : il faut donc tracer 4 traits.",
+      "difficulty": 1
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Combien de sommets (de coins) a un triangle ?",
+      "answers": [
+        {
+          "text": "3",
+          "correct": true
+        }
+      ],
+      "explanation": "Le triangle a 3 côtés et 3 sommets. « Tri » veut dire trois !",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Combien de sommets a un rectangle ?",
+      "answers": [
+        {
+          "text": "4",
+          "correct": true
+        }
+      ],
+      "explanation": "Le rectangle a 4 sommets (les coins) et 4 côtés.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "single",
+      "statement": "Combien de faces a un cube ?",
+      "answers": [
+        {
+          "text": "6",
+          "correct": true
+        },
+        {
+          "text": "4",
+          "correct": false
+        },
+        {
+          "text": "8",
+          "correct": false
+        },
+        {
+          "text": "12",
+          "correct": false
+        }
+      ],
+      "explanation": "Le cube a 6 faces carrées, comme un dé. Il a aussi 8 sommets et 12 arêtes — attention à ne pas confondre !",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Combien d'angles droits y a-t-il dans un rectangle ?",
+      "answers": [
+        {
+          "text": "4",
+          "correct": true
+        }
+      ],
+      "explanation": "Le rectangle a 4 angles droits, un à chaque coin.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Un rectangle mesure 5 cm de long et 3 cm de large. Quel est son périmètre, en cm ?",
+      "answers": [
+        {
+          "text": "16",
+          "correct": true
+        }
+      ],
+      "explanation": "Le périmètre, c'est le tour de la figure : 5 + 3 + 5 + 3 = 16 cm. On additionne les 4 côtés.",
+      "difficulty": 3
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "single",
+      "statement": "Quelle figure n'a aucun côté droit ?",
+      "answers": [
+        {
+          "text": "le cercle",
+          "correct": true
+        },
+        {
+          "text": "le carré",
+          "correct": false
+        },
+        {
+          "text": "le triangle",
+          "correct": false
+        },
+        {
+          "text": "le rectangle",
+          "correct": false
+        }
+      ],
+      "explanation": "Le cercle est une ligne courbe : il n'a pas de côté droit ni de sommet.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "single",
+      "statement": "Quelle figure a 4 côtés de la même longueur et 4 angles droits ?",
+      "answers": [
+        {
+          "text": "le carré",
+          "correct": true
+        },
+        {
+          "text": "le rectangle",
+          "correct": false
+        },
+        {
+          "text": "le cercle",
+          "correct": false
+        },
+        {
+          "text": "le triangle",
+          "correct": false
+        }
+      ],
+      "explanation": "Le carré : 4 côtés égaux et 4 angles droits. Le rectangle a 4 angles droits mais ses côtés ne sont pas tous égaux.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "multi",
+      "statement": "Quelles figures ont 4 côtés ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "le carré",
+          "correct": true
+        },
+        {
+          "text": "le rectangle",
+          "correct": true
+        },
+        {
+          "text": "le triangle",
+          "correct": false
+        },
+        {
+          "text": "le cercle",
+          "correct": false
+        }
+      ],
+      "explanation": "Le carré et le rectangle ont 4 côtés. Le triangle en a 3, le cercle aucun.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "exact",
+      "statement": "Comment s'appelle une figure qui a 3 côtés ? (écris un seul mot, sans article)",
+      "answers": [
+        {
+          "text": "triangle",
+          "correct": true
+        }
+      ],
+      "explanation": "Une figure à 3 côtés s'appelle un triangle.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "single",
+      "statement": "La petite aiguille est sur le 3 et la grande aiguille sur le 12. Quelle heure est-il ?",
+      "answers": [
+        {
+          "text": "3 heures",
+          "correct": true
+        },
+        {
+          "text": "12 heures",
+          "correct": false
+        },
+        {
+          "text": "3 heures et demie",
+          "correct": false
+        },
+        {
+          "text": "midi et quart",
+          "correct": false
+        }
+      ],
+      "explanation": "La petite aiguille donne l'heure (3), la grande sur le 12 signifie « pile ». Il est 3 heures.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Il est 8 heures. Dans 2 heures, quelle heure sera-t-il ? (réponds par un nombre)",
+      "answers": [
+        {
+          "text": "10",
+          "correct": true
+        }
+      ],
+      "explanation": "8 + 2 = 10. Il sera 10 heures.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Continue la suite : 2, 4, 6, 8, ?",
+      "answers": [
+        {
+          "text": "10",
+          "correct": true
+        }
+      ],
+      "explanation": "On ajoute 2 à chaque fois : après 8 vient 10.",
+      "difficulty": 1
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Continue la suite : 5, 10, 15, 20, ?",
+      "answers": [
+        {
+          "text": "25",
+          "correct": true
+        }
+      ],
+      "explanation": "On avance de 5 en 5 : après 20 vient 25.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "single",
+      "statement": "Continue la suite : 100, 90, 80, 70, ?",
+      "answers": [
+        {
+          "text": "60",
+          "correct": true
+        },
+        {
+          "text": "50",
+          "correct": false
+        },
+        {
+          "text": "65",
+          "correct": false
+        },
+        {
+          "text": "75",
+          "correct": false
+        }
+      ],
+      "explanation": "On recule de 10 en 10 : après 70 vient 60.",
+      "difficulty": 2
+    },
+    {
+      "subject": "Mathématiques",
+      "kind": "number",
+      "statement": "Combien font 20 + 20 + 20 ?",
+      "answers": [
+        {
+          "text": "60",
+          "correct": true
+        }
+      ],
+      "explanation": "20 + 20 + 20 = 60. C'est aussi 20 × 3.",
+      "difficulty": 2
+    }
+  ]
+}

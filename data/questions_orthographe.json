@@ -1,0 +1,3184 @@
+{
+  "subjects": [
+    {
+      "name": "Orthographe",
+      "weight": 1.0
+    }
+  ],
+  "questions": [
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un stylo » ?",
+      "answers": [
+        {
+          "text": "des stylos",
+          "correct": true
+        },
+        {
+          "text": "des stylo",
+          "correct": false
+        },
+        {
+          "text": "des stylots",
+          "correct": false
+        },
+        {
+          "text": "des stylons",
+          "correct": false
+        }
+      ],
+      "explanation": "Les noms suivent en général la règle du pluriel : on ajoute un -s au nom singulier. Un stylo → des stylos. Comme un crayon → des crayons.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « une table ». (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "tables",
+          "correct": true
+        }
+      ],
+      "explanation": "La règle générale du pluriel : on ajoute un -s à la fin du nom. Une table → des tables. Comme une chaise → des chaises.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « une fleur ». (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "fleurs",
+          "correct": true
+        }
+      ],
+      "explanation": "Au pluriel, la plupart des noms prennent un -s : une fleur → des fleurs. Comme une porte → des portes.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le singulier de « des chaises » ?",
+      "answers": [
+        {
+          "text": "une chaise",
+          "correct": true
+        },
+        {
+          "text": "un chaise",
+          "correct": false
+        },
+        {
+          "text": "une chaisse",
+          "correct": false
+        },
+        {
+          "text": "une chaize",
+          "correct": false
+        }
+      ],
+      "explanation": "Pour passer du pluriel au singulier, on enlève le -s final et on choisit le bon déterminant (un/une). Des chaises → une chaise. Comme des tables → une table.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un tuyau » ?",
+      "answers": [
+        {
+          "text": "des tuyaux",
+          "correct": true
+        },
+        {
+          "text": "des tuyaus",
+          "correct": false
+        },
+        {
+          "text": "des tuyauds",
+          "correct": false
+        },
+        {
+          "text": "des tuyaules",
+          "correct": false
+        }
+      ],
+      "explanation": "Les noms terminés par -au prennent un -x au pluriel : un tuyau → des tuyaux. Comme un noyau → des noyaux.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « un jeu ». (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "jeux",
+          "correct": true
+        }
+      ],
+      "explanation": "Les noms terminés par -eu prennent un -x au pluriel : un jeu → des jeux. Comme un feu → des feux.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un pneu » ?",
+      "answers": [
+        {
+          "text": "des pneus",
+          "correct": true
+        },
+        {
+          "text": "des pneux",
+          "correct": false
+        },
+        {
+          "text": "des pneuds",
+          "correct": false
+        },
+        {
+          "text": "des pneurs",
+          "correct": false
+        }
+      ],
+      "explanation": "Attention : « pneu » est une exception ! Les noms en -eu prennent d'habitude un -x, mais pneu (et bleu) prennent un simple -s : un pneu → des pneus.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « un cheveu ». (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "cheveux",
+          "correct": true
+        }
+      ],
+      "explanation": "Les noms en -eu prennent un -x au pluriel : un cheveu → des cheveux. Comme un jeu → des jeux.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "multi",
+      "statement": "Parmi ces pluriels de noms en -eau, lesquels sont correctement écrits ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "des chapeaux",
+          "correct": true
+        },
+        {
+          "text": "des poteaux",
+          "correct": true
+        },
+        {
+          "text": "des chapeaus",
+          "correct": false
+        },
+        {
+          "text": "des poteaus",
+          "correct": false
+        }
+      ],
+      "explanation": "Les noms en -eau prennent un -x au pluriel, jamais un -s : un chapeau → des chapeaux, un poteau → des poteaux.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un journal » ?",
+      "answers": [
+        {
+          "text": "des journaux",
+          "correct": true
+        },
+        {
+          "text": "des journals",
+          "correct": false
+        },
+        {
+          "text": "des journaus",
+          "correct": false
+        },
+        {
+          "text": "des journeaux",
+          "correct": false
+        }
+      ],
+      "explanation": "Les noms en -al font leur pluriel en -aux : un journal → des journaux. Comme un animal → des animaux.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « un animal ». (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "animaux",
+          "correct": true
+        }
+      ],
+      "explanation": "Les noms en -al font leur pluriel en -aux : un animal → des animaux. Comme un journal → des journaux.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un canal » ?",
+      "answers": [
+        {
+          "text": "des canaux",
+          "correct": true
+        },
+        {
+          "text": "des canals",
+          "correct": false
+        },
+        {
+          "text": "des canaus",
+          "correct": false
+        },
+        {
+          "text": "des canales",
+          "correct": false
+        }
+      ],
+      "explanation": "Les noms en -al font leur pluriel en -aux : un canal → des canaux. Comme un cheval → des chevaux.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « un hôpital ». (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "hôpitaux",
+          "correct": true
+        }
+      ],
+      "explanation": "Les noms en -al font leur pluriel en -aux : un hôpital → des hôpitaux. Comme un canal → des canaux.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un carnaval » ?",
+      "answers": [
+        {
+          "text": "des carnavals",
+          "correct": true
+        },
+        {
+          "text": "des carnavaux",
+          "correct": false
+        },
+        {
+          "text": "des carnavales",
+          "correct": false
+        },
+        {
+          "text": "des carnavaus",
+          "correct": false
+        }
+      ],
+      "explanation": "Attention : « carnaval » est une exception ! Il ne fait pas -aux mais -s, comme bal, festival, chacal, récital et régal : un carnaval → des carnavals.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "multi",
+      "statement": "Parmi ces pluriels, lesquels sont correctement écrits ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "des bals",
+          "correct": true
+        },
+        {
+          "text": "des festivals",
+          "correct": true
+        },
+        {
+          "text": "des chevals",
+          "correct": false
+        },
+        {
+          "text": "des journals",
+          "correct": false
+        }
+      ],
+      "explanation": "Bal et festival sont des exceptions et prennent un -s au pluriel (des bals, des festivals), alors que cheval et journal suivent la règle générale des noms en -al et font -aux (des chevaux, des journaux).",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un trou » ?",
+      "answers": [
+        {
+          "text": "des trous",
+          "correct": true
+        },
+        {
+          "text": "des troux",
+          "correct": false
+        },
+        {
+          "text": "des trouds",
+          "correct": false
+        },
+        {
+          "text": "des trouz",
+          "correct": false
+        }
+      ],
+      "explanation": "Les noms en -ou prennent en général un simple -s au pluriel : un trou → des trous. Comme un clou → des clous.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « un clou ». (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "clous",
+          "correct": true
+        }
+      ],
+      "explanation": "Les noms en -ou prennent un -s au pluriel : un clou → des clous. Comme un trou → des trous.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un chou » ?",
+      "answers": [
+        {
+          "text": "des choux",
+          "correct": true
+        },
+        {
+          "text": "des chous",
+          "correct": false
+        },
+        {
+          "text": "des chouds",
+          "correct": false
+        },
+        {
+          "text": "des chouz",
+          "correct": false
+        }
+      ],
+      "explanation": "Attention : « chou » fait partie des 7 exceptions en -ou qui prennent un -x au pluriel (avec bijou, caillou, genou, hibou, joujou, pou) : un chou → des choux.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « un bijou ». (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "bijoux",
+          "correct": true
+        }
+      ],
+      "explanation": "Bijou fait partie des 7 exceptions en -ou qui prennent un -x au pluriel : un bijou → des bijoux. Comme un caillou → des cailloux.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « un genou ». (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "genoux",
+          "correct": true
+        }
+      ],
+      "explanation": "Genou fait partie des 7 exceptions en -ou qui prennent un -x au pluriel : un genou → des genoux. Comme un hibou → des hiboux.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "multi",
+      "statement": "Parmi ces noms en -ou, lesquels prennent un -x au pluriel ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "un caillou",
+          "correct": true
+        },
+        {
+          "text": "un hibou",
+          "correct": true
+        },
+        {
+          "text": "un trou",
+          "correct": false
+        },
+        {
+          "text": "un clou",
+          "correct": false
+        }
+      ],
+      "explanation": "Caillou et hibou font partie des 7 exceptions en -ou qui prennent un -x (avec bijou, chou, genou, joujou, pou), alors que trou et clou suivent la règle générale et prennent seulement un -s.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un tapis » ?",
+      "answers": [
+        {
+          "text": "des tapis",
+          "correct": true
+        },
+        {
+          "text": "des tapiss",
+          "correct": false
+        },
+        {
+          "text": "des tapits",
+          "correct": false
+        },
+        {
+          "text": "des tapisses",
+          "correct": false
+        }
+      ],
+      "explanation": "Les noms terminés par -s, -x ou -z ne changent pas au pluriel : un tapis → des tapis. Comme une noix → des noix.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « une noix ». (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "noix",
+          "correct": true
+        }
+      ],
+      "explanation": "Les noms terminés par -x ne changent pas au pluriel : une noix → des noix. C'est l'article qui indique le nombre, pas le nom.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un nez » ?",
+      "answers": [
+        {
+          "text": "des nez",
+          "correct": true
+        },
+        {
+          "text": "des nezs",
+          "correct": false
+        },
+        {
+          "text": "des neze",
+          "correct": false
+        },
+        {
+          "text": "des nes",
+          "correct": false
+        }
+      ],
+      "explanation": "Les noms terminés par -z ne changent pas au pluriel : un nez → des nez. Comme un riz → des riz.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "multi",
+      "statement": "Parmi ces noms, lesquels restent identiques au singulier et au pluriel ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "souris",
+          "correct": true
+        },
+        {
+          "text": "noix",
+          "correct": true
+        },
+        {
+          "text": "cheval",
+          "correct": false
+        },
+        {
+          "text": "bateau",
+          "correct": false
+        }
+      ],
+      "explanation": "Les noms terminés par -s, -x ou -z sont invariables : souris et noix ne changent pas. Cheval devient chevaux et bateau devient bateaux, ils changent donc de forme.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un chat noir » ?",
+      "answers": [
+        {
+          "text": "des chats noirs",
+          "correct": true
+        },
+        {
+          "text": "des chat noirs",
+          "correct": false
+        },
+        {
+          "text": "des chats noir",
+          "correct": false
+        },
+        {
+          "text": "des chats noires",
+          "correct": false
+        }
+      ],
+      "explanation": "Au pluriel, le nom ET l'adjectif s'accordent tous les deux : un chat noir → des chats noirs. Comme un pull vert → des pulls verts.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Complète au pluriel : « un stylo bleu » devient « des stylos ... ». Écris uniquement l'adjectif accordé, un seul mot.",
+      "answers": [
+        {
+          "text": "bleus",
+          "correct": true
+        }
+      ],
+      "explanation": "L'adjectif s'accorde en nombre avec le nom qu'il accompagne : bleu → bleus au pluriel. Comme un ballon rouge → des ballons rouges.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris l'adjectif « beau » au masculin pluriel. (Un seul mot, sans article.)",
+      "answers": [
+        {
+          "text": "beaux",
+          "correct": true
+        }
+      ],
+      "explanation": "Beau est un adjectif irrégulier : au masculin pluriel, il devient beaux, comme les noms en -eau. Un beau jardin → de beaux jardins.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un petit chien » ?",
+      "answers": [
+        {
+          "text": "des petits chiens",
+          "correct": true
+        },
+        {
+          "text": "des petit chiens",
+          "correct": false
+        },
+        {
+          "text": "des petits chien",
+          "correct": false
+        },
+        {
+          "text": "des petits chiennes",
+          "correct": false
+        }
+      ],
+      "explanation": "Dans le groupe nominal, le déterminant, l'adjectif et le nom s'accordent tous ensemble au pluriel : un petit chien → des petits chiens.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « le petit chien » ?",
+      "answers": [
+        {
+          "text": "les petits chiens",
+          "correct": true
+        },
+        {
+          "text": "les petit chien",
+          "correct": false
+        },
+        {
+          "text": "les petits chien",
+          "correct": false
+        },
+        {
+          "text": "le petits chiens",
+          "correct": false
+        }
+      ],
+      "explanation": "Dans un groupe nominal, TOUS les mots s'accordent au pluriel : le déterminant (le → les), l'adjectif (petit → petits) et le nom (chien → chiens).",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « la grande maison » ?",
+      "answers": [
+        {
+          "text": "les grandes maisons",
+          "correct": true
+        },
+        {
+          "text": "les grande maisons",
+          "correct": false
+        },
+        {
+          "text": "les grandes maison",
+          "correct": false
+        },
+        {
+          "text": "la grandes maisons",
+          "correct": false
+        }
+      ],
+      "explanation": "Dans un groupe nominal féminin, le déterminant, l'adjectif et le nom s'accordent tous au pluriel : la grande maison → les grandes maisons.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "multi",
+      "statement": "Parmi ces groupes nominaux, lesquels sont correctement accordés au pluriel ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "les beaux jardins",
+          "correct": true
+        },
+        {
+          "text": "les chats noirs",
+          "correct": true
+        },
+        {
+          "text": "les chat noirs",
+          "correct": false
+        },
+        {
+          "text": "les beaux jardin",
+          "correct": false
+        }
+      ],
+      "explanation": "Dans un groupe nominal au pluriel, le déterminant, l'adjectif et le nom doivent TOUS porter la marque du pluriel : les beaux jardins et les chats noirs sont complets, alors que « les chat noirs » et « les beaux jardin » ont oublié le -s sur un des mots.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le singulier de « des journaux » ?",
+      "answers": [
+        {
+          "text": "un journal",
+          "correct": true
+        },
+        {
+          "text": "un journail",
+          "correct": false
+        },
+        {
+          "text": "un journau",
+          "correct": false
+        },
+        {
+          "text": "un journale",
+          "correct": false
+        }
+      ],
+      "explanation": "Pour passer du pluriel au singulier, on retrouve la terminaison -al des noms qui font -aux au pluriel : des journaux → un journal. Comme des chevaux → un cheval.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le singulier du nom « des choux ». (Écris UNIQUEMENT le nom au singulier, sans article.)",
+      "answers": [
+        {
+          "text": "chou",
+          "correct": true
+        }
+      ],
+      "explanation": "Chou est une exception en -ou qui prend un -x au pluriel ; au singulier, on retire simplement le -x : des choux → un chou.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le singulier de « des animaux » ?",
+      "answers": [
+        {
+          "text": "un animal",
+          "correct": true
+        },
+        {
+          "text": "un animau",
+          "correct": false
+        },
+        {
+          "text": "un animale",
+          "correct": false
+        },
+        {
+          "text": "un animaux",
+          "correct": false
+        }
+      ],
+      "explanation": "Pour passer du pluriel au singulier, on remplace la terminaison -aux par -al : des animaux → un animal. Comme des journaux → un journal.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Dans le groupe « les tapis », comment sait-on que « tapis » est ici au pluriel, puisque le mot ne change pas ?",
+      "answers": [
+        {
+          "text": "grâce à l'article « les »",
+          "correct": true
+        },
+        {
+          "text": "grâce à un -s final visible",
+          "correct": false
+        },
+        {
+          "text": "grâce à une majuscule",
+          "correct": false
+        },
+        {
+          "text": "grâce à un accent",
+          "correct": false
+        }
+      ],
+      "explanation": "Tapis est un nom invariable : il s'écrit pareil au singulier et au pluriel. C'est donc le déterminant (un tapis / les tapis) qui indique le nombre, pas le nom lui-même.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel déterminant faut-il choisir pour écrire « ... chevaux » au pluriel ?",
+      "answers": [
+        {
+          "text": "les",
+          "correct": true
+        },
+        {
+          "text": "le",
+          "correct": false
+        },
+        {
+          "text": "la",
+          "correct": false
+        },
+        {
+          "text": "un",
+          "correct": false
+        }
+      ],
+      "explanation": "Devant un nom pluriel, on utilise un déterminant pluriel comme les ou des : les chevaux. Le, la et un sont des déterminants singuliers.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Parmi ces groupes nominaux, lequel est écrit au pluriel ?",
+      "answers": [
+        {
+          "text": "des hiboux",
+          "correct": true
+        },
+        {
+          "text": "un hibou",
+          "correct": false
+        },
+        {
+          "text": "le cheval",
+          "correct": false
+        },
+        {
+          "text": "la souris",
+          "correct": false
+        }
+      ],
+      "explanation": "Des hiboux est au pluriel grâce au déterminant « des » et à la marque -x sur hibou. Les trois autres groupes ont un déterminant singulier (un, le, la).",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase est correctement accordée ? (le sujet est « les chats »)",
+      "answers": [
+        {
+          "text": "Les chats dorment sur le canapé.",
+          "correct": true
+        },
+        {
+          "text": "Les chats dort sur le canapé.",
+          "correct": false
+        },
+        {
+          "text": "Le chats dorment sur le canapé.",
+          "correct": false
+        },
+        {
+          "text": "Les chat dorment sur le canapé.",
+          "correct": false
+        }
+      ],
+      "explanation": "Le sujet « les chats » est au pluriel : le déterminant (les), le nom (chats) et le verbe (dorment) doivent tous être au pluriel. Le verbe s'accorde toujours avec son sujet.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase est correctement accordée ? (groupe nominal étendu : « les élèves de la classe »)",
+      "answers": [
+        {
+          "text": "Les élèves de la classe travaillent bien.",
+          "correct": true
+        },
+        {
+          "text": "Les élèves de la classe travaille bien.",
+          "correct": false
+        },
+        {
+          "text": "Les élève de la classe travaillent bien.",
+          "correct": false
+        },
+        {
+          "text": "Le élèves de la classe travaillent bien.",
+          "correct": false
+        }
+      ],
+      "explanation": "Le sujet réel est « les élèves » : le complément « de la classe » ne compte pas pour l'accord. Il est au pluriel, donc le verbe prend la terminaison -ent : ils travaillent.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase est correctement accordée ? (passé composé avec l'auxiliaire être)",
+      "answers": [
+        {
+          "text": "Les filles sont parties tôt ce matin.",
+          "correct": true
+        },
+        {
+          "text": "Les filles sont parti tôt ce matin.",
+          "correct": false
+        },
+        {
+          "text": "Les filles est parties tôt ce matin.",
+          "correct": false
+        },
+        {
+          "text": "Les fille sont parties tôt ce matin.",
+          "correct": false
+        }
+      ],
+      "explanation": "Avec l'auxiliaire être, le participe passé s'accorde avec le sujet : « les filles » est féminin pluriel, donc parties prend un e et un s. N'oublie pas non plus l'accord du nom et du verbe être (sont).",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase est correctement accordée ? (adjectif épithète après le nom)",
+      "answers": [
+        {
+          "text": "Elle a acheté des voitures rouges.",
+          "correct": true
+        },
+        {
+          "text": "Elle a acheté des voitures rouge.",
+          "correct": false
+        },
+        {
+          "text": "Elle a acheté des voiture rouges.",
+          "correct": false
+        },
+        {
+          "text": "Elle a acheté des voitures rougent.",
+          "correct": false
+        }
+      ],
+      "explanation": "L'adjectif « rouge » qualifie « voitures », qui est féminin pluriel : il prend donc un s (rouges). Un adjectif ne se conjugue jamais comme un verbe : « rougent » n'existe pas.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase est correctement accordée ? (adjectif attribut du sujet)",
+      "answers": [
+        {
+          "text": "Les fleurs sont belles ce printemps.",
+          "correct": true
+        },
+        {
+          "text": "Les fleurs sont belle ce printemps.",
+          "correct": false
+        },
+        {
+          "text": "La fleurs sont belles ce printemps.",
+          "correct": false
+        },
+        {
+          "text": "Les fleurs est belles ce printemps.",
+          "correct": false
+        }
+      ],
+      "explanation": "Même en tant qu'attribut, l'adjectif s'accorde avec le sujet : « les fleurs » est féminin pluriel, donc belles prend un e et un s. Le verbe être doit lui aussi s'accorder : sont, pas est.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase est correctement accordée ? (groupe nominal complet : déterminant, adjectif, nom)",
+      "answers": [
+        {
+          "text": "Les petits chiens noirs courent vite.",
+          "correct": true
+        },
+        {
+          "text": "Les petit chiens noirs courent vite.",
+          "correct": false
+        },
+        {
+          "text": "Les petits chiens noir courent vite.",
+          "correct": false
+        },
+        {
+          "text": "Le petits chiens noirs courent vite.",
+          "correct": false
+        }
+      ],
+      "explanation": "Dans un groupe nominal pluriel, tous les mots qui s'accordent doivent porter la marque du pluriel : le déterminant (les), l'adjectif (petits), le nom (chiens) et l'autre adjectif (noirs).",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase est correctement accordée ? (pronom sujet « ils »)",
+      "answers": [
+        {
+          "text": "Ils mangent une glace au parc.",
+          "correct": true
+        },
+        {
+          "text": "Ils mange une glace au parc.",
+          "correct": false
+        },
+        {
+          "text": "Il mangent une glace au parc.",
+          "correct": false
+        },
+        {
+          "text": "Ils manges une glace au parc.",
+          "correct": false
+        }
+      ],
+      "explanation": "« Ils » est un pronom de la 3e personne du pluriel : le verbe prend la terminaison -ent au présent (ils mangent), jamais -es ou une forme du singulier.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase est correctement accordée ? (pronom sujet « elles »)",
+      "answers": [
+        {
+          "text": "Elles chantent une jolie chanson.",
+          "correct": true
+        },
+        {
+          "text": "Elles chante une jolie chanson.",
+          "correct": false
+        },
+        {
+          "text": "Elle chantent une jolie chanson.",
+          "correct": false
+        },
+        {
+          "text": "Elles chantons une jolie chanson.",
+          "correct": false
+        }
+      ],
+      "explanation": "« Elles » est un pronom pluriel : le verbe s'accorde avec la terminaison -ent (elles chantent). La terminaison -ons est réservée à « nous ».",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase est correctement accordée ? (pronom sujet « nous »)",
+      "answers": [
+        {
+          "text": "Nous partons en vacances demain.",
+          "correct": true
+        },
+        {
+          "text": "Nous part en vacances demain.",
+          "correct": false
+        },
+        {
+          "text": "Nous partez en vacances demain.",
+          "correct": false
+        },
+        {
+          "text": "Nous partent en vacances demain.",
+          "correct": false
+        }
+      ],
+      "explanation": "Avec le pronom « nous », le verbe se termine par -ons au présent : nous partons. Ne confonds pas avec -ez (vous) ou -ent (ils/elles).",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase est correctement accordée ? (pronom sujet « vous »)",
+      "answers": [
+        {
+          "text": "Vous choisissez un livre à la bibliothèque.",
+          "correct": true
+        },
+        {
+          "text": "Vous choisissons un livre à la bibliothèque.",
+          "correct": false
+        },
+        {
+          "text": "Vous choisissent un livre à la bibliothèque.",
+          "correct": false
+        },
+        {
+          "text": "Vous choisit un livre à la bibliothèque.",
+          "correct": false
+        }
+      ],
+      "explanation": "Avec le pronom « vous », le verbe se termine par -ez au présent : vous choisissez. C'est une terminaison réservée à la 2e personne du pluriel.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Parmi ces quatre phrases sur les oiseaux, laquelle contient une faute d'accord ?",
+      "answers": [
+        {
+          "text": "Les oiseaux volent haut dans le ciel.",
+          "correct": false
+        },
+        {
+          "text": "Les oiseaux vole haut dans le ciel.",
+          "correct": true
+        },
+        {
+          "text": "Les petits oiseaux chantent le matin.",
+          "correct": false
+        },
+        {
+          "text": "Ils volent en direction du sud.",
+          "correct": false
+        }
+      ],
+      "explanation": "Dans « les oiseaux vole », le sujet « les oiseaux » est au pluriel mais le verbe est resté au singulier : il fallait écrire volent, avec -ent, pour s'accorder avec le sujet.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Parmi ces quatre phrases sur la classe, laquelle contient une faute d'accord ?",
+      "answers": [
+        {
+          "text": "Les enfants sont sages en classe.",
+          "correct": false
+        },
+        {
+          "text": "Le maître explique la leçon.",
+          "correct": false
+        },
+        {
+          "text": "Les enfants sont sage en classe.",
+          "correct": true
+        },
+        {
+          "text": "Ils écoutent attentivement.",
+          "correct": false
+        }
+      ],
+      "explanation": "Dans « les enfants sont sage », l'adjectif attribut « sage » ne s'accorde pas avec le sujet pluriel « les enfants ». Il fallait écrire sages, avec un s.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase est correctement accordée ? (adjectif en -eau devenant -eaux au pluriel)",
+      "answers": [
+        {
+          "text": "Le port compte de beaux bateaux.",
+          "correct": true
+        },
+        {
+          "text": "Le port compte de beau bateaux.",
+          "correct": false
+        },
+        {
+          "text": "Le port compte de beaux bateau.",
+          "correct": false
+        },
+        {
+          "text": "Le port compte de belle bateaux.",
+          "correct": false
+        }
+      ],
+      "explanation": "Au masculin pluriel, l'adjectif « beau » devient beaux (comme le nom bateau devient bateaux) : ce sont deux accords en -x, pas en -s.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase est correctement accordée ? (adjectif en -al devenant -aux au pluriel)",
+      "answers": [
+        {
+          "text": "Les enfants résolvent des problèmes nationaux.",
+          "correct": true
+        },
+        {
+          "text": "Les enfants résolvent des problèmes national.",
+          "correct": false
+        },
+        {
+          "text": "Les enfants résolvent des problème nationaux.",
+          "correct": false
+        },
+        {
+          "text": "Les enfants résolvent des problèmes nationals.",
+          "correct": false
+        }
+      ],
+      "explanation": "La plupart des adjectifs en -al font leur pluriel en -aux : national devient nationaux. La forme « nationals » n'existe pas en français.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle est la forme correcte au PLURIEL de la phrase « Le petit chat noir dort. » ?",
+      "answers": [
+        {
+          "text": "Les petits chats noirs dorment.",
+          "correct": true
+        },
+        {
+          "text": "Les petit chats noir dort.",
+          "correct": false
+        },
+        {
+          "text": "Les petits chat noirs dorment.",
+          "correct": false
+        },
+        {
+          "text": "Les petits chats noirs dort.",
+          "correct": false
+        }
+      ],
+      "explanation": "Au pluriel, tous les mots accordés avec le sujet changent : déterminant (les), adjectif (petits), nom (chats), adjectif (noirs) et verbe (dorment).",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle est la forme correcte au SINGULIER de la phrase « Les grands arbres verts poussent vite. » ?",
+      "answers": [
+        {
+          "text": "Le grand arbre vert pousse vite.",
+          "correct": true
+        },
+        {
+          "text": "Le grands arbre vert pousse vite.",
+          "correct": false
+        },
+        {
+          "text": "Le grand arbres verts pousse vite.",
+          "correct": false
+        },
+        {
+          "text": "Le grand arbre vert poussent vite.",
+          "correct": false
+        }
+      ],
+      "explanation": "Au singulier, chaque mot accordé au sujet doit perdre sa marque de pluriel : le déterminant (le), l'adjectif (grand), le nom (arbre), l'adjectif (vert) et le verbe (pousse).",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase est correctement accordée ? (l'adverbe ne s'accorde jamais)",
+      "answers": [
+        {
+          "text": "Les enfants courent vite dans le jardin.",
+          "correct": true
+        },
+        {
+          "text": "Les enfants courent vites dans le jardin.",
+          "correct": false
+        },
+        {
+          "text": "Les enfant courent vite dans le jardin.",
+          "correct": false
+        },
+        {
+          "text": "Les enfants court vite dans le jardin.",
+          "correct": false
+        }
+      ],
+      "explanation": "L'adverbe « vite » est invariable : il ne prend jamais de s, même si le sujet est au pluriel. Seuls le nom, le déterminant et le verbe s'accordent avec le sujet.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase est correctement accordée ? (la préposition « chez » est invariable)",
+      "answers": [
+        {
+          "text": "Les enfants jouent chez leurs cousins.",
+          "correct": true
+        },
+        {
+          "text": "Les enfants jouent chezs leurs cousins.",
+          "correct": false
+        },
+        {
+          "text": "Les enfant jouent chez leurs cousins.",
+          "correct": false
+        },
+        {
+          "text": "Les enfants joue chez leurs cousins.",
+          "correct": false
+        }
+      ],
+      "explanation": "La préposition « chez » ne s'accorde jamais, même devant un nom pluriel : elle reste invariable. Seuls le nom (enfants), le déterminant (les) et le verbe (jouent) s'accordent avec le sujet pluriel.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase est correctement accordée ? (deux sujets singuliers coordonnés par « et »)",
+      "answers": [
+        {
+          "text": "Le chat et le chien sont noirs.",
+          "correct": true
+        },
+        {
+          "text": "Le chat et le chien est noirs.",
+          "correct": false
+        },
+        {
+          "text": "Le chat et le chien sont noir.",
+          "correct": false
+        },
+        {
+          "text": "Le chat et le chien sont noire.",
+          "correct": false
+        }
+      ],
+      "explanation": "Quand deux sujets singuliers sont reliés par « et », l'ensemble forme un sujet pluriel : le verbe (sont) et l'adjectif (noirs) s'accordent au pluriel, même si chaque nom pris seul est singulier.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase est correctement accordée ? (complément du nom : « les fruits du jardin »)",
+      "answers": [
+        {
+          "text": "Les fruits du jardin sont mûrs.",
+          "correct": true
+        },
+        {
+          "text": "Les fruits du jardin sont mûr.",
+          "correct": false
+        },
+        {
+          "text": "Le fruits du jardin sont mûrs.",
+          "correct": false
+        },
+        {
+          "text": "Les fruits du jardin est mûrs.",
+          "correct": false
+        }
+      ],
+      "explanation": "Le sujet est « les fruits » : le complément « du jardin » reste au singulier et ne change pas l'accord. Le sujet étant pluriel, le verbe (sont) et l'adjectif attribut (mûrs) s'accordent au pluriel.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Complète en accordant le verbe : « Les chiens ... dans le jardin. » (verbe COURIR au présent — écris UNIQUEMENT le verbe conjugué)",
+      "answers": [
+        {
+          "text": "courent",
+          "correct": true
+        }
+      ],
+      "explanation": "Le sujet « les chiens » est à la 3e personne du pluriel : le verbe courir se conjugue courent au présent (ils courent).",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Complète en accordant le verbe : « Elles ... leurs devoirs avant le dîner. » (verbe FINIR au présent — écris UNIQUEMENT le verbe conjugué)",
+      "answers": [
+        {
+          "text": "finissent",
+          "correct": true
+        }
+      ],
+      "explanation": "« Elles » est un pronom de la 3e personne du pluriel : le verbe finir se conjugue finissent au présent (elles finissent).",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Complète en accordant le verbe : « Nous ... au marché tous les samedis. » (verbe ALLER au présent — écris UNIQUEMENT le verbe conjugué)",
+      "answers": [
+        {
+          "text": "allons",
+          "correct": true
+        }
+      ],
+      "explanation": "Avec le pronom « nous », le verbe aller se conjugue allons au présent : la terminaison -ons est propre à la 1re personne du pluriel.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Complète en accordant le verbe : « Vous ... très bien en français. » (verbe ÉCRIRE au présent — écris UNIQUEMENT le verbe conjugué)",
+      "answers": [
+        {
+          "text": "écrivez",
+          "correct": true
+        }
+      ],
+      "explanation": "Avec le pronom « vous », le verbe écrire se conjugue écrivez au présent : la terminaison -ez est propre à la 2e personne du pluriel.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Complète en accordant le verbe : « Les élèves ... la leçon avec attention. » (verbe ÉCOUTER au présent — écris UNIQUEMENT le verbe conjugué)",
+      "answers": [
+        {
+          "text": "écoutent",
+          "correct": true
+        }
+      ],
+      "explanation": "Le sujet « les élèves » est au pluriel : le verbe écouter prend la terminaison -ent au présent (ils écoutent).",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Complète en accordant l'adjectif : « Elle porte des chaussures ... » (adjectif NOIR à accorder avec « chaussures » — écris UNIQUEMENT l'adjectif accordé)",
+      "answers": [
+        {
+          "text": "noires",
+          "correct": true
+        }
+      ],
+      "explanation": "« Chaussures » est féminin pluriel : l'adjectif noir prend les deux marques, le e du féminin et le s du pluriel : noires.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Complète en accordant l'adjectif : « Les enfants sont ... aujourd'hui. » (adjectif CONTENT à accorder avec « enfants » — écris UNIQUEMENT l'adjectif accordé)",
+      "answers": [
+        {
+          "text": "contents",
+          "correct": true
+        }
+      ],
+      "explanation": "« Les enfants » est masculin pluriel : l'adjectif attribut content prend seulement la marque du pluriel, le s : contents.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Complète en accordant l'adjectif : « Le magasin vend de ... vélos. » (adjectif NOUVEAU à accorder avec « vélos », au masculin pluriel — écris UNIQUEMENT l'adjectif accordé)",
+      "answers": [
+        {
+          "text": "nouveaux",
+          "correct": true
+        }
+      ],
+      "explanation": "« Vélos » est masculin pluriel : comme les adjectifs en -eau, nouveau fait son pluriel en -eaux : nouveaux.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Complète en accordant l'adjectif : « Ce sont des histoires ... » (adjectif ORIGINAL à accorder avec « histoires », au féminin pluriel — écris UNIQUEMENT l'adjectif accordé)",
+      "answers": [
+        {
+          "text": "originales",
+          "correct": true
+        }
+      ],
+      "explanation": "« Histoires » est féminin pluriel : au féminin, original suit la règle générale et prend juste un s : originales. Seul le masculin pluriel fait -aux, comme dans nationaux.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Complète en accordant le verbe : « Les feuilles ... des arbres en automne. » (verbe TOMBER au présent — écris UNIQUEMENT le verbe conjugué)",
+      "answers": [
+        {
+          "text": "tombent",
+          "correct": true
+        }
+      ],
+      "explanation": "Le sujet « les feuilles » est au pluriel : le verbe tomber prend la terminaison -ent au présent (elles tombent).",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Complète au passé composé : « Les garçons ... au stade hier. » (verbe ALLER, auxiliaire ÊTRE — écris UNIQUEMENT le participe passé accordé)",
+      "answers": [
+        {
+          "text": "allés",
+          "correct": true
+        }
+      ],
+      "explanation": "Avec l'auxiliaire être, le participe passé s'accorde avec le sujet : « les garçons » est masculin pluriel, donc allé prend un s : allés.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Complète au passé composé : « Les filles ... dans le jardin. » (verbe TOMBER, auxiliaire ÊTRE — écris UNIQUEMENT le participe passé accordé)",
+      "answers": [
+        {
+          "text": "tombées",
+          "correct": true
+        }
+      ],
+      "explanation": "Avec l'auxiliaire être, le participe passé s'accorde avec le sujet : « les filles » est féminin pluriel, donc tombé prend un e et un s : tombées.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "multi",
+      "statement": "Dans la phrase « Les petits garçons courent vite dans le parc », quels mots sont au PLURIEL ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "petits",
+          "correct": true
+        },
+        {
+          "text": "courent",
+          "correct": true
+        },
+        {
+          "text": "vite",
+          "correct": false
+        },
+        {
+          "text": "dans",
+          "correct": false
+        }
+      ],
+      "explanation": "« petits » est un adjectif accordé au pluriel avec « garçons », et « courent » est le verbe accordé avec le sujet pluriel. « vite » est un adverbe et « dans » une préposition : ces mots ne s'accordent jamais.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "multi",
+      "statement": "Dans la phrase « Les vieilles maisons grises tombent en ruine », quels mots sont au PLURIEL ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "vieilles",
+          "correct": true
+        },
+        {
+          "text": "tombent",
+          "correct": true
+        },
+        {
+          "text": "en",
+          "correct": false
+        },
+        {
+          "text": "ruine",
+          "correct": false
+        }
+      ],
+      "explanation": "« vieilles » est un adjectif accordé au pluriel avec « maisons », et « tombent » est le verbe accordé avec le sujet pluriel. « en » est une préposition invariable et « ruine » reste un nom singulier dans cette expression.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "multi",
+      "statement": "Dans la phrase « Les enfants sages écoutent la maîtresse », quels mots sont au PLURIEL ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "sages",
+          "correct": true
+        },
+        {
+          "text": "écoutent",
+          "correct": true
+        },
+        {
+          "text": "la",
+          "correct": false
+        },
+        {
+          "text": "maîtresse",
+          "correct": false
+        }
+      ],
+      "explanation": "« sages » est un adjectif accordé au pluriel avec « enfants », et « écoutent » est le verbe accordé avec le sujet pluriel. « la » et « maîtresse » restent au singulier, car il n'y a qu'une seule maîtresse.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "multi",
+      "statement": "Dans la phrase « Ils regardent avec plaisir les nouveaux films », quels mots sont au PLURIEL ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "Ils",
+          "correct": true
+        },
+        {
+          "text": "nouveaux",
+          "correct": true
+        },
+        {
+          "text": "avec",
+          "correct": false
+        },
+        {
+          "text": "plaisir",
+          "correct": false
+        }
+      ],
+      "explanation": "« Ils » est un pronom sujet au pluriel, et « nouveaux » est un adjectif accordé au pluriel avec « films ». « avec » est une préposition invariable et « plaisir » est un nom au singulier.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "multi",
+      "statement": "Dans la phrase « Elle a rangé soigneusement ses nouveaux cahiers », quels mots sont au PLURIEL ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "ses",
+          "correct": true
+        },
+        {
+          "text": "nouveaux",
+          "correct": true
+        },
+        {
+          "text": "soigneusement",
+          "correct": false
+        },
+        {
+          "text": "rangé",
+          "correct": false
+        }
+      ],
+      "explanation": "« ses » est un déterminant possessif pluriel et « nouveaux » est un adjectif accordé au pluriel avec « cahiers ». « soigneusement » est un adverbe invariable, et ici le participe « rangé » reste invariable.",
+      "difficulty": 4
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un vitrail » ?",
+      "answers": [
+        {
+          "text": "des vitraux",
+          "correct": true
+        },
+        {
+          "text": "des vitrails",
+          "correct": false
+        },
+        {
+          "text": "des vitraies",
+          "correct": false
+        },
+        {
+          "text": "des vitrailles",
+          "correct": false
+        }
+      ],
+      "explanation": "En principe, les noms en -ail font leur pluriel en -ails (un détail → des détails). Mais SEPT font -aux : bail, corail, émail, soupirail, travail, vantail, vitrail. Donc un vitrail → des vitraux.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un soupirail », cette petite fenêtre basse d'une cave ?",
+      "answers": [
+        {
+          "text": "des soupiraux",
+          "correct": true
+        },
+        {
+          "text": "des soupirails",
+          "correct": false
+        },
+        {
+          "text": "des soupiraies",
+          "correct": false
+        },
+        {
+          "text": "des soupirailles",
+          "correct": false
+        }
+      ],
+      "explanation": "Les noms en -ail font en principe leur pluriel en -ails (un éventail → des éventails). Mais SEPT font -aux : bail, corail, émail, soupirail, travail, vantail, vitrail. Donc un soupirail → des soupiraux.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un émail » ?",
+      "answers": [
+        {
+          "text": "des émaux",
+          "correct": true
+        },
+        {
+          "text": "des émails",
+          "correct": false
+        },
+        {
+          "text": "des émailles",
+          "correct": false
+        },
+        {
+          "text": "des émaies",
+          "correct": false
+        }
+      ],
+      "explanation": "Émail fait partie des sept noms en -ail qui prennent -aux au pluriel : bail, corail, émail, soupirail, travail, vantail, vitrail. Tous les autres noms en -ail suivent la règle et prennent un -s. Donc un émail → des émaux.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un chandail » ?",
+      "answers": [
+        {
+          "text": "des chandails",
+          "correct": true
+        },
+        {
+          "text": "des chandaux",
+          "correct": false
+        },
+        {
+          "text": "des chandaies",
+          "correct": false
+        },
+        {
+          "text": "des chandailles",
+          "correct": false
+        }
+      ],
+      "explanation": "Chandail suit la règle générale des noms en -ail : il prend un simple -s au pluriel. Seuls SEPT noms en -ail font -aux (bail, corail, émail, soupirail, travail, vantail, vitrail) et chandail n'en fait pas partie. Donc un chandail → des chandails.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un rail » ?",
+      "answers": [
+        {
+          "text": "des rails",
+          "correct": true
+        },
+        {
+          "text": "des raux",
+          "correct": false
+        },
+        {
+          "text": "des railles",
+          "correct": false
+        },
+        {
+          "text": "des raies",
+          "correct": false
+        }
+      ],
+      "explanation": "La règle générale des noms en -ail est le pluriel en -ails : un rail → des rails, comme un détail → des détails. Seuls SEPT noms en -ail font -aux : bail, corail, émail, soupirail, travail, vantail, vitrail.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un hôpital » ?",
+      "answers": [
+        {
+          "text": "des hôpitaux",
+          "correct": true
+        },
+        {
+          "text": "des hôpitals",
+          "correct": false
+        },
+        {
+          "text": "des hôpitales",
+          "correct": false
+        },
+        {
+          "text": "des hôpitaus",
+          "correct": false
+        }
+      ],
+      "explanation": "Les noms en -al font leur pluriel en -aux : un hôpital → des hôpitaux. Seuls quelques noms en -al font exception et prennent un simple -s : bal, carnaval, festival, chacal, récital, régal.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un général » ?",
+      "answers": [
+        {
+          "text": "des généraux",
+          "correct": true
+        },
+        {
+          "text": "des générals",
+          "correct": false
+        },
+        {
+          "text": "des généreaux",
+          "correct": false
+        },
+        {
+          "text": "des générales",
+          "correct": false
+        }
+      ],
+      "explanation": "Les noms en -al font leur pluriel en -aux : un général → des généraux. Les exceptions qui prennent un -s sont peu nombreuses : bal, carnaval, festival, chacal, récital, régal. Général n'en fait pas partie.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un bocal » ?",
+      "answers": [
+        {
+          "text": "des bocaux",
+          "correct": true
+        },
+        {
+          "text": "des bocals",
+          "correct": false
+        },
+        {
+          "text": "des bocales",
+          "correct": false
+        },
+        {
+          "text": "des boceaux",
+          "correct": false
+        }
+      ],
+      "explanation": "Les noms en -al font leur pluriel en -aux : un bocal → des bocaux, comme un canal → des canaux. Les seules exceptions courantes qui prennent un -s sont : bal, carnaval, festival, chacal, récital, régal.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un bal » ?",
+      "answers": [
+        {
+          "text": "des bals",
+          "correct": true
+        },
+        {
+          "text": "des baux",
+          "correct": false
+        },
+        {
+          "text": "des bales",
+          "correct": false
+        },
+        {
+          "text": "des balles",
+          "correct": false
+        }
+      ],
+      "explanation": "Bal est l'une des exceptions des noms en -al : il prend un simple -s au pluriel, comme carnaval, festival, chacal, récital, régal. Attention, « baux » n'est pas le pluriel de bal mais celui de « bail ». Donc un bal → des bals.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un régal », quand un plat est délicieux ?",
+      "answers": [
+        {
+          "text": "des régals",
+          "correct": true
+        },
+        {
+          "text": "des régaux",
+          "correct": false
+        },
+        {
+          "text": "des régales",
+          "correct": false
+        },
+        {
+          "text": "des régalx",
+          "correct": false
+        }
+      ],
+      "explanation": "La règle des noms en -al donne un pluriel en -aux (des hôpitaux, des canaux). Mais régal fait partie des exceptions qui prennent un simple -s : bal, carnaval, festival, chacal, récital, régal. Donc un régal → des régals.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un cheveu » ?",
+      "answers": [
+        {
+          "text": "des cheveux",
+          "correct": true
+        },
+        {
+          "text": "des cheveus",
+          "correct": false
+        },
+        {
+          "text": "des chevaux",
+          "correct": false
+        },
+        {
+          "text": "des cheveuts",
+          "correct": false
+        }
+      ],
+      "explanation": "Les noms en -eu prennent un -x au pluriel : un cheveu → des cheveux, un feu → des feux. Attention à ne pas confondre avec « chevaux », qui est le pluriel de « cheval ». Seules deux exceptions en -eu prennent un -s : pneu et bleu.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un landau », la petite voiture d'un bébé ?",
+      "answers": [
+        {
+          "text": "des landaus",
+          "correct": true
+        },
+        {
+          "text": "des landaux",
+          "correct": false
+        },
+        {
+          "text": "des landeaux",
+          "correct": false
+        },
+        {
+          "text": "des landauds",
+          "correct": false
+        }
+      ],
+      "explanation": "Les noms en -au et en -eau prennent un -x au pluriel (un tuyau → des tuyaux, un château → des châteaux). Mais landau et sarrau font exception et prennent un simple -s. Donc un landau → des landaus.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « le ciel » au sens poétique ou religieux (le paradis) ?",
+      "answers": [
+        {
+          "text": "les cieux",
+          "correct": true
+        },
+        {
+          "text": "les cielx",
+          "correct": false
+        },
+        {
+          "text": "les cieuls",
+          "correct": false
+        },
+        {
+          "text": "les ciaux",
+          "correct": false
+        }
+      ],
+      "explanation": "Ciel a deux pluriels selon le sens : « des ciels » pour plusieurs étendues de ciel qu'on regarde ou qu'on peint (des ciels d'orage), et « des cieux », pluriel irrégulier, au sens poétique ou religieux (les cieux étoilés). C'est ce pluriel irrégulier « cieux » qu'il faut retenir.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « madame » ?",
+      "answers": [
+        {
+          "text": "mesdames",
+          "correct": true
+        },
+        {
+          "text": "madames",
+          "correct": false
+        },
+        {
+          "text": "mesdame",
+          "correct": false
+        },
+        {
+          "text": "mesdammes",
+          "correct": false
+        }
+      ],
+      "explanation": "Madame a un pluriel irrégulier : les deux parties du mot changent, madame → mesdames. C'est la même chose pour monsieur → messieurs et mademoiselle → mesdemoiselles. Aucune règle ne le donne : il faut le connaître par cœur.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un chou-fleur » ?",
+      "answers": [
+        {
+          "text": "des choux-fleurs",
+          "correct": true
+        },
+        {
+          "text": "des chou-fleurs",
+          "correct": false
+        },
+        {
+          "text": "des choux-fleur",
+          "correct": false
+        },
+        {
+          "text": "des chous-fleurs",
+          "correct": false
+        }
+      ],
+      "explanation": "Dans un nom composé, seuls les NOMS et les ADJECTIFS s'accordent, jamais le verbe ni la préposition. Chou-fleur est formé de deux noms : les deux prennent la marque du pluriel, chou en -x (c'est l'une des exceptions en -ou) et fleur en -s. Donc un chou-fleur → des choux-fleurs.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un porte-manteau » ?",
+      "answers": [
+        {
+          "text": "des porte-manteaux",
+          "correct": true
+        },
+        {
+          "text": "des portes-manteaux",
+          "correct": false
+        },
+        {
+          "text": "des porte-manteau",
+          "correct": false
+        },
+        {
+          "text": "des portes-manteau",
+          "correct": false
+        }
+      ],
+      "explanation": "Porte-manteau est formé du VERBE porter (« porte ») et du NOM manteau. Dans un nom composé, le verbe ne s'accorde JAMAIS : « porte » reste invariable. Seul le nom manteau prend la marque du pluriel, ici -x comme tous les noms en -eau. Donc un porte-manteau → des porte-manteaux.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un arc-en-ciel » ?",
+      "answers": [
+        {
+          "text": "des arcs-en-ciel",
+          "correct": true
+        },
+        {
+          "text": "des arcs-en-ciels",
+          "correct": false
+        },
+        {
+          "text": "des arc-en-ciels",
+          "correct": false
+        },
+        {
+          "text": "des arcs-en-cieux",
+          "correct": false
+        }
+      ],
+      "explanation": "Arc-en-ciel est formé d'un nom (arc), d'une préposition (en) et d'un nom (ciel). La préposition ne s'accorde jamais. Seul le premier nom, arc, prend la marque du pluriel : il y a plusieurs arcs, mais toujours un seul ciel. Donc un arc-en-ciel → des arcs-en-ciel.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un timbre-poste » ?",
+      "answers": [
+        {
+          "text": "des timbres-poste",
+          "correct": true
+        },
+        {
+          "text": "des timbres-postes",
+          "correct": false
+        },
+        {
+          "text": "des timbre-postes",
+          "correct": false
+        },
+        {
+          "text": "des timbre-poste",
+          "correct": false
+        }
+      ],
+      "explanation": "Timbre-poste veut dire « timbre DE LA poste » : le mot poste est un complément, il reste invariable comme s'il était précédé de « de ». Seul le nom timbre prend la marque du pluriel. Donc un timbre-poste → des timbres-poste.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quel est le pluriel de « un gratte-ciel » ?",
+      "answers": [
+        {
+          "text": "des gratte-ciel",
+          "correct": true
+        },
+        {
+          "text": "des gratte-ciels",
+          "correct": false
+        },
+        {
+          "text": "des grattes-ciel",
+          "correct": false
+        },
+        {
+          "text": "des grattes-ciels",
+          "correct": false
+        }
+      ],
+      "explanation": "Gratte-ciel est formé du VERBE gratter (« gratte ») et du nom ciel : le verbe ne s'accorde jamais, et le ciel reste unique. Rien ne change donc au pluriel : un gratte-ciel → des gratte-ciel, le nom composé est totalement invariable.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Comment écrit-on correctement : « Les ... sont invités à dîner ce soir », en parlant de la famille Dupont ?",
+      "answers": [
+        {
+          "text": "Les Dupont",
+          "correct": true
+        },
+        {
+          "text": "Les Duponts",
+          "correct": false
+        },
+        {
+          "text": "Les Duponds",
+          "correct": false
+        },
+        {
+          "text": "Les Dupontes",
+          "correct": false
+        }
+      ],
+      "explanation": "Les noms propres de famille sont invariables au pluriel : ils ne prennent JAMAIS de -s. On écrit les Dupont, les Martin, les Bernard, même quand on parle de plusieurs personnes de la même famille.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « un travail ». (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "travaux",
+          "correct": true
+        }
+      ],
+      "explanation": "Travail fait partie des sept noms en -ail qui prennent -aux au pluriel : bail, corail, émail, soupirail, travail, vantail, vitrail. Tous les autres suivent la règle en -ails. Donc un travail → des travaux.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « un corail ». (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "coraux",
+          "correct": true
+        }
+      ],
+      "explanation": "Corail fait partie des sept noms en -ail qui prennent -aux au pluriel : bail, corail, émail, soupirail, travail, vantail, vitrail. Donc un corail → des coraux.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « un bail » (le contrat qu'on signe pour louer un logement). (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "baux",
+          "correct": true
+        }
+      ],
+      "explanation": "Bail fait partie des sept noms en -ail qui prennent -aux au pluriel : bail, corail, émail, soupirail, travail, vantail, vitrail. Donc un bail → des baux.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « un vantail » (le battant d'une porte ou d'une fenêtre). (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "vantaux",
+          "correct": true
+        }
+      ],
+      "explanation": "Vantail fait partie des sept noms en -ail qui prennent -aux au pluriel : bail, corail, émail, soupirail, travail, vantail, vitrail. Donc un vantail → des vantaux.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « un détail ». (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "détails",
+          "correct": true
+        }
+      ],
+      "explanation": "La règle générale des noms en -ail est le pluriel en -ails : un détail → des détails. Seuls SEPT noms font -aux : bail, corail, émail, soupirail, travail, vantail, vitrail. Détail n'en fait pas partie.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « un portail ». (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "portails",
+          "correct": true
+        }
+      ],
+      "explanation": "Portail suit la règle générale des noms en -ail et prend un simple -s : un portail → des portails. Ne te laisse pas piéger par les sept exceptions en -aux (bail, corail, émail, soupirail, travail, vantail, vitrail) : portail n'en est pas une.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « un métal ». (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "métaux",
+          "correct": true
+        }
+      ],
+      "explanation": "Les noms en -al font leur pluriel en -aux : un métal → des métaux, comme un hôpital → des hôpitaux. Les seules exceptions qui prennent un simple -s sont : bal, carnaval, festival, chacal, récital, régal.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « un canal ». (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "canaux",
+          "correct": true
+        }
+      ],
+      "explanation": "Les noms en -al font leur pluriel en -aux : un canal → des canaux, comme un bocal → des bocaux. Seuls bal, carnaval, festival, chacal, récital et régal font exception avec un -s.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « un festival ». (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "festivals",
+          "correct": true
+        }
+      ],
+      "explanation": "Festival fait partie des exceptions des noms en -al qui prennent un simple -s au lieu de -aux : bal, carnaval, festival, chacal, récital, régal. Donc un festival → des festivals.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « un chacal » (cet animal sauvage). (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "chacals",
+          "correct": true
+        }
+      ],
+      "explanation": "Chacal fait partie des exceptions des noms en -al qui prennent un simple -s au pluriel : bal, carnaval, festival, chacal, récital, régal. Donc un chacal → des chacals, et surtout pas « des chacaux ».",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « un œil ». (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "yeux",
+          "correct": true
+        }
+      ],
+      "explanation": "Œil a un pluriel totalement irrégulier : un œil → des yeux. Le mot change complètement, aucune règle ne le donne : il faut le retenir par cœur.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « monsieur ». (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "messieurs",
+          "correct": true
+        }
+      ],
+      "explanation": "Monsieur a un pluriel irrégulier : les deux parties du mot changent, monsieur → messieurs. C'est pareil pour madame → mesdames et mademoiselle → mesdemoiselles. À apprendre par cœur.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Écris le pluriel du nom « un bleu », quand il désigne une marque sur la peau après un coup. (Écris UNIQUEMENT le nom au pluriel, sans article.)",
+      "answers": [
+        {
+          "text": "bleus",
+          "correct": true
+        }
+      ],
+      "explanation": "Les noms en -eu prennent en général un -x au pluriel (des cheveux, des feux). Mais DEUX exceptions prennent un simple -s : pneu et bleu. Donc un bleu → des bleus.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "multi",
+      "statement": "Parmi ces noms en -al, lesquels font EXCEPTION et prennent un simple -s au pluriel ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "un chacal",
+          "correct": true
+        },
+        {
+          "text": "un récital",
+          "correct": true
+        },
+        {
+          "text": "un animal",
+          "correct": false
+        },
+        {
+          "text": "un hôpital",
+          "correct": false
+        }
+      ],
+      "explanation": "La règle des noms en -al est le pluriel en -aux (des animaux, des hôpitaux). Mais quelques-uns prennent un -s : bal, carnaval, festival, chacal, récital, régal. Donc des chacals et des récitals.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "multi",
+      "statement": "Parmi ces noms en -ail, lesquels font EXCEPTION et prennent -aux au pluriel ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "un vantail",
+          "correct": true
+        },
+        {
+          "text": "un émail",
+          "correct": true
+        },
+        {
+          "text": "un gouvernail",
+          "correct": false
+        },
+        {
+          "text": "un épouvantail",
+          "correct": false
+        }
+      ],
+      "explanation": "La règle des noms en -ail est le pluriel en -ails (des gouvernails, des épouvantails). Mais SEPT font -aux : bail, corail, émail, soupirail, travail, vantail, vitrail. Donc des vantaux et des émaux.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "multi",
+      "statement": "Parmi ces noms, lesquels restent IDENTIQUES au pluriel (ils ne changent pas du tout) ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "un nez",
+          "correct": true
+        },
+        {
+          "text": "une croix",
+          "correct": true
+        },
+        {
+          "text": "un stylo",
+          "correct": false
+        },
+        {
+          "text": "un chat",
+          "correct": false
+        }
+      ],
+      "explanation": "Les noms déjà terminés par -s, -x ou -z au singulier ne changent pas au pluriel : un nez → des nez, une croix → des croix, un prix → des prix. Les autres prennent bien une marque : un stylo → des stylos, un chat → des chats.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "multi",
+      "statement": "Parmi ces noms composés, lesquels ont vu leurs DEUX éléments s'accorder au pluriel ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "des choux-fleurs",
+          "correct": true
+        },
+        {
+          "text": "des wagons-lits",
+          "correct": true
+        },
+        {
+          "text": "des porte-manteaux",
+          "correct": false
+        },
+        {
+          "text": "des timbres-poste",
+          "correct": false
+        }
+      ],
+      "explanation": "Dans un nom composé, seuls les NOMS et les ADJECTIFS s'accordent, jamais le verbe ni la préposition. Choux-fleurs et wagons-lits sont formés de deux noms : les deux s'accordent. En revanche « porte » est un verbe et reste invariable (des porte-manteaux), et dans timbre-poste le mot poste est un complément invariable (des timbres-poste).",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "multi",
+      "statement": "Parmi ces noms, lesquels s'emploient TOUJOURS au pluriel (ils n'ont pas de singulier) ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "les fiançailles",
+          "correct": true
+        },
+        {
+          "text": "les mœurs",
+          "correct": true
+        },
+        {
+          "text": "les fleurs",
+          "correct": false
+        },
+        {
+          "text": "les enfants",
+          "correct": false
+        }
+      ],
+      "explanation": "Certains noms n'existent qu'au pluriel : des fiançailles, des mœurs, des environs, des funérailles, des ténèbres. On ne dit jamais « une fiançaille » ni « une mœur ». Au contraire, fleurs et enfants ont un singulier tout à fait normal : une fleur, un enfant.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase accorde correctement le verbe avec un sujet éloigné ?",
+      "answers": [
+        {
+          "text": "Les enfants de mon voisin jouent bruyamment dans la cour.",
+          "correct": true
+        },
+        {
+          "text": "Les enfants de mon voisin joue bruyamment dans la cour.",
+          "correct": false
+        },
+        {
+          "text": "Les enfant de mon voisin jouent bruyamment dans la cour.",
+          "correct": false
+        },
+        {
+          "text": "Les enfants de mon voisin joues bruyamment dans la cour.",
+          "correct": false
+        }
+      ],
+      "explanation": "Le sujet du verbe est « les enfants » (pluriel), pas « mon voisin » qui est seulement un complément du nom placé juste avant le verbe. On accorde donc avec « enfants » : ils jouent. Le piège classique est d'accorder avec le mot le plus proche du verbe au lieu du vrai sujet.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase accorde correctement le verbe avec un sujet inversé (placé après lui) ?",
+      "answers": [
+        {
+          "text": "Dans le jardin poussent des roses magnifiques.",
+          "correct": true
+        },
+        {
+          "text": "Dans le jardin pousse des roses magnifiques.",
+          "correct": false
+        },
+        {
+          "text": "Dans le jardin poussent une rose magnifique.",
+          "correct": false
+        },
+        {
+          "text": "Dans le jardin poussent des rose magnifiques.",
+          "correct": false
+        }
+      ],
+      "explanation": "Même si le sujet « des roses » est placé après le verbe, l'accord se fait quand même avec lui : « des roses » est pluriel, donc le verbe se met au pluriel, poussent. Ne te fie jamais à l'ordre des mots, cherche toujours QUI fait l'action.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase accorde correctement le verbe avec deux sujets reliés par « et » ?",
+      "answers": [
+        {
+          "text": "Le chat et le chien dorment sur le tapis.",
+          "correct": true
+        },
+        {
+          "text": "Le chat et le chien dort sur le tapis.",
+          "correct": false
+        },
+        {
+          "text": "Le chat et le chien dorm sur le tapis.",
+          "correct": false
+        },
+        {
+          "text": "Le chat et le chien dormant sur le tapis.",
+          "correct": false
+        }
+      ],
+      "explanation": "Deux sujets singuliers reliés par « et » forment un ensemble pluriel : on accorde le verbe au pluriel, même si chaque sujet pris seul est au singulier. « Le chat et le chien » équivaut à « ils » : ils dorment.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle est la transformation correcte au pluriel de la phrase : « Le petit garçon attentif range son cahier. » ?",
+      "answers": [
+        {
+          "text": "Les petits garçons attentifs rangent leurs cahiers.",
+          "correct": true
+        },
+        {
+          "text": "Les petits garçons attentif rangent leurs cahiers.",
+          "correct": false
+        },
+        {
+          "text": "Les petits garçons attentifs range leurs cahiers.",
+          "correct": false
+        },
+        {
+          "text": "Les petits garçons attentifs rangent leur cahiers.",
+          "correct": false
+        }
+      ],
+      "explanation": "Au pluriel, TOUS les mots liés au sujet changent : le déterminant (les), le nom (garçons), l'adjectif (attentifs) et le verbe (rangent). Le complément suit la même logique : chaque garçon range son propre cahier, donc au pluriel on écrit leurs cahiers, avec un -s à leurs. Une phrase au pluriel ne s'improvise pas mot par mot, il faut TOUT vérifier.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase accorde correctement le verbe qui suit le pronom relatif « qui » ?",
+      "answers": [
+        {
+          "text": "Ce sont les élèves qui chantent le plus fort.",
+          "correct": true
+        },
+        {
+          "text": "Ce sont les élèves qui chante le plus fort.",
+          "correct": false
+        },
+        {
+          "text": "Ce sont les élève qui chantent le plus fort.",
+          "correct": false
+        },
+        {
+          "text": "Ce sont les élèves qui chantons le plus fort.",
+          "correct": false
+        }
+      ],
+      "explanation": "Le pronom relatif « qui » reprend son antécédent : ici, « les élèves » (pluriel). Le verbe qui suit « qui » s'accorde avec cet antécédent, pas avec un mot voisin ni avec une autre personne : ils chantent.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase accorde correctement l'adjectif attribut avec un sujet éloigné ?",
+      "answers": [
+        {
+          "text": "Les fleurs du jardin de ma grand-mère sont magnifiques.",
+          "correct": true
+        },
+        {
+          "text": "Les fleurs du jardin de ma grand-mère est magnifique.",
+          "correct": false
+        },
+        {
+          "text": "Les fleur du jardin de ma grand-mère sont magnifiques.",
+          "correct": false
+        },
+        {
+          "text": "Les fleurs du jardin de ma grand-mère sont magnifique.",
+          "correct": false
+        }
+      ],
+      "explanation": "L'adjectif attribut « magnifiques » s'accorde avec le sujet réel, « les fleurs » (féminin pluriel), et non avec « grand-mère » qui n'est qu'un complément du nom placé juste avant. Repère toujours le sujet réel avant d'accorder l'attribut.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase accorde correctement le participe passé avec « être » au féminin pluriel ?",
+      "answers": [
+        {
+          "text": "Les filles sont parties tôt ce matin.",
+          "correct": true
+        },
+        {
+          "text": "Les filles sont parti tôt ce matin.",
+          "correct": false
+        },
+        {
+          "text": "Les filles sont partis tôt ce matin.",
+          "correct": false
+        },
+        {
+          "text": "Les filles sont partie tôt ce matin.",
+          "correct": false
+        }
+      ],
+      "explanation": "Avec l'auxiliaire « être », le participe passé s'accorde en genre ET en nombre avec le sujet. « Les filles » est féminin pluriel, donc parties, avec -es. Un seul -s ou un accord au masculin ne suffit pas.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase accorde correctement le participe passé avec « être » au masculin pluriel ?",
+      "answers": [
+        {
+          "text": "Mes cousins sont arrivés hier soir.",
+          "correct": true
+        },
+        {
+          "text": "Mes cousins sont arrivé hier soir.",
+          "correct": false
+        },
+        {
+          "text": "Mes cousins sont arrivée hier soir.",
+          "correct": false
+        },
+        {
+          "text": "Mes cousin sont arrivés hier soir.",
+          "correct": false
+        }
+      ],
+      "explanation": "Avec l'auxiliaire « être », le participe passé s'accorde avec le sujet : « mes cousins » est masculin pluriel, donc arrivés. Vérifie aussi que le nom sujet porte bien sa marque du pluriel : cousins, pas cousin.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase respecte bien les règles d'accord des adjectifs de couleur ?",
+      "answers": [
+        {
+          "text": "Elle porte des chaussures marron et des chaussettes vertes.",
+          "correct": true
+        },
+        {
+          "text": "Elle porte des chaussures marrons et des chaussettes vertes.",
+          "correct": false
+        },
+        {
+          "text": "Elle porte des chaussures marron et des chaussettes vert.",
+          "correct": false
+        },
+        {
+          "text": "Elle porte des chaussures marrons et des chaussettes vert.",
+          "correct": false
+        }
+      ],
+      "explanation": "« marron » vient du nom d'un fruit : il reste invariable, même au pluriel (des chaussures marron). « vert » est un adjectif de couleur ordinaire : il s'accorde normalement (des chaussettes vertes). Ne mélange pas les deux règles !",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase utilise correctement le nombre 80 (quatre-vingts) ?",
+      "answers": [
+        {
+          "text": "Mon grand-père a quatre-vingts ans.",
+          "correct": true
+        },
+        {
+          "text": "Mon grand-père a quatre-vingt ans.",
+          "correct": false
+        },
+        {
+          "text": "Mon grand-père a quatre-vingts-ans.",
+          "correct": false
+        },
+        {
+          "text": "Mon grand-père a quatres-vingts ans.",
+          "correct": false
+        }
+      ],
+      "explanation": "« vingt » prend un -s quand il est multiplié par un nombre (4×20) ET qu'il n'est suivi d'aucun autre nombre : quatre-vingts. Rien ne suit ici, donc il garde son -s. Attention : « quatre », lui, ne s'accorde jamais.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase utilise correctement le nombre 82 (quatre-vingt-deux) ?",
+      "answers": [
+        {
+          "text": "Cette table mesure quatre-vingt-deux centimètres.",
+          "correct": true
+        },
+        {
+          "text": "Cette table mesure quatre-vingts-deux centimètres.",
+          "correct": false
+        },
+        {
+          "text": "Cette table mesure quatre-vingt-deux-centimètres.",
+          "correct": false
+        },
+        {
+          "text": "Cette table mesure quatre-vingt-deux centimètre.",
+          "correct": false
+        }
+      ],
+      "explanation": "« vingt » ne prend PAS de -s quand il est suivi d'un autre nombre : quatre-vingt-deux (4×20 + 2). Le piège : on garde parfois le -s par habitude, mais dès qu'un nombre suit, le -s disparaît. Et le nom compté, lui, reste au pluriel : centimètres.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase utilise correctement le nombre 300 (trois cents) ?",
+      "answers": [
+        {
+          "text": "Ce stade accueille trois cents personnes.",
+          "correct": true
+        },
+        {
+          "text": "Ce stade accueille trois cent personnes.",
+          "correct": false
+        },
+        {
+          "text": "Ce stade accueille trois centes personnes.",
+          "correct": false
+        },
+        {
+          "text": "Ce stade accueille trois cents personne.",
+          "correct": false
+        }
+      ],
+      "explanation": "« cent » prend un -s quand il est multiplié (3×100) ET qu'aucun autre nombre ne le suit : trois cents. Comme pour « vingt », ce -s disparaîtrait si un nombre suivait. Et la forme « centes » n'existe pas.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase utilise correctement le nombre 305 (trois cent cinq) ?",
+      "answers": [
+        {
+          "text": "Ce stade accueille trois cent cinq personnes.",
+          "correct": true
+        },
+        {
+          "text": "Ce stade accueille trois cents cinq personnes.",
+          "correct": false
+        },
+        {
+          "text": "Ce stade accueille trois cent cinqs personnes.",
+          "correct": false
+        },
+        {
+          "text": "Ce stade accueille trois cent cinq personne.",
+          "correct": false
+        }
+      ],
+      "explanation": "« cent » perd son -s dès qu'un autre nombre le suit : trois cent cinq (3×100 + 5). Les nombres comme « cinq » ne prennent jamais de -s. Et n'oublie pas le -s final de « personnes », le nom compté reste pluriel.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Comment écrit-on le nombre 200 en lettres dans la phrase « Le stade peut accueillir ... spectateurs. » ?",
+      "answers": [
+        {
+          "text": "deux cents spectateurs",
+          "correct": true
+        },
+        {
+          "text": "deux cent spectateurs",
+          "correct": false
+        },
+        {
+          "text": "deux centes spectateurs",
+          "correct": false
+        },
+        {
+          "text": "deux cents spectateur",
+          "correct": false
+        }
+      ],
+      "explanation": "« cent » prend un -s quand il est multiplié par un nombre (2×100) ET qu'aucun autre nombre ne le suit : deux cents. Le piège est d'oublier ce -s, ou d'inventer une forme « centes » qui n'existe pas. Retiens bien la paire : deux cents / deux cent trois.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Comment écrit-on le nombre 402 en lettres dans la phrase « Cette entreprise emploie ... salariés. » ?",
+      "answers": [
+        {
+          "text": "quatre cent deux salariés",
+          "correct": true
+        },
+        {
+          "text": "quatre cents deux salariés",
+          "correct": false
+        },
+        {
+          "text": "quatre centes deux salariés",
+          "correct": false
+        },
+        {
+          "text": "quatre cent deux salarié",
+          "correct": false
+        }
+      ],
+      "explanation": "« cent » ne prend un -s que s'il est multiplié ET qu'aucun nombre ne le suit. Ici « deux » suit : le -s disparaît, on écrit quatre cent deux. Le piège est de mettre le -s par habitude. Compare : deux cents / deux cent trois.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase respecte la règle du mot « demi » placé avant ou après le nom ?",
+      "answers": [
+        {
+          "text": "Nous avons parcouru trois kilomètres et demi en une demi-heure.",
+          "correct": true
+        },
+        {
+          "text": "Nous avons parcouru trois kilomètres et demi en une demie-heure.",
+          "correct": false
+        },
+        {
+          "text": "Nous avons parcouru trois kilomètres et demie en une demi-heure.",
+          "correct": false
+        },
+        {
+          "text": "Nous avons parcouru trois kilomètres et demis en une demi-heure.",
+          "correct": false
+        }
+      ],
+      "explanation": "Placé AVANT le nom et relié par un trait d'union, « demi » est TOUJOURS invariable : une demi-heure, jamais demie-heure. Placé APRÈS le nom avec « et », il s'accorde seulement en genre avec ce nom, jamais en nombre : trois kilomètres (masculin) et demi, jamais demis ni demie.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase respecte la règle du mot « nu » placé avant ou après le nom ?",
+      "answers": [
+        {
+          "text": "Les enfants courent nu-pieds sur la pelouse mouillée.",
+          "correct": true
+        },
+        {
+          "text": "Les enfants courent nus-pieds sur la pelouse mouillée.",
+          "correct": false
+        },
+        {
+          "text": "Les enfants courent nue-pieds sur la pelouse mouillée.",
+          "correct": false
+        },
+        {
+          "text": "Les enfants courent les pieds nu sur la pelouse mouillée.",
+          "correct": false
+        }
+      ],
+      "explanation": "Placé AVANT le nom avec un trait d'union, « nu » reste invariable : nu-pieds, jamais nus-pieds ni nue-pieds. Mais placé APRÈS le nom, il s'accorde normalement : les pieds nus. Le piège est de croire que « nu » est toujours invariable, alors que sa position change la règle.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase accorde correctement « tous » devant un nom masculin pluriel ?",
+      "answers": [
+        {
+          "text": "Tous les élèves de la classe sont arrivés à l'heure.",
+          "correct": true
+        },
+        {
+          "text": "Tout les élèves de la classe sont arrivés à l'heure.",
+          "correct": false
+        },
+        {
+          "text": "Tous les élève de la classe sont arrivés à l'heure.",
+          "correct": false
+        },
+        {
+          "text": "Toute les élèves de la classe sont arrivés à l'heure.",
+          "correct": false
+        }
+      ],
+      "explanation": "Devant un nom masculin pluriel, « tout » devient « tous » : tous les élèves. Le piège classique est d'oublier le -s à l'écrit, ou de confondre avec « toute » (féminin singulier). Vérifie aussi que le nom porte bien la marque du pluriel : élèves.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase accorde correctement « quel », l'adjectif et le participe passé dans la même phrase ?",
+      "answers": [
+        {
+          "text": "Quels beaux dessins tu as faits pour ta grand-mère !",
+          "correct": true
+        },
+        {
+          "text": "Quel beaux dessins tu as faits pour ta grand-mère !",
+          "correct": false
+        },
+        {
+          "text": "Quels beau dessins tu as faits pour ta grand-mère !",
+          "correct": false
+        },
+        {
+          "text": "Quels beaux dessins tu as fait pour ta grand-mère !",
+          "correct": false
+        }
+      ],
+      "explanation": "« quel » s'accorde avec le nom qu'il introduit : « des dessins » est masculin pluriel, donc quels. L'adjectif « beaux » s'accorde aussi avec dessins. Et comme le mot « dessins » est placé avant l'auxiliaire avoir, le participe passé s'accorde également : faits, pas fait. Trois accords à vérifier dans une seule phrase !",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase accorde correctement le déterminant possessif « leurs » ?",
+      "answers": [
+        {
+          "text": "Les parents ont préparé leurs valises pour le voyage.",
+          "correct": true
+        },
+        {
+          "text": "Les parents ont préparé leur valises pour le voyage.",
+          "correct": false
+        },
+        {
+          "text": "Les parents ont préparé leures valises pour le voyage.",
+          "correct": false
+        },
+        {
+          "text": "Les parent ont préparé leurs valises pour le voyage.",
+          "correct": false
+        }
+      ],
+      "explanation": "« leurs » est ici un déterminant possessif : comme chaque famille a plusieurs valises, il s'accorde au pluriel, comme n'importe quel déterminant devant un nom pluriel. Attention à l'orthographe : leurs, jamais leures. Et n'oublie pas le -s de « parents ».",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Quelle phrase utilise correctement le pronom invariable « leur » ?",
+      "answers": [
+        {
+          "text": "La maîtresse leur a expliqué la consigne avant l'exercice.",
+          "correct": true
+        },
+        {
+          "text": "La maîtresse leurs a expliqué la consigne avant l'exercice.",
+          "correct": false
+        },
+        {
+          "text": "La maîtresse leur as expliqué la consigne avant l'exercice.",
+          "correct": false
+        },
+        {
+          "text": "La maîtresse leur ont expliqué la consigne avant l'exercice.",
+          "correct": false
+        }
+      ],
+      "explanation": "Ici, « leur » est un pronom qui remplace « aux élèves » : il ne prend JAMAIS de -s, contrairement au déterminant possessif « leurs ». Le sujet du verbe est « la maîtresse » (singulier), donc le verbe reste au singulier : a expliqué, pas ont expliqué ni as expliqué.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "single",
+      "statement": "Cette phrase contient une faute : « Les élèves de ma classe et leur maîtresse part en sortie. » Quelle est la version correcte ?",
+      "answers": [
+        {
+          "text": "Les élèves de ma classe et leur maîtresse partent en sortie.",
+          "correct": true
+        },
+        {
+          "text": "Les élèves de ma classe et leur maîtresse parte en sortie.",
+          "correct": false
+        },
+        {
+          "text": "Les élève de ma classe et leur maîtresse partent en sortie.",
+          "correct": false
+        },
+        {
+          "text": "Les élèves de ma classe et leur maîtresse partends en sortie.",
+          "correct": false
+        }
+      ],
+      "explanation": "Deux sujets, « les élèves » et « leur maîtresse », reliés par « et » forment un sujet pluriel : le verbe s'accorde au pluriel, partent. Peu importe que le deuxième sujet soit singulier : l'addition des deux impose le pluriel. Et « partends » n'existe pas, la bonne terminaison est -ent.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Accorde l'adjectif entre parenthèses : « Les enfants de la voisine sont (bruyant). » (Écris UNIQUEMENT l'adjectif accordé.)",
+      "answers": [
+        {
+          "text": "bruyants",
+          "correct": true
+        }
+      ],
+      "explanation": "L'adjectif attribut s'accorde avec le sujet « les enfants » (masculin pluriel) : bruyants. Le piège serait de l'accorder avec « la voisine », qui n'est qu'un complément du nom placé juste à côté du verbe.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Conjugue le verbe entre parenthèses au présent : « Les fleurs du jardin de mon grand-père (embaumer) toute la maison. » (Écris UNIQUEMENT le verbe conjugué.)",
+      "answers": [
+        {
+          "text": "embaument",
+          "correct": true
+        }
+      ],
+      "explanation": "Le sujet du verbe est « les fleurs » (pluriel), pas « mon grand-père » qui n'est qu'un complément du nom. Au présent, embaumer à la 3e personne du pluriel donne embaument.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Conjugue le verbe entre parenthèses au présent : « Sur la table (briller) plusieurs pièces d'or. » (Écris UNIQUEMENT le verbe conjugué.)",
+      "answers": [
+        {
+          "text": "brillent",
+          "correct": true
+        }
+      ],
+      "explanation": "Le sujet réel, « plusieurs pièces », est placé APRÈS le verbe : la phrase commence par le complément « sur la table ». On accorde quand même avec le vrai sujet, qui est pluriel : brillent.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Conjugue le verbe entre parenthèses au présent : « Le loup et le renard (guetter) la basse-cour. » (Écris UNIQUEMENT le verbe conjugué.)",
+      "answers": [
+        {
+          "text": "guettent",
+          "correct": true
+        }
+      ],
+      "explanation": "« le loup » et « le renard » sont deux sujets singuliers reliés par « et » : ensemble, ils forment un sujet pluriel (ils), donc le verbe se conjugue au pluriel, guettent.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Conjugue le verbe entre parenthèses au présent : « Ce sont les musiciens qui (jouer) le mieux. » (Écris UNIQUEMENT le verbe conjugué.)",
+      "answers": [
+        {
+          "text": "jouent",
+          "correct": true
+        }
+      ],
+      "explanation": "Le pronom relatif « qui » reprend l'antécédent « les musiciens » (pluriel) : le verbe qui suit s'accorde donc à la 3e personne du pluriel, jouent.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Accorde le participe passé entre parenthèses : « Les filles sont (parti) les premières. » (Écris UNIQUEMENT le participe passé accordé.)",
+      "answers": [
+        {
+          "text": "parties",
+          "correct": true
+        }
+      ],
+      "explanation": "Avec l'auxiliaire être, le participe passé s'accorde avec le sujet « les filles » (féminin pluriel) : il faut le -e du féminin ET le -s du pluriel, donc parties.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Accorde le participe passé entre parenthèses : « Mes cousins sont (arrivé) hier soir. » (Écris UNIQUEMENT le participe passé accordé.)",
+      "answers": [
+        {
+          "text": "arrivés",
+          "correct": true
+        }
+      ],
+      "explanation": "Avec l'auxiliaire être, le participe passé s'accorde avec le sujet « mes cousins » (masculin pluriel) : arrivés, avec un -s.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Accorde le mot entre parenthèses : « (Tout) les élèves ont terminé leur exercice. » (Écris UNIQUEMENT le mot accordé.)",
+      "answers": [
+        {
+          "text": "tous",
+          "correct": true
+        }
+      ],
+      "explanation": "Devant un nom masculin pluriel, « tout » devient « tous » : tous les élèves. Le -s est obligatoire à l'écrit, même si on ne l'entend pas quand on parle.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Accorde le mot entre parenthèses : « (Quel) jolies fleurs tu as cueillies ! » (Écris UNIQUEMENT le mot accordé.)",
+      "answers": [
+        {
+          "text": "quelles",
+          "correct": true
+        }
+      ],
+      "explanation": "« quel » s'accorde en genre et en nombre avec le nom qu'il introduit : « fleurs » est féminin pluriel, donc quelles. Le piège est de laisser « quel » invariable, comme si c'était un petit mot sans importance.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "exact",
+      "statement": "Accorde l'adjectif de couleur entre parenthèses : « Elle a acheté des rideaux (vert). » (Écris UNIQUEMENT l'adjectif accordé.)",
+      "answers": [
+        {
+          "text": "verts",
+          "correct": true
+        }
+      ],
+      "explanation": "« vert » est un vrai adjectif de couleur : il s'accorde normalement avec le nom, donc des rideaux verts. Ne le confonds pas avec « orange » ou « marron », qui viennent d'un nom et restent invariables.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "multi",
+      "statement": "Parmi ces adjectifs de couleur, lesquels NE s'accordent JAMAIS, même au pluriel ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "kaki (des pantalons kaki)",
+          "correct": true
+        },
+        {
+          "text": "cerise (des rubans cerise)",
+          "correct": true
+        },
+        {
+          "text": "noir (des pantalons noirs)",
+          "correct": false
+        },
+        {
+          "text": "rouge (des rubans rouges)",
+          "correct": false
+        }
+      ],
+      "explanation": "« kaki » et « cerise » viennent d'un nom (une plante, un fruit) : ce sont des adjectifs de couleur invariables, ils ne prennent jamais de -s. « noir » et « rouge » sont de vrais adjectifs de couleur : ils s'accordent normalement au pluriel.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "multi",
+      "statement": "Parmi ces phrases, lesquelles accordent correctement le verbe avec deux sujets singuliers reliés par « et » ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "Le vent et la pluie ont abîmé le toit de la grange.",
+          "correct": true
+        },
+        {
+          "text": "La maîtresse et le directeur discutent dans le couloir.",
+          "correct": true
+        },
+        {
+          "text": "Le stylo et le crayon est dans la trousse.",
+          "correct": false
+        },
+        {
+          "text": "La pomme et la poire reste sur la table de la cuisine.",
+          "correct": false
+        }
+      ],
+      "explanation": "Deux sujets réunis par « et » forment un ensemble pluriel, même si chacun pris seul est singulier : le vent et la pluie équivaut à ils, la maîtresse et le directeur équivaut à ils. Le verbe doit donc être au pluriel. Dans les phrases fausses, le verbe est resté au singulier par erreur.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "multi",
+      "statement": "Parmi ces expressions de nombres, lesquelles sont correctement écrites ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "quatre-vingts euros",
+          "correct": true
+        },
+        {
+          "text": "deux cents personnes",
+          "correct": true
+        },
+        {
+          "text": "quatre-vingts-trois euros",
+          "correct": false
+        },
+        {
+          "text": "deux cents dix personnes",
+          "correct": false
+        }
+      ],
+      "explanation": "« vingt » et « cent » prennent un -s uniquement quand ils sont multipliés par un nombre ET qu'aucun autre nombre ne les suit : quatre-vingts, deux cents. Dès qu'un nombre suit, comme dans quatre-vingt-trois ou deux cent dix, le -s disparaît.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "multi",
+      "statement": "Parmi ces phrases, lesquelles emploient correctement « tout » au pluriel ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "Tous les élèves sont arrivés à l'heure.",
+          "correct": true
+        },
+        {
+          "text": "Elle a nettoyé toutes les fenêtres de la maison.",
+          "correct": true
+        },
+        {
+          "text": "Tout les enfants jouent dans la cour.",
+          "correct": false
+        },
+        {
+          "text": "Il a rangé tout ses jouets avant le repas.",
+          "correct": false
+        }
+      ],
+      "explanation": "Devant un nom masculin pluriel, « tout » devient « tous » ; devant un nom féminin pluriel, il devient « toutes ». Le -s est obligatoire dans les deux cas : tous les élèves, toutes les fenêtres. Écrire « tout les » ou « tout ses » est une faute fréquente, car on n'entend pas la différence à l'oral.",
+      "difficulty": 5
+    },
+    {
+      "subject": "Orthographe",
+      "kind": "multi",
+      "statement": "Parmi ces phrases, lesquelles respectent bien l'invariabilité de « demi » ou « nu » placés AVANT le nom ? (plusieurs réponses)",
+      "answers": [
+        {
+          "text": "Nous avons attendu une demi-heure.",
+          "correct": true
+        },
+        {
+          "text": "Il se promène nu-pieds sur la plage.",
+          "correct": true
+        },
+        {
+          "text": "Elle est arrivée avec une demie-heure de retard.",
+          "correct": false
+        },
+        {
+          "text": "Elle marche nue-pieds dans le jardin.",
+          "correct": false
+        }
+      ],
+      "explanation": "Placés AVANT le nom et reliés par un trait d'union, « demi » et « nu » sont TOUJOURS invariables, même devant un nom féminin : une demi-heure (jamais demie), nu-pieds (jamais nue). Le piège est de vouloir les accorder comme des adjectifs ordinaires.",
+      "difficulty": 5
+    }
+  ]
+}
