@@ -129,20 +129,58 @@ else
     install -Dm0644 config.toml "$CONFIG_DIR/config.toml"
 fi
 
-# `data/*.json` et non `data/questions_*.json` : les banques importées
-# (data/import_*.json) sont arrivées après, et le motif d'origine les laissait
-# dehors — des milliers de questions qui n'atteignaient jamais la machine.
-say "Import des questions…"
-for f in data/*.json; do
-    [[ -e "$f" ]] || continue
-    echo "    $f"
-    "$BIN_DIR/sesame" import "$f" >/dev/null || warn "échec sur $f"
-done
+# L'import N'EST PAS idempotent : `sesame import` réinsère les questions (INSERT
+# simple), et le dédoublonnage qui suit garde la copie la PLUS RÉCENTE — celle du
+# JSON. Sur une réinstallation, cela ÉCRASE ton travail : une difficulté corrigée
+# à la main est remplacée par celle de la banque, une question supprimée
+# réapparaît. On ne réimporte donc QUE si tu le demandes ; seule une base absente
+# déclenche l'import d'office (première installation).
+#
+# Où est cette base ? On ne la devine pas et on ne code pas son chemin en dur :
+# on lit `paths.database` dans config.toml — LA source de vérité, celle que lit
+# le binaire — et on la résout pareil (chemin relatif => $XDG_DATA_HOME/sesame/).
+# Pas de config.toml = rien à préserver = première installation, on prend le
+# défaut « questions.db ».
+db_rel=""
+if [[ -f "$CONFIG_DIR/config.toml" ]]; then
+    db_rel=$(sed -n 's/^[[:space:]]*database[[:space:]]*=[[:space:]]*"\([^"]*\)".*/\1/p' \
+             "$CONFIG_DIR/config.toml" | head -1)
+fi
+db_rel="${db_rel:-questions.db}"
+case "$db_rel" in
+    /*) DB_FILE="$db_rel" ;;                                        # chemin absolu : tel quel
+    *)  DB_FILE="${XDG_DATA_HOME:-$HOME/.local/share}/sesame/$db_rel" ;;  # relatif : sous les données
+esac
 
-# Deux banques finissent toujours par se recouper. On nettoie tout de suite :
-# sans ça, un enfant peut recevoir deux fois le même énoncé au même contrôle.
-say "Suppression des doublons…"
-"$BIN_DIR/sesame" dedupe | tail -1
+import_questions=yes
+if [[ -s "$DB_FILE" ]]; then
+    say "Base existante : $DB_FILE"
+    echo "    Réimporter réinsère les banques data/*.json et ANNULE tes retouches :"
+    echo "    les questions supprimées réapparaissent, les difficultés éditées à la"
+    echo "    main sont écrasées par celles du JSON. Réponds « o » UNIQUEMENT si tu"
+    echo "    as ajouté de nouvelles banques à importer."
+    ask "Réimporter les questions ?" || import_questions=no
+fi
+
+if [[ "$import_questions" == yes ]]; then
+    # `data/*.json` et non `data/questions_*.json` : les banques importées
+    # (data/import_*.json) sont arrivées après, et le motif d'origine les
+    # laissait dehors — des milliers de questions qui n'atteignaient jamais la
+    # machine.
+    say "Import des questions…"
+    for f in data/*.json; do
+        [[ -e "$f" ]] || continue
+        echo "    $f"
+        "$BIN_DIR/sesame" import "$f" >/dev/null || warn "échec sur $f"
+    done
+
+    # Deux banques finissent toujours par se recouper. On nettoie tout de suite :
+    # sans ça, un enfant peut recevoir deux fois le même énoncé au même contrôle.
+    say "Suppression des doublons…"
+    "$BIN_DIR/sesame" dedupe | tail -1
+else
+    say "Import ignoré — base et retouches préservées."
+fi
 
 # ===== Durcissement (facultatif) ============================================
 
