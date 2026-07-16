@@ -37,6 +37,7 @@ pub fn router() -> Router<AppState> {
         .route("/children/:id/revoke", post(child_revoke_post))
         .route("/children/:id/schedules", post(schedule_add_post))
         .route("/children/:id/schedules/:sid/delete", post(schedule_delete_post))
+        .route("/children/:id/weights", post(child_weights_post))
         .route("/subjects", get(subjects_get).post(subjects_post))
         .route("/subjects/:id/delete", post(subject_delete_post))
         .route("/settings", get(settings_get).post(settings_post))
@@ -358,13 +359,32 @@ async fn dashboard(
 
 // ===== Questions: list =======================================================
 
+/// `serde_urlencoded` ne distingue pas « clé absente » de « clé vide ». Un
+/// `<option value="">— Toutes —</option>` renvoie `subject=` (chaîne vide),
+/// et `Option<i64>` tente alors de parser "" en entier → « cannot parse
+/// integer from empty string ». Ce désérialiseur traite la chaîne vide comme
+/// `None` — c'est exactement ce que « — Toutes — » veut dire.
+fn empty_string_as_none<'de, D, T>(de: D) -> Result<Option<T>, D::Error>
+where
+    D: serde::Deserializer<'de>,
+    T: std::str::FromStr,
+    T::Err: std::fmt::Display,
+{
+    match Option::<String>::deserialize(de)?.as_deref() {
+        None | Some("") => Ok(None),
+        Some(s) => s.parse().map(Some).map_err(serde::de::Error::custom),
+    }
+}
+
 #[derive(Deserialize)]
 struct QuestionsListQuery {
+    #[serde(default, deserialize_with = "empty_string_as_none")]
     subject: Option<i64>,
     /// Filtre par difficulté. Sert surtout à retrouver le lot des questions
     /// jamais notées : importées sans `difficulty`, elles valent toutes 3 par
     /// défaut (importer.rs). Un 3 « par défaut » et un 3 « choisi » se
     /// ressemblent en base — c'est en les filtrant qu'on les retrouve.
+    #[serde(default, deserialize_with = "empty_string_as_none")]
     difficulty: Option<i64>,
     msg: Option<String>,
 }
@@ -849,6 +869,16 @@ struct ChildRow {
     has_grant: bool,
 }
 
+/// Une ligne du réglage des matières PROPRE à l'enfant. `weight`/`enabled`
+/// viennent de sa ligne `child_subject_weights`, ou du défaut global si elle
+/// n'existe pas encore (matière ajoutée après lui).
+struct SubjectWeightRow {
+    id: i64,
+    name: String,
+    weight: f64,
+    enabled: bool,
+}
+
 #[derive(Template)]
 #[template(path = "admin/child_form.html")]
 struct ChildFormTemplate {
@@ -857,6 +887,7 @@ struct ChildFormTemplate {
     avatar: String,
     enabled: bool,
     schedules: Vec<ScheduleRow>,
+    subjects: Vec<SubjectWeightRow>,
     difficulty_min: i64,
     difficulty_max: i64,
     questions_per_test: i64,
@@ -951,11 +982,24 @@ async fn child_create_post(
         return Err(AppError::bad_request(format!("« {name} » existe déjà")));
     }
 
-    sqlx::query("INSERT INTO children (name, avatar) VALUES (?, ?)")
+    let mut tx = state.pool.begin().await?;
+    let new_id = sqlx::query("INSERT INTO children (name, avatar) VALUES (?, ?)")
         .bind(name)
         .bind(&avatar)
-        .execute(&state.pool)
-        .await?;
+        .execute(&mut *tx)
+        .await?
+        .last_insert_rowid();
+
+    // Le nouvel enfant hérite des valeurs par défaut globales, matière par
+    // matière : sa fiche s'ouvre sur un gabarit sensé, pas sur du vide.
+    sqlx::query(
+        "INSERT INTO child_subject_weights (child_id, subject_id, weight, enabled)
+         SELECT ?, s.id, s.weight, s.enabled FROM subjects s",
+    )
+    .bind(new_id)
+    .execute(&mut *tx)
+    .await?;
+    tx.commit().await?;
 
     Ok(Redirect::to("/admin/children?msg=Enfant+créé").into_response())
 }
@@ -982,12 +1026,37 @@ async fn child_edit_get(
         return Err(AppError::bad_request(format!("enfant {id} introuvable")));
     };
 
+    // Une ligne par matière : la valeur propre à l'enfant, ou le défaut global
+    // (COALESCE) pour celles qu'il n'a pas encore réglées.
+    let subj_rows: Vec<(i64, String, f64, i64)> = sqlx::query_as(
+        "SELECT s.id, s.name,
+                COALESCE(csw.weight, s.weight),
+                COALESCE(csw.enabled, s.enabled)
+         FROM subjects s
+         LEFT JOIN child_subject_weights csw
+                ON csw.subject_id = s.id AND csw.child_id = ?
+         ORDER BY s.name",
+    )
+    .bind(id)
+    .fetch_all(&state.pool)
+    .await?;
+    let subjects = subj_rows
+        .into_iter()
+        .map(|(sid, name, weight, en)| SubjectWeightRow {
+            id: sid,
+            name,
+            weight,
+            enabled: en == 1,
+        })
+        .collect();
+
     Ok(render(ChildFormTemplate {
         child_id: id,
         name,
         avatar,
         enabled: enabled == 1,
         schedules: load_schedules(&state, id).await?,
+        subjects,
         difficulty_min: dmin,
         difficulty_max: dmax,
         questions_per_test: qpt,
@@ -1080,6 +1149,57 @@ async fn child_edit_post(
     .await?;
 
     Ok(Redirect::to("/admin/children?msg=Enfant+enregistré").into_response())
+}
+
+/// Enregistre le poids et l'activation des matières PROPRES à cet enfant.
+/// Clés dynamiques (`subj_weight_<id>` / `subj_enabled_<id>`) : on ne peut pas
+/// passer par un struct à champs fixes, d'où le parsing manuel des paires —
+/// même logique que `subjects_post`, mais scopé à un enfant via un upsert.
+async fn child_weights_post(
+    _: AdminAuth,
+    State(state): State<AppState>,
+    AxPath(id): AxPath<i64>,
+    Form(pairs): Form<Vec<(String, String)>>,
+) -> Result<Response, AppError> {
+    // (poids, activée) par matière. La case cochée envoie un champ caché « 0 »
+    // avant la case « 1 » : la dernière valeur reçue donne l'état réel.
+    let mut rows: HashMap<i64, (f64, bool)> = HashMap::new();
+    for (k, v) in &pairs {
+        if let Some(suffix) = k.strip_prefix("subj_weight_") {
+            let sid: i64 = suffix.parse().context("id de matière invalide")?;
+            let w: f64 = v
+                .parse()
+                .map_err(|_| AppError::bad_request("poids invalide"))?;
+            if w <= 0.0 {
+                return Err(AppError::bad_request(
+                    "le poids doit être strictement positif",
+                ));
+            }
+            rows.entry(sid).or_insert((1.0, true)).0 = w;
+        } else if let Some(suffix) = k.strip_prefix("subj_enabled_") {
+            let sid: i64 = suffix.parse().context("id de matière invalide")?;
+            rows.entry(sid).or_insert((1.0, true)).1 = v == "1";
+        }
+    }
+
+    let mut tx = state.pool.begin().await?;
+    for (sid, (weight, enabled)) in rows {
+        sqlx::query(
+            "INSERT INTO child_subject_weights (child_id, subject_id, weight, enabled)
+             VALUES (?, ?, ?, ?)
+             ON CONFLICT(child_id, subject_id)
+             DO UPDATE SET weight = excluded.weight, enabled = excluded.enabled",
+        )
+        .bind(id)
+        .bind(sid)
+        .bind(weight)
+        .bind(enabled as i64)
+        .execute(&mut *tx)
+        .await?;
+    }
+    tx.commit().await?;
+
+    Ok(Redirect::to(&format!("/admin/children/{id}/edit")).into_response())
 }
 
 /// Supprime un enfant. Ses tentatives passées sont anonymisées (child_id NULL)

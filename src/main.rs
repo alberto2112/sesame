@@ -310,7 +310,7 @@ async fn run_preview(pool: &SqlitePool, n_override: Option<usize>) -> Result<()>
     let n = n_override.unwrap_or(child.questions_per_test as usize);
 
     let questions =
-        quiz::pick_questions(pool, n, child.difficulty_min, child.difficulty_max).await?;
+        quiz::pick_questions(pool, child.id, n, child.difficulty_min, child.difficulty_max).await?;
     println!(
         "=== Aperçu du contrôle de {} ({} questions) ===",
         child.name,

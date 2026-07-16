@@ -136,6 +136,7 @@ async fn index(State(state): State<AppState>, cookies: Cookies) -> Result<Respon
         } => {
             let questions = quiz::pick_questions(
                 &state.pool,
+                child.id,
                 questions as usize,
                 child.difficulty_min,
                 child.difficulty_max,

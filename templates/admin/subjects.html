@@ -5,11 +5,15 @@
 {% block admin_content %}
 <div class="page-head">
   <h1>Matières</h1>
-  <p>Le poids détermine la part de chaque matière dans un contrôle. Les valeurs
-     sont relatives — pas besoin qu'elles fassent 1.</p>
-  <p>Une matière <strong>désactivée</strong> n'apparaît plus dans les contrôles
-     mais garde ses questions. La <strong>supprimer</strong> efface la matière
-     <em>et toutes ses questions</em>.</p>
+  <p>Le poids et l'activation réglés ici sont les <strong>valeurs par défaut</strong> :
+     le gabarit hérité par chaque <em>nouvel</em> enfant, et le repli pour une matière
+     pas encore réglée dans sa fiche. Le réglage fin, matière par matière et enfant
+     par enfant, se fait dans la fiche de chaque <a href="/admin/children">enfant</a>
+     — modifier ces défauts ne touche pas les enfants déjà réglés.</p>
+  <p>Les valeurs sont relatives — pas besoin qu'elles fassent 1.</p>
+  <p>Une matière <strong>désactivée</strong> par défaut n'apparaît plus dans les
+     contrôles des enfants qui n'ont pas réglé sa fiche, mais garde ses questions.
+     La <strong>supprimer</strong> efface la matière <em>et toutes ses questions</em>.</p>
 </div>
 
 {% match flash %}
@@ -53,7 +57,7 @@
     </tbody>
   </table>
   </div>
-  <button type="submit">Enregistrer les poids</button>
+  <button type="submit">Enregistrer les valeurs par défaut</button>
 </form>
 
 {# Les doublons ont déménagé dans « Questions » : c'est de questions qu'il s'agit,

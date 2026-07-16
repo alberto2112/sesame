@@ -78,8 +78,14 @@ pub struct GradedAnswer {
 /// s'applique aussi au comptage par matière, pour que la répartition
 /// proportionnelle se fasse sur les questions réellement disponibles
 /// pour cet enfant, pas sur le total.
+///
+/// Le poids et l'activation de chaque matière sont PROPRES à l'enfant
+/// (`child_subject_weights`). La ligne enfant×matière fait foi ; à défaut —
+/// matière ajoutée après l'enfant — on retombe (`COALESCE`) sur la valeur par
+/// défaut globale de `subjects`.
 pub async fn pick_questions(
     pool: &SqlitePool,
+    child_id: i64,
     n: usize,
     diff_min: i64,
     diff_max: i64,
@@ -89,13 +95,16 @@ pub async fn pick_questions(
     }
 
     let rows: Vec<(i64, f64, i64)> = sqlx::query_as(
-        "SELECT s.id, s.weight, COUNT(q.id)
+        "SELECT s.id, COALESCE(csw.weight, s.weight), COUNT(q.id)
          FROM subjects s
+         LEFT JOIN child_subject_weights csw
+                ON csw.subject_id = s.id AND csw.child_id = ?
          LEFT JOIN questions q ON q.subject_id = s.id
                               AND q.difficulty BETWEEN ? AND ?
-         WHERE s.enabled = 1
+         WHERE COALESCE(csw.enabled, s.enabled) = 1
          GROUP BY s.id",
     )
+    .bind(child_id)
     .bind(diff_min)
     .bind(diff_max)
     .fetch_all(pool)

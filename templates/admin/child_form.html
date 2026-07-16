@@ -78,6 +78,48 @@
   <button type="submit">Enregistrer</button>
 </form>
 
+<h3>Matières</h3>
+<p class="hint">
+  Le poids fixe la part de chaque matière dans les contrôles de {{ name }} — les
+  valeurs sont relatives. Décochez une matière pour la retirer de ses contrôles.
+  Ces réglages sont <strong>propres à cet enfant</strong> ; les valeurs par
+  défaut, elles, se règlent dans <a href="/admin/subjects">Matières</a>.
+</p>
+
+{% if subjects.is_empty() %}
+  <p><em>Aucune matière — importez des questions pour en créer.</em></p>
+{% else %}
+<form method="post" action="/admin/children/{{ child_id }}/weights">
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Matière</th><th>Poids</th><th>Activée</th></tr>
+    </thead>
+    <tbody>
+      {% for s in subjects %}
+      <tr>
+        <td data-label="Matière"><strong>{{ s.name }}</strong></td>
+        <td data-label="Poids">
+          <input type="number" step="0.1" min="0.1" name="subj_weight_{{ s.id }}"
+                 value="{{ s.weight }}" class="narrow" required
+                 aria-label="Poids de {{ s.name }} pour {{ name }}">
+        </td>
+        <td data-label="Activée">
+          {# Champ caché « 0 » + case « 1 » : décochée, seul le 0 part. #}
+          <input type="hidden" name="subj_enabled_{{ s.id }}" value="0">
+          <input type="checkbox" name="subj_enabled_{{ s.id }}" value="1"
+                 {% if s.enabled %}checked{% endif %}
+                 aria-label="Activer {{ s.name }} pour {{ name }}">
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  <button type="submit">Enregistrer les matières</button>
+</form>
+{% endif %}
+
 <h3>Plages horaires</h3>
 <p class="hint">
   Hors de ces fenêtres, l'ordinateur est bloqué (« C'est l'heure de dormir »).
