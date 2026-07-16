@@ -102,6 +102,9 @@
     <button type="submit" class="btn btn-final" data-final>Valider mes réponses</button>
   </nav>
 </form>
+
+{# Hors du <form> du contrôle : c'est une autre action, un autre formulaire. #}
+{% include "_poweroff.html" %}
 {% endblock %}
 
 {% block head_extra %}

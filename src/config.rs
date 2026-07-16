@@ -28,6 +28,12 @@ pub struct KioskConfig {
     /// automatique parmi les navigateurs installés.
     #[serde(default)]
     pub browser: Option<String>,
+
+    /// Commande exécutée par le bouton « Éteindre » de la page de contrôle.
+    /// Vide = valeur par défaut (voir `web::DEFAULT_POWEROFF_CMD`). Le parent
+    /// peut la remplacer si son système diffère.
+    #[serde(default)]
+    pub poweroff: Option<String>,
 }
 
 impl Config {

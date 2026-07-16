@@ -116,6 +116,25 @@ main { max-width: 640px; margin: 0 auto; padding: 2rem 1rem 3rem; }
 .btn:disabled { opacity: .35; cursor: not-allowed; }
 .btn:disabled:hover { background: var(--teal); transform: none; }
 
+/* ---- Bouton discret « Éteindre » : la sortie de secours de l'enfant ----
+   Volontairement effacé. Il doit se voir sans jamais rivaliser avec « Valider »
+   ni « Débloquer » : gris, sans fond, à l'écart en bas de page. La teinte
+   rouge-douce n'arrive qu'au survol, quand l'intention est là. */
+.poweroff { margin-top: 2.25rem; text-align: center; }
+.btn-quiet {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: none; border: none;
+  color: var(--muted); font: inherit; font-size: .95rem; font-weight: 600;
+  padding: .6rem 1.1rem; border-radius: 999px;
+  cursor: pointer; opacity: .85;
+  transition: color .15s, background .15s, opacity .15s;
+}
+.btn-quiet:hover {
+  color: var(--soft-red);
+  background: rgba(224, 122, 95, .1);
+  opacity: 1;
+}
+
 /* `hidden` doit gagner contre nos règles d'affichage : sans ça, une règle de
    classe (spécificité 0,1,0) écrase la feuille du navigateur et le bouton
    masqué en JS resterait visible. */

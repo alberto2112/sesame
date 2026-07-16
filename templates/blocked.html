@@ -9,4 +9,8 @@
   <p class="score-sub">{{ detail }}</p>
   <p class="score-sub">{{ child_avatar }} {{ child_name }}</p>
 </div>
+
+{# Bloqué (budget, couvre-feu, pause) : il ne peut rien gagner maintenant, alors
+   qu'au moins il puisse éteindre. #}
+{% include "_poweroff.html" %}
 {% endblock %}

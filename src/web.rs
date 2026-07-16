@@ -22,9 +22,25 @@ use crate::quiz::{self, Given, GradedAttempt, QuizQuestion, Submission};
 /// (donc du kiosque), on redemande qui est là.
 pub const CHILD_COOKIE_NAME: &str = "sesame_child";
 
+/// Commande d'extinction par défaut du bouton « Éteindre ».
+///
+/// `systemctl poweroff` passe par logind : pour la session LOCALE ACTIVE — et
+/// c'est exactement le cas du kiosque —, polkit l'autorise SANS mot de passe
+/// (`org.freedesktop.login1.power-off`, `allow_active=yes`). Aucune règle sudo
+/// n'est donc requise dans le cas normal.
+///
+/// Le `|| sudo -n poweroff` est la ceinture-bretelles : si polkit refusait
+/// (session jugée inactive, plusieurs sessions ouvertes), la machine porte déjà
+/// une règle NOPASSWD sur `poweroff`. Une porte de sortie qui ne s'ouvre pas
+/// n'est pas une porte de sortie.
+pub const DEFAULT_POWEROFF_CMD: &str = "systemctl poweroff || sudo -n poweroff";
+
 #[derive(Clone)]
 pub struct AppState {
     pub pool: SqlitePool,
+    /// Ligne de commande shell exécutée par `POST /poweroff`. Résolue une fois
+    /// au démarrage depuis `[kiosk] poweroff`, ou [`DEFAULT_POWEROFF_CMD`].
+    pub poweroff_cmd: String,
 }
 
 pub fn build_router(state: AppState) -> Router {
@@ -34,6 +50,7 @@ pub fn build_router(state: AppState) -> Router {
         .route("/profile", post(profile_post))
         .route("/submit", post(submit))
         .route("/unlock", post(unlock))
+        .route("/poweroff", post(poweroff))
         .route("/api/gate", get(api_gate))
         .route("/api/status", get(api_status))
         .route("/api/heartbeat", post(api_heartbeat))
@@ -109,6 +126,10 @@ struct BlockedTemplate {
 struct ProfilesTemplate {
     children: Vec<Child>,
 }
+
+#[derive(Template)]
+#[template(path = "poweroff.html")]
+struct PoweroffTemplate;
 
 // ===== Handlers =====
 
@@ -263,6 +284,28 @@ async fn unlock(
     }
 
     Ok(Redirect::to("/").into_response())
+}
+
+/// Sortie de secours de l'enfant : **éteindre la machine** plutôt que de passer
+/// le contrôle. C'est sans danger, et voici pourquoi : éteindre ne DÉBLOQUE
+/// rien. La porte protège le bureau, pas l'interrupteur ; un redémarrage
+/// ramène à cette même page, aucun temps gagné, aucun temps perdu (le budget
+/// est un compteur, pas une horloge d'expiration). L'offrir à l'enfant ne crée
+/// donc aucune faille — ça bouche seulement un piège : rester coincé devant un
+/// contrôle qu'il ne veut pas faire, sans même pouvoir arrêter l'ordinateur.
+///
+/// La commande tourne DÉTACHÉE (`spawn`, jamais `status`) : on ne l'attend pas.
+/// L'attendre, ce serait risquer que la machine s'éteigne sous nos pieds avant
+/// que la page « À bientôt » n'atteigne le navigateur. Le shell porte le
+/// `||` du repli sudo — d'où `sh -c`, sur une chaîne fixe, sans entrée externe.
+async fn poweroff(State(state): State<AppState>) -> Result<Response, AppError> {
+    tracing::info!(cmd = %state.poweroff_cmd, "extinction demandée depuis la porte");
+    std::process::Command::new("sh")
+        .arg("-c")
+        .arg(&state.poweroff_cmd)
+        .spawn()
+        .context("lancement de la commande d'extinction")?;
+    Ok(render(PoweroffTemplate))
 }
 
 // ===== API (kiosque, fenêtre de verrouillage, minuteur) =====

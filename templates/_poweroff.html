@@ -1,0 +1,16 @@
+{# Sortie de secours de l'enfant : éteindre l'ordinateur au lieu de passer le
+   contrôle. C'est SON propre formulaire — surtout pas imbriqué dans celui du
+   contrôle (des <form> imbriqués sont du HTML invalide).
+
+   La confirmation : `onsubmit` renvoie le résultat de `confirm()`. À l'annulation,
+   la soumission est stoppée net — rien n'est envoyé. Un enfant de 7 ans a la
+   main leste, et une extinction sur clic malheureux, c'est un contrôle en cours
+   perdu. Sans JavaScript (jamais le cas dans le kiosque), `onsubmit` est ignoré
+   et le formulaire part directement : au pire, un redémarrage ramène ici.
+
+   L'apostrophe du message est une vraie apostrophe typographique (’, U+2019),
+   pas l'ASCII ' : elle ne referme donc pas la chaîne JavaScript. #}
+<form method="post" action="/poweroff" class="poweroff"
+      onsubmit="return confirm('Veux-tu vraiment éteindre l’ordinateur ?')">
+  <button type="submit" class="btn-quiet">⏻ Éteindre l’ordinateur</button>
+</form>
