@@ -13,4 +13,22 @@
 {# Bloqué (budget, couvre-feu, pause) : il ne peut rien gagner maintenant, alors
    qu'au moins il puisse éteindre. #}
 {% include "_poweroff.html" %}
+
+{# Coin parent : débloquer avec le mot de passe d'administration, sans quitter
+   la porte. Discret (une clé presque transparente dans le coin) mais PAS caché :
+   la sécurité est le mot de passe, pas le camouflage. Le panneau se rouvre tout
+   seul après un refus, pour que l'erreur soit lisible. #}
+<details class="parent-corner" {% if parent_error != "" %}open{% endif %}>
+  <summary title="Accès parent">🔑</summary>
+  <form method="post" action="/parent-unlock">
+    <strong>Déblocage parent</strong>
+    <p class="parent-note">Le bureau s'ouvrira <strong>sans limite de temps</strong>.
+       Toutes les protections seront suspendues : <strong>fermez la session ou
+       redémarrez</strong> pour réarmer la porte.</p>
+    {% if parent_error != "" %}<p class="parent-error">{{ parent_error }}</p>{% endif %}
+    <input type="password" name="password" placeholder="Mot de passe d'administration"
+           required autocomplete="current-password">
+    <button type="submit" class="btn-quiet">Débloquer l’ordinateur</button>
+  </form>
+</details>
 {% endblock %}

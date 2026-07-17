@@ -184,7 +184,11 @@ async fn run_server(cfg: Config, pool: SqlitePool, force_admin: bool) -> Result<
         .poweroff
         .clone()
         .unwrap_or_else(|| web::DEFAULT_POWEROFF_CMD.to_string());
-    let router = web::build_router(web::AppState { pool, poweroff_cmd });
+    let router = web::build_router(web::AppState {
+        pool,
+        poweroff_cmd,
+        parent_mode: Default::default(),
+    });
 
     let listener = tokio::net::TcpListener::bind(format!("{host}:{port}")).await?;
     let actual = listener.local_addr()?;

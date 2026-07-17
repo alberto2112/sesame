@@ -1,4 +1,6 @@
 use std::collections::HashMap;
+use std::sync::Arc;
+use std::sync::atomic::{AtomicBool, Ordering};
 
 use anyhow::{Context, Result};
 use askama::Template;
@@ -14,6 +16,7 @@ use tower_cookies::{Cookie, CookieManagerLayer, Cookies};
 use tower_http::trace::TraceLayer;
 
 use crate::admin;
+use crate::auth;
 use crate::policy::{self, BlockReason, Child, GateDecision};
 use crate::quiz::{self, Given, GradedAttempt, QuizQuestion, Submission};
 
@@ -41,6 +44,15 @@ pub struct AppState {
     /// Ligne de commande shell exécutée par `POST /poweroff`. Résolue une fois
     /// au démarrage depuis `[kiosk] poweroff`, ou [`DEFAULT_POWEROFF_CMD`].
     pub poweroff_cmd: String,
+    /// Mode parent : l'adulte a déverrouillé la machine avec le mot de passe
+    /// d'administration. Tant qu'il est actif, /api/gate répond « ouvert » sans
+    /// enfant : rien n'est décompté, rien n'expire, le minuteur ne coupe pas.
+    ///
+    /// EN MÉMOIRE, jamais en base — et c'est le cœur du contrat. Le serveur
+    /// naît et meurt avec la session (sesame-session le lance puis le tue) :
+    /// fermer la session ou redémarrer réarme donc la porte PAR CONSTRUCTION.
+    /// En base, un parent oublieux laisserait la machine ouverte pour toujours.
+    pub parent_mode: Arc<AtomicBool>,
 }
 
 pub fn build_router(state: AppState) -> Router {
@@ -51,6 +63,7 @@ pub fn build_router(state: AppState) -> Router {
         .route("/submit", post(submit))
         .route("/unlock", post(unlock))
         .route("/poweroff", post(poweroff))
+        .route("/parent-unlock", post(parent_unlock))
         .route("/api/gate", get(api_gate))
         .route("/api/status", get(api_status))
         .route("/api/heartbeat", post(api_heartbeat))
@@ -119,6 +132,9 @@ struct BlockedTemplate {
     emoji: String,
     title: String,
     detail: String,
+    /// Message d'erreur du coin parent (mot de passe refusé). Vide = pas
+    /// d'erreur ; le gabarit rouvre le panneau quand il est non vide.
+    parent_error: String,
 }
 
 #[derive(Template)]
@@ -130,6 +146,10 @@ struct ProfilesTemplate {
 #[derive(Template)]
 #[template(path = "poweroff.html")]
 struct PoweroffTemplate;
+
+#[derive(Template)]
+#[template(path = "parent.html")]
+struct ParentModeTemplate;
 
 // ===== Handlers =====
 
@@ -176,6 +196,7 @@ async fn index(State(state): State<AppState>, cookies: Cookies) -> Result<Respon
                     detail: "Aucune question ne correspond à ton niveau. \
                              Demande à un parent d'en ajouter !"
                         .to_string(),
+                    parent_error: String::new(),
                 }));
             }
 
@@ -308,6 +329,58 @@ async fn poweroff(State(state): State<AppState>) -> Result<Response, AppError> {
     Ok(render(PoweroffTemplate))
 }
 
+#[derive(Deserialize)]
+struct ParentUnlockForm {
+    password: String,
+}
+
+/// Coin parent de la page de blocage : ouvrir la machine avec le mot de passe
+/// d'administration, sans quitter la porte. Pendant un couvre-feu, le bureau
+/// n'existe pas et /admin n'est pas affiché : sans ce bouton, l'adulte n'a que
+/// la console VT.
+///
+/// Ce n'est PAS une concession : aucun grant, aucun décompte, rien d'imputé au
+/// budget d'un enfant — l'adulte n'emprunte pas le temps de quelqu'un d'autre.
+/// On lève le [`AppState::parent_mode`], et la machine est à lui jusqu'à ce
+/// qu'il ferme la session ou redémarre : c'est SA responsabilité, le
+/// formulaire le lui dit en toutes lettres.
+async fn parent_unlock(
+    State(state): State<AppState>,
+    cookies: Cookies,
+    Form(form): Form<ParentUnlockForm>,
+) -> Result<Response, AppError> {
+    // Pas de mot de passe configuré → pas de déblocage par ici : ce serait un
+    // bouton « ouvrir » à la portée de l'enfant.
+    let ok = match auth::read_password_hash(&state.pool).await?.as_deref() {
+        Some(hash) if !hash.is_empty() => auth::verify_password(&form.password, hash),
+        _ => false,
+    };
+
+    if !ok {
+        // Frein à la force brute : argon2 est déjà lent, on ajoute une pause
+        // fixe. Un enfant qui essaie des mots de passe attendra 2 s par essai.
+        tokio::time::sleep(std::time::Duration::from_secs(2)).await;
+        tracing::warn!("coin parent : mot de passe refusé");
+
+        // On remontre l'écran d'où il vient. S'il n'est plus bloqué (la
+        // situation a pu changer pendant la pause), l'accueil décidera.
+        let Some(child) = resolve_child(&state, &cookies).await? else {
+            return Ok(Redirect::to("/profiles").into_response());
+        };
+        let GateDecision::Blocked { reason } = policy::evaluate(&state.pool, &child).await?
+        else {
+            return Ok(Redirect::to("/").into_response());
+        };
+        let mut page = blocked_page(&child, &reason);
+        page.parent_error = "Mot de passe incorrect.".to_string();
+        return Ok(render(page));
+    }
+
+    state.parent_mode.store(true, Ordering::Relaxed);
+    tracing::info!("mode parent activé depuis la porte — aucun décompte jusqu'à la fin de session");
+    Ok(render(ParentModeTemplate))
+}
+
 // ===== API (kiosque, fenêtre de verrouillage, minuteur) =====
 
 /// *La MACHINE est-elle ouverte ?* — et non « cet enfant a-t-il du temps ? ».
@@ -335,6 +408,19 @@ async fn api_gate(State(state): State<AppState>) -> Result<Json<GateResponse>, A
             .fetch_optional(&state.pool)
             .await?;
     let lock_mode = lock_mode.map(|(v,)| v).unwrap_or_else(|| "logout".into());
+
+    // Mode parent : ouvert, mais SANS enfant. Le minuteur ne trouve pas de
+    // child_id → il ne débite rien et ne coupe jamais ; le grand livre des
+    // enfants n'est pas touché. La responsabilité du temps est à l'adulte.
+    if state.parent_mode.load(Ordering::Relaxed) {
+        return Ok(Json(GateResponse {
+            unlocked: true,
+            child_id: None,
+            child_name: Some("le parent".to_string()),
+            remaining_secs: 0,
+            lock_mode,
+        }));
+    }
 
     for child in policy::list_children(&state.pool).await? {
         if let GateDecision::Granted { remaining_secs } =
@@ -530,6 +616,7 @@ fn blocked_page(child: &Child, reason: &BlockReason) -> BlockedTemplate {
         emoji: emoji.to_string(),
         title,
         detail,
+        parent_error: String::new(),
     }
 }
 

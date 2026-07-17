@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Mode parent{% endblock %}
+
+{% block content %}
+{# Page de transition : le kiosque interroge /api/gate chaque seconde, la voit
+   ouverte et lance le bureau — cette page ne vit donc qu'un instant. Elle
+   répète quand même la consigne : c'est la dernière chose que l'adulte lit
+   avant que le bureau n'arrive. #}
+<div class="score-hero pass">
+  <div class="emoji">🔓</div>
+  <h1>Mode parent activé</h1>
+  <p class="score-sub">Le bureau va s'ouvrir, sans limite de temps et sans
+     toucher au budget des enfants.</p>
+  <p class="score-sub"><strong>Pensez à fermer la session ou à redémarrer quand
+     vous aurez terminé</strong> : c'est ce qui réarme la porte.</p>
+</div>
+{% endblock %}
