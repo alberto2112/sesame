@@ -5,9 +5,16 @@
 //! **sort avec le code 0**. C'est tout son contrat avec le système :
 //!
 //! ```sh
-//! cage -- sesame-kiosk
-//! sesame-kiosk --check || exit 1     # pas débloqué → pas de bureau
-//! exec startplasma-wayland
+//! while :; do
+//!     cage -- sesame-kiosk
+//!     sesame-kiosk --check
+//!     case $? in
+//!         0) break ;;      # débloqué → bureau
+//!         2) continue ;;   # verrouillé mais sain → on remontre la porte
+//!         *) exit 1 ;;     # cassé → pas de bureau, un adulte doit venir
+//!     esac
+//! done
+//! startplasma-wayland
 //! ```
 //!
 //! ## Pourquoi il n'y a rien à fuir
@@ -64,9 +71,12 @@ signal, pour le script de session, qu'il peut lancer le bureau.
 OPTIONS :
     -c, --config <fichier>   Utilise ce fichier de configuration.
         --check              Demande une seule fois si l'ordinateur est
-                             débloqué, sans rien afficher. Sort 0 (oui) ou
-                             1 (non, ou serveur muet). C'est le verdict que
-                             sesame-session interroge après cage.
+                             débloqué, sans rien afficher. Trois verdicts :
+                             0 = débloqué, 2 = verrouillé mais le système est
+                             SAIN (le serveur a répondu), 1 = cassé (serveur
+                             muet, configuration illisible…). C'est le verdict
+                             que sesame-session interroge après cage : 2 lui
+                             dit de remontrer la porte, 1 de s'arrêter.
     -h, --help               Affiche cette aide.
 
 Le navigateur est choisi automatiquement, sauf si config.toml le précise :
@@ -137,13 +147,25 @@ fn run() -> Result<()> {
     // qui s'est passé dedans. La seule source de vérité, c'est
     // `policy::evaluate` derrière /api/gate — alors on la lui demande.
     //
-    // Serveur muet, réponse illisible, ordinateur verrouillé : tout tombe du
-    // même côté, le code 1. Une serrure doit échouer FERMÉE.
+    // TROIS verdicts, parce que « non » a deux visages qui n'appellent pas la
+    // même réponse :
+    //
+    //   * 2 — verrouillé mais SAIN : le serveur a répondu, la porte est juste
+    //     fermée (couvre-feu, concession expirée pendant le démontage de cage).
+    //     sesame-session remontre la porte. Un enfant qui débloque une seconde
+    //     avant le couvre-feu ne doit pas laisser un écran noir : il retombe
+    //     sur la page de blocage, avec son bouton « Éteindre ».
+    //   * 1 — cassé : serveur muet, réponse illisible, configuration absente.
+    //     Là, sesame-session s'arrête (exit 1) et laisse la main à un adulte.
+    //
+    // Une serrure doit échouer FERMÉE — les deux codes le font. Ils choisissent
+    // seulement QUI regarde la porte ensuite : l'enfant (2) ou l'adulte (1).
     if check_only {
         wait_for_server(&base)?;
         let g = gate(&base)?;
         if !g.unlocked {
-            bail!("ordinateur verrouillé — aucune concession de temps vivante");
+            eprintln!("sesame-kiosk : ordinateur verrouillé — aucune concession de temps vivante");
+            std::process::exit(2);
         }
         let who = g.child_name.unwrap_or_else(|| "quelqu'un".into());
         eprintln!(

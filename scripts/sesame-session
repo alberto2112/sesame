@@ -70,22 +70,59 @@ log "serveur démarré (pid $SERVER_PID)"
 #
 # (Un bug wlroots connu fige l'écran au changement de VT quand `xorg-xwayland`
 # manque : le garder installé rend cette sortie fiable.)
-cage -s -- "$BIN_DIR/sesame-kiosk"
-log "le kiosque a rendu la main (cage a rendu $?)"
+#
+# --- 2 et 3 forment une BOUCLE, et la raison tient en une phrase : un écran
+# noir n'est jamais un état valide de cette machine.
+#
+# La vérité, c'est l'API — PAS le code de sortie de cage. Le contrat « code 0 →
+# bureau » passe À TRAVERS cage, et rien ne garantit que cage propage le code
+# de son enfant. On repose donc la question à la seule source de vérité —
+# `policy::evaluate`, derrière /api/gate — via `--check` : une requête, pas de
+# navigateur. Trois verdicts :
+#
+#   0  débloqué → on sort de la boucle, le bureau se lance.
+#   2  verrouillé mais SAIN (le serveur a répondu) → on REMONTRE la porte.
+#      C'est le cas de l'enfant qui débloque une seconde avant le couvre-feu :
+#      le temps de démonter cage, la concession a expiré. Avant, ce `--check`
+#      perdant sortait en 1 ; SDDM criait « Process crashed », coupait
+#      l'autologin, et la famille héritait d'un écran noir jusqu'au redémarrage.
+#      Désormais il retombe sur la page de blocage — motif, bouton « Éteindre »,
+#      coin parent — exactement ce qu'il aurait vu en allumant pendant le
+#      couvre-feu.
+#   1  cassé (serveur muet, cage absent, kiosque planté) → refuser. Fermé par
+#      construction, pas par confiance : là oui, un adulte doit venir.
+#
+# Le garde-fou RAPID borne le seul risque de la boucle : un cage qui meurt à
+# la naissance tournerait en rond à l'infini. S'il rend la main en moins de
+# 15 s plusieurs fois de suite, ce n'est pas un enfant devant une porte, c'est
+# un composant cassé — et on retombe sur le verdict 1.
+RAPID=0
+while :; do
+    KIOSK_T0=$SECONDS
+    cage -s -- "$BIN_DIR/sesame-kiosk"
+    log "le kiosque a rendu la main (cage a rendu $?)"
 
-# --- 3. La vérité, c'est l'API — PAS le code de sortie de cage.
-#
-# Le contrat « code 0 → bureau » passe désormais À TRAVERS cage, et rien ne
-# garantit que cage propage le code de son enfant. S'il rendait 0 quoi qu'il
-# arrive, la serrure s'ouvrirait toute seule.
-#
-# Une serrure qui échoue OUVERTE n'est pas une serrure. On repose donc la
-# question à la seule source de vérité — `policy::evaluate`, derrière
-# /api/gate. `--check` : une requête, pas de navigateur, sort 0 ou 1.
-#
-# Conséquence voulue : cage absent, cage cassé, kiosque planté, serveur muet →
-# tout finit ici, sur un exit 1. Fermé par construction, pas par confiance.
-"$BIN_DIR/sesame-kiosk" --check || refuser "l'ordinateur n'est pas débloqué"
+    "$BIN_DIR/sesame-kiosk" --check
+    VERDICT=$?
+    case "$VERDICT" in
+        0)
+            break
+            ;;
+        2)
+            if [ $((SECONDS - KIOSK_T0)) -lt 15 ]; then
+                RAPID=$((RAPID + 1))
+                [ "$RAPID" -ge 5 ] && refuser "la porte meurt en boucle (cage ou kiosque cassé ?)"
+            else
+                RAPID=0
+            fi
+            log "porte fermée mais système sain — on remontre le contrôle"
+            sleep 2
+            ;;
+        *)
+            refuser "l'ordinateur n'est pas débloqué (verdict $VERDICT)"
+            ;;
+    esac
+done
 log "contrôle réussi — on ouvre le bureau"
 
 # --- L'horloge. Elle décompte, prévient, et ferme la session à la fin.
