@@ -108,12 +108,25 @@ fn run() -> Result<()> {
         };
 
         if !gate.unlocked {
-            // Personne n'a de temps : rien à débiter, et le compteur repart de
-            // zéro pour ne pas facturer l'attente à la prochaine concession.
-            last_beat = Instant::now();
-            warned_below = None;
-            sleep(TICK_IDLE);
-            continue;
+            // La porte s'est refermée PENDANT que nous tournons. Le minuteur
+            // ne vit QUE dans la session de l'enfant (sesame-session le lance
+            // APRÈS l'ouverture du bureau) : « personne n'a de temps » ne peut
+            // pas vouloir dire « on patiente à la porte » — ça veut dire « le
+            // bureau tourne sans droit ». Couvre-feu atteint, concession
+            // révoquée depuis /admin : peu importe la raison, on ferme.
+            //
+            // Sans cette branche, le couvre-feu ne coupait JAMAIS : la fin de
+            // fenêtre horaire arrive par l'horloge murale, pas par nos
+            // battements, donc c'est CE gate() — pas le heartbeat — qui la
+            // voit en premier, et l'ancienne branche « idle » dormait dessus
+            // pendant que l'enfant gardait le bureau ouvert des heures.
+            eprintln!("sesame-timer : la porte est fermée — on clôt la session");
+            notify(
+                "Temps écoulé",
+                "C'est fini pour cette fois. On ferme…",
+            );
+            sleep(GRACE);
+            return expire(&gate.lock_mode);
         }
 
         let Some(child_id) = gate.child_id else {
