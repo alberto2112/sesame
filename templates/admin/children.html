@@ -20,76 +20,77 @@
   {# Cette liste répond à « où en sont-ils, là, maintenant ? » — pas « quels
      sont leurs réglages ». La difficulté, la durée de session et le budget
      vivent dans la fiche : les remettre ici ne ferait que pousser les boutons
-     hors de l'écran. #}
-  <div class="table-wrap">
-  <table>
-    <thead>
-      <tr>
-        <th>Enfant</th><th>Aujourd'hui</th><th>Contrôles</th>
-        <th>Questions</th><th>Actif</th><th></th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for c in children %}
-      <tr>
-        {# Un SEUL élément dans la cellule : en mode carte, la cellule est une
-           grille et chaque enfant direct tomberait dans une case différente
-           (l'emoji d'un côté, le prénom à la ligne). #}
-        <td data-label="Enfant">
-          <span class="who">
-            <span class="avatar">{{ c.avatar }}</span>
-            <strong>{{ c.name }}</strong>
-            {% if c.has_grant %}<span class="badge badge-live">⏱ en cours</span>{% endif %}
-          </span>
-        </td>
-        <td data-label="Aujourd'hui">
-          {{ c.used_today_min }} / {{ c.daily_budget_minutes }} min
-        </td>
-        <td data-label="Contrôles">{{ c.attempts_passed }}/{{ c.attempts_total }} réussis</td>
-        <td data-label="Questions">
-          {% if c.available_questions == 0 %}
-            <span class="badge badge-warn">0 — aucun contrôle possible</span>
-          {% else %}
-            {{ c.available_questions }}
-          {% endif %}
-        </td>
-        <td data-label="Actif">
-          {% if c.enabled %}
-            <span class="badge badge-ok">oui</span>
-          {% else %}
-            <span class="badge badge-ko">non</span>
-          {% endif %}
-        </td>
-        <td data-label="">
-          <div class="actions">
-            <a href="/admin/children/{{ c.id }}/edit" role="button" class="btn-sm outline">Modifier</a>
+     hors de l'écran.
 
-            <form method="post" action="/admin/children/{{ c.id }}/grant">
-              <input type="number" name="minutes" value="30" min="1" max="600"
-                     aria-label="Minutes à accorder">
-              <button type="submit" class="btn-sm"
-                      title="Donner du temps sans contrôle — ignore le budget et les horaires">
-                Donner
-              </button>
-            </form>
+     Une CARTE par enfant, pas un tableau. Un tableau sert à comparer une même
+     colonne d'une ligne à l'autre ; ici chaque ligne portait un formulaire —
+     et un formulaire n'est pas une donnée. D'où les boutons entassés dans une
+     cellule trop étroite. La carte donne à chaque enfant son espace : l'état
+     en haut, les chiffres au milieu, les actions en bas, séparées. #}
+  <div class="kid-grid">
+    {% for c in children %}
+    <article class="kid kid-{{ c.state }}">
+      <header class="kid-head">
+        <span class="avatar">{{ c.avatar }}</span>
+        <strong class="kid-name">{{ c.name }}</strong>
+        {% if !c.enabled %}<span class="badge badge-ko">désactivé</span>{% endif %}
+      </header>
 
-            {% if c.has_grant %}
-            <form method="post" action="/admin/children/{{ c.id }}/revoke">
-              <button type="submit" class="btn-sm secondary outline">Couper le temps</button>
-            </form>
+      {# LA ligne que le parent vient chercher : combien de temps avant que
+         l'écran s'éteigne. Le moteur a déjà pris le minimum entre la session,
+         le budget du jour et la fin de la plage horaire. #}
+      <p class="kid-state">{{ c.state_text }}</p>
+
+      <dl class="kid-facts">
+        <div>
+          <dt>Aujourd'hui</dt>
+          <dd>{{ c.used_today_min }} / {{ c.daily_budget_minutes }} min</dd>
+        </div>
+        <div>
+          <dt>Contrôles</dt>
+          <dd>{{ c.attempts_passed }}/{{ c.attempts_total }} réussis</dd>
+        </div>
+        <div>
+          <dt>Questions</dt>
+          <dd>
+            {% if c.available_questions == 0 %}
+              <span class="badge badge-warn">0 — aucun contrôle possible</span>
+            {% else %}
+              {{ c.available_questions }}
             {% endif %}
+          </dd>
+        </div>
+      </dl>
 
-            <form method="post" action="/admin/children/{{ c.id }}/delete"
-                  onsubmit="return confirm('Supprimer {{ c.name }} ? Son historique sera conservé mais anonymisé.')">
-              <button type="submit" class="btn-sm secondary outline">Supprimer</button>
-            </form>
-          </div>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+      <footer class="kid-actions">
+        <form method="post" action="/admin/children/{{ c.id }}/grant" class="grant">
+          <input type="number" name="minutes" value="30" min="1" max="600"
+                 aria-label="Minutes à accorder pour {{ c.name }}">
+          <button type="submit" class="btn-sm"
+                  title="Donner du temps sans contrôle — ignore le budget et les horaires">
+            Donner
+          </button>
+        </form>
+
+        <div class="kid-links">
+          <a href="/admin/children/{{ c.id }}/edit" role="button" class="btn-sm outline">Modifier</a>
+
+          {% if c.has_grant %}
+          <form method="post" action="/admin/children/{{ c.id }}/revoke">
+            <button type="submit" class="btn-sm secondary outline">Couper le temps</button>
+          </form>
+          {% endif %}
+
+          <form method="post" action="/admin/children/{{ c.id }}/delete"
+                onsubmit="return confirm('Supprimer {{ c.name }} ? Son historique sera conservé mais anonymisé.')">
+            <button type="submit" class="btn-sm secondary outline danger">Supprimer</button>
+          </form>
+        </div>
+      </footer>
+    </article>
+    {% endfor %}
   </div>
+
 {% endif %}
 
 <h3>Ajouter un enfant</h3>

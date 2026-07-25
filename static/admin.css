@@ -239,10 +239,208 @@ legend { font-weight: 700; padding: 0; margin-bottom: .5rem; }
 /* Emoji + prénom + « en cours » : un seul bloc, jamais coupé en deux. */
 .who { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
 
-/* Sans largeur minimale, la colonne se règle sur son contenu : « Zoé » tient
-   sur une ligne, « Hugo » passe à la suivante, et ça sent le travail bâclé. */
+/* Sans largeur minimale, une colonne de NOMS se règle sur son contenu : « Zoé »
+   tient sur une ligne, « Hugo » passe à la suivante, et ça sent le travail
+   bâclé.
+
+   Mais c'est une règle de colonne de noms, pas une règle de première colonne :
+   en visant `td:first-child`, elle donnait aussi 10 rem à une case à cocher et
+   à un numéro de ligne — trois mots de large pour une case de 1 rem. Elle se
+   demande maintenant, colonne par colonne. */
 @media (min-width: 901px) {
-  td:first-child { min-width: 10rem; }
+  th.col-wide { min-width: 10rem; }
+}
+
+/* ===== Fiches enfant =======================================================
+   Un tableau compare des colonnes ; une fiche d'enfant porte un formulaire.
+   Ce n'est pas la même chose, et c'est pour ça que les boutons s'entassaient
+   dans une cellule de 12 % de large. Ici chaque enfant a sa carte, et la carte
+   a trois étages : QUI, où il en est, ce que le parent peut faire.
+
+   `auto-fill` + `minmax` : autant de colonnes que l'écran en supporte, une
+   seule sur téléphone. Aucun point de bascule à maintenir à la main. */
+
+.kid-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.kid {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  /* Le liseré de gauche porte l'état : lisible d'un coup d'œil, à distance,
+     sans lire un mot. La couleur double le texte, elle ne le remplace pas. */
+  border-left: 4px solid var(--line);
+}
+.kid-live    { border-left-color: var(--green); }
+.kid-exam    { border-left-color: var(--teal); }
+.kid-blocked { border-left-color: var(--amber); }
+.kid-off     { border-left-color: var(--line); opacity: .65; }
+
+.kid-head {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.kid-name { font-size: 1.15rem; }
+
+/* LA ligne que le parent vient chercher : le temps qui reste. Elle est plus
+   grosse que le reste parce qu'elle compte plus que le reste. */
+.kid-state {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+.kid-live    .kid-state { color: var(--green); }
+.kid-exam    .kid-state { color: var(--teal-dark); }
+.kid-blocked .kid-state { color: var(--amber); }
+.kid-off     .kid-state { color: var(--muted); font-weight: 600; }
+
+.kid-facts {
+  margin: 0;
+  display: grid;
+  gap: .35rem;
+  font-size: .9rem;
+}
+.kid-facts > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .75rem;
+  border-top: 1px solid var(--page);
+  padding-top: .35rem;
+}
+.kid-facts dt { color: var(--muted); }
+.kid-facts dd { margin: 0; font-weight: 600; text-align: right; }
+
+.kid-actions {
+  margin: 0;
+  padding: .75rem 0 0;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  /* « Donner du temps » d'un côté, le reste de l'autre : l'action courante ne
+     se retrouve jamais collée à « Supprimer ». */
+  justify-content: space-between;
+  align-items: center;
+}
+.kid-actions form { margin: 0; }
+.kid-actions .grant { display: flex; gap: .3rem; align-items: center; }
+.kid-actions .grant input[type="number"] {
+  width: 4.5rem; margin: 0; padding: .25rem .4rem; font-size: .85rem;
+}
+.kid-links { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+.kid-links .danger { --pico-color: var(--red); --pico-border-color: var(--red); }
+
+/* ===== Liste des questions =================================================
+   Le contenu de cette page, c'est l'ÉNONCÉ. Tout le reste est de la métadonnée
+   qui l'aidait à se faire écraser : sept colonnes se partageaient la largeur à
+   parts égales, et l'énoncé — le seul texte long du lot — recevait la même
+   part qu'un chiffre de 1 à 5. Deux mots par ligne.
+
+   `table-layout: fixed` renverse la logique : les quatre colonnes accessoires
+   annoncent leur largeur, l'énoncé encaisse tout le reste. Sans ça, le moteur
+   de rendu mesure le contenu et redistribue — c'est-à-dire qu'il refait
+   exactement ce qu'on essaie d'empêcher. */
+
+.q-table { table-layout: fixed; width: 100%; margin-bottom: 1rem; }
+.q-table .col-check { width: 2.75rem; }
+/* 8 rem : « Grille (traits) » tient sur une ligne. En dessous il se coupe en
+   deux, ce qui n'est pas grave — mais une colonne qui se coupe TOUJOURS finit
+   par coûter en hauteur ce qu'elle prétendait économiser en largeur. */
+.q-table .col-type  { width: 8rem; font-size: .85rem; line-height: 1.3; color: var(--muted); }
+.q-table .col-diff  { width: 4.5rem;  text-align: center; }
+.q-table .col-menu  { width: 7.5rem; }
+.q-table .col-check input { margin: 0; }
+
+/* Matière au-dessus, en petit et en sourdine : elle situe l'énoncé sans lui
+   disputer une colonne. Une colonne coûte de la largeur à TOUTES les lignes ;
+   une ligne de surtitre ne coûte que sa propre hauteur. */
+.q-cell { display: flex; flex-direction: column; gap: .1rem; }
+.q-subject {
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--muted);
+}
+/* `anywhere` et pas `break-word` : une formule sans espace (« 12+7×3=… ») est
+   un seul « mot » de 30 caractères — elle élargirait la colonne au lieu de se
+   couper, et on retomberait sur une mise en page à deux mots par ligne. */
+.q-statement { font-weight: 600; line-height: 1.4; overflow-wrap: anywhere; }
+
+/* ===== Menu d'actions d'une ligne ==========================================
+   Deux boutons par ligne, c'est deux boutons × N lignes de largeur perdue, et
+   « Supprimer » à un pixel de « Modifier ». Un menu ne coûte qu'une largeur,
+   une fois, et met le geste irréversible derrière un clic de plus.
+
+   `<details>` natif : pas de JS pour ouvrir, pas de JS pour le clavier. */
+
+/* Pico décale le résumé d'un `<details>` ouvert (`margin-bottom: spacing`) :
+   dans un tableau, la ligne sauterait à chaque ouverture. */
+details.row-menu[open] > summary { margin-bottom: 0; }
+
+.row-menu > summary { width: 100%; }
+
+/* Pico ancre le panneau à gauche et lui donne la largeur du résumé. En bout de
+   ligne, il déborderait de la page : on l'aligne par la droite et on le laisse
+   prendre la largeur de son contenu. */
+details.row-menu > summary + ul {
+  right: 0;
+  left: auto;
+  width: max-content;
+  min-width: 10rem;
+}
+details.row-menu > summary + ul li { padding: 0; }
+details.row-menu > summary + ul li:first-of-type { margin-top: .25rem; }
+details.row-menu > summary + ul li:last-of-type  { margin-bottom: .25rem; }
+.row-menu li form { margin: 0; }
+
+/* Un lien et un bouton dans le même menu doivent être le MÊME objet à l'œil :
+   on désarme le style bouton de Pico plutôt que d'habiller le lien. */
+.row-menu li a,
+.row-menu li button {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: .45rem .9rem;
+  border: none;
+  border-radius: 0;
+  background: none;
+  color: var(--navy);
+  font-size: .9rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: left;
+  text-decoration: none;
+}
+/* Sélecteur complet, et pas `.row-menu li a:hover` : Pico peint déjà le survol
+   des liens de son menu (`details.dropdown>summary+ul li a:hover`) avec une
+   spécificité plus forte. Un lien gris Pico et un bouton gris à nous dans le
+   même menu, ça se voit. On égalise le sélecteur pour égaliser la couleur. */
+details.row-menu > summary + ul li a:hover,
+details.row-menu > summary + ul li button:hover {
+  background: var(--page);
+  color: var(--navy);
+}
+.row-menu li .menu-danger { color: var(--red); }
+details.row-menu > summary + ul li .menu-danger:hover {
+  background: #fdeced;
+  color: var(--red);
 }
 
 /* ===== Tableaux ============================================================
@@ -318,6 +516,33 @@ td, th { background-color: transparent; }
   td[data-label=""]::before { content: none; }
 
   .narrow { width: 100%; }
+
+  /* En mode carte, les largeurs de colonnes n'ont plus de sens — et elles
+     gagneraient : `.q-table .col-check` est plus spécifique que le `td` du
+     bloc au-dessus, la case à cocher resterait large de 2,75 rem dans une
+     carte pleine largeur. */
+  .q-table .col-check,
+  .q-table .col-type,
+  .q-table .col-diff,
+  .q-table .col-menu { width: 100%; }
+  .q-table .col-diff { text-align: left; }
+
+  /* Le `tr` en `block` empile les cellules dans l'ordre du DOM. En `flex`, on
+     peut les réordonner : l'énoncé — le contenu — passe en tête, la case à
+     cocher redescend près des actions, là où on s'en sert. L'ordre du DOM ne
+     bouge pas : la tabulation et la case « tout cocher » restent cohérentes
+     avec la vue large. */
+  .q-table tr { display: flex; flex-direction: column; }
+  .q-table tbody td:nth-child(2) { order: 1; } /* l'énoncé */
+  .q-table .col-type  { order: 2; }
+  .q-table .col-diff  { order: 3; }
+  .q-table .col-check { order: 4; }
+  .q-table .col-menu  { order: 5; } /* dernier dans le DOM ET à l'écran :
+                                       `td:last-child` lui retire son filet. */
+
+  /* Le menu s'ouvre vers le bas d'une carte : rien ne le rogne, mais il n'a
+     plus de raison d'être collé à droite d'une colonne qui n'existe plus. */
+  details.row-menu > summary + ul { right: auto; left: 0; }
 }
 
 /* ===== Historique : détail d'un contrôle =================================== */

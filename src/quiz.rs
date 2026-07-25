@@ -290,6 +290,28 @@ pub fn is_grid(kind: &str) -> bool {
     grid::is_grid_kind(kind)
 }
 
+/// Le type d'une question, écrit pour un humain. Le `kind` en base est une
+/// clé technique (`grid_lines`) : l'afficher tel quel dans un panneau dont
+/// TOUT le reste est en français, c'est laisser fuiter le schéma dans l'écran.
+///
+/// Court volontairement — ça vit dans une colonne étroite et à côté d'un
+/// énoncé. La version longue et explicative reste dans le `<select>` de la
+/// fiche, là où le parent CHOISIT un type et a besoin qu'on le lui décrive.
+///
+/// Le cas par défaut renvoie la clé brute plutôt qu'un tiret : le jour où une
+/// migration ajoute un type, on veut le voir à l'écran, pas le voir disparaître.
+pub fn kind_label(kind: &str) -> &str {
+    match kind {
+        "single" => "QCM",
+        "multi" => "QCM multiple",
+        "exact" => "Écrite",
+        "number" => "Numérique",
+        grid::KIND_CELLS => "Grille (cases)",
+        grid::KIND_LINES => "Grille (traits)",
+        other => other,
+    }
+}
+
 /// Types dont l'unique ligne d'`answers` porte LA bonne réponse, et non des
 /// options à proposer. C'est la règle de validation partagée par l'importeur et
 /// le panel admin : exactement une réponse, marquée correcte.

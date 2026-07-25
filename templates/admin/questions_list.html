@@ -31,7 +31,7 @@
   <div class="table-wrap">
   <table>
     <thead>
-      <tr><th>Énoncé</th><th>Conservée</th><th>Supprimée(s)</th></tr>
+      <tr><th class="col-wide">Énoncé</th><th>Conservée</th><th>Supprimée(s)</th></tr>
     </thead>
     <tbody>
       {% for d in duplicates %}
@@ -109,39 +109,61 @@
     <button type="submit" class="btn-auto">Appliquer aux sélectionnées</button>
   </form>
 
-  <div class="table-wrap">
-  <table>
+  {# Pas de `.table-wrap` ici, et c'est VOULU : `overflow-x: auto` crée un
+     conteneur de défilement, qui rogne tout ce qui en dépasse — y compris le
+     menu déroulant d'une ligne, positionné en absolu. Avec quatre colonnes
+     étroites et une seule élastique, ce tableau ne déborde plus : le filet de
+     sécurité n'a plus rien à rattraper, et il coûtait le menu. #}
+  <table class="q-table">
     <thead>
       <tr>
-        <th><input type="checkbox" data-check-all title="Tout cocher"></th>
-        <th>#</th><th>Énoncé</th><th>Matière</th><th>Type</th>
-        <th>Diff.</th><th>Réponses</th><th></th>
+        <th class="col-check"><input type="checkbox" data-check-all title="Tout cocher"></th>
+        <th>Question</th>
+        <th class="col-type">Type</th>
+        <th class="col-diff">Diff.</th>
+        <th class="col-menu"></th>
       </tr>
     </thead>
     <tbody>
       {% for q in questions %}
-      <tr>
-        <td data-label=""><input type="checkbox" form="bulk" name="ids" value="{{ q.id }}" data-row-check></td>
-        <td data-label="#">{{ q.id }}</td>
-        <td data-label="Énoncé"><strong>{{ q.statement }}</strong></td>
-        <td data-label="Matière">{{ q.subject_name }}</td>
-        <td data-label="Type">{{ q.kind }}</td>
-        <td data-label="Difficulté">{{ q.difficulty }}</td>
-        <td data-label="Réponses">{{ q.nb_answers }}</td>
+      {# L'`id` a quitté la vue — il ne veut rien dire pour un parent — mais il
+         reste l'ancre de la ligne : on peut toujours pointer une question. #}
+      <tr id="q{{ q.id }}">
+        <td class="col-check" data-label="Sélection">
+          <input type="checkbox" form="bulk" name="ids" value="{{ q.id }}" data-row-check>
+        </td>
+        {# UN seul enfant dans la cellule : en mode carte le `td` devient une
+           grille, et deux enfants directs tomberaient dans deux cases (la
+           matière d'un côté, l'énoncé à la ligne). #}
         <td data-label="">
-          <div class="actions">
-            <a href="/admin/questions/{{ q.id }}/edit" role="button" class="btn-sm outline">Modifier</a>
-            <form method="post" action="/admin/questions/{{ q.id }}/delete"
-                  onsubmit="return confirm('Supprimer cette question ?')">
-              <button type="submit" class="btn-sm secondary outline">Supprimer</button>
-            </form>
+          <div class="q-cell">
+            <span class="q-subject">{{ q.subject_name }}</span>
+            <span class="q-statement">{{ q.statement }}</span>
           </div>
+        </td>
+        <td class="col-type" data-label="Type">{{ q.kind_label }}</td>
+        <td class="col-diff" data-label="Difficulté">{{ q.difficulty }}</td>
+        <td class="col-menu" data-label="">
+          {# `<details>` natif : un menu sans framework, qui marche au clavier
+             et sans JavaScript. Le script ne fait qu'une chose en plus —
+             refermer celui qui traîne. #}
+          <details class="dropdown row-menu">
+            <summary role="button" class="btn-sm outline">Actions</summary>
+            <ul>
+              <li><a href="/admin/questions/{{ q.id }}/edit">Modifier</a></li>
+              <li>
+                <form method="post" action="/admin/questions/{{ q.id }}/delete"
+                      onsubmit="return confirm('Supprimer cette question ?')">
+                  <button type="submit" class="menu-danger">Supprimer</button>
+                </form>
+              </li>
+            </ul>
+          </details>
         </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
-  </div>
 
   <script>
     (() => {
@@ -160,6 +182,22 @@
       });
       rows.forEach((c) => c.addEventListener("change", sync));
       sync();
+
+      // Un `<details>` ouvert ne se referme pas tout seul : sans ça, on
+      // repart de la page avec trois menus béants. Cliquer ailleurs (y
+      // compris sur un AUTRE menu) ferme les autres — d'où l'exclusivité,
+      // sans avoir à les grouper.
+      const closeMenus = (except) => {
+        document.querySelectorAll("details.row-menu[open]").forEach((d) => {
+          if (d !== except) d.open = false;
+        });
+      };
+      document.addEventListener("click", (e) => {
+        closeMenus(e.target.closest("details.row-menu"));
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMenus(null);
+      });
     })();
   </script>
 {% endif %}

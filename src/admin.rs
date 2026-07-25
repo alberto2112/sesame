@@ -13,7 +13,7 @@ use tower_cookies::{Cookie, Cookies};
 use crate::auth;
 use crate::dedup;
 use crate::importer::{self, ImportFile};
-use crate::policy;
+use crate::policy::{self, BlockReason, GateDecision};
 use crate::web::{AppError, AppState, render};
 
 // ===== Router ================================================================
@@ -141,13 +141,19 @@ struct SubjectOption {
     selected: bool,
 }
 
+/// Ce que la liste montre. Pas d'`nb_answers` : les deux seules portes
+/// d'entrée (le formulaire et l'importateur) refusent une question sans
+/// réponse — exactement 1 pour `exact`/`number`/`grid_*`, au moins 2 sinon.
+/// La colonne ne pouvait donc afficher qu'un nombre toujours correct : de
+/// l'encre pour rien, volée à l'énoncé.
 struct QuestionRow {
     id: i64,
     statement: String,
-    kind: String,
+    /// Déjà traduit (`quiz::kind_label`) : la vue ne reçoit pas la clé
+    /// technique, donc elle ne peut pas l'afficher par distraction.
+    kind_label: String,
     subject_name: String,
     difficulty: i64,
-    nb_answers: i64,
 }
 
 #[derive(Template)]
@@ -282,7 +288,9 @@ struct HistoryDetailQuestion {
     /// si la question a été modifiée ou supprimée depuis.
     grid: Option<crate::quiz::GridReview>,
     statement: String,
-    kind: String,
+    /// Traduit, comme dans la liste — même clé, même mot à l'écran. Ici c'est
+    /// `kind_snapshot` : le type que la question avait AU MOMENT du contrôle.
+    kind_label: String,
     correct_overall: bool,
     answers: Vec<HistoryDetailAnswer>,
 }
@@ -456,10 +464,9 @@ async fn questions_list(
     // recopiées, on construit le WHERE : les valeurs restent liées (`bind`),
     // seuls les fragments SQL sont concaténés — aucune donnée ne touche le SQL.
     let mut sql = String::from(
-        "SELECT q.id, q.statement, q.kind, s.name, q.difficulty, COUNT(a.id)
+        "SELECT q.id, q.statement, q.kind, s.name, q.difficulty
          FROM questions q
-         JOIN subjects s ON s.id = q.subject_id
-         LEFT JOIN answers a ON a.question_id = q.id",
+         JOIN subjects s ON s.id = q.subject_id",
     );
     let mut conds: Vec<&str> = Vec::new();
     if q.subject.is_some() {
@@ -472,9 +479,10 @@ async fn questions_list(
         sql.push_str(" WHERE ");
         sql.push_str(&conds.join(" AND "));
     }
-    sql.push_str(" GROUP BY q.id ORDER BY q.id DESC");
+    // Plus de `GROUP BY` : il n'existait que pour agréger le COUNT des réponses.
+    sql.push_str(" ORDER BY q.id DESC");
 
-    let mut query = sqlx::query_as::<_, (i64, String, String, String, i64, i64)>(&sql);
+    let mut query = sqlx::query_as::<_, (i64, String, String, String, i64)>(&sql);
     if let Some(sid) = q.subject {
         query = query.bind(sid);
     }
@@ -485,13 +493,12 @@ async fn questions_list(
 
     let questions = rows
         .into_iter()
-        .map(|(id, st, kd, sn, df, na)| QuestionRow {
+        .map(|(id, st, kd, sn, df)| QuestionRow {
             id,
             statement: st,
-            kind: kd,
+            kind_label: crate::quiz::kind_label(&kd).to_string(),
             subject_name: sn,
             difficulty: df,
-            nb_answers: na,
         })
         .collect();
 
@@ -924,6 +931,14 @@ struct ChildRow {
     attempts_total: i64,
     /// Concession vivante (temps en cours) ?
     has_grant: bool,
+    /// Verdict de `policy::evaluate`, précalculé pour le gabarit :
+    /// `"live" | "exam" | "blocked" | "off"`. Askama ne sait pas filtrer une
+    /// énumération dans un `{% if %}`, et surtout : la liste ne doit pas
+    /// REFAIRE le raisonnement du moteur, juste l'afficher.
+    state: &'static str,
+    /// Une phrase française qui dit l'état. « 1 h 05 avant la coupure »,
+    /// « Contrôle disponible — 30 min à gagner », « Retour demain à 17h00 ».
+    state_text: String,
 }
 
 /// Une ligne du réglage des matières PROPRE à l'enfant. `weight`/`enabled`
@@ -961,6 +976,40 @@ struct ChildrenQuery {
     msg: Option<String>,
 }
 
+/// Secondes → « 1 h 05 » / « 42 min » / « moins d'une minute ». Arrondi vers le
+/// BAS : annoncer 3 minutes quand il en reste 2 min 10 s, c'est promettre du
+/// temps qui n'existe pas, et c'est l'enfant qui encaisse la différence.
+fn human_duration(secs: i64) -> String {
+    let total_min = secs / 60;
+    if total_min <= 0 {
+        return "moins d'une minute".to_string();
+    }
+    let (h, m) = (total_min / 60, total_min % 60);
+    if h > 0 {
+        format!("{h} h {m:02}")
+    } else {
+        format!("{m} min")
+    }
+}
+
+/// Le motif du blocage EST le message : le parent doit lire pourquoi, pas
+/// deviner. `next_window` arrive déjà humanisé depuis `policy`.
+fn block_text(reason: &BlockReason) -> String {
+    match reason {
+        BlockReason::DailyBudgetSpent {
+            used_min,
+            budget_min,
+        } => format!("Budget du jour épuisé ({used_min}/{budget_min} min)"),
+        BlockReason::OutsideSchedule { next_window } => match next_window {
+            Some(w) => format!("Hors horaires — retour {w}"),
+            None => "Hors des horaires autorisés".to_string(),
+        },
+        BlockReason::Cooldown { remaining_min } => {
+            format!("Pause après un échec — encore {remaining_min} min")
+        }
+    }
+}
+
 async fn children_list(
     _: AdminAuth,
     State(state): State<AppState>,
@@ -984,23 +1033,44 @@ async fn children_list(
     .fetch_all(&state.pool)
     .await?;
 
-    let children = rows
-        .into_iter()
-        .map(
-            |(id, name, avatar, enabled, budget, used, avail, passed, total, grant)| ChildRow {
-                id,
-                name,
-                avatar,
-                enabled: enabled == 1,
-                daily_budget_minutes: budget,
-                used_today_min: used,
-                available_questions: avail,
-                attempts_passed: passed,
-                attempts_total: total,
-                has_grant: grant == 1,
+    // Le compteur « il lui reste X » ne se calcule PAS ici : on demande au
+    // moteur. Lui seul sait que la coupure viendra du budget, du couvre-feu ou
+    // de la fin de la session — et c'est ce minimum-là qui intéresse le parent.
+    let profiles = policy::list_children_all(&state.pool).await?;
+
+    let mut children = Vec::with_capacity(rows.len());
+    for (id, name, avatar, enabled, budget, used, avail, passed, total, grant) in rows {
+        let (kind, text) = match profiles.iter().find(|p| p.id == id) {
+            Some(child) if enabled == 1 => match policy::evaluate(&state.pool, child).await? {
+                GateDecision::Granted { remaining_secs } => {
+                    ("live", format!("{} avant la coupure", human_duration(remaining_secs)))
+                }
+                GateDecision::ExamAvailable {
+                    max_grant_minutes, ..
+                } => (
+                    "exam",
+                    format!("Contrôle disponible — {max_grant_minutes} min à gagner"),
+                ),
+                GateDecision::Blocked { reason } => ("blocked", block_text(&reason)),
             },
-        )
-        .collect();
+            _ => ("off", "Profil désactivé".to_string()),
+        };
+
+        children.push(ChildRow {
+            id,
+            name,
+            avatar,
+            enabled: enabled == 1,
+            daily_budget_minutes: budget,
+            used_today_min: used,
+            available_questions: avail,
+            attempts_passed: passed,
+            attempts_total: total,
+            has_grant: grant == 1,
+            state: kind,
+            state_text: text,
+        });
+    }
 
     Ok(render(ChildrenTemplate {
         children,
@@ -1663,7 +1733,7 @@ async fn history_detail(
 
             grouped.push(HistoryDetailQuestion {
                 statement: s,
-                kind,
+                kind_label: crate::quiz::kind_label(&kind).to_string(),
                 grid,
                 correct_overall,
                 answers: answers

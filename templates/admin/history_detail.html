@@ -22,7 +22,7 @@
 <article class="{% if q.correct_overall %}q-correct{% else %}q-incorrect{% endif %}">
   <header class="q-head">
     <strong>{{ loop.index }}. {{ q.statement }}</strong>
-    <small>({{ q.kind }})</small>
+    <small>({{ q.kind_label }})</small>
   </header>
   {# Grilles : montrer les deux dessins plutôt que la figure sérialisée. Un
      parent qui cherche à comprendre où sa fille bute a besoin de voir ce

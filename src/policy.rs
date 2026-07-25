@@ -46,6 +46,14 @@ pub async fn load_child(pool: &SqlitePool, id: i64) -> Result<Option<Child>> {
     Ok(sqlx::query_as(&sql).bind(id).fetch_optional(pool).await?)
 }
 
+/// Comme [`list_children`], mais SANS filtrer sur `enabled` : l'admin doit voir
+/// les enfants désactivés pour pouvoir les réactiver. Réservé à l'admin — les
+/// surfaces enfant ne doivent jamais charger un profil éteint.
+pub async fn list_children_all(pool: &SqlitePool) -> Result<Vec<Child>> {
+    let sql = format!("SELECT {CHILD_COLUMNS} FROM children ORDER BY position, id");
+    Ok(sqlx::query_as(&sql).fetch_all(pool).await?)
+}
+
 pub async fn list_children(pool: &SqlitePool) -> Result<Vec<Child>> {
     let sql =
         format!("SELECT {CHILD_COLUMNS} FROM children WHERE enabled = 1 ORDER BY position, id");
