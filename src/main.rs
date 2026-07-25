@@ -333,6 +333,15 @@ async fn run_preview(pool: &SqlitePool, n_override: Option<usize>) -> Result<()>
             // elle ne doit pas fuiter vers le rendu. L'aperçu ne la voit pas non plus.
             println!("   - (réponse à écrire)");
         }
+        // Grille : le modèle EST l'énoncé, il n'a rien de secret. On le dessine
+        // en caractères — sans quoi l'aperçu n'afficherait qu'une payload
+        // sérialisée, c'est-à-dire rien de vérifiable à l'œil.
+        if let Some(model) = grid_model(pool, q).await? {
+            println!("   modèle à reproduire :");
+            for line in model.ascii().lines() {
+                println!("     {line}");
+            }
+        }
         for a in &q.answers {
             println!("   - ({}) {}", a.id, a.text);
         }
@@ -343,7 +352,15 @@ async fn run_preview(pool: &SqlitePool, n_override: Option<usize>) -> Result<()>
         // Simulation « tout juste » : on va chercher la bonne réponse en base, sous
         // la forme qu'attend le type — des identifiants pour un QCM, du texte pour
         // une réponse écrite.
-        let given = if quiz::is_free_input(&q.kind) {
+        let given = if quiz::is_grid(&q.kind) {
+            // « Tout juste » pour une grille, c'est recopier le modèle à
+            // l'identique : on renvoie ses jetons, un par un, exactement comme
+            // le ferait un enfant qui n'a rien oublié.
+            match grid_model(pool, q).await? {
+                Some(model) => Given::Grid(model_tokens(&model)),
+                None => Given::Grid(Vec::new()),
+            }
+        } else if quiz::is_free_input(&q.kind) {
             let correct: Option<(String,)> = sqlx::query_as(
                 "SELECT text FROM answers WHERE question_id = ? AND is_correct = 1 LIMIT 1",
             )
@@ -376,6 +393,33 @@ async fn run_preview(pool: &SqlitePool, n_override: Option<usize>) -> Result<()>
     let used = policy::consumed_today(pool, child.id).await? / 60;
     println!("\nTemps consommé aujourd'hui : {used} min");
     Ok(())
+}
+
+/// La figure modèle d'une question grille, ou `None` pour tout autre type.
+async fn grid_model(
+    pool: &SqlitePool,
+    q: &quiz::QuizQuestion,
+) -> Result<Option<sesame::grid::Grid>> {
+    if !quiz::is_grid(&q.kind) {
+        return Ok(None);
+    }
+    let row: Option<(String,)> = sqlx::query_as(
+        "SELECT text FROM answers WHERE question_id = ? AND is_correct = 1 LIMIT 1",
+    )
+    .bind(q.id)
+    .fetch_optional(pool)
+    .await?;
+    Ok(row.and_then(|(payload,)| sesame::grid::Grid::parse_as(&q.kind, &payload).ok()))
+}
+
+/// Les jetons d'une figure, sous la forme que poste le formulaire — un par case
+/// ou par segment.
+fn model_tokens(model: &sesame::grid::Grid) -> Vec<String> {
+    use sesame::grid::Figure;
+    match &model.figure {
+        Figure::Cells(cells) => cells.iter().map(|(r, c)| format!("{r},{c}")).collect(),
+        Figure::Edges(edges) => edges.iter().map(|e| e.token()).collect(),
+    }
 }
 
 fn init_tracing() {

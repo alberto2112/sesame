@@ -161,7 +161,56 @@ struct QuestionFormTemplate {
     kind: String,
     difficulty: i64,
     answers: Vec<(String, bool)>,
+    /// Les planches à dessin de l'éditeur de grille — une par taille et par
+    /// type, toutes rendues, une seule visible.
+    grid_boards: Vec<GridBoard>,
     error: Option<String>,
+}
+
+/// Une grille vierge sur laquelle le parent dessine le modèle.
+///
+/// Toutes les planches sont rendues PAR LE SERVEUR et cachées en CSS, plutôt
+/// que fabriquées en JavaScript au changement de taille. La raison est la même
+/// que pour la correction : la géométrie d'une grille (où tombe une arête, quel
+/// jeton elle porte) n'a le droit d'exister qu'à UN endroit — `grid::toggles`.
+/// La réécrire en JS, c'est se donner deux définitions du même dessin, et la
+/// première à dériver produit une question que personne ne peut réussir.
+/// grid-editor.js ne fait que recopier les cases cochées dans le champ texte ;
+/// le serveur, lui, remet le tout sous forme canonique avant de l'enregistrer.
+struct GridBoard {
+    /// « grid_cells:8x8 » — ce que le sélecteur de taille cherche.
+    key: String,
+    aspect: String,
+    blank_svg: String,
+    toggles: Vec<crate::grid::Toggle>,
+}
+
+/// Les tailles proposées au parent. Elles montent avec la difficulté : une 4×4
+/// pour commencer, une 8×8 comme à l'école.
+const GRID_SIZES: [(i64, i64); 3] = [(4, 4), (6, 6), (8, 8)];
+
+fn build_grid_boards() -> Vec<GridBoard> {
+    let mut out = Vec::with_capacity(GRID_SIZES.len() * 2);
+    for kind in [crate::grid::KIND_CELLS, crate::grid::KIND_LINES] {
+        for (w, h) in GRID_SIZES {
+            let blank = crate::grid::Grid {
+                w,
+                h,
+                figure: if kind == crate::grid::KIND_CELLS {
+                    crate::grid::Figure::Cells(Default::default())
+                } else {
+                    crate::grid::Figure::Edges(Default::default())
+                },
+            };
+            out.push(GridBoard {
+                key: format!("{kind}:{w}x{h}"),
+                aspect: crate::grid::frame_aspect(w, h),
+                blank_svg: blank.svg_blank(),
+                toggles: crate::grid::toggles(kind, w, h),
+            });
+        }
+    }
+    out
 }
 
 #[derive(Template)]
@@ -228,6 +277,10 @@ struct HistoryDetailTemplate {
 }
 
 struct HistoryDetailQuestion {
+    /// Grilles : les deux dessins côte à côte. Le parent doit VOIR ce que
+    /// l'enfant a tracé — reconstruit depuis les instantanés, donc lisible même
+    /// si la question a été modifiée ou supprimée depuis.
+    grid: Option<crate::quiz::GridReview>,
     statement: String,
     kind: String,
     correct_overall: bool,
@@ -588,6 +641,7 @@ async fn question_new_get(
         kind: "single".into(),
         difficulty: 3,
         answers: vec![(String::new(), false); 6],
+        grid_boards: build_grid_boards(),
         error: None,
     }))
 }
@@ -613,6 +667,7 @@ async fn question_new_post(
                 kind: pair_get_or(&pairs, "kind", "single"),
                 difficulty: pair_get_or(&pairs, "difficulty", "3").parse().unwrap_or(3),
                 answers: collect_answer_pairs(&pairs),
+                grid_boards: build_grid_boards(),
                 error: Some(msg),
             }));
         }
@@ -684,6 +739,7 @@ async fn question_edit_get(
         kind,
         difficulty,
         answers,
+        grid_boards: build_grid_boards(),
         error: None,
     }))
 }
@@ -709,6 +765,7 @@ async fn question_edit_post(
                 kind: pair_get_or(&pairs, "kind", "single"),
                 difficulty: pair_get_or(&pairs, "difficulty", "3").parse().unwrap_or(3),
                 answers: collect_answer_pairs(&pairs),
+                grid_boards: build_grid_boards(),
                 error: Some(msg),
             }));
         }
@@ -1547,9 +1604,9 @@ async fn history_detail(
         None => return Err(AppError::bad_request(format!("attempt {id} introuvable"))),
     };
 
-    let rows: Vec<(i64, String, String, String, i64, i64)> = sqlx::query_as(
+    let rows: Vec<(i64, String, String, String, Option<String>, i64, i64)> = sqlx::query_as(
         "SELECT question_id, kind_snapshot, statement_snapshot, answer_text_snapshot,
-                was_chosen, is_correct
+                given_text_snapshot, was_chosen, is_correct
          FROM attempt_answers
          WHERE attempt_id = ?
          ORDER BY question_id, id",
@@ -1567,14 +1624,47 @@ async fn history_detail(
     let flush = |grouped: &mut Vec<HistoryDetailQuestion>,
                  stmt: &mut Option<String>,
                  kind: &mut String,
+                 given: &mut Option<String>,
                  answers: &mut Vec<(i64, String, bool, bool)>,
                  chosen: &mut std::collections::HashSet<i64>,
                  correct: &mut std::collections::HashSet<i64>| {
         if let Some(s) = stmt.take() {
             let correct_overall = chosen == correct;
+            let kind = std::mem::take(kind);
+            let drawn = given.take();
+
+            // Grille : la liste des réponses n'a rien à montrer — son unique
+            // ligne contient la figure sérialisée. On la remplace par les deux
+            // dessins, reconstruits à partir des instantanés.
+            let grid = if crate::quiz::is_grid(&kind) {
+                answers
+                    .first()
+                    .and_then(|(_, payload, _, _)| {
+                        crate::grid::Grid::parse_as(&kind, payload).ok()
+                    })
+                    .map(|model| {
+                        let drawn = drawn
+                            .as_deref()
+                            .and_then(|d| crate::grid::Grid::parse_as(&kind, d).ok());
+                        crate::quiz::GridReview {
+                            w: model.w,
+                            h: model.h,
+                            aspect: crate::grid::frame_aspect(model.w, model.h),
+                            model_svg: model.svg(),
+                            given_svg: model.svg_review(drawn.as_ref()),
+                        }
+                    })
+            } else {
+                None
+            };
+            if grid.is_some() {
+                answers.clear();
+            }
+
             grouped.push(HistoryDetailQuestion {
                 statement: s,
-                kind: std::mem::take(kind),
+                kind,
+                grid,
                 correct_overall,
                 answers: answers
                     .drain(..)
@@ -1592,13 +1682,15 @@ async fn history_detail(
 
     let mut current_stmt: Option<String> = None;
     let mut current_kind: String = String::new();
+    let mut current_given: Option<String> = None;
 
-    for (qid, kind, stmt, atext, was, isc) in rows {
+    for (qid, kind, stmt, atext, given, was, isc) in rows {
         if Some(qid) != current_qid {
             flush(
                 &mut grouped,
                 &mut current_stmt,
                 &mut current_kind,
+                &mut current_given,
                 &mut answer_buf_idx,
                 &mut chosen_set,
                 &mut correct_set,
@@ -1606,6 +1698,7 @@ async fn history_detail(
             current_qid = Some(qid);
             current_stmt = Some(stmt);
             current_kind = kind;
+            current_given = given;
         }
         let aid = answer_buf_idx.len() as i64;
         if was == 1 {
@@ -1620,6 +1713,7 @@ async fn history_detail(
         &mut grouped,
         &mut current_stmt,
         &mut current_kind,
+        &mut current_given,
         &mut answer_buf_idx,
         &mut chosen_set,
         &mut correct_set,
@@ -1654,8 +1748,13 @@ fn parse_question_form(pairs: &[(String, String)]) -> Result<ParsedQuestion, Str
         .parse()
         .map_err(|_| "Choisis une matière.".to_string())?;
     let kind = pair_get(pairs, "kind");
-    if !matches!(kind.as_str(), "single" | "multi" | "exact" | "number") {
-        return Err("Type invalide (single, multi, exact ou number).".into());
+    if !matches!(
+        kind.as_str(),
+        "single" | "multi" | "exact" | "number" | "grid_cells" | "grid_lines"
+    ) {
+        return Err(
+            "Type invalide (single, multi, exact, number, grid_cells ou grid_lines).".into(),
+        );
     }
     let difficulty: i64 = pair_get_or(pairs, "difficulty", "3")
         .parse()
@@ -1678,9 +1777,11 @@ fn parse_question_form(pairs: &[(String, String)]) -> Result<ParsedQuestion, Str
     let nb_correct = answers.iter().filter(|(_, c)| *c).count();
     let nb_wrong = answers.len() - nb_correct;
 
-    // 'exact'/'number' : une seule réponse, la bonne. Pas d'options à proposer —
-    // l'enfant l'écrit. Mêmes règles que l'importeur (importer.rs).
-    if crate::quiz::is_free_input(&kind) {
+    // 'exact'/'number'/'grid_*' : une seule réponse, la bonne. Pas d'options à
+    // proposer — l'enfant l'écrit ou la dessine. Mêmes règles que l'importeur
+    // (importer.rs).
+    if crate::quiz::stores_single_answer(&kind) {
+        let mut answers = answers;
         if answers.len() != 1 || nb_correct != 1 {
             return Err(format!(
                 "Type '{kind}' : remplis UNE seule réponse (la bonne) et coche « correcte »."
@@ -1691,6 +1792,16 @@ fn parse_question_form(pairs: &[(String, String)]) -> Result<ParsedQuestion, Str
                 "Type 'number' : « {} » n'est pas un nombre.",
                 answers[0].0
             ));
+        }
+        if crate::quiz::is_grid(&kind) {
+            // On enregistre la forme CANONIQUE, pas ce qui a été tapé ou envoyé
+            // par l'éditeur : les jetons y sont triés, les extrémités remises
+            // dans l'ordre, un long segment découpé en arêtes d'une case. La
+            // base ne contient alors qu'une seule écriture possible d'un dessin
+            // donné — l'historique et les comparaisons s'en trouvent stables.
+            let model = crate::grid::Grid::validate_model(&kind, &answers[0].0)
+                .map_err(|e| format!("Figure invalide : {e}"))?;
+            answers[0].0 = model.serialize();
         }
         return Ok(ParsedQuestion {
             subject_id,
@@ -1831,4 +1942,82 @@ fn format_ts(ts: i64) -> String {
     chrono::DateTime::from_timestamp(ts, 0)
         .map(|d| d.format("%Y-%m-%d %H:%M").to_string())
         .unwrap_or_else(|| ts.to_string())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// `question_form.html` hérite de `admin/_layout.html`, qui hérite lui-même
+    /// de `admin/_shell.html` — et c'est tout en haut de cette chaîne que vit le
+    /// bloc `head_extra`. Ce test vérifie qu'un petit-enfant peut bel et bien le
+    /// remplir. Sinon la feuille de la grille et l'éditeur ne seraient jamais
+    /// chargés : le parent verrait un champ texte nu, sans le moindre indice
+    /// qu'il lui manque quelque chose — la panne silencieuse par excellence.
+    #[test]
+    fn question_form_carries_the_grid_editor() {
+        let html = QuestionFormTemplate {
+            title: "Nouvelle question".into(),
+            action: "/admin/questions/new".into(),
+            subjects: Vec::new(),
+            statement: String::new(),
+            explanation: String::new(),
+            kind: "grid_lines".into(),
+            difficulty: 3,
+            answers: vec![(String::new(), false); 6],
+            grid_boards: build_grid_boards(),
+            error: None,
+        }
+        .render()
+        .expect("le gabarit doit se rendre");
+
+        assert!(
+            html.contains("/static/grid.css"),
+            "la feuille de style de la grille n'est pas chargée"
+        );
+        assert!(
+            html.contains("/static/grid-editor.js"),
+            "l'éditeur de grille n'est pas chargé"
+        );
+        assert!(
+            html.contains(r#"data-grid-board="grid_lines:8x8""#),
+            "la planche 8×8 de segments n'est pas rendue"
+        );
+        assert!(
+            html.contains(r#"value="grid_cells""#),
+            "le type « cases à colorier » n'est pas proposé"
+        );
+    }
+
+    /// Une figure enregistrée depuis le panel doit ressortir sous forme
+    /// canonique, quelle que soit celle que l'adulte a tapée : jetons triés,
+    /// extrémités remises dans l'ordre, longs segments découpés. C'est ce qui
+    /// garantit qu'une même figure a UNE seule écriture en base.
+    #[test]
+    fn admin_stores_the_canonical_figure() {
+        let pairs: Vec<(String, String)> = vec![
+            ("statement".into(), "Reproduis le dessin".into()),
+            ("subject_id".into(), "1".into()),
+            ("kind".into(), "grid_lines".into()),
+            ("difficulty".into(), "2".into()),
+            // Tracé de droite à gauche, sur trois cases, dans le désordre.
+            ("ans_1_text".into(), "4x4:e=0,3-0,0".into()),
+            ("ans_1_correct".into(), "1".into()),
+        ];
+        let parsed = parse_question_form(&pairs).expect("figure valide");
+        assert_eq!(parsed.answers[0].0, "4x4:e=0,0-0,1;0,1-0,2;0,2-0,3");
+    }
+
+    #[test]
+    fn admin_refuses_an_empty_figure() {
+        let pairs: Vec<(String, String)> = vec![
+            ("statement".into(), "Reproduis le dessin".into()),
+            ("subject_id".into(), "1".into()),
+            ("kind".into(), "grid_cells".into()),
+            ("difficulty".into(), "2".into()),
+            ("ans_1_text".into(), "4x4:c=".into()),
+            ("ans_1_correct".into(), "1".into()),
+        ];
+        assert!(parse_question_form(&pairs).is_err());
+    }
 }

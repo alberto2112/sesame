@@ -24,21 +24,48 @@
     <strong>{{ loop.index }}. {{ q.statement }}</strong>
     <small>({{ q.kind }})</small>
   </header>
-  <ul>
-    {% for a in q.answers %}
-      <li>
-        {% if a.is_correct && a.was_chosen %}
-          <span class="answer-correct-chosen">{{ a.text }}</span> — bonne réponse, choisie ✓
-        {% else if a.is_correct %}
-          <span class="answer-correct-missed">{{ a.text }}</span> — c'était la bonne réponse
-        {% else if a.was_chosen %}
-          <span class="answer-wrong-chosen">{{ a.text }}</span> — choisie mais incorrecte ✗
-        {% else %}
-          {{ a.text }}
-        {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
+  {# Grilles : montrer les deux dessins plutôt que la figure sérialisée. Un
+     parent qui cherche à comprendre où sa fille bute a besoin de voir ce
+     qu'elle a tracé, pas « 8x8:c=0,3;1,3 ». #}
+  {% match q.grid %}
+    {% when Some with (g) %}
+      <div class="grid-pair">
+        <figure class="grid-side">
+          <figcaption>Le modèle</figcaption>
+          <div class="grid-frame" style="aspect-ratio:{{ g.aspect }}">{{ g.model_svg|safe }}</div>
+        </figure>
+        <figure class="grid-side">
+          <figcaption>Son dessin</figcaption>
+          <div class="grid-frame" style="aspect-ratio:{{ g.aspect }}">{{ g.given_svg|safe }}</div>
+        </figure>
+      </div>
+      <p class="grid-legend">
+        <span class="lg-ok">▬ juste</span>
+        <span class="lg-extra">▬ en trop</span>
+        <span class="lg-miss">▬ oublié</span>
+      </p>
+
+    {% when None %}
+      <ul>
+        {% for a in q.answers %}
+          <li>
+            {% if a.is_correct && a.was_chosen %}
+              <span class="answer-correct-chosen">{{ a.text }}</span> — bonne réponse, choisie ✓
+            {% else if a.is_correct %}
+              <span class="answer-correct-missed">{{ a.text }}</span> — c'était la bonne réponse
+            {% else if a.was_chosen %}
+              <span class="answer-wrong-chosen">{{ a.text }}</span> — choisie mais incorrecte ✗
+            {% else %}
+              {{ a.text }}
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+  {% endmatch %}
 </article>
 {% endfor %}
+{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="/static/grid.css">
 {% endblock %}

@@ -17,6 +17,7 @@ pub mod auth;
 pub mod config;
 pub mod db;
 pub mod dedup;
+pub mod grid;
 pub mod importer;
 pub mod policy;
 pub mod quiz;

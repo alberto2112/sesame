@@ -622,11 +622,11 @@ fn blocked_page(child: &Child, reason: &BlockReason) -> BlockedTemplate {
 
 // ===== Form parsing =====
 
-/// Deux préfixes, et ce n'est pas cosmétique : `q_` porte des identifiants de
-/// réponse, `t_` du texte libre. Les confondre serait fatal — la réponse « 8 »
-/// d'une addition se parserait en `answer_id = 8`, et corrigerait la question
-/// contre une option d'un tout autre QCM. Le préfixe rend l'ambiguïté impossible
-/// à écrire.
+/// Trois préfixes, et ce n'est pas cosmétique : `q_` porte des identifiants de
+/// réponse, `t_` du texte libre, `g_` les cases ou segments d'une grille. Les
+/// confondre serait fatal — la réponse « 8 » d'une addition se parserait en
+/// `answer_id = 8`, et corrigerait la question contre une option d'un tout autre
+/// QCM. Le préfixe rend l'ambiguïté impossible à écrire.
 fn parse_form(pairs: &[(String, String)]) -> Result<(Vec<i64>, Submission), AppError> {
     let mut question_ids: Vec<i64> = Vec::new();
     let mut given: Submission = HashMap::new();
@@ -651,13 +651,28 @@ fn parse_form(pairs: &[(String, String)]) -> Result<(Vec<i64>, Submission), AppE
                 Given::Choices(ids) => ids.push(aid),
                 // Texte ET cases pour la même question : formulaire trafiqué.
                 // On ignore ici, `grade` tranchera contre le `kind` en base.
-                Given::Text(_) => {}
+                Given::Text(_) | Given::Grid(_) => {}
             }
         } else if let Some(suffix) = k.strip_prefix("t_") {
             let qid: i64 = suffix
                 .parse()
                 .with_context(|| format!("invalid t_ key '{suffix}'"))?;
             given.insert(qid, Given::Text(v.clone()));
+        } else if let Some(suffix) = k.strip_prefix("g_") {
+            // Une case cochée = une paire `g_<qid>` de plus, comme un QCM à
+            // réponses multiples : on ACCUMULE, on n'écrase pas. Les jetons
+            // restent bruts jusqu'à `grade`, qui les fera passer par `grid` —
+            // le seul endroit qui décide de ce que « ce dessin » veut dire.
+            let qid: i64 = suffix
+                .parse()
+                .with_context(|| format!("invalid g_ key '{suffix}'"))?;
+            match given
+                .entry(qid)
+                .or_insert_with(|| Given::Grid(Vec::new()))
+            {
+                Given::Grid(marks) => marks.push(v.clone()),
+                Given::Choices(_) | Given::Text(_) => {}
+            }
         }
     }
 

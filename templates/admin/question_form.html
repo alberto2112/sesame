@@ -38,6 +38,8 @@
         <option value="multi" {% if kind == "multi" %}selected{% endif %}>Réponses multiples (QCM)</option>
         <option value="exact" {% if kind == "exact" %}selected{% endif %}>Réponse écrite</option>
         <option value="number" {% if kind == "number" %}selected{% endif %}>Réponse numérique</option>
+        <option value="grid_cells" {% if kind == "grid_cells" %}selected{% endif %}>Grille — cases à colorier</option>
+        <option value="grid_lines" {% if kind == "grid_lines" %}selected{% endif %}>Grille — traits à reproduire</option>
       </select>
     </label>
   </div>
@@ -58,7 +60,51 @@
     <textarea name="explanation" rows="2">{{ explanation }}</textarea>
   </label>
 
+  {# ---- Éditeur de grille ----------------------------------------------------
+     Visible seulement pour les deux types 'grid_*', et piloté par
+     grid-editor.js. Le parent DESSINE le modèle ; le script recopie les cases
+     cochées dans « Réponse 1 ». Sans JavaScript le bloc reste caché et le champ
+     texte accepte toujours la figure écrite à la main — l'éditeur est un
+     confort, pas une dépendance.
+
+     Toutes les planches sont rendues par le serveur (admin.rs::build_grid_boards)
+     et une seule est affichée : la géométrie d'une grille n'existe qu'à un seul
+     endroit, `grid::toggles`, en Rust. #}
+  <div class="grid-editor" data-grid-editor hidden>
+    <h3>Dessine le modèle</h3>
+    <p class="hint">Clique — ou glisse — pour poser les cases ou les traits que
+      l'enfant devra reproduire. Le champ <strong>Réponse 1</strong> se remplit
+      tout seul ; il reste modifiable à la main.</p>
+
+    <label>
+      Taille de la grille
+      <select data-grid-size>
+        <option value="4x4">4 × 4 — pour commencer</option>
+        <option value="6x6">6 × 6</option>
+        <option value="8x8" selected>8 × 8 — comme à l'école</option>
+      </select>
+    </label>
+
+    {% for b in grid_boards %}
+      <div class="grid-board-wrap" data-grid-board="{{ b.key }}" hidden>
+        <div class="grid-frame grid-edit" style="aspect-ratio:{{ b.aspect }}" data-grid>
+          {{ b.blank_svg|safe }}
+          {% for t in b.toggles %}
+            <label class="{{ t.class }}" style="{{ t.style }}">
+              <input type="checkbox" value="{{ t.value }}">
+              <i class="g-mark"></i>
+            </label>
+          {% endfor %}
+        </div>
+        <button type="button" class="grid-clear" data-grid-clear>Tout effacer</button>
+      </div>
+    {% endfor %}
+  </div>
+
   <h3>Réponses</h3>
+  <p class="hint"><strong>Grille</strong> : une seule « réponse », la figure elle-même,
+    au format <code>8x8:c=0,3;1,3</code> (cases) ou <code>8x8:e=0,0-0,1</code> (traits).
+    Sers-toi de l'éditeur ci-dessus plutôt que de l'écrire — et coche « correcte ».</p>
   <p class="hint"><strong>QCM</strong> (réponse unique / multiple) : jusqu'à 6 options.
     Laisse vide ce que tu n'utilises pas, et coche « correcte » pour les bonnes.</p>
   <p class="hint"><strong>Réponse écrite / numérique</strong> : l'enfant tape sa réponse,
@@ -79,4 +125,13 @@
 
   <button type="submit">Enregistrer</button>
 </form>
+{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="/static/grid.css">
+{# Posée avant le rendu : `html.js` conditionne l'affichage du bouton « effacer ». #}
+<script>document.documentElement.classList.add("js");</script>
+{# `defer` garde l'ordre : grid-paint.js pose `sesameGridPaint`, l'éditeur l'utilise. #}
+<script src="/static/grid-paint.js" defer></script>
+<script src="/static/grid-editor.js" defer></script>
 {% endblock %}

@@ -124,9 +124,22 @@ pub async fn import(pool: &SqlitePool, file: ImportFile) -> Result<ImportReport>
         .await?;
 
         for a in &q.answers {
+            // Une figure entre sous sa forme CANONIQUE, quelle que soit celle
+            // qu'a produite le fichier : jetons triés, extrémités remises dans
+            // l'ordre, longs segments découpés. Deux fichiers décrivant le même
+            // dessin donnent alors la même ligne en base — et `dedup` peut les
+            // reconnaître comme le doublon qu'ils sont. (`validate_question`
+            // est déjà passé : le repli ne sert que de garde-fou.)
+            let text = if crate::quiz::is_grid(&q.kind) {
+                crate::grid::Grid::parse(a.text.trim())
+                    .map(|g| g.serialize())
+                    .unwrap_or_else(|_| a.text.trim().to_string())
+            } else {
+                a.text.trim().to_string()
+            };
             sqlx::query("INSERT INTO answers (question_id, text, is_correct) VALUES (?, ?, ?)")
                 .bind(inserted.0)
-                .bind(a.text.trim())
+                .bind(&text)
                 .bind(if a.correct { 1 } else { 0 })
                 .execute(&mut *tx)
                 .await?;
@@ -153,9 +166,9 @@ fn validate_question(q: &ImportQuestion) -> Result<(), String> {
     let correct = q.answers.iter().filter(|a| a.correct).count();
     let incorrect = q.answers.len() - correct;
 
-    // 'exact'/'number' : la bonne réponse est STOCKÉE, une seule ligne. Elle n'est
-    // jamais déduite de l'énoncé — voir migrations/0006.
-    if crate::quiz::is_free_input(&q.kind) {
+    // 'exact'/'number'/'grid_*' : la bonne réponse est STOCKÉE, une seule ligne.
+    // Elle n'est jamais déduite de l'énoncé — voir migrations/0006 et 0008.
+    if crate::quiz::stores_single_answer(&q.kind) {
         if q.answers.len() != 1 {
             return Err(format!(
                 "type '{}' exige exactement 1 réponse (la bonne), {} fournies",
@@ -174,6 +187,10 @@ fn validate_question(q: &ImportQuestion) -> Result<(), String> {
                 "type 'number' : la réponse '{}' n'est pas un nombre",
                 q.answers[0].text.trim()
             ));
+        }
+        if crate::quiz::is_grid(&q.kind) {
+            crate::grid::Grid::validate_model(&q.kind, &q.answers[0].text)
+                .map_err(|e| format!("type '{}' : {e}", q.kind))?;
         }
         return Ok(());
     }
@@ -221,7 +238,8 @@ fn validate_question(q: &ImportQuestion) -> Result<(), String> {
         }
         other => {
             return Err(format!(
-                "type '{other}' invalide (attendu 'single', 'multi', 'exact' ou 'number')"
+                "type '{other}' invalide (attendu 'single', 'multi', 'exact', 'number', \
+                 'grid_cells' ou 'grid_lines')"
             ));
         }
     }

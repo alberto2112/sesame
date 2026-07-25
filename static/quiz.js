@@ -111,6 +111,18 @@
     if (e.key === "ArrowLeft") go(current - 1);
   });
 
+  /* Grilles à reproduire : le confort du glisser-pour-peindre, partagé avec
+   * l'éditeur du panel d'administration (grid-paint.js). On lui passe `refresh`
+   * pour que la barre de progression et les pastilles suivent le dessin — sans
+   * ça elles ne verraient rien passer, puisque nous cochons les cases nous-mêmes.
+   *
+   * Le dessin marche sans tout ceci : ce sont de vraies cases à cocher. */
+  if (window.sesameGridPaint) {
+    form
+      .querySelectorAll("[data-grid]")
+      .forEach((grid) => window.sesameGridPaint(grid, refresh));
+  }
+
   // Validation finale : on ne poste pas un contrôle troué par distraction.
   // (Les `required` HTML sont impossibles ici : un champ caché en display:none
   // n'est pas focusable et le navigateur refuse alors de soumettre, en silence.)

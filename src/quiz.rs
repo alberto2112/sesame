@@ -4,6 +4,8 @@ use anyhow::Result;
 use rand::seq::SliceRandom;
 use sqlx::SqlitePool;
 
+use crate::grid::{self, Grid, Toggle};
+
 // ===== Types exposed to routes/templates =====
 
 #[derive(Debug, Clone)]
@@ -12,12 +14,35 @@ pub struct QuizQuestion {
     pub kind: String,
     pub statement: String,
     pub answers: Vec<QuizAnswer>,
+    /// 'grid_cells' / 'grid_lines' : le modèle à reproduire et la grille vierge.
+    /// `None` pour tous les autres types.
+    pub grid: Option<GridPrompt>,
 }
 
 #[derive(Debug, Clone)]
 pub struct QuizAnswer {
     pub id: i64,
     pub text: String,
+}
+
+/// Tout ce dont le gabarit a besoin pour poser l'exercice de reproduction —
+/// déjà rendu, déjà calculé. Askama ne fait pas de géométrie ; Rust si.
+#[derive(Debug, Clone)]
+pub struct GridPrompt {
+    pub w: i64,
+    pub h: i64,
+    /// Rapport largeur/hauteur du cadre, marge du dessin comprise — c'est lui
+    /// qui fait coïncider les cases à cocher avec le quadrillage dessiné.
+    pub aspect: String,
+    /// SVG du modèle, à gauche.
+    pub model_svg: String,
+    /// SVG du quadrillage nu, sous les cases à cocher, à droite.
+    pub blank_svg: String,
+    /// Les zones cliquables de la grille vierge.
+    pub toggles: Vec<Toggle>,
+    /// `true` pour 'grid_cells' — le gabarit s'en sert pour la consigne et
+    /// pour l'habillage des marques (une case pleine, ou un trait).
+    pub is_cells: bool,
 }
 
 /// Ce que l'enfant a donné pour UNE question. Le type de la question décide
@@ -29,6 +54,11 @@ pub enum Given {
     Choices(Vec<i64>),
     /// 'exact' / 'number' : le texte saisi.
     Text(String),
+    /// 'grid_cells' / 'grid_lines' : les cases ou segments marqués, jeton par
+    /// jeton, dans l'ordre où le navigateur les a envoyés. La mise en forme
+    /// canonique n'a pas lieu ici mais dans `grid` : un seul endroit décide de
+    /// ce que « ce dessin » veut dire.
+    Grid(Vec<String>),
 }
 
 impl Default for Given {
@@ -61,7 +91,22 @@ pub struct GradedQuestion {
     /// Ce que l'enfant a écrit ('exact'/'number' seulement). None pour les types
     /// à choix : l'information y vit déjà dans `was_chosen`.
     pub given_text: Option<String>,
+    /// Modèle et dessin de l'enfant, côte à côte, pour la page de correction.
+    /// `None` hors des types grille.
+    pub grid: Option<GridReview>,
     pub correct: bool,
+}
+
+/// La correction d'une reproduction : le modèle, et le dessin de l'enfant
+/// colorié en trois couleurs (juste / en trop / oublié). Un « raté » sans le
+/// dessin sous les yeux n'apprend rien à personne.
+#[derive(Debug, Clone)]
+pub struct GridReview {
+    pub w: i64,
+    pub h: i64,
+    pub aspect: String,
+    pub model_svg: String,
+    pub given_svg: String,
 }
 
 #[derive(Debug, Clone)]
@@ -150,14 +195,27 @@ pub async fn pick_questions(
                 .fetch_one(pool)
                 .await?;
 
-        // Pour 'exact'/'number', la table `answers` ne contient PAS des options :
-        // elle contient LA bonne réponse. La joindre au rendu, c'est l'écrire dans
-        // le HTML — un Ctrl+U et l'enfant lit le résultat. On ne la charge donc
-        // même pas : la correction se fait côté serveur, dans `grade`.
-        let answers = if is_free_input(&q.1) {
-            Vec::new()
+        // Trois régimes, et un seul mot d'ordre : ce qui doit rester secret ne
+        // quitte pas le serveur.
+        //   - QCM       : les options partent, forcément — l'enfant y choisit.
+        //   - écrit     : rien ne part. Un Ctrl+U lirait la réponse.
+        //   - grille    : le modèle part, et c'est TOUT L'EXERCICE. Voir la
+        //                 figure ne dispense pas de savoir la recopier.
+        let (answers, grid) = if is_grid(&q.1) {
+            // Une figure illisible ne donne PAS une question sans grille : elle
+            // donne une carte sans le moindre champ, et `quiz.js` refuse de
+            // valider un contrôle dont une question n'est pas répondue. L'enfant
+            // se retrouverait bloqué, incapable de terminer — la porte fermée
+            // par un bug d'adulte. On retire donc la question du contrôle : il
+            // en comptera une de moins, et c'est très bien.
+            let Some(prompt) = load_grid_prompt(pool, qid, &q.1).await? else {
+                continue;
+            };
+            (Vec::new(), Some(prompt))
+        } else if answer_is_secret(&q.1) {
+            (Vec::new(), None)
         } else {
-            sqlx::query_as::<_, (i64, String)>(
+            let options = sqlx::query_as::<_, (i64, String)>(
                 "SELECT id, text FROM answers WHERE question_id = ? ORDER BY RANDOM()",
             )
             .bind(qid)
@@ -165,7 +223,8 @@ pub async fn pick_questions(
             .await?
             .into_iter()
             .map(|(id, text)| QuizAnswer { id, text })
-            .collect()
+            .collect();
+            (options, None)
         };
 
         result.push(QuizQuestion {
@@ -173,14 +232,80 @@ pub async fn pick_questions(
             kind: q.1,
             statement: q.2,
             answers,
+            grid,
         });
     }
     Ok(result)
 }
 
+/// Charge la figure modèle et prépare la grille vierge.
+///
+/// Une payload illisible ne fait pas tomber le contrôle : la question part sans
+/// grille et le gabarit n'affiche rien à reproduire. Elle sera comptée fausse,
+/// ce qui est mauvais — mais planter la page, c'est refuser l'ordinateur à
+/// l'enfant pour une question mal saisie par un adulte.
+async fn load_grid_prompt(
+    pool: &SqlitePool,
+    question_id: i64,
+    kind: &str,
+) -> Result<Option<GridPrompt>> {
+    let row: Option<(String,)> = sqlx::query_as(
+        "SELECT text FROM answers WHERE question_id = ? AND is_correct = 1 LIMIT 1",
+    )
+    .bind(question_id)
+    .fetch_optional(pool)
+    .await?;
+
+    let Some((payload,)) = row else {
+        tracing::warn!(question_id, "question grille sans figure en base");
+        return Ok(None);
+    };
+
+    let model = match Grid::parse_as(kind, &payload) {
+        Ok(g) => g,
+        Err(err) => {
+            tracing::warn!(question_id, %err, "figure illisible");
+            return Ok(None);
+        }
+    };
+
+    Ok(Some(GridPrompt {
+        w: model.w,
+        h: model.h,
+        aspect: grid::frame_aspect(model.w, model.h),
+        model_svg: model.svg(),
+        blank_svg: model.svg_blank(),
+        toggles: grid::toggles(kind, model.w, model.h),
+        is_cells: kind == grid::KIND_CELLS,
+    }))
+}
+
 /// Types dont la réponse s'écrit au clavier, par opposition aux types à choix.
 pub fn is_free_input(kind: &str) -> bool {
     matches!(kind, "exact" | "number")
+}
+
+/// Types où l'enfant reproduit une figure sur une grille.
+pub fn is_grid(kind: &str) -> bool {
+    grid::is_grid_kind(kind)
+}
+
+/// Types dont l'unique ligne d'`answers` porte LA bonne réponse, et non des
+/// options à proposer. C'est la règle de validation partagée par l'importeur et
+/// le panel admin : exactement une réponse, marquée correcte.
+pub fn stores_single_answer(kind: &str) -> bool {
+    is_free_input(kind) || is_grid(kind)
+}
+
+/// « Cette réponse doit-elle rester sur le serveur ? »
+///
+/// À ne pas confondre avec [`is_free_input`], même si les deux ont longtemps
+/// donné le même verdict — jusqu'aux grilles. Une réponse écrite est secrète :
+/// l'envoyer, c'est la donner. Un modèle à reproduire est PUBLIC par nature :
+/// c'est l'énoncé lui-même. Confondre les deux axes, c'était soit dévoiler une
+/// réponse, soit rendre l'exercice impossible.
+pub fn answer_is_secret(kind: &str) -> bool {
+    is_free_input(kind)
 }
 
 /// Pure allocation algorithm (Hamilton/largest remainder + iterative cap).
@@ -316,7 +441,48 @@ pub async fn grade(
         // que le formulaire a envoyée : un couple incohérent (du texte pour un
         // QCM, des cases pour une question écrite) est un formulaire trafiqué, et
         // se solde par « faux ». On ne fait jamais confiance au client.
-        let (correct, given_text) = match (kind, given) {
+        let (correct, given_text, grid_review) = match (kind, given) {
+            // Les grilles passent en premier et attrapent TOUTES les formes de
+            // réponse, y compris l'absence de réponse. Une question sautée doit
+            // rester fausse — ça va de soi — mais elle doit aussi produire sa
+            // correction : l'enfant qui n'a rien dessiné a justement besoin de
+            // voir le modèle qu'il n'a pas recopié.
+            (k, g) if is_grid(k) => {
+                let tokens: &[String] = match g {
+                    Given::Grid(t) => t,
+                    _ => &[],
+                };
+                let model = answer_rows
+                    .iter()
+                    .find(|(_, _, c)| *c == 1)
+                    .and_then(|(_, text, _)| Grid::parse_as(k, text).ok());
+                match model {
+                    Some(model) => {
+                        let drawn = Grid::from_tokens(k, model.w, model.h, tokens);
+                        // 100 % ou rien : une seule marque en trop ou en moins,
+                        // et le dessin n'est pas le même. C'est la règle de
+                        // l'exercice, pas une sévérité qu'on ajoute.
+                        let correct = drawn == model;
+                        let review = GridReview {
+                            w: model.w,
+                            h: model.h,
+                            aspect: grid::frame_aspect(model.w, model.h),
+                            model_svg: model.svg(),
+                            given_svg: model.svg_review(Some(&drawn)),
+                        };
+                        let serialized = if drawn.is_empty() {
+                            None
+                        } else {
+                            Some(drawn.serialize())
+                        };
+                        (correct, serialized, Some(review))
+                    }
+                    // Figure absente ou illisible : la question est mal saisie et
+                    // impossible à réussir. Même politique qu'ailleurs — on ne
+                    // devine pas ce que l'adulte a voulu dessiner.
+                    None => (false, None, None),
+                }
+            }
             ("single" | "multi", Given::Choices(ids)) => {
                 let chosen: HashSet<i64> = ids.iter().copied().collect();
                 let expected: HashSet<i64> = answer_rows
@@ -324,7 +490,7 @@ pub async fn grade(
                     .filter(|(_, _, c)| *c == 1)
                     .map(|(id, _, _)| *id)
                     .collect();
-                (chosen == expected, None)
+                (chosen == expected, None, None)
             }
             ("exact" | "number", Given::Text(typed)) => {
                 let expected = answer_rows.iter().find(|(_, _, c)| *c == 1);
@@ -344,17 +510,18 @@ pub async fn grade(
                 } else {
                     Some(typed.clone())
                 };
-                (correct, typed)
+                (correct, typed, None)
             }
-            _ => (false, None),
+            _ => (false, None, None),
         };
 
-        // Pour 'exact'/'number', `answer_rows` tient l'unique bonne réponse :
-        // `was_chosen` y vaut « l'enfant est tombé dessus ». La page de correction
-        // affiche donc « c'était la bonne réponse » exactement comme pour un QCM.
+        // Pour les types à réponse unique stockée (écrite ou dessinée),
+        // `answer_rows` tient LA bonne réponse : `was_chosen` y vaut « l'enfant
+        // est tombé dessus ». La page de correction affiche donc « c'était la
+        // bonne réponse » exactement comme pour un QCM.
         let chosen_ids: HashSet<i64> = match given {
             Given::Choices(ids) => ids.iter().copied().collect(),
-            Given::Text(_) => HashSet::new(),
+            Given::Text(_) | Given::Grid(_) => HashSet::new(),
         };
         let answers = answer_rows
             .into_iter()
@@ -364,7 +531,7 @@ pub async fn grade(
                     answer_id: id,
                     text,
                     is_correct,
-                    was_chosen: if is_free_input(kind) {
+                    was_chosen: if stores_single_answer(kind) {
                         is_correct && correct
                     } else {
                         chosen_ids.contains(&id)
@@ -380,6 +547,7 @@ pub async fn grade(
             explanation: q.3,
             answers,
             given_text,
+            grid: grid_review,
             correct,
         });
     }
