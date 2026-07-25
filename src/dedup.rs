@@ -40,6 +40,31 @@ pub fn dedup_key(statement: &str) -> String {
         .to_lowercase()
 }
 
+/// La clé complète, celle qui sert vraiment au regroupement.
+///
+/// Pour presque tous les types, l'énoncé SUFFIT à identifier la question : deux
+/// « Quelle est la capitale de la France ? » sont le même exercice, quelles que
+/// soient les options proposées.
+///
+/// Les grilles à reproduire renversent ça. Leur énoncé est une consigne
+/// interchangeable — « Reproduis le dessin sur la grille vide » — et la question
+/// RÉELLE est la figure. Cinquante figures différentes partagent le même texte :
+/// sur le seul énoncé, `purge` en garderait UNE et supprimerait les
+/// quarante-neuf autres, en silence et en une transaction. La figure entre donc
+/// dans la clé, et deux grilles ne sont des doublons que si elles font dessiner
+/// exactement la même chose. Le lecteur qui ajoute un type dont le contenu vit
+/// ailleurs que dans l'énoncé a ici son point d'accroche.
+fn full_key(kind: &str, statement: &str, figure: Option<&str>) -> String {
+    match figure {
+        Some(f) if crate::quiz::is_grid(kind) => {
+            // La figure est déjà sous forme canonique en base (importer.rs,
+            // admin.rs) : deux écritures du même dessin ont le même texte.
+            format!("{kind}\u{1}{}\u{1}{f}", dedup_key(statement))
+        }
+        _ => dedup_key(statement),
+    }
+}
+
 /// Un groupe de doublons : le survivant, et ce qui tombe.
 pub struct DuplicateGroup {
     pub statement: String,
@@ -69,8 +94,14 @@ pub struct PurgeReport {
 
 /// Les groupes de doublons, du plus gros au plus petit.
 pub async fn find_duplicates(pool: &SqlitePool) -> Result<Vec<DuplicateGroup>> {
-    let rows: Vec<(i64, String, String)> = sqlx::query_as(
-        "SELECT q.id, q.statement, s.name
+    // La figure d'une grille est jointe ici : elle fait partie de l'identité de
+    // la question (voir `full_key`). `LIMIT 1` dans la sous-requête parce que
+    // ces types-là n'ont qu'une seule réponse, la bonne.
+    let rows: Vec<(i64, String, String, String, Option<String>)> = sqlx::query_as(
+        "SELECT q.id, q.statement, s.name, q.kind,
+                (SELECT a.text FROM answers a
+                  WHERE a.question_id = q.id AND a.is_correct = 1
+                  LIMIT 1)
          FROM questions q JOIN subjects s ON s.id = q.subject_id
          ORDER BY q.id",
     )
@@ -78,8 +109,12 @@ pub async fn find_duplicates(pool: &SqlitePool) -> Result<Vec<DuplicateGroup>> {
     .await?;
 
     let mut by_key: HashMap<String, Vec<(i64, String, String)>> = HashMap::new();
-    for row in rows {
-        by_key.entry(dedup_key(&row.1)).or_default().push(row);
+    for (id, statement, subject_name, kind, figure) in rows {
+        let key = full_key(&kind, &statement, figure.as_deref());
+        by_key
+            .entry(key)
+            .or_default()
+            .push((id, statement, subject_name));
     }
 
     let mut groups = Vec::new();
@@ -195,5 +230,38 @@ mod tests {
         assert_ne!(dedup_key("2 + 2 = ?"), dedup_key("2 + 3 = ?"));
         // Les accents restent significatifs : ce ne sont pas les mêmes mots.
         assert_ne!(dedup_key("ou ?"), dedup_key("où ?"));
+    }
+
+    // ===== Grilles : la figure fait la question =====
+
+    #[test]
+    fn two_different_figures_are_not_duplicates() {
+        // Le cas qui a motivé `full_key` : toute une banque de grilles partage
+        // le même énoncé. Sur le seul énoncé, `purge` en aurait gardé UNE.
+        let stmt = "Reproduis le dessin sur la grille vide.";
+        assert_ne!(
+            full_key("grid_cells", stmt, Some("4x4:c=0,0")),
+            full_key("grid_cells", stmt, Some("4x4:c=1,1")),
+        );
+    }
+
+    #[test]
+    fn the_same_figure_is_still_a_duplicate() {
+        // Deux imports du même fichier restent un doublon — c'est bien le but
+        // de la commande.
+        assert_eq!(
+            full_key("grid_lines", "Refais le dessin.", Some("4x4:e=0,0-0,1")),
+            full_key("grid_lines", "  REFAIS   le dessin. ", Some("4x4:e=0,0-0,1")),
+        );
+    }
+
+    #[test]
+    fn other_kinds_still_group_on_the_statement_alone() {
+        // Deux QCM au même énoncé restent un doublon même si leurs options
+        // diffèrent : c'est le comportement d'origine, et il est voulu.
+        assert_eq!(
+            full_key("single", "Capitale de la France ?", Some("Paris")),
+            full_key("single", "Capitale de la France ?", Some("Lyon")),
+        );
     }
 }
